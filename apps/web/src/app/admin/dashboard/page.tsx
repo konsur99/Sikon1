@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
+import { exportToCsv } from '../../../lib/exportCsv';
 import {
   FileSpreadsheet,
   CheckCircle2,
@@ -67,10 +68,17 @@ export default function AdminDashboardPage() {
 
         <div className="flex items-center gap-2.5">
           <button
-            onClick={() => showToast('Ekspor ringkasan eksekutif anggaran dan kegiatan berhasil diunduh.')}
+            onClick={() => {
+              exportToCsv(
+                'Ringkasan_Dashboard_SIKONI_2026',
+                ['Nomor Berkas', 'Nama Kegiatan', 'Cabang Olahraga', 'Nilai Pengajuan', 'Tanggal', 'Status'],
+                recentSubmissions.map((s) => [s.number, s.activity, s.cabor, s.amount, s.date, s.status]),
+              );
+              showToast('Berkas ringkasan eksekutif (CSV / Excel) berhasil diunduh.');
+            }}
             className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
           >
-            <Download size={14} /> Export
+            <Download size={14} /> Export CSV
           </button>
           <Link
             href="/admin/rab"

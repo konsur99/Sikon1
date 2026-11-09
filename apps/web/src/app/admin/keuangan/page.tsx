@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { Coins, FileSpreadsheet, ArrowUpRight, CheckCircle2, ArrowRight, Download, Check } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function FinanceOverviewPage() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -33,7 +34,21 @@ export default function FinanceOverviewPage() {
         </div>
 
         <button
-          onClick={() => showToast('Ekspor seluruh pembukuan keuangan (Excel) berhasil diunduh.')}
+          onClick={() => {
+            exportToCsv(
+              'Rekap_Keuangan_KONI_2026',
+              ['Indikator Keuangan', 'Nilai (Rp)', 'Keterangan'],
+              [
+                ['Dana Diterima (Hibah APBD)', 'Rp 2.450.000.000', 'Akumulasi TA 2026'],
+                ['Dialokasikan ke Program', 'Rp 1.820.000.000', '74.3% dari total dana'],
+                ['Realisasi Nota Valid', 'Rp 1.210.000.000', 'Sudah diverifikasi'],
+                ['Pembayaran Kasir Kas', 'Rp 985.000.000', 'Sudah dibayarkan'],
+                ['Komitmen Belum Terealisasi', 'Rp 310.000.000', 'RAB disetujui, belum SPJ'],
+                ['Sisa Pagu Belum Dialokasi', 'Rp 630.000.000', 'Pagu tersedia'],
+              ],
+            );
+            showToast('Ekspor pembukuan keuangan format Excel/CSV berhasil diunduh.');
+          }}
           className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
         >
           <Download size={14} /> Ekspor Data Keuangan

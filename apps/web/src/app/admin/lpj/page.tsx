@@ -3,11 +3,18 @@
 import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
-import { FileCheck2, Clock, RotateCcw, CheckCircle2, Plus, X, Eye, Check } from 'lucide-react';
+import { FileCheck2, Clock, RotateCcw, CheckCircle2, Plus, X, Eye, Check, Download, AlertCircle } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function LpjPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [selectedLpj, setSelectedLpj] = useState<any | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   const [lpjList, setLpjList] = useState([
     {
@@ -47,20 +54,25 @@ export default function LpjPage() {
     if (!newLpj.activity) return;
 
     const count = lpjList.length + 15;
-    setLpjList([
-      {
-        number: `LPJ-${count}/XI/26`,
-        activity: newLpj.activity,
-        cabor: newLpj.cabor,
-        totalRealization: newLpj.amount,
-        submittedDate: '09 Nov 2026',
-        status: 'Verifikasi',
-      },
-      ...lpjList,
-    ]);
+    const item = {
+      number: `LPJ-${count}/XI/26`,
+      activity: newLpj.activity,
+      cabor: newLpj.cabor,
+      totalRealization: newLpj.amount,
+      submittedDate: '09 Nov 2026',
+      status: 'Verifikasi',
+    };
 
+    setLpjList([item, ...lpjList]);
     setShowCreateModal(false);
+    showToast(`Dokumen ${item.number} berhasil disusun dan masuk antrean verifikasi.`);
     setNewLpj({ activity: '', cabor: 'PASI', amount: 'Rp 0' });
+  };
+
+  const handleUpdateLpjStatus = (number: string, newStatus: string) => {
+    setLpjList(lpjList.map((l) => (l.number === number ? { ...l, status: newStatus } : l)));
+    setSelectedLpj(null);
+    showToast(`Status ${number} berhasil diperbarui menjadi ${newStatus}.`);
   };
 
   return (
@@ -74,12 +86,27 @@ export default function LpjPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowCreateModal(true)}
-          className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
-        >
-          <Plus size={15} /> Buat LPJ Baru
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => {
+              exportToCsv(
+                'Rekap_LPJ_Kegiatan_2026',
+                ['Nomor LPJ', 'Nama Kegiatan', 'Cabor', 'Total Realisasi', 'Tanggal Kirim', 'Status Pemeriksaan'],
+                lpjList.map((l) => [l.number, l.activity, l.cabor, l.totalRealization, l.submittedDate, l.status]),
+              );
+              showToast('Rekapitulasi LPJ format CSV / Excel berhasil diunduh.');
+            }}
+            className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
+          >
+            <Download size={14} /> Export CSV
+          </button>
+          <button
+            onClick={() => setShowCreateModal(true)}
+            className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+          >
+            <Plus size={15} /> Buat LPJ Baru
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -194,6 +221,7 @@ export default function LpjPage() {
                   <option>PBSI</option>
                   <option>PSSI</option>
                   <option>PRSI</option>
+                  <option>PERPANI</option>
                 </select>
               </div>
 
@@ -228,10 +256,10 @@ export default function LpjPage() {
         </div>
       )}
 
-      {/* LPJ Detail Checklist Modal */}
+      {/* Interactive LPJ Audit Checklist Modal */}
       {selectedLpj && (
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
+          <div className="card-sikoni w-full max-w-xl p-6 space-y-4 shadow-2xl">
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-[10px] font-bold text-sikoni-teal bg-teal-50 px-2 py-0.5 rounded">
@@ -245,26 +273,64 @@ export default function LpjPage() {
               </button>
             </div>
 
-            <div className="border border-sikoni-line rounded-xl p-3 bg-slate-50 text-xs space-y-2">
-              <b className="text-sikoni-navy block">Hasil Penelaahan Berkas:</b>
-              <div className="space-y-1 text-sikoni-ink">
-                <div>• Identitas kegiatan: <b className="text-sikoni-green">Lengkap ✓</b></div>
-                <div>• Kesesuaian RAB vs Realisasi: <b className="text-sikoni-green">Sesuai Alokasi ✓</b></div>
-                <div>• Bukti Pengeluaran & Nota: <b className="text-sikoni-green">Telah Diverifikasi ✓</b></div>
-                <div>• Bukti Pembayaran Kasir: <b className="text-sikoni-green">Kuitansi Sah ✓</b></div>
-                <div>• Dokumentasi Foto: <b className="text-sikoni-green">Terlampir ✓</b></div>
+            <div className="border border-sikoni-line rounded-xl p-3.5 bg-slate-50 text-xs space-y-2">
+              <b className="text-sikoni-navy block">5 Checklist Instrumen Pemeriksaan:</b>
+              <div className="space-y-1.5 text-sikoni-ink">
+                <div className="flex justify-between items-center py-1 border-b border-slate-200">
+                  <span>1. Identitas & Laporan Narasi Hasil Kegiatan</span>
+                  <span className="text-sikoni-green font-bold">✓ Lengkap</span>
+                </div>
+                <div className="flex justify-between items-center py-1 border-b border-slate-200">
+                  <span>2. Rekonsiliasi Realisasi Belanja terhadap RAB</span>
+                  <span className="text-sikoni-green font-bold">✓ Sesuai Pagu</span>
+                </div>
+                <div className="flex justify-between items-center py-1 border-b border-slate-200">
+                  <span>3. Keabsahan Bukti Pengeluaran & Nota Pembelian</span>
+                  <span className="text-sikoni-green font-bold">✓ Terverifikasi</span>
+                </div>
+                <div className="flex justify-between items-center py-1 border-b border-slate-200">
+                  <span>4. Bukti Kuitansi & Rekening Koran Penerima</span>
+                  <span className="text-sikoni-green font-bold">✓ Sah</span>
+                </div>
+                <div className="flex justify-between items-center py-1">
+                  <span>5. Dokumentasi Foto Lapangan & Presensi Atlet</span>
+                  <span className="text-sikoni-green font-bold">✓ Terlampir</span>
+                </div>
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-sikoni-line">
+            <div className="flex justify-between items-center pt-3 border-t border-sikoni-line">
               <button
                 onClick={() => setSelectedLpj(null)}
-                className="px-4 py-2 bg-sikoni-navy text-white text-xs font-bold rounded-xl"
+                className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
               >
-                Tutup Pemeriksaan
+                Tutup
               </button>
+
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleUpdateLpjStatus(selectedLpj.number, 'Ditolak')}
+                  className="px-3 py-2 bg-rose-50 text-sikoni-red rounded-lg text-xs font-bold hover:bg-rose-100 flex items-center gap-1"
+                >
+                  <AlertCircle size={14} /> Kembalikan Revisi
+                </button>
+                <button
+                  onClick={() => handleUpdateLpjStatus(selectedLpj.number, 'Disetujui')}
+                  className="px-4 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 shadow-sm flex items-center gap-1"
+                >
+                  <Check size={14} /> Sahkan & Setujui LPJ
+                </button>
+              </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+          <Check size={16} className="text-sikoni-green" />
+          <span>{toastMessage}</span>
         </div>
       )}
     </div>

@@ -4,38 +4,44 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
-import { Clock, CheckCircle2, RotateCcw, Timer, Check, X, Edit3 } from 'lucide-react';
+import { Clock, CheckCircle2, RotateCcw, Timer, Check, X, Edit3, FileText, ShieldAlert } from 'lucide-react';
 
 export default function ApprovalsPage() {
   const [selectedItem, setSelectedItem] = useState<any | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [decisionNotes, setDecisionNotes] = useState('');
+  const [checklist, setChecklist] = useState({
+    proposal: true,
+    skCabor: true,
+    rekomendasi: true,
+  });
 
   const [approvalInbox, setApprovalInbox] = useState([
     {
       id: '1',
       number: 'RAB-026/VI/26',
       activity: 'Kejuaraan Atletik Kota',
-      applicant: 'PASI',
+      applicant: 'PASI (Atletik)',
       myStage: 'Verifikasi Bendahara',
-      amount: 'Rp 48,5 jt',
+      amount: 'Rp 48.500.000',
       date: '09 Nov 2026',
     },
     {
       id: '2',
       number: 'LPJ-014/X/26',
       activity: 'Pemusatan Latihan Kejurda',
-      applicant: 'PBSI',
+      applicant: 'PBSI (Bulutangkis)',
       myStage: 'Pemeriksaan LPJ',
-      amount: 'Rp 31,8 jt',
+      amount: 'Rp 31.800.000',
       date: '08 Nov 2026',
     },
     {
       id: '3',
       number: 'EXP-1126',
       activity: 'Transportasi atlet & ofisial',
-      applicant: 'PASI',
+      applicant: 'PASI (Atletik)',
       myStage: 'Verifikasi Bukti Nota',
-      amount: 'Rp 4,5 jt',
+      amount: 'Rp 4.500.000',
       date: '08 Nov 2026',
     },
   ]);
@@ -51,12 +57,13 @@ export default function ApprovalsPage() {
     setApprovalInbox(approvalInbox.filter((it) => it.id !== selectedItem.id));
 
     if (decision === 'APPROVE') {
-      showToast(`Berkas ${selectedItem.number} berhasil disetujui!`);
+      showToast(`Berkas ${selectedItem.number} berhasil disetujui! Diteruskan ke tahap berikutnya.`);
     } else {
       showToast(`Berkas ${selectedItem.number} telah dikembalikan ke pemohon untuk revisi.`);
     }
 
     setSelectedItem(null);
+    setDecisionNotes('');
   };
 
   return (
@@ -110,10 +117,10 @@ export default function ApprovalsPage() {
         data={approvalInbox}
       />
 
-      {/* Decision Review Modal */}
+      {/* Decision Review Modal with Multi-Stage Visual Stepper */}
       {selectedItem && (
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
+          <div className="card-sikoni w-full max-w-xl p-6 space-y-4 shadow-2xl max-h-[92vh] overflow-y-auto">
             <div className="flex justify-between items-start">
               <div>
                 <span className="text-[10px] font-bold text-sikoni-teal bg-teal-50 px-2 py-0.5 rounded">
@@ -128,17 +135,94 @@ export default function ApprovalsPage() {
               </div>
             </div>
 
-            <div className="border border-sikoni-line rounded-xl p-3 bg-slate-50 text-xs space-y-2">
-              <div className="font-bold text-sikoni-navy">Catatan Pemeriksaan Verifikator:</div>
-              <p className="text-sikoni-muted leading-relaxed">
-                Berkas usulan telah memenuhi kelengkapan administrasi awal. Sisa alokasi pagu {selectedItem.applicant} mencukupi untuk pembiayaan kegiatan ini.
-              </p>
+            {/* Visual Multi-Stage Workflow Timeline */}
+            <div className="border border-sikoni-line rounded-xl p-3.5 bg-slate-50 space-y-2 text-xs">
+              <span className="font-extrabold text-sikoni-navy block text-[11px] uppercase tracking-wider">
+                Alur Persetujuan Bertingkat:
+              </span>
+              <div className="space-y-2 pt-1">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-sikoni-green text-white grid place-items-center text-[10px] font-bold">
+                    ✓
+                  </div>
+                  <div className="flex-1 flex justify-between">
+                    <span className="text-sikoni-ink font-medium">1. Pengajuan Usulan (Operator Cabor)</span>
+                    <span className="text-[10px] text-sikoni-muted">09 Nov, 09:12 WIB</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-sikoni-green text-white grid place-items-center text-[10px] font-bold">
+                    ✓
+                  </div>
+                  <div className="flex-1 flex justify-between">
+                    <span className="text-sikoni-ink font-medium">2. Verifikasi Kelengkapan (Sekretariat)</span>
+                    <span className="text-[10px] text-sikoni-muted">09 Nov, 11:30 WIB</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5">
+                  <div className="w-5 h-5 rounded-full bg-sikoni-gold text-white grid place-items-center text-[10px] font-bold animate-pulse">
+                    ◷
+                  </div>
+                  <div className="flex-1 flex justify-between">
+                    <span className="text-sikoni-navy font-bold">3. Verifikasi Pagu & Anggaran (Bendahara KONI)</span>
+                    <span className="text-[10px] font-bold text-sikoni-gold">Tahap Anda</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2.5 opacity-60">
+                  <div className="w-5 h-5 rounded-full bg-slate-200 text-slate-500 grid place-items-center text-[10px] font-bold">
+                    4
+                  </div>
+                  <div className="flex-1 flex justify-between">
+                    <span className="text-sikoni-muted">4. Persetujuan Final (Ketua Umum KONI)</span>
+                    <span className="text-[10px] text-sikoni-muted">Menunggu</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mandatory Supporting Documents Checklist */}
+            <div className="border border-sikoni-line rounded-xl p-3 text-xs space-y-2">
+              <span className="font-bold text-sikoni-navy block">Kelengkapan Dokumen Wajib:</span>
+              <div className="space-y-1.5">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={checklist.proposal}
+                    onChange={(e) => setChecklist({ ...checklist, proposal: e.target.checked })}
+                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                  />
+                  <span>Proposal teknis dan rincian kebutuhan biaya per item</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={checklist.skCabor}
+                    onChange={(e) => setChecklist({ ...checklist, skCabor: e.target.checked })}
+                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                  />
+                  <span>Surat Keputusan (SK) Pengurus Cabor masa bakti aktif</span>
+                </label>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={checklist.rekomendasi}
+                    onChange={(e) => setChecklist({ ...checklist, rekomendasi: e.target.checked })}
+                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                  />
+                  <span>Rekomendasi teknis dari Bidang Pembinaan Prestasi KONI</span>
+                </label>
+              </div>
             </div>
 
             <div>
-              <label className="text-xs font-bold text-sikoni-navy block mb-1">Catatan Keputusan</label>
+              <label className="text-xs font-bold text-sikoni-navy block mb-1">Catatan Keputusan Pejabat *</label>
               <textarea
-                placeholder="Tuliskan catatan persetujuan atau poin kekurangan jika mengembalikan revisi..."
+                value={decisionNotes}
+                onChange={(e) => setDecisionNotes(e.target.value)}
+                placeholder="Tuliskan catatan persetujuan atau arahan revisi berkas untuk pemohon..."
                 rows={3}
                 className="w-full text-xs border border-sikoni-line rounded-xl p-2.5 focus:outline-none focus:border-sikoni-teal"
               />
@@ -155,13 +239,13 @@ export default function ApprovalsPage() {
               <div className="flex gap-2">
                 <button
                   onClick={() => handleDecision('REVISION')}
-                  className="px-3 py-2 bg-amber-50 text-sikoni-amber rounded-lg text-xs font-bold flex items-center gap-1"
+                  className="px-3.5 py-2 bg-amber-50 text-sikoni-amber rounded-lg text-xs font-bold flex items-center gap-1 hover:bg-amber-100"
                 >
                   <Edit3 size={14} /> Minta Revisi
                 </button>
                 <button
                   onClick={() => handleDecision('APPROVE')}
-                  className="px-4 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm"
+                  className="px-4 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm hover:bg-teal-700"
                 >
                   <Check size={14} /> Setujui Berkas
                 </button>
@@ -173,9 +257,9 @@ export default function ApprovalsPage() {
 
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in">
-          <Check size={18} className="text-sikoni-green" />
-          <span className="text-xs font-bold">{toastMessage}</span>
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+          <Check size={16} className="text-sikoni-green" />
+          <span>{toastMessage}</span>
         </div>
       )}
     </div>

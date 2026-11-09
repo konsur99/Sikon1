@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
 import { ArrowUpRight, CheckCircle2, Layers, Clock, Download, Check, X, Eye } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function RealizationPage() {
   const [selectedExpense, setSelectedExpense] = useState<any | null>(null);
@@ -64,10 +65,17 @@ export default function RealizationPage() {
         </div>
 
         <button
-          onClick={() => showToast('Mengunduh rekapitulasi realisasi pengeluaran format Excel.')}
+          onClick={() => {
+            exportToCsv(
+              'Rekap_Realisasi_Pengeluaran_2026',
+              ['ID Pengeluaran', 'Uraian Pengeluaran', 'Cabang Olahraga', 'Metode Bayar', 'Nilai Transaksi', 'Tanggal', 'Status Verifikasi', 'Lampiran Bukti'],
+              expenses.map((e) => [e.id, e.description, e.cabor, e.method, e.amount, e.date, e.status, e.proof]),
+            );
+            showToast('Rekapitulasi realisasi pengeluaran format CSV / Excel berhasil diunduh.');
+          }}
           className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
         >
-          <Download size={14} /> Unduh Rekap Excel
+          <Download size={14} /> Unduh Rekap CSV
         </button>
       </div>
 

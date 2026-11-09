@@ -19,6 +19,15 @@ export default function RabBuilderPage() {
   const [currentStep, setCurrentStep] = useState<1 | 2 | 3>(2);
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState<string[]>([
+    'Proposal_Kejuaraan_Atletik_Kota_2026.pdf (2.4 MB)',
+  ]);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
 
   // Step 1 Form Data
   const [formData, setFormData] = useState({
@@ -367,9 +376,38 @@ export default function RabBuilderPage() {
               <p className="text-[11px] text-sikoni-muted max-w-sm mx-auto">
                 Format file didukung: PDF (Maksimal 10 MB). Berkas akan disimpan pada private S3 storage dengan enkripsi.
               </p>
-              <button className="px-4 py-2 bg-white border border-sikoni-line rounded-lg font-bold text-sikoni-navy hover:bg-slate-100 shadow-sm">
-                Pilih Berkas PDF
+              <button
+                type="button"
+                onClick={() => {
+                  setUploadedFiles([...uploadedFiles, `Lampiran_Pendukung_${uploadedFiles.length + 1}.pdf (1.5 MB)`]);
+                  showToast('Lampiran dokumen berhasil diunggah.');
+                }}
+                className="px-4 py-2 bg-white border border-sikoni-line rounded-lg font-bold text-sikoni-navy hover:bg-slate-100 shadow-sm"
+              >
+                ＋ Tambah Dokumen Lampiran
               </button>
+
+              {/* Uploaded File List */}
+              {uploadedFiles.length > 0 && (
+                <div className="mt-4 pt-3 border-t border-slate-200 text-left max-w-md mx-auto space-y-1.5">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase">Berkas Terunggah:</span>
+                  {uploadedFiles.map((file, idx) => (
+                    <div key={idx} className="flex justify-between items-center bg-white p-2 rounded-lg border border-sikoni-line text-xs">
+                      <div className="flex items-center gap-2 text-sikoni-navy">
+                        <FileText size={14} className="text-sikoni-teal" />
+                        <span>{file}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setUploadedFiles(uploadedFiles.filter((_, i) => i !== idx))}
+                        className="text-slate-400 hover:text-sikoni-red"
+                      >
+                        <Trash2 size={13} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Summary Review Card */}
@@ -385,6 +423,7 @@ export default function RabBuilderPage() {
 
             <div className="flex justify-between items-center pt-4 border-t border-sikoni-line">
               <button
+                type="button"
                 onClick={() => setCurrentStep(2)}
                 className="px-4 py-2.5 rounded-xl border border-sikoni-line text-xs font-bold text-sikoni-navy hover:bg-slate-50"
               >
@@ -393,12 +432,21 @@ export default function RabBuilderPage() {
 
               <div className="flex gap-2">
                 <button
-                  onClick={() => alert('Draft RAB tersimpan.')}
+                  type="button"
+                  onClick={() => window.print()}
+                  className="px-3.5 py-2.5 rounded-xl border border-sikoni-line text-xs font-bold text-sikoni-navy hover:bg-slate-50"
+                >
+                  Cetak Lembar RAB
+                </button>
+                <button
+                  type="button"
+                  onClick={() => showToast('Draf formulir RAB berhasil disimpan secara lokal.')}
                   className="px-4 py-2.5 rounded-xl border border-sikoni-line text-xs font-bold text-sikoni-navy hover:bg-slate-50 flex items-center gap-1.5"
                 >
                   <Save size={15} /> Simpan Draft
                 </button>
                 <button
+                  type="button"
                   onClick={() => setShowConfirmModal(true)}
                   className="px-6 py-2.5 bg-sikoni-teal text-white rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-md"
                 >
@@ -441,6 +489,14 @@ export default function RabBuilderPage() {
         <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-bounce">
           <Check size={18} className="text-sikoni-green" />
           <span className="text-xs font-bold">RAB berhasil diajukan! Mengalihkan ke daftar...</span>
+        </div>
+      )}
+
+      {/* General Toast */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+          <Check size={16} className="text-sikoni-green" />
+          <span>{toastMessage}</span>
         </div>
       )}
     </div>

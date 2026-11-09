@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { BarChart3, ArrowUpRight, Shield, Download, Calendar, Check, Clock } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function AdminReportsPage() {
   const [reportType, setReportType] = useState('Rekap realisasi anggaran');
@@ -16,7 +17,18 @@ export default function AdminReportsPage() {
   };
 
   const handleGenerate = () => {
-    showToast(`Dokumen ${reportType} (${year} - ${cabor}) format ${format} berhasil dibuat dan diunduh.`);
+    const filename = `Laporan_${reportType.replace(/\s+/g, '_')}_${year}_${cabor.replace(/\s+/g, '_')}`;
+    exportToCsv(
+      filename,
+      ['Jenis Dokumen', 'Tahun Anggaran', 'Cabor', 'Program Kerja', 'Pagu Alokasi', 'Realisasi Valid', 'Persentase Serapan', 'Status Kepatuhan'],
+      [
+        [reportType, year, cabor === 'Seluruh cabor' ? 'PASI (Atletik)' : cabor, 'Pembinaan Prestasi', 'Rp 320.000.000', 'Rp 180.000.000', '56.25%', 'Tertib Administrasi'],
+        [reportType, year, cabor === 'Seluruh cabor' ? 'PBSI (Bulutangkis)' : cabor, 'Pemusatan Latihan', 'Rp 280.000.000', 'Rp 170.000.000', '60.71%', 'Tertib Administrasi'],
+        [reportType, year, cabor === 'Seluruh cabor' ? 'PSSI (Sepak Bola)' : cabor, 'Kompetisi Resmi', 'Rp 450.000.000', 'Rp 205.000.000', '45.56%', 'Menunggu SPJ'],
+        [reportType, year, cabor === 'Seluruh cabor' ? 'PRSI (Renang)' : cabor, 'Kejuaraan Kota', 'Rp 190.000.000', 'Rp 80.000.000', '42.11%', 'Tertib Administrasi'],
+      ],
+    );
+    showToast(`Dokumen ${reportType} (${year} - ${cabor}) berhasil diekspor.`);
   };
 
   return (

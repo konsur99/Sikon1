@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
 import { FileSpreadsheet, Layers, Clock, Plus, Download, X, Check } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function BudgetControlPage() {
   const [showModal, setShowModal] = useState(false);
@@ -135,10 +136,17 @@ export default function BudgetControlPage() {
 
         <div className="flex items-center gap-2.5">
           <button
-            onClick={() => showToast('Ekspor rekapitulasi alokasi anggaran berhasil diunduh.')}
+            onClick={() => {
+              exportToCsv(
+                'Alokasi_Anggaran_Cabor_2026',
+                ['Program / Cabang Olahraga', 'Pagu Alokasi', 'RAB Disetujui', 'Komitmen Aktif', 'Realisasi Valid'],
+                budgetAllocations.map((b) => [b.cabor, b.pagu, b.rab, b.commitment, b.realization]),
+              );
+              showToast('Ekspor alokasi anggaran cabor (CSV / Excel) berhasil diunduh.');
+            }}
             className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
           >
-            <Download size={14} /> Export
+            <Download size={14} /> Export CSV
           </button>
           <button
             onClick={() => setShowModal(true)}
