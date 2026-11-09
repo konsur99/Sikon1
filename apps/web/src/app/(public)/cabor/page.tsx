@@ -137,30 +137,37 @@ export default function PublicCaborPage() {
         {filtered.map((cabor) => (
           <div
             key={cabor.code}
-            className="card-sikoni flex flex-col justify-between hover:shadow-lg transition-all border border-sikoni-line"
+            className="card-sikoni flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group border-t-4 border-t-sikoni-teal"
           >
             <div>
-              <div className="w-12 h-12 rounded-2xl bg-sikoni-teal2 text-2xl grid place-items-center mb-3">
-                {cabor.icon}
+              <div className="flex items-center justify-between mb-3">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-2xl grid place-items-center shadow-sm border border-emerald-100 group-hover:scale-105 transition-transform">
+                  {cabor.icon}
+                </div>
+                <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full">
+                  {cabor.category}
+                </span>
               </div>
-              <div className="flex items-center gap-2">
-                <b className="text-base text-sikoni-navy">{cabor.code}</b>
-                <span className="text-xs text-sikoni-muted">— {cabor.name}</span>
+
+              <div className="flex items-baseline gap-2">
+                <b className="text-base font-extrabold text-sikoni-navy group-hover:text-sikoni-teal transition-colors">
+                  {cabor.code}
+                </b>
+                <span className="text-xs text-slate-600 font-medium">— {cabor.name}</span>
               </div>
-              <div className="text-[11px] text-sikoni-teal font-semibold mt-1">
-                Kategori {cabor.category}
-              </div>
-              <p className="text-xs text-sikoni-muted mt-2">
-                {cabor.athletes} • Informasi kepengurusan dan program latihan aktif.
+
+              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
+                {cabor.athletes} • Tempat latihan resmi di {cabor.venue.split(',')[0]}.
               </p>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-sikoni-line">
+            <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-[10.5px] text-slate-400 font-medium">Binaan KONI Surakarta</span>
               <button
                 onClick={() => setSelectedCabor(cabor)}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="bg-emerald-50 hover:bg-emerald-100 text-sikoni-teal text-xs font-bold px-3 py-1.5 rounded-lg transition-all"
               >
-                Profil cabor →
+                Lihat Profil Lengkap →
               </button>
             </div>
           </div>

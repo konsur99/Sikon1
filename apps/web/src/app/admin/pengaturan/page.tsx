@@ -33,101 +33,162 @@ export default function AdminSettingsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* User & RBAC Management */}
-        <div className="card-sikoni space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-sikoni-teal2 text-sikoni-teal grid place-items-center">
-              <Users size={18} />
+        <div className="card-sikoni space-y-4 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-teal" />
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-emerald-50 text-sikoni-teal grid place-items-center shadow-sm">
+                <Users size={18} />
+              </div>
+              <div>
+                <h3 className="text-sm font-extrabold text-sikoni-navy">Pengguna & Hak Akses</h3>
+                <p className="text-[11px] text-sikoni-muted">Manajemen kredensial dan batas wewenang</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Pengguna & Hak Akses</h3>
-              <p className="text-[11px] text-sikoni-muted">Manajemen kredensial dan batas wewenang</p>
-            </div>
+            <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-2 py-0.5 rounded-full border border-emerald-200">
+              RBAC Aktif
+            </span>
           </div>
 
-          <div className="divide-y divide-sikoni-line text-xs">
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Manajemen Akun Pengguna</span>
+          <div className="space-y-2 text-xs">
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-sikoni-teal transition-colors">
+                  Manajemen Akun Pengguna
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Tambah, nonaktifkan, dan ubah profil pejabat</span>
+              </div>
               <button
                 onClick={() => setActiveModal('users')}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-teal text-sikoni-teal px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Kelola <ArrowRight size={13} />
+                Kelola <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Role & Granular Permission</span>
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-sikoni-teal transition-colors">
+                  Role & Granular Permission
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Admin, Bendahara, Verifikator, & Operator Cabor</span>
+              </div>
               <button
                 onClick={() => setActiveModal('roles')}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-teal text-sikoni-teal px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Kelola <ArrowRight size={13} />
+                Kelola <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Relasi Pengguna – Cabang Olahraga (Cabor Scope)</span>
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-sikoni-teal transition-colors">
+                  Relasi Scope Cabang Olahraga
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Isolasi data antar cabor (Multi-tenant Cabor Scope)</span>
+              </div>
               <button
                 onClick={() => setActiveModal('cabor-scope')}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-teal text-sikoni-teal px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Kelola <ArrowRight size={13} />
+                Kelola <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Reset Akses & Multi-Factor Auth (MFA)</span>
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-sikoni-teal transition-colors">
+                  Keamanan & Multi-Factor Auth (MFA)
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Autentikasi dua faktor untuk verifikator & bendahara</span>
+              </div>
               <button
                 onClick={() => setActiveModal('mfa')}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-teal text-sikoni-teal px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Kelola <ArrowRight size={13} />
+                Kelola <ArrowRight size={12} />
               </button>
             </div>
           </div>
         </div>
 
         {/* Workflow & Business Parameters */}
-        <div className="card-sikoni space-y-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-sikoni-gold2 text-sikoni-gold grid place-items-center">
-              <Workflow size={18} />
+        <div className="card-sikoni space-y-4 relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-gold" />
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div className="flex items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-amber-50 text-sikoni-gold grid place-items-center shadow-sm">
+                <Workflow size={18} />
+              </div>
+              <div>
+                <h3 className="text-sm font-extrabold text-sikoni-navy">Workflow & Parameter Bisnis</h3>
+                <p className="text-[11px] text-sikoni-muted">Aturan dan ambang batas yang disahkan KONI</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Workflow & Parameter Bisnis</h3>
-              <p className="text-[11px] text-sikoni-muted">Aturan dan ambang batas yang disahkan KONI</p>
-            </div>
+            <span className="text-[10px] font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-full border border-amber-200">
+              Parametrik
+            </span>
           </div>
 
-          <div className="divide-y divide-sikoni-line text-xs">
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Approval Matrix (Jenjang Persetujuan Bertingkat)</span>
+          <div className="space-y-2 text-xs">
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-amber-700 transition-colors">
+                  Approval Matrix (Persetujuan Bertingkat)
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Batas nominal disposisi Verifikator, Bendahara, & Ketum</span>
+              </div>
               <button
                 onClick={() => setActiveModal('approval-matrix')}
-                className="text-xs font-bold text-sikoni-gold hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-gold text-amber-700 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Konfigurasi <ArrowRight size={13} />
+                Konfigurasi <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Tahun Anggaran & Penetapan Pagu Induk</span>
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-amber-700 transition-colors">
+                  Tahun Anggaran & Pagu Induk
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Penetapan batas plafon dana hibah tahun 2026</span>
+              </div>
               <button
                 onClick={() => setActiveModal('fiscal-year')}
-                className="text-xs font-bold text-sikoni-gold hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-gold text-amber-700 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Konfigurasi <ArrowRight size={13} />
+                Konfigurasi <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Kategori Standar Biaya Masukan (SBM)</span>
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-amber-700 transition-colors">
+                  Standar Biaya Masukan (SBM)
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Plafon uang saku atlet, transport, dan katering</span>
+              </div>
               <button
                 onClick={() => setActiveModal('sbm')}
-                className="text-xs font-bold text-sikoni-gold hover:underline flex items-center gap-1"
+                className="bg-white border border-slate-200 hover:border-sikoni-gold text-amber-700 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
               >
-                Konfigurasi <ArrowRight size={13} />
+                Konfigurasi <ArrowRight size={12} />
               </button>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span className="text-sikoni-ink font-medium">Konfigurasi Aturan Pajak Transaksi</span>
-              <Link href="/admin/pajak" className="text-xs font-bold text-sikoni-gold hover:underline flex items-center gap-1">
-                Buka Modul <ArrowRight size={13} />
+
+            <div className="p-3 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold group">
+              <div>
+                <b className="text-sikoni-navy block text-xs group-hover:text-amber-700 transition-colors">
+                  Konfigurasi Aturan Pajak Transaksi
+                </b>
+                <span className="text-[10.5px] text-slate-500 font-medium">Rumus PPh 21, PPh 23, PPN, dan tarif NPWP</span>
+              </div>
+              <Link
+                href="/admin/pajak"
+                className="bg-white border border-slate-200 hover:border-sikoni-gold text-amber-700 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all shadow-sm flex items-center gap-1"
+              >
+                Buka Modul <ArrowRight size={12} />
               </Link>
             </div>
           </div>
@@ -135,40 +196,46 @@ export default function AdminSettingsPage() {
       </div>
 
       {/* Security & Audit System */}
-      <div className="card-sikoni space-y-4">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 grid place-items-center">
-            <ShieldCheck size={18} />
+      <div className="card-sikoni space-y-4 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-navy" />
+        <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 grid place-items-center shadow-sm">
+              <ShieldCheck size={18} />
+            </div>
+            <div>
+              <h3 className="text-sm font-extrabold text-sikoni-navy">Keamanan, Audit, & Keandalan Infrastruktur</h3>
+              <p className="text-[11px] text-sikoni-muted">Parameter operasional sistem kritikal Kota Surakarta</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Keamanan, Audit, & Keandalan Infrastruktur</h3>
-            <p className="text-[11px] text-sikoni-muted">Parameter operasional sistem kritikal</p>
-          </div>
+          <span className="text-[10px] font-bold bg-indigo-50 text-indigo-700 px-2 py-0.5 rounded-full border border-indigo-200">
+            Audit Trail Siap
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2">
-          <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl">
-            <span className="text-[10px] text-sikoni-muted font-bold block uppercase">Audit Trail</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 pt-1">
+          <div className="p-3.5 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-xl shadow-sm border-l-4 border-l-emerald-600 hover:shadow-md transition-all">
+            <span className="text-[10px] text-sikoni-muted font-bold block uppercase tracking-wider">Audit Trail</span>
             <b className="text-xs text-sikoni-navy mt-1 block">Aktif (Append-Only)</b>
-            <small className="text-[10px] text-sikoni-green">Mencatat IP & payload</small>
+            <small className="text-[10px] text-sikoni-green font-semibold">Mencatat IP & payload mutasi</small>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl">
-            <span className="text-[10px] text-sikoni-muted font-bold block uppercase">Backup Database</span>
+          <div className="p-3.5 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-xl shadow-sm border-l-4 border-l-sikoni-teal hover:shadow-md transition-all">
+            <span className="text-[10px] text-sikoni-muted font-bold block uppercase tracking-wider">Backup Database</span>
             <b className="text-xs text-sikoni-navy mt-1 block">Otomatis Tiap Hari</b>
-            <small className="text-[10px] text-sikoni-teal">Dump terenkripsi S3</small>
+            <small className="text-[10px] text-sikoni-teal font-semibold">Dump terenkripsi PostgreSQL</small>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl">
-            <span className="text-[10px] text-sikoni-muted font-bold block uppercase">Masa Retensi Berkas</span>
-            <b className="text-xs text-sikoni-navy mt-1 block">10 Tahun</b>
-            <small className="text-[10px] text-sikoni-muted">Standar BPK/Inspektorat</small>
+          <div className="p-3.5 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-xl shadow-sm border-l-4 border-l-sikoni-navy hover:shadow-md transition-all">
+            <span className="text-[10px] text-sikoni-muted font-bold block uppercase tracking-wider">Masa Retensi Berkas</span>
+            <b className="text-xs text-sikoni-navy mt-1 block">10 Tahun Fiskal</b>
+            <small className="text-[10px] text-slate-500 font-semibold">Standar BPK & Inspektorat</small>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl">
-            <span className="text-[10px] text-sikoni-muted font-bold block uppercase">Notifikasi Push</span>
+          <div className="p-3.5 bg-gradient-to-r from-slate-50 to-white border border-slate-200 rounded-xl shadow-sm border-l-4 border-l-sikoni-gold hover:shadow-md transition-all">
+            <span className="text-[10px] text-sikoni-muted font-bold block uppercase tracking-wider">Notifikasi Push</span>
             <b className="text-xs text-sikoni-navy mt-1 block">FCM Terhubung</b>
-            <small className="text-[10px] text-sikoni-teal">Android & Web Push</small>
+            <small className="text-[10px] text-amber-700 font-semibold">Android & Web Popover</small>
           </div>
         </div>
       </div>

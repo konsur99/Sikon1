@@ -236,26 +236,55 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            <div className="space-y-2.5 text-xs">
-              <div className="flex justify-between py-1.5 border-b border-slate-100">
-                <span className="text-slate-600 font-medium">Pagu DPA Murni</span>
-                <b className="text-sikoni-navy">Rp 2.450.000.000</b>
+            <div className="space-y-2 text-xs">
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-navy">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sikoni-navy" />
+                  <span className="text-slate-700 font-medium">Pagu DPA Murni</span>
+                </div>
+                <b className="text-sikoni-navy bg-white px-2.5 py-0.5 rounded-md border border-slate-200 shadow-sm font-black">
+                  Rp 2.450.000.000
+                </b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-100">
-                <span className="text-slate-600 font-medium">RAB Disetujui</span>
-                <b className="text-sikoni-navy">Rp 1.820.000.000</b>
+
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sikoni-teal" />
+                  <span className="text-slate-700 font-medium">RAB Disetujui</span>
+                </div>
+                <b className="text-sikoni-navy bg-white px-2.5 py-0.5 rounded-md border border-slate-200 shadow-sm font-black">
+                  Rp 1.820.000.000
+                </b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-100">
-                <span className="text-slate-600 font-medium">Realisasi Nota Valid</span>
-                <b className="text-sikoni-navy">Rp 1.210.000.000</b>
+
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-emerald-600">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                  <span className="text-slate-700 font-medium">Realisasi Nota Valid</span>
+                </div>
+                <b className="text-emerald-700 bg-white px-2.5 py-0.5 rounded-md border border-emerald-200 shadow-sm font-black">
+                  Rp 1.210.000.000
+                </b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-slate-100">
-                <span className="text-slate-600 font-medium">Komitmen Berjalan</span>
-                <b className="text-sikoni-navy">Rp 310.000.000</b>
+
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sikoni-gold" />
+                  <span className="text-slate-700 font-medium">Komitmen Berjalan</span>
+                </div>
+                <b className="text-amber-800 bg-white px-2.5 py-0.5 rounded-md border border-amber-200 shadow-sm font-black">
+                  Rp 310.000.000
+                </b>
               </div>
-              <div className="flex justify-between py-1.5 bg-emerald-50/70 p-2 rounded-lg border border-emerald-100">
-                <span className="text-emerald-800 font-bold">Sisa Pagu Tersedia</span>
-                <b className="text-sikoni-green font-black">Rp 630.000.000</b>
+
+              <div className="p-2.5 bg-gradient-to-r from-emerald-50 via-white to-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between shadow-sm border-l-4 border-l-emerald-600">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-emerald-900 font-extrabold">Sisa Pagu Tersedia</span>
+                </div>
+                <b className="text-sikoni-green bg-white px-2.5 py-0.5 rounded-md border border-emerald-200 shadow-sm font-black text-sm">
+                  Rp 630.000.000
+                </b>
               </div>
             </div>
           </div>

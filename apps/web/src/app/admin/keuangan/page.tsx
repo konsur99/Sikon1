@@ -229,33 +229,36 @@ export default function FinanceOverviewPage() {
               </div>
 
               <div className="space-y-2 text-xs flex-1">
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-slate-600">
-                    <span className="w-2.5 h-2.5 rounded-full bg-sikoni-teal" />
+                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal">
+                  <span className="flex items-center gap-2 font-medium text-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-sikoni-teal" />
                     Program Tanding
                   </span>
-                  <b className="text-sikoni-navy">44%</b>
+                  <b className="text-sikoni-navy bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-sm">44%</b>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-slate-600">
-                    <span className="w-2.5 h-2.5 rounded-full bg-sikoni-gold" />
+
+                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold">
+                  <span className="flex items-center gap-2 font-medium text-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-sikoni-gold" />
                     Pembinaan Atlet
                   </span>
-                  <b className="text-sikoni-navy">25%</b>
+                  <b className="text-sikoni-navy bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-sm">25%</b>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-slate-600">
-                    <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+
+                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-slate-400">
+                  <span className="flex items-center gap-2 font-medium text-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-slate-400" />
                     Operasional KONI
                   </span>
-                  <b className="text-sikoni-navy">18%</b>
+                  <b className="text-sikoni-navy bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-sm">18%</b>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="flex items-center gap-1.5 text-slate-600">
-                    <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
+
+                <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-slate-300">
+                  <span className="flex items-center gap-2 font-medium text-slate-700">
+                    <span className="w-2 h-2 rounded-full bg-slate-300" />
                     Cadangan Pagu
                   </span>
-                  <b className="text-sikoni-navy">13%</b>
+                  <b className="text-sikoni-navy bg-white px-2 py-0.5 rounded-md border border-slate-200 shadow-sm">13%</b>
                 </div>
               </div>
             </div>
