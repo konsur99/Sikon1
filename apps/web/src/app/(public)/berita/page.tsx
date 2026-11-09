@@ -65,34 +65,41 @@ export default function NewsPage() {
         {newsItems.map((item, idx) => (
           <div
             key={idx}
-            className={`card-sikoni flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group ${item.accent}`}
+            className={`bg-gradient-to-br from-white via-slate-50 to-[#edf3f8] border border-slate-200/90 rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group flex flex-col justify-between ${item.accent}`}
           >
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <div className="w-10 h-10 rounded-xl bg-slate-100 text-xl grid place-items-center shadow-sm group-hover:scale-105 transition-transform">
+                <div className="w-11 h-11 rounded-2xl bg-white text-2xl grid place-items-center shadow-md border border-slate-200/80 group-hover:scale-105 transition-transform">
                   {item.icon}
                 </div>
-                <span className="text-[9.5px] font-bold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  {item.tag}
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-bold bg-white text-slate-700 px-2.5 py-1 rounded-full border border-slate-200/80 shadow-sm uppercase tracking-wider">
+                    {item.tag}
+                  </span>
+                </div>
               </div>
 
-              <div className="text-[10px] text-slate-400 font-medium flex items-center gap-1.5">
-                <Calendar size={11} /> {item.date}
+              <div className="text-[10.5px] text-slate-500 font-semibold flex items-center gap-1.5 pt-1">
+                <Calendar size={12} className="text-sikoni-teal" /> {item.date} • Liputan Resmi
               </div>
 
-              <h3 className="text-sm font-extrabold text-sikoni-navy leading-snug group-hover:text-sikoni-teal transition-colors">
+              <h3 className="text-base font-extrabold text-sikoni-navy leading-snug group-hover:text-sikoni-teal transition-colors">
                 {item.title}
               </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">{item.summary}</p>
+
+              {/* Inner Styled Excerpt Box */}
+              <div className="p-3 bg-white/90 rounded-xl border border-slate-200/80 shadow-sm text-xs text-slate-600 leading-relaxed">
+                {item.summary}
+              </div>
             </div>
 
+            {/* Action Pill Button Box */}
             <button
               onClick={() => setSelectedNews(item)}
-              className="text-xs font-bold text-sikoni-teal hover:text-teal-800 text-left mt-5 pt-3 border-t border-slate-100 flex items-center justify-between group-hover:underline"
+              className="w-full mt-4 py-2.5 px-3.5 bg-white hover:bg-sikoni-navy hover:text-white rounded-xl border border-slate-200 shadow-sm flex items-center justify-between font-bold text-xs text-sikoni-teal transition-all group-hover:border-sikoni-navy"
             >
-              <span>Baca Selengkapnya</span>
-              <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
+              <span>Baca Rilis Lengkap</span>
+              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
         ))}

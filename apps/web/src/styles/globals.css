@@ -50,10 +50,10 @@ body {
 
 /* Modern Elegant Box / Card Styling */
 .card-sikoni {
-  background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
-  border: 1px solid rgba(20, 42, 67, 0.09);
+  background: linear-gradient(165deg, #ffffff 0%, #fafbfc 50%, #f4f7fa 100%);
+  border: 1px solid rgba(20, 42, 67, 0.12);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: 0 4px 6px -1px rgba(20, 42, 67, 0.04), 0 10px 24px -3px rgba(20, 42, 67, 0.07);
   padding: 22px;
   position: relative;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -61,7 +61,22 @@ body {
 
 .card-sikoni:hover {
   box-shadow: var(--shadow-hover);
-  border-color: rgba(22, 139, 139, 0.25);
+  border-color: rgba(22, 139, 139, 0.35);
+}
+
+.item-box-sikoni {
+  background: linear-gradient(90deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 3px rgba(20, 42, 67, 0.04);
+  transition: all 0.2s ease;
+}
+
+.item-box-sikoni:hover {
+  background: #ffffff;
+  border-color: rgba(22, 139, 139, 0.4);
+  box-shadow: 0 4px 12px rgba(20, 42, 67, 0.08);
 }
 
 .card-sikoni-accent {

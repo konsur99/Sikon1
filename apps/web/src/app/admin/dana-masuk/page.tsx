@@ -3,7 +3,19 @@
 import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
-import { PlusCircle, Layers, CheckCircle2, Clock, Plus, X, Check } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
+import {
+  PlusCircle,
+  Layers,
+  CheckCircle2,
+  Clock,
+  Plus,
+  X,
+  Check,
+  Download,
+  Building,
+  ShieldCheck,
+} from 'lucide-react';
 
 export default function FundReceiptsPage() {
   const [showModal, setShowModal] = useState(false);
@@ -17,15 +29,15 @@ export default function FundReceiptsPage() {
   const [fundData, setFundData] = useState([
     {
       date: '02 Jan 2026',
-      source: 'Hibah Pemerintah Daerah',
+      source: 'Hibah Pemerintah Daerah (APBD)',
       reference: 'HIB/001/2026',
       amount: 'Rp 1.500.000.000',
-      docs: '2 lampiran',
+      docs: '2 lampiran (NPHD & SP2D)',
       status: 'Disetujui',
     },
     {
       date: '15 Mar 2026',
-      source: 'Bantuan Pembinaan',
+      source: 'Bantuan Pembinaan Khusus',
       reference: 'BPM/015/2026',
       amount: 'Rp 650.000.000',
       docs: '3 lampiran',
@@ -33,7 +45,7 @@ export default function FundReceiptsPage() {
     },
     {
       date: '04 Jul 2026',
-      source: 'Sponsor Kegiatan',
+      source: 'Sponsor Kegiatan Perbankan',
       reference: 'SPN/004/2026',
       amount: 'Rp 250.000.000',
       docs: '1 lampiran',
@@ -41,7 +53,7 @@ export default function FundReceiptsPage() {
     },
     {
       date: '08 Nov 2026',
-      source: 'Penerimaan lainnya',
+      source: 'Penerimaan lainnya yang sah',
       reference: 'OTH/008/2026',
       amount: 'Rp 50.000.000',
       docs: '1 lampiran',
@@ -51,7 +63,7 @@ export default function FundReceiptsPage() {
 
   const [newReceipt, setNewReceipt] = useState({
     date: '09 Nov 2026',
-    source: 'Hibah Pemerintah Daerah',
+    source: 'Hibah Pemerintah Daerah (APBD)',
     reference: '',
     amount: '100000000',
     docs: '1 lampiran',
@@ -79,7 +91,7 @@ export default function FundReceiptsPage() {
     showToast(`Penerimaan dana ${newReceipt.reference} (${formattedAmount}) berhasil dicatat.`);
     setNewReceipt({
       date: '09 Nov 2026',
-      source: 'Hibah Pemerintah Daerah',
+      source: 'Hibah Pemerintah Daerah (APBD)',
       reference: '',
       amount: '100000000',
       docs: '1 lampiran',
@@ -90,26 +102,71 @@ export default function FundReceiptsPage() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="text-[11px] text-sikoni-muted mb-1">SIKONI / Keuangan / Dana Masuk</div>
-          <h1 className="text-2xl font-black text-sikoni-navy tracking-tight">Dana Masuk</h1>
+          <div className="text-[11px] text-sikoni-muted mb-1">
+            SIKONI <span className="text-slate-300">/</span> Keuangan <span className="text-slate-300">/</span> Dana Masuk
+          </div>
+          <h1 className="text-2xl font-black text-sikoni-navy tracking-tight">Dana Masuk & Penerimaan Hibah</h1>
           <p className="text-xs text-sikoni-muted mt-0.5">
-            Catat penerimaan dana berdasarkan sumber, tanggal, dan dokumen pendukung resmi.
+            Pencatatan penerimaan dana kas, hibah APBD Pemkot Surakarta, sponsorship, dan bukti transfer resmi.
           </p>
         </div>
 
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
-        >
-          <Plus size={15} /> Catat Dana Masuk
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => {
+              exportToCsv(
+                'Rekap_Penerimaan_Dana_KONI_2026',
+                ['Tanggal', 'Sumber Dana', 'Nomor Referensi', 'Nilai Penerimaan', 'Lampiran Dokumen', 'Status'],
+                fundData.map((f) => [f.date, f.source, f.reference, f.amount, f.docs, f.status]),
+              );
+              showToast('Data penerimaan kas format CSV / Excel berhasil diekspor.');
+            }}
+            className="bg-white border border-slate-200 text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <Download size={14} /> Export CSV
+          </button>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm transition-all"
+          >
+            <Plus size={15} /> Catat Dana Masuk
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Total Penerimaan" value="Rp 2,45 M" foot="Tahun anggaran berjalan" icon={<PlusCircle size={18} />} />
-        <KpiCard label="Sumber Dana" value="04 Sumber" foot="Aktif terdata" icon={<Layers size={18} />} />
-        <KpiCard label="Transaksi" value="12 Transaksi" foot="Tercatat di pembukuan" icon={<CheckCircle2 size={18} />} />
-        <KpiCard label="Perlu Verifikasi" value="01 Transaksi" foot="Periksa dokumen fisik" icon={<Clock size={18} />} />
+        <KpiCard
+          label="Total Penerimaan"
+          value="Rp 2,45 M"
+          foot="Tahun anggaran berjalan"
+          accentColor="teal"
+          badge="Kas Daerah"
+          icon={<PlusCircle size={19} />}
+        />
+        <KpiCard
+          label="Sumber Pendanaan"
+          value="04 Sumber"
+          foot="APBD, sponsor & bantuan"
+          accentColor="navy"
+          badge="Resmi"
+          icon={<Layers size={19} />}
+        />
+        <KpiCard
+          label="Transaksi Kasda"
+          value="12 Transaksi"
+          foot="Tervalidasi di giro bank"
+          accentColor="green"
+          badge="Rekening Giro"
+          icon={<CheckCircle2 size={19} />}
+        />
+        <KpiCard
+          label="Perlu Verifikasi"
+          value="01 Transaksi"
+          foot="Cek fisik rekening koran"
+          accentColor="amber"
+          badge="Review"
+          icon={<Clock size={19} />}
+        />
       </div>
 
       <DataTable

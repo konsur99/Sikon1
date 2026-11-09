@@ -115,7 +115,9 @@ export function DataTable<T extends Record<string, any>>({
               filteredData.map((row, rowIdx) => (
                 <tr
                   key={rowIdx}
-                  className="hover:bg-slate-50/80 transition-colors duration-150 group"
+                  className={`transition-colors duration-150 group ${
+                    rowIdx % 2 === 1 ? 'bg-[#fcfdfe]' : 'bg-white'
+                  } hover:bg-emerald-50/40`}
                 >
                   {columns.map((col, colIdx) => {
                     let cellContent: React.ReactNode = null;

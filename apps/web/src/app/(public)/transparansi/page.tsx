@@ -253,29 +253,73 @@ export default function TransparencyPage() {
         </div>
       </div>
 
-      {/* Dokumen Publik Table */}
-      <DataTable
-        title="Dokumen Publik yang Tersedia"
-        subtitle="Hanya berkas resmi yang ditetapkan untuk diakses publik"
-        showFilterbar={false}
-        columns={[
-          { header: 'Nama Dokumen', accessor: 'document' },
-          { header: 'Periode', accessor: 'period' },
-          { header: 'Tanggal Publikasi', accessor: 'publishedDate' },
-          {
-            header: 'Aksi',
-            accessor: (row) => (
+      {/* Dokumen Publik Container in Themed Cardlet Boxes */}
+      <div className="card-sikoni space-y-4 relative overflow-hidden">
+        <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100">
+          <div>
+            <h3 className="text-base font-extrabold text-sikoni-navy tracking-tight flex items-center gap-2">
+              <FileSpreadsheet size={18} className="text-sikoni-teal" /> Dokumen Publik yang Tersedia
+            </h3>
+            <p className="text-xs text-sikoni-muted mt-0.5">
+              Hanya berkas resmi yang telah disahkan dan ditetapkan untuk diakses oleh masyarakat umum
+            </p>
+          </div>
+          <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-3 py-1 rounded-full border border-emerald-200 self-start sm:self-auto">
+            Terbuka & Akuntabel
+          </span>
+        </div>
+
+        {/* Distinct Document Cardlet Boxes */}
+        <div className="space-y-3">
+          {publicDocuments.map((doc) => (
+            <div
+              key={doc.id}
+              className="p-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-2xl border border-slate-200/90 shadow-sm hover:shadow-md hover:border-sikoni-teal/50 transition-all border-l-4 border-l-sikoni-teal flex flex-col sm:flex-row sm:items-center justify-between gap-4 group"
+            >
+              <div className="flex items-start gap-3.5">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-sikoni-navy to-slate-800 text-sikoni-gold grid place-items-center flex-shrink-0 shadow-md group-hover:scale-105 transition-transform">
+                  <FileText size={22} />
+                </div>
+                <div>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[9.5px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full uppercase">
+                      {doc.id}
+                    </span>
+                    <span className="text-[10px] font-semibold text-sikoni-teal bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+                      {doc.period}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-medium">
+                      Publikasi: {doc.publishedDate}
+                    </span>
+                  </div>
+                  <h4 className="text-sm font-extrabold text-sikoni-navy mt-1 group-hover:text-sikoni-teal transition-colors">
+                    {doc.document}
+                  </h4>
+                  <p className="text-xs text-slate-600 mt-1 line-clamp-2 leading-relaxed">
+                    {doc.summary}
+                  </p>
+                </div>
+              </div>
+
               <button
-                onClick={() => setSelectedDoc(row as PublicDocItem)}
-                className="text-xs font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                onClick={() => setSelectedDoc(doc)}
+                className="bg-white hover:bg-sikoni-teal hover:text-white text-sikoni-teal border border-teal-200 hover:border-sikoni-teal px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-sm flex-shrink-0 self-end sm:self-center"
               >
-                <Eye size={13} /> Pratinjau
+                <Eye size={14} /> Pratinjau Dokumen
               </button>
-            ),
-          },
-        ]}
-        data={publicDocuments}
-      />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-between pt-3 text-[11px] text-slate-500 font-medium border-t border-slate-100">
+          <span>Menampilkan {publicDocuments.length} dari {publicDocuments.length} berkas resmi</span>
+          <span className="text-[10px] bg-slate-100 text-slate-600 px-2.5 py-0.5 rounded-full font-bold">
+            Portal Keterbukaan SIKONI
+          </span>
+        </div>
+      </div>
 
       {/* Document Preview Modal */}
       {selectedDoc && (
