@@ -284,27 +284,27 @@ export default function FinanceOverviewPage() {
           {financeModules.map((mod, idx) => (
             <div
               key={idx}
-              className={`bg-white border border-slate-200/90 p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group ${mod.accent}`}
+              className={`bg-gradient-to-br from-white via-slate-50/50 to-slate-100/40 border border-slate-200/90 p-4 rounded-xl shadow-xs hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group ${mod.accent}`}
             >
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <div className="p-2 bg-slate-50 rounded-lg group-hover:scale-105 transition-transform">
+                <div className="flex items-center justify-between mb-2.5">
+                  <div className="p-2.5 bg-white rounded-xl shadow-xs border border-slate-200/70 group-hover:scale-110 transition-transform">
                     {mod.icon}
                   </div>
-                  <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">
+                  <span className="text-[9.5px] font-extrabold bg-white text-slate-700 px-2 py-0.5 rounded-full border border-slate-200/80 shadow-xs">
                     {mod.badge}
                   </span>
                 </div>
                 <b className="text-xs text-sikoni-navy block group-hover:text-sikoni-teal transition-colors">
                   {mod.title}
                 </b>
-                <p className="text-[11px] text-sikoni-muted mt-1 leading-relaxed">
+                <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">
                   {mod.desc}
                 </p>
               </div>
               <Link
                 href={mod.href}
-                className="mt-4 text-xs font-bold text-sikoni-teal hover:text-teal-800 flex items-center justify-between pt-2 border-t border-slate-100 group-hover:underline"
+                className="mt-4 text-xs font-bold text-sikoni-teal hover:text-teal-800 flex items-center justify-between pt-2.5 border-t border-slate-100 group-hover:underline"
               >
                 <span>Buka Modul</span>
                 <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />

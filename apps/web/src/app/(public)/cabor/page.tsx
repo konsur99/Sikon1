@@ -198,26 +198,28 @@ export default function PublicCaborPage() {
               </button>
             </div>
 
-            <div className="p-4 bg-slate-50 border border-sikoni-line rounded-xl space-y-2.5 text-xs">
-              <div className="flex items-center gap-2 text-sikoni-ink">
-                <Users size={15} className="text-sikoni-muted" />
-                <span className="text-sikoni-muted">Ketua Umum:</span>
-                <b>{selectedCabor.leader}</b>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Ketua Umum Pengkot</span>
+                <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.leader}</b>
               </div>
-              <div className="flex items-center gap-2 text-sikoni-ink">
-                <MapPin size={15} className="text-sikoni-muted" />
-                <span className="text-sikoni-muted">Tempat Latihan:</span>
-                <b>{selectedCabor.venue}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Tempat Latihan Resmi</span>
+                <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.venue}</b>
               </div>
-              <div className="flex items-center gap-2 text-sikoni-ink">
-                <Mail size={15} className="text-sikoni-muted" />
-                <span className="text-sikoni-muted">Email Resmi:</span>
-                <b>{selectedCabor.email}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Email Resmi</span>
+                <b className="text-xs text-sikoni-teal mt-0.5 block">{selectedCabor.email}</b>
               </div>
-              <div className="flex items-center gap-2 text-sikoni-ink">
-                <Phone size={15} className="text-sikoni-muted" />
-                <span className="text-sikoni-muted">Kontak Pengkot:</span>
-                <b>{selectedCabor.phone}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Nomor Kontak WhatsApp</span>
+                <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.phone}</b>
+              </div>
+              <div className="sm:col-span-2 p-3 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70 flex justify-between items-center">
+                <span className="text-xs font-bold text-sikoni-navy">Data Pembinaan Atlet:</span>
+                <span className="px-3 py-1 rounded-full bg-sikoni-teal text-white font-extrabold text-xs">
+                  {selectedCabor.athletes}
+                </span>
               </div>
             </div>
 

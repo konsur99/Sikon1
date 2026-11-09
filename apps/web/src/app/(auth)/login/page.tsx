@@ -27,7 +27,8 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-[calc(100vh-160px)] flex items-center justify-center py-12 px-4">
-      <div className="card-sikoni w-full max-w-md p-8 space-y-6 shadow-xl border border-sikoni-line">
+      <div className="card-sikoni relative overflow-hidden w-full max-w-md p-8 space-y-6 shadow-2xl border border-slate-200/90">
+        <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
         <div className="text-center space-y-2">
           <div className="brand-mark mx-auto mb-3">SK</div>
           <h2 className="text-2xl font-black text-sikoni-navy tracking-tight">Masuk ke SIKONI</h2>
@@ -41,32 +42,38 @@ export default function LoginPage() {
           <span className="text-[10px] font-bold text-sikoni-muted uppercase tracking-wider block">
             Pilih Akses Demo Instan:
           </span>
-          <div className="grid grid-cols-3 gap-2 text-[11px]">
+          <div className="grid grid-cols-3 gap-2.5 text-[11px]">
             <button
               type="button"
               onClick={() => selectPersona('admin@koni-surakarta.id', '/admin/dashboard')}
-              className="p-2 rounded-xl bg-slate-50 border border-sikoni-line hover:border-sikoni-navy text-center flex flex-col items-center gap-1 transition-all"
+              className="p-2.5 rounded-xl bg-gradient-to-br from-slate-50 to-white border border-slate-200/80 hover:border-sikoni-navy hover:shadow-md text-center flex flex-col items-center gap-1.5 transition-all group"
             >
-              <ShieldCheck size={16} className="text-sikoni-navy" />
-              <b className="text-[10px] text-sikoni-navy">Admin KONI</b>
+              <div className="w-8 h-8 rounded-lg bg-slate-100 text-sikoni-navy grid place-items-center group-hover:scale-110 transition-transform">
+                <ShieldCheck size={17} />
+              </div>
+              <b className="text-[10.5px] text-sikoni-navy">Admin KONI</b>
             </button>
 
             <button
               type="button"
               onClick={() => selectPersona('bendahara@koni-surakarta.id', '/admin/dashboard')}
-              className="p-2 rounded-xl bg-slate-50 border border-sikoni-line hover:border-sikoni-teal text-center flex flex-col items-center gap-1 transition-all"
+              className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-50/50 to-white border border-teal-200/80 hover:border-sikoni-teal hover:shadow-md text-center flex flex-col items-center gap-1.5 transition-all group"
             >
-              <UserCheck size={16} className="text-sikoni-teal" />
-              <b className="text-[10px] text-sikoni-teal">Bendahara</b>
+              <div className="w-8 h-8 rounded-lg bg-teal-50 text-sikoni-teal grid place-items-center group-hover:scale-110 transition-transform">
+                <UserCheck size={17} />
+              </div>
+              <b className="text-[10.5px] text-sikoni-teal">Bendahara</b>
             </button>
 
             <button
               type="button"
               onClick={() => selectPersona('operator@pasi.demo', '/android-preview')}
-              className="p-2 rounded-xl bg-slate-50 border border-sikoni-line hover:border-sikoni-gold text-center flex flex-col items-center gap-1 transition-all"
+              className="p-2.5 rounded-xl bg-gradient-to-br from-amber-50/50 to-white border border-amber-200/80 hover:border-sikoni-gold hover:shadow-md text-center flex flex-col items-center gap-1.5 transition-all group"
             >
-              <Smartphone size={16} className="text-sikoni-gold" />
-              <b className="text-[10px] text-sikoni-gold">Operator Cabor</b>
+              <div className="w-8 h-8 rounded-lg bg-amber-50 text-sikoni-gold grid place-items-center group-hover:scale-110 transition-transform">
+                <Smartphone size={17} />
+              </div>
+              <b className="text-[10.5px] text-amber-800">Operator Cabor</b>
             </button>
           </div>
         </div>
@@ -76,7 +83,7 @@ export default function LoginPage() {
             e.preventDefault();
             handleLogin();
           }}
-          className="space-y-4 text-xs pt-2 border-t border-sikoni-line"
+          className="space-y-4 text-xs pt-2 border-t border-slate-100"
         >
           <div>
             <label className="font-bold text-sikoni-navy block mb-1">Email / Username</label>
@@ -132,7 +139,8 @@ export default function LoginPage() {
       {/* Help Modal */}
       {showHelpModal && (
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-sm p-6 space-y-4 shadow-2xl">
+          <div className="card-sikoni relative overflow-hidden w-full max-w-sm p-6 space-y-4 shadow-2xl">
+            <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-extrabold text-sikoni-navy">Bantuan Akun & Reset Akses</h3>
               <button onClick={() => setShowHelpModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
@@ -144,15 +152,15 @@ export default function LoginPage() {
               <p className="leading-relaxed">
                 Untuk menjaga integritas dan keamanan data keuangan hibah, reset kata sandi dan pembaharuan akun operator cabor dilakukan langsung melalui Administrator Sekretariat KONI Surakarta:
               </p>
-              <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl space-y-2 text-xs">
-                <div className="flex items-center gap-2 text-sikoni-navy font-semibold">
-                  <Mail size={14} className="text-sikoni-teal" /> sekretariat@koni-surakarta.id
+              <div className="space-y-2 text-xs">
+                <div className="p-2.5 rounded-xl bg-gradient-to-r from-teal-50/60 to-white border border-teal-200/80 flex items-center gap-2 text-sikoni-navy font-semibold">
+                  <Mail size={15} className="text-sikoni-teal" /> sekretariat@koni-surakarta.id
                 </div>
-                <div className="flex items-center gap-2 text-sikoni-navy font-semibold">
-                  <Phone size={14} className="text-sikoni-teal" /> (0271) 714930
+                <div className="p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex items-center gap-2 text-sikoni-navy font-semibold">
+                  <Phone size={15} className="text-sikoni-teal" /> (0271) 714930
                 </div>
-                <div className="flex items-center gap-2 text-sikoni-muted text-[11px]">
-                  <MapPin size={14} /> Gedung Sekretariat KONI, Manahan Surakarta
+                <div className="p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex items-center gap-2 text-sikoni-muted text-[11px]">
+                  <MapPin size={15} className="text-sikoni-navy" /> Gedung Sekretariat KONI, Manahan Surakarta
                 </div>
               </div>
             </div>

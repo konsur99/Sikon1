@@ -297,20 +297,20 @@ export default function AdminSettingsPage() {
               Atur ambang batas nominal (*threshold*) untuk tahapan persetujuan usulan RAB & LPJ.
             </p>
 
-            <div className="space-y-3 text-xs">
-              <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl space-y-2">
-                <b className="text-sikoni-navy block">Tahap 1: Verifikator Teknis</b>
-                <span className="text-sikoni-muted block">Memvalidasi kelengkapan berkas untuk semua nominal usulan.</span>
+            <div className="space-y-2.5 text-xs">
+              <div className="p-3 bg-gradient-to-r from-teal-50/60 to-white border border-teal-200/80 rounded-xl space-y-1 border-l-4 border-l-sikoni-teal shadow-xs">
+                <b className="text-sikoni-navy block text-xs">Tahap 1: Verifikator Teknis Sekretariat</b>
+                <span className="text-[11px] text-slate-600 block">Memvalidasi kelengkapan berkas fisik & digital untuk semua nominal usulan.</span>
               </div>
 
-              <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl space-y-2">
-                <b className="text-sikoni-navy block">Tahap 2: Bendahara KONI</b>
-                <span className="text-sikoni-muted block">Persetujuan keuangan & ketersediaan pagu cabor (s.d. Rp 100.000.000).</span>
+              <div className="p-3 bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 rounded-xl space-y-1 border-l-4 border-l-sikoni-navy shadow-xs">
+                <b className="text-sikoni-navy block text-xs">Tahap 2: Bendahara Umum KONI</b>
+                <span className="text-[11px] text-slate-600 block">Persetujuan keuangan & ketersediaan pagu cabor (plafon s.d. Rp 100.000.000).</span>
               </div>
 
-              <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl space-y-2">
-                <b className="text-sikoni-navy block">Tahap 3: Ketua Umum KONI</b>
-                <span className="text-sikoni-muted block">Persetujuan akhir untuk usulan bernilai di atas Rp 100.000.000.</span>
+              <div className="p-3 bg-gradient-to-r from-amber-50/60 to-white border border-amber-200/80 rounded-xl space-y-1 border-l-4 border-l-sikoni-gold shadow-xs">
+                <b className="text-amber-900 block text-xs">Tahap 3: Ketua Umum KONI Surakarta</b>
+                <span className="text-[11px] text-slate-600 block">Persetujuan akhir eksekutif untuk usulan bernilai di atas Rp 100.000.000.</span>
               </div>
             </div>
 

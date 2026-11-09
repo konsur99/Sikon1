@@ -385,7 +385,7 @@ export const Topbar: React.FC = () => {
               </div>
 
               {/* Notification Items List */}
-              <div className="max-h-[360px] overflow-y-auto divide-y divide-slate-100">
+              <div className="max-h-[380px] overflow-y-auto p-2 space-y-2 bg-slate-50/50">
                 {filteredNotifs.length === 0 ? (
                   <div className="p-8 text-center text-sikoni-muted">
                     <p className="font-semibold">Tidak ada notifikasi dalam kategori ini.</p>
@@ -406,22 +406,24 @@ export const Topbar: React.FC = () => {
                     };
 
                     const getBg = () => {
-                      if (item.category === 'persetujuan') return 'bg-amber-50 border-amber-100';
-                      if (item.category === 'lpj') return 'bg-teal-50 border-teal-100';
-                      if (item.category === 'pajak') return 'bg-rose-50 border-rose-100';
-                      return 'bg-emerald-50 border-emerald-100';
+                      if (item.category === 'persetujuan') return 'bg-amber-50 border-amber-200';
+                      if (item.category === 'lpj') return 'bg-teal-50 border-teal-200';
+                      if (item.category === 'pajak') return 'bg-rose-50 border-rose-200';
+                      return 'bg-emerald-50 border-emerald-200';
                     };
 
                     return (
                       <div
                         key={item.id}
-                        className={`p-3.5 transition-colors relative hover:bg-slate-50/90 ${
-                          item.unread ? 'bg-sky-50/40' : 'bg-white'
+                        className={`p-3 rounded-xl border transition-all duration-200 shadow-xs hover:shadow-md ${
+                          item.unread
+                            ? 'bg-gradient-to-r from-teal-50/40 via-white to-sky-50/30 border-teal-200/90'
+                            : 'bg-white border-slate-200/80'
                         }`}
                       >
                         <div className="flex items-start gap-3">
                           <div
-                            className={`w-9 h-9 rounded-xl flex-shrink-0 grid place-items-center border shadow-sm ${getBg()}`}
+                            className={`w-9 h-9 rounded-xl flex-shrink-0 grid place-items-center border shadow-xs ${getBg()}`}
                           >
                             {getIcon()}
                           </div>
@@ -430,13 +432,13 @@ export const Topbar: React.FC = () => {
                             <div className="flex items-center justify-between gap-1">
                               <h4
                                 className={`text-xs font-bold leading-tight truncate ${
-                                  item.unread ? 'text-sikoni-navy font-extrabold' : 'text-slate-700'
+                                  item.unread ? 'text-sikoni-navy font-black' : 'text-slate-700'
                                 }`}
                               >
                                 {item.title}
                               </h4>
                               {item.unread && (
-                                <span className="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0" />
+                                <span className="w-2 h-2 rounded-full bg-rose-500 flex-shrink-0 shadow-xs" />
                               )}
                             </div>
 
@@ -444,14 +446,14 @@ export const Topbar: React.FC = () => {
                               {item.message}
                             </p>
 
-                            <div className="flex items-center justify-between mt-2.5 pt-1.5 border-t border-slate-100/80">
-                              <span className="text-[10px] text-sikoni-muted font-medium">
+                            <div className="flex items-center justify-between mt-2.5 pt-1.5 border-t border-slate-100/90">
+                              <span className="text-[10px] text-sikoni-muted font-semibold">
                                 {item.time}
                               </span>
 
                               <button
                                 onClick={() => handleNotificationClick(item)}
-                                className="text-[10.5px] font-bold text-sikoni-teal hover:text-teal-800 flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100/80 px-2 py-0.5 rounded-md transition-colors"
+                                className="text-[10.5px] font-bold text-sikoni-teal hover:text-teal-800 flex items-center gap-1 bg-emerald-50 hover:bg-emerald-100/80 px-2 py-0.5 rounded-md transition-colors border border-emerald-200/60"
                               >
                                 {item.actionText} <ArrowRight size={11} />
                               </button>

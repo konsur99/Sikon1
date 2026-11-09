@@ -485,38 +485,39 @@ export const MobilePreview: React.FC = () => {
                 </div>
 
                 {/* Upcoming Events Feed */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-3.5 space-y-2.5 shadow-sm">
+                <div className="card-sikoni relative overflow-hidden p-3.5 space-y-3">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-teal to-sikoni-gold" />
                   <div className="flex justify-between items-center">
-                    <b className="text-xs text-sikoni-navy">Kejuaraan Terdekat di Solo</b>
+                    <b className="text-xs text-sikoni-navy font-black">Kejuaraan Terdekat di Solo</b>
                     <button
                       onClick={() => setPublikTab('jadwal')}
-                      className="text-[10px] text-sikoni-teal font-bold"
+                      className="text-[10px] text-sikoni-teal font-extrabold bg-teal-50 px-2 py-0.5 rounded-full hover:bg-teal-100 transition-colors"
                     >
-                      Semua
+                      Semua →
                     </button>
                   </div>
 
-                  <div className="divide-y divide-slate-100 text-xs">
-                    <div className="py-2 flex items-start gap-2.5">
-                      <div className="w-10 h-10 rounded-xl bg-emerald-50 text-sikoni-teal flex-shrink-0 grid place-items-center font-black text-xs">
-                        15<br /><span className="text-[8px] font-medium">NOV</span>
+                  <div className="space-y-2 text-xs">
+                    <div className="p-2.5 rounded-xl bg-gradient-to-r from-emerald-50/60 to-white border border-emerald-100/90 flex items-start gap-2.5 shadow-xs">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-100/80 text-sikoni-teal flex-shrink-0 grid place-items-center font-black text-xs border border-emerald-200/60 shadow-xs">
+                        15<br /><span className="text-[8px] font-bold">NOV</span>
                       </div>
                       <div>
-                        <b className="text-sikoni-navy block text-[11.5px]">Kejuaraan Atletik Antar Pelajar</b>
-                        <span className="text-[10px] text-slate-500 flex items-center gap-1">
-                          <MapPin size={10} /> Stadion Sriwedari • PASI Solo
+                        <b className="text-sikoni-navy block text-[11.5px] font-bold">Kejuaraan Atletik Antar Pelajar</b>
+                        <span className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5">
+                          <MapPin size={10} className="text-sikoni-teal" /> Stadion Sriwedari • PASI Solo
                         </span>
                       </div>
                     </div>
 
-                    <div className="py-2 flex items-start gap-2.5">
-                      <div className="w-10 h-10 rounded-xl bg-amber-50 text-sikoni-gold flex-shrink-0 grid place-items-center font-black text-xs">
-                        22<br /><span className="text-[8px] font-medium">NOV</span>
+                    <div className="p-2.5 rounded-xl bg-gradient-to-r from-amber-50/60 to-white border border-amber-100/90 flex items-start gap-2.5 shadow-xs">
+                      <div className="w-10 h-10 rounded-xl bg-amber-100/80 text-amber-800 flex-shrink-0 grid place-items-center font-black text-xs border border-amber-200/60 shadow-xs">
+                        22<br /><span className="text-[8px] font-bold">NOV</span>
                       </div>
                       <div>
-                        <b className="text-sikoni-navy block text-[11.5px]">Turnamen Bola Voli Piala Walikota</b>
-                        <span className="text-[10px] text-slate-500 flex items-center gap-1">
-                          <MapPin size={10} /> GOR Manahan Solo • PBVSI
+                        <b className="text-sikoni-navy block text-[11.5px] font-bold">Turnamen Bola Voli Walikota Cup</b>
+                        <span className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5">
+                          <MapPin size={10} className="text-sikoni-gold" /> GOR Manahan Solo • PBVSI
                         </span>
                       </div>
                     </div>
@@ -524,16 +525,17 @@ export const MobilePreview: React.FC = () => {
                 </div>
 
                 {/* Latest News Feed */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-3.5 space-y-2.5 shadow-sm">
-                  <b className="text-xs text-sikoni-navy block">Berita & Informasi Olahraga</b>
-                  <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100 space-y-1">
-                    <span className="text-[9px] font-bold text-sikoni-teal bg-emerald-50 px-1.5 py-0.5 rounded">
+                <div className="card-sikoni relative overflow-hidden p-3.5 space-y-2.5">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-navy" />
+                  <b className="text-xs text-sikoni-navy font-black block">Berita & Informasi Olahraga</b>
+                  <div className="p-3 bg-gradient-to-br from-slate-50 to-white rounded-xl border border-slate-200/80 shadow-xs space-y-1.5 border-l-4 border-l-sikoni-teal">
+                    <span className="text-[9px] font-extrabold text-sikoni-teal bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
                       Prestasi Atlet
                     </span>
-                    <b className="text-[11px] text-sikoni-navy block leading-snug">
+                    <b className="text-[11px] text-sikoni-navy block leading-snug font-bold">
                       Pemkot dan KONI Surakarta Salurkan Bonus Atlet Berprestasi SEA Games
                     </b>
-                    <p className="text-[10px] text-slate-500">
+                    <p className="text-[10px] text-slate-500 leading-relaxed">
                       Total bonus sebesar Rp 1,4 Miliar diserahkan secara simbolis di Balai Kota Surakarta.
                     </p>
                   </div>
@@ -869,18 +871,19 @@ export const MobilePreview: React.FC = () => {
                 </div>
 
                 {/* Submissions List */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-3.5 space-y-3 shadow-sm">
+                <div className="card-sikoni relative overflow-hidden p-3.5 space-y-3">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-teal to-sikoni-gold" />
                   <div className="flex justify-between items-center">
-                    <b className="text-xs text-sikoni-navy">Usulan Berkas Berjalan</b>
+                    <b className="text-xs text-sikoni-navy font-black">Usulan Berkas Berjalan</b>
                     <button
                       onClick={() => setCaborTab('submissions')}
-                      className="text-[10px] text-sikoni-teal font-bold"
+                      className="text-[10px] text-sikoni-teal font-extrabold bg-teal-50 px-2 py-0.5 rounded-full hover:bg-teal-100 transition-colors"
                     >
-                      Lihat Semua
+                      Lihat Semua →
                     </button>
                   </div>
 
-                  <div className="divide-y divide-slate-100 text-xs">
+                  <div className="space-y-2 text-xs">
                     <button
                       onClick={() =>
                         setSelectedMobileItem({
@@ -891,14 +894,14 @@ export const MobilePreview: React.FC = () => {
                           desc: 'Pengajuan sedang berada pada antrean verifikasi teknis oleh Bendahara KONI Surakarta.',
                         })
                       }
-                      className="w-full text-left py-2.5 flex justify-between items-center hover:bg-slate-50 rounded px-1 transition-colors"
+                      className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex justify-between items-center hover:bg-white hover:shadow-xs transition-all border-l-4 border-l-sikoni-gold"
                     >
                       <div>
-                        <b className="text-sikoni-navy block text-[11.5px]">RAB Kejuaraan Atletik Kota</b>
+                        <b className="text-sikoni-navy block text-[11.5px] font-bold">RAB Kejuaraan Atletik Kota</b>
                         <small className="text-[10px] text-sikoni-muted">RAB-026 • 09 Nov 2026</small>
                       </div>
                       <div className="text-right">
-                        <b className="text-sikoni-navy block text-[11.5px]">Rp 48,5 jt</b>
+                        <b className="text-sikoni-navy block text-[11.5px] font-black">Rp 48,5 jt</b>
                         <StatusBadge status="Menunggu" />
                       </div>
                     </button>
@@ -913,14 +916,14 @@ export const MobilePreview: React.FC = () => {
                           desc: 'Bukti kuitansi sewa armada bus sedang diteliti kelengkapan stempel dan meterainya.',
                         })
                       }
-                      className="w-full text-left py-2.5 flex justify-between items-center hover:bg-slate-50 rounded px-1 transition-colors"
+                      className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex justify-between items-center hover:bg-white hover:shadow-xs transition-all border-l-4 border-l-sikoni-teal"
                     >
                       <div>
-                        <b className="text-sikoni-navy block text-[11.5px]">Transportasi Atlet</b>
+                        <b className="text-sikoni-navy block text-[11.5px] font-bold">Transportasi Atlet</b>
                         <small className="text-[10px] text-sikoni-muted">EXP-1126 • 08 Nov 2026</small>
                       </div>
                       <div className="text-right">
-                        <b className="text-sikoni-navy block text-[11.5px]">Rp 4,5 jt</b>
+                        <b className="text-sikoni-navy block text-[11.5px] font-black">Rp 4,5 jt</b>
                         <StatusBadge status="Verifikasi" />
                       </div>
                     </button>
@@ -937,30 +940,30 @@ export const MobilePreview: React.FC = () => {
                   <h2 className="text-xl font-black text-sikoni-navy">Kas Cabor PASI</h2>
                 </div>
 
-                <div className="bg-sikoni-navy text-white p-4 rounded-2xl shadow-md">
-                  <div className="text-[10px] text-slate-300">SALDO KAS OPERASIONAL CABOR</div>
-                  <div className="text-2xl font-black mt-1">Rp 32.500.000</div>
-                  <div className="text-[11px] text-sikoni-gold mt-0.5">
+                <div className="card-hero-navy p-4 rounded-2xl shadow-md">
+                  <div className="text-[10px] text-slate-300 font-extrabold uppercase tracking-wider">SALDO KAS OPERASIONAL CABOR</div>
+                  <div className="text-2xl font-black mt-1 text-white">Rp 32.500.000</div>
+                  <div className="text-[11px] text-sikoni-gold mt-0.5 font-bold">
                     Rekening Giro Bank Jateng No. 102-992-811
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5">
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <small className="text-[10px] text-sikoni-muted">Realisasi valid</small>
-                    <b className="block text-base text-sikoni-navy mt-1">Rp 48 jt</b>
+                  <div className="bg-gradient-to-br from-slate-50 to-white p-3 rounded-xl border border-slate-200 shadow-xs border-l-4 border-l-sikoni-navy">
+                    <small className="text-[10px] text-sikoni-muted font-bold block uppercase">Realisasi valid</small>
+                    <b className="block text-base text-sikoni-navy mt-1 font-black">Rp 48 jt</b>
                   </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <small className="text-[10px] text-sikoni-muted">Sudah ditransfer</small>
-                    <b className="block text-base text-sikoni-green mt-1">Rp 40 jt</b>
+                  <div className="bg-gradient-to-br from-emerald-50/50 to-white p-3 rounded-xl border border-teal-200/80 shadow-xs border-l-4 border-l-emerald-600">
+                    <small className="text-[10px] text-emerald-700 font-bold block uppercase">Sudah ditransfer</small>
+                    <b className="block text-base text-sikoni-green mt-1 font-black">Rp 40 jt</b>
                   </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <small className="text-[10px] text-sikoni-muted">Menunggu SP2D</small>
-                    <b className="block text-base text-amber-600 mt-1">Rp 8 jt</b>
+                  <div className="bg-gradient-to-br from-amber-50/50 to-white p-3 rounded-xl border border-amber-200/80 shadow-xs border-l-4 border-l-sikoni-gold">
+                    <small className="text-[10px] text-amber-800 font-bold block uppercase">Menunggu SP2D</small>
+                    <b className="block text-base text-amber-700 mt-1 font-black">Rp 8 jt</b>
                   </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <small className="text-[10px] text-sikoni-muted">Sisa pagu cabor</small>
-                    <b className="block text-base text-sikoni-teal mt-1">Rp 72 jt</b>
+                  <div className="bg-gradient-to-br from-teal-50/50 to-white p-3 rounded-xl border border-teal-200/80 shadow-xs border-l-4 border-l-sikoni-teal">
+                    <small className="text-[10px] text-sikoni-teal font-bold block uppercase">Sisa pagu cabor</small>
+                    <b className="block text-base text-sikoni-teal mt-1 font-black">Rp 72 jt</b>
                   </div>
                 </div>
 
@@ -1309,45 +1312,46 @@ export const MobilePreview: React.FC = () => {
                 </div>
 
                 {/* Top 5 Cabor Serapan */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-3.5 space-y-2.5 shadow-sm text-xs">
+                <div className="card-sikoni relative overflow-hidden p-3.5 space-y-3 text-xs">
+                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
                   <div className="flex justify-between items-center">
-                    <b className="text-xs text-sikoni-navy">Monitoring Serapan Cabor</b>
+                    <b className="text-xs text-sikoni-navy font-black">Monitoring Serapan Cabor</b>
                     <button
                       onClick={() => setPengurusTab('monitoring')}
-                      className="text-[10px] text-sikoni-teal font-bold"
+                      className="text-[10px] text-sikoni-teal font-extrabold bg-teal-50 px-2 py-0.5 rounded-full hover:bg-teal-100 transition-colors"
                     >
-                      Semua 64 Cabor
+                      Semua 64 Cabor →
                     </button>
                   </div>
 
-                  <div className="space-y-2">
-                    <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>PASI (Atletik)</span>
+                  <div className="space-y-2.5">
+                    <div className="p-2.5 bg-gradient-to-r from-slate-50 to-white rounded-xl border border-slate-200/80 shadow-xs">
+                      <div className="flex justify-between text-[11px] mb-1 font-semibold">
+                        <span className="text-sikoni-navy">PASI (Atletik)</span>
                         <b className="text-sikoni-navy">Rp 48 jt / Rp 120 jt (40%)</b>
                       </div>
-                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-sikoni-teal h-full" style={{ width: '40%' }} />
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden shadow-inner">
+                        <div className="bg-sikoni-teal h-full rounded-full" style={{ width: '40%' }} />
                       </div>
                     </div>
 
-                    <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>PBVSI (Bola Voli)</span>
+                    <div className="p-2.5 bg-gradient-to-r from-slate-50 to-white rounded-xl border border-slate-200/80 shadow-xs">
+                      <div className="flex justify-between text-[11px] mb-1 font-semibold">
+                        <span className="text-sikoni-navy">PBVSI (Bola Voli)</span>
                         <b className="text-sikoni-navy">Rp 75 jt / Rp 100 jt (75%)</b>
                       </div>
-                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-emerald-500 h-full" style={{ width: '75%' }} />
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden shadow-inner">
+                        <div className="bg-emerald-500 h-full rounded-full" style={{ width: '75%' }} />
                       </div>
                     </div>
 
-                    <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>PBSI (Bulu Tangkis)</span>
+                    <div className="p-2.5 bg-gradient-to-r from-slate-50 to-white rounded-xl border border-slate-200/80 shadow-xs">
+                      <div className="flex justify-between text-[11px] mb-1 font-semibold">
+                        <span className="text-sikoni-navy">PBSI (Bulu Tangkis)</span>
                         <b className="text-sikoni-navy">Rp 92 jt / Rp 110 jt (83%)</b>
                       </div>
-                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-sikoni-gold h-full" style={{ width: '83%' }} />
+                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden shadow-inner">
+                        <div className="bg-sikoni-gold h-full rounded-full" style={{ width: '83%' }} />
                       </div>
                     </div>
                   </div>
