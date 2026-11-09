@@ -219,18 +219,18 @@ export default function SubmissionsPage() {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Nilai Usulan:</span>
-                  <b className="text-sikoni-navy text-sm font-black">{selectedSubmission.amount}</b>
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="p-3 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Nilai Usulan</span>
+                  <b className="text-sm font-black text-sikoni-teal">{selectedSubmission.amount}</b>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-slate-500">Status Persetujuan:</span>
-                  <StatusBadge status={selectedSubmission.status} />
+                <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex flex-col justify-between">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Status Persetujuan</span>
+                  <div className="mt-1"><StatusBadge status={selectedSubmission.status} /></div>
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-slate-500">Penanggung Jawab:</span>
-                  <b className="text-slate-700">{selectedSubmission.signer}</b>
+                <div className="col-span-2 p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex justify-between items-center">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase">Penanggung Jawab:</span>
+                  <b className="text-xs text-sikoni-navy font-bold">{selectedSubmission.signer}</b>
                 </div>
               </div>
 

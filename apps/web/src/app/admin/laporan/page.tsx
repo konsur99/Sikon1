@@ -52,13 +52,13 @@ export default function AdminReportsPage() {
 
       {/* 3 Report Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="card-sikoni flex flex-col justify-between">
+        <div className="card-sikoni border-t-4 border-t-sikoni-teal hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-sikoni-teal2 text-sikoni-teal grid place-items-center">
+            <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs group-hover:scale-110 transition-transform">
               <BarChart3 size={20} />
             </div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Laporan Anggaran & Pagu</h3>
-            <p className="text-xs text-sikoni-muted leading-relaxed">
+            <h3 className="text-sm font-extrabold text-sikoni-navy group-hover:text-sikoni-teal transition-colors">Laporan Anggaran & Pagu</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Pagu disahkan, alokasi program per cabor, komitmen aktif, realisasi valid, dan sisa alokasi.
             </p>
           </div>
@@ -67,19 +67,20 @@ export default function AdminReportsPage() {
               setReportType('Rekap realisasi anggaran');
               showToast('Template Laporan Anggaran & Pagu dipilih');
             }}
-            className="text-xs font-bold text-sikoni-teal hover:underline text-left mt-4 pt-3 border-t border-sikoni-line"
+            className="text-xs font-bold text-sikoni-teal group-hover:underline text-left mt-4 pt-3 border-t border-slate-100 flex items-center justify-between"
           >
-            Pilih laporan ini →
+            <span>Pilih laporan ini</span>
+            <span>→</span>
           </button>
         </div>
 
-        <div className="card-sikoni flex flex-col justify-between">
+        <div className="card-sikoni border-t-4 border-t-sikoni-gold hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-sikoni-gold2 text-sikoni-gold grid place-items-center">
+            <div className="w-10 h-10 rounded-xl bg-amber-50 text-sikoni-gold grid place-items-center shadow-xs group-hover:scale-110 transition-transform">
               <ArrowUpRight size={20} />
             </div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Laporan Realisasi & Kas</h3>
-            <p className="text-xs text-sikoni-muted leading-relaxed">
+            <h3 className="text-sm font-extrabold text-sikoni-navy group-hover:text-amber-700 transition-colors">Laporan Realisasi & Kas</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Rincian seluruh pengeluaran nota terverifikasi, kuitansi bayar, dan rekonsiliasi kas.
             </p>
           </div>
@@ -88,19 +89,20 @@ export default function AdminReportsPage() {
               setReportType('Rekap pengeluaran');
               showToast('Template Laporan Realisasi & Kas dipilih');
             }}
-            className="text-xs font-bold text-sikoni-gold hover:underline text-left mt-4 pt-3 border-t border-sikoni-line"
+            className="text-xs font-bold text-sikoni-gold group-hover:underline text-left mt-4 pt-3 border-t border-slate-100 flex items-center justify-between"
           >
-            Pilih laporan ini →
+            <span>Pilih laporan ini</span>
+            <span>→</span>
           </button>
         </div>
 
-        <div className="card-sikoni flex flex-col justify-between">
+        <div className="card-sikoni border-t-4 border-t-sikoni-navy hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
           <div className="space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-slate-100 text-sikoni-navy grid place-items-center">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 text-sikoni-navy grid place-items-center shadow-xs group-hover:scale-110 transition-transform">
               <Shield size={20} />
             </div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Laporan Evaluasi Cabor</h3>
-            <p className="text-xs text-sikoni-muted leading-relaxed">
+            <h3 className="text-sm font-extrabold text-sikoni-navy group-hover:text-sikoni-teal transition-colors">Laporan Evaluasi Cabor</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Profil organisasi, keaktifan pembinaan atlet, kepatuhan LPJ, dan rekapitulasi usulan.
             </p>
           </div>
@@ -109,15 +111,17 @@ export default function AdminReportsPage() {
               setReportType('Rekap evaluasi cabor');
               showToast('Template Laporan Evaluasi Cabor dipilih');
             }}
-            className="text-xs font-bold text-sikoni-navy hover:underline text-left mt-4 pt-3 border-t border-sikoni-line"
+            className="text-xs font-bold text-sikoni-navy group-hover:underline text-left mt-4 pt-3 border-t border-slate-100 flex items-center justify-between"
           >
-            Pilih laporan ini →
+            <span>Pilih laporan ini</span>
+            <span>→</span>
           </button>
         </div>
       </div>
 
       {/* Parameter Filter Card */}
-      <div className="card-sikoni space-y-4">
+      <div className="card-sikoni relative overflow-hidden space-y-4">
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
         <div>
           <h3 className="text-sm font-extrabold text-sikoni-navy">Parameter Pembuatan Laporan</h3>
           <p className="text-[11px] text-sikoni-muted">Sesuaikan filter dan format dokumen yang diinginkan</p>

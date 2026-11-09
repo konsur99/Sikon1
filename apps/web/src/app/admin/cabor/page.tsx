@@ -294,26 +294,28 @@ export default function AdminCaborPage() {
               </span>
             </div>
 
-            <div className="divide-y divide-sikoni-line text-xs bg-slate-50 p-4 rounded-xl border border-sikoni-line space-y-2">
-              <div className="flex justify-between py-1">
-                <span className="text-sikoni-muted">Kategori Olahraga</span>
-                <b>{selectedCabor.category}</b>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Kategori Olahraga</span>
+                <b className="text-xs text-sikoni-navy">{selectedCabor.category}</b>
               </div>
-              <div className="flex justify-between py-1">
-                <span className="text-sikoni-muted">Ketua Umum Pengkot</span>
-                <b>{selectedCabor.leader}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Ketua Umum Pengkot</span>
+                <b className="text-xs text-sikoni-navy">{selectedCabor.leader}</b>
               </div>
-              <div className="flex justify-between py-1">
-                <span className="text-sikoni-muted">Email Resmi</span>
-                <b>{selectedCabor.email}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Email Resmi</span>
+                <b className="text-xs text-sikoni-teal">{selectedCabor.email}</b>
               </div>
-              <div className="flex justify-between py-1">
-                <span className="text-sikoni-muted">Nomor Kontak</span>
-                <b>{selectedCabor.phone}</b>
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Nomor Kontak WhatsApp</span>
+                <b className="text-xs text-sikoni-navy">{selectedCabor.phone}</b>
               </div>
-              <div className="flex justify-between py-1">
-                <span className="text-sikoni-muted">Atlet Terdata</span>
-                <b>{selectedCabor.athletes} Orang</b>
+              <div className="sm:col-span-2 p-3.5 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70 flex justify-between items-center">
+                <span className="text-xs font-bold text-sikoni-navy">Total Atlet Binaan Terdaftar:</span>
+                <span className="px-3 py-1 rounded-full bg-sikoni-teal text-white font-extrabold text-xs">
+                  {selectedCabor.athletes} Atlet
+                </span>
               </div>
             </div>
 

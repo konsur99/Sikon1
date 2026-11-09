@@ -162,14 +162,23 @@ export default function RealizationPage() {
               </div>
             </div>
 
-            <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl text-xs space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sikoni-muted">Berkas Bukti / Nota:</span>
-                <b className="text-sikoni-teal font-semibold">{selectedExpense.proof}</b>
+            <div className="space-y-2.5 text-xs">
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70 flex justify-between items-center">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase">Berkas Bukti / Nota Transaksi:</span>
+                <b className="text-xs text-sikoni-teal font-extrabold flex items-center gap-1.5">
+                  <CheckCircle2 size={13} className="text-sikoni-teal" />
+                  {selectedExpense.proof}
+                </b>
               </div>
-              <div className="flex justify-between">
-                <span className="text-sikoni-muted">Status Saat Ini:</span>
-                <b>{selectedExpense.status}</b>
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Metode Pembayaran</span>
+                  <b className="text-xs text-sikoni-navy">{selectedExpense.method}</b>
+                </div>
+                <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Status Pemeriksaan</span>
+                  <b className="text-xs text-sikoni-navy">{selectedExpense.status}</b>
+                </div>
               </div>
             </div>
 

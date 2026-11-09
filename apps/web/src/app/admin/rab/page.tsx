@@ -342,9 +342,12 @@ export default function RabBuilderPage() {
             </div>
 
             {/* Subtotal Banner */}
-            <div className="flex justify-between items-center bg-[#f8fafc] p-4 rounded-xl border border-sikoni-line">
-              <span className="text-xs font-bold text-sikoni-muted">TOTAL RENCANA ANGGARAN BIAYA</span>
-              <b className="text-xl font-black text-sikoni-navy">{MoneyMath.formatRupiah(totalAmount)}</b>
+            <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3 bg-gradient-to-r from-[#142a43] via-[#1b3a5c] to-[#142a43] p-5 rounded-2xl border border-sikoni-navy/20 shadow-md text-white">
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-widest text-sikoni-gold block">TOTAL RENCANA ANGGARAN BIAYA</span>
+                <span className="text-[11px] text-slate-300">Dihitung otomatis berdasarkan volume × harga satuan</span>
+              </div>
+              <b className="text-2xl font-black tracking-tight text-white">{MoneyMath.formatRupiah(totalAmount)}</b>
             </div>
 
             <div className="flex justify-between items-center pt-4 border-t border-sikoni-line">
@@ -410,14 +413,26 @@ export default function RabBuilderPage() {
               )}
             </div>
 
-            {/* Summary Review Card */}
-            <div className="bg-[#f8fafc] border border-sikoni-line rounded-xl p-4 space-y-2">
-              <b className="text-xs text-sikoni-navy block">Ringkasan Pengajuan:</b>
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div><span className="text-sikoni-muted">Kegiatan:</span> <b>{formData.name}</b></div>
-                <div><span className="text-sikoni-muted">Cabor:</span> <b>{formData.cabor}</b></div>
-                <div><span className="text-sikoni-muted">Tanggal:</span> <b>{formData.period}</b></div>
-                <div><span className="text-sikoni-muted">Total Usulan:</span> <b className="text-sikoni-teal text-sm">{MoneyMath.formatRupiah(totalAmount)}</b></div>
+            {/* Summary Review Sub-boxes */}
+            <div className="space-y-2">
+              <span className="text-[11px] font-extrabold uppercase tracking-wider text-sikoni-navy block">Ringkasan Rencana Pengajuan:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                <div className="p-3.5 rounded-xl bg-gradient-to-br from-white to-slate-50/80 border-l-4 border-l-sikoni-teal border-t border-r border-b border-slate-200/80 shadow-xs">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Kegiatan</span>
+                  <b className="text-xs text-sikoni-navy font-bold line-clamp-1">{formData.name}</b>
+                </div>
+                <div className="p-3.5 rounded-xl bg-gradient-to-br from-white to-slate-50/80 border-l-4 border-l-sikoni-navy border-t border-r border-b border-slate-200/80 shadow-xs">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Cabor Pemohon</span>
+                  <b className="text-xs text-sikoni-navy font-bold">{formData.cabor}</b>
+                </div>
+                <div className="p-3.5 rounded-xl bg-gradient-to-br from-white to-slate-50/80 border-l-4 border-l-sikoni-gold border-t border-r border-b border-slate-200/80 shadow-xs">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Jadwal Pelaksanaan</span>
+                  <b className="text-xs text-sikoni-navy font-bold">{formData.period}</b>
+                </div>
+                <div className="p-3.5 rounded-xl bg-gradient-to-br from-white to-teal-50/40 border-l-4 border-l-[#23846d] border-t border-r border-b border-slate-200/80 shadow-xs">
+                  <span className="text-[10px] font-bold text-emerald-700 uppercase block">Total Nilai Usulan</span>
+                  <b className="text-sm text-sikoni-teal font-black">{MoneyMath.formatRupiah(totalAmount)}</b>
+                </div>
               </div>
             </div>
 

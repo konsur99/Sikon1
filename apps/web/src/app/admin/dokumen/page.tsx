@@ -253,18 +253,20 @@ export default function AdminDocumentsPage() {
               </button>
             </div>
 
-            <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl text-xs space-y-2">
-              <div className="flex justify-between">
-                <span className="text-sikoni-muted">Perihal:</span>
-                <b className="text-sikoni-navy text-right max-w-xs">{selectedDoc.subject}</b>
+            <div className="space-y-2.5 text-xs">
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Perihal Dokumen</span>
+                <b className="text-xs text-sikoni-navy mt-0.5 block leading-relaxed">{selectedDoc.subject}</b>
               </div>
-              <div className="flex justify-between">
-                <span className="text-sikoni-muted">Pengirim / Pemilik:</span>
-                <b>{selectedDoc.owner}</b>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-sikoni-muted">Status:</span>
-                <b>{selectedDoc.status}</b>
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Unit Pengirim</span>
+                  <b className="text-xs text-sikoni-navy">{selectedDoc.owner}</b>
+                </div>
+                <div className="p-3 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70">
+                  <span className="text-[10px] font-bold text-sikoni-teal uppercase block">Status Dokumen</span>
+                  <b className="text-xs text-sikoni-teal">{selectedDoc.status}</b>
+                </div>
               </div>
             </div>
 

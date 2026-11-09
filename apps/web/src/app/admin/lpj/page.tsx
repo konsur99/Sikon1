@@ -143,45 +143,71 @@ export default function LpjPage() {
 
       {/* Checklist & Kontrol Pemeriksaan */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="card-sikoni space-y-3">
-          <h3 className="text-sm font-extrabold text-sikoni-navy">Struktur Kelengkapan LPJ</h3>
-          <p className="text-[11px] text-sikoni-muted">5 instrumen wajib yang harus divalidasi</p>
+        <div className="card-sikoni relative overflow-hidden space-y-4">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-teal via-sikoni-green to-sikoni-gold" />
+          <div>
+            <h3 className="text-sm font-extrabold text-sikoni-navy">Struktur Kelengkapan LPJ</h3>
+            <p className="text-[11px] text-sikoni-muted">5 instrumen wajib yang harus divalidasi</p>
+          </div>
 
-          <div className="divide-y divide-sikoni-line text-xs">
-            <div className="py-2.5 flex justify-between items-center">
-              <span>1. Identitas dan ringkasan kegiatan</span>
-              <span className="text-sikoni-green font-bold">✓ Lengkap</span>
+          <div className="space-y-2.5 text-xs">
+            <div className="flex justify-between items-center p-3 rounded-xl bg-gradient-to-r from-emerald-50/80 via-white to-slate-50/60 border border-emerald-200/80 shadow-xs hover:border-emerald-300 transition-all">
+              <span className="font-medium text-sikoni-navy flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold">1</span>
+                Identitas dan ringkasan kegiatan
+              </span>
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">✓ Lengkap</span>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span>2. Realisasi pengeluaran terhadap RAB</span>
-              <span className="text-sikoni-green font-bold">✓ Terhubung</span>
+            <div className="flex justify-between items-center p-3 rounded-xl bg-gradient-to-r from-emerald-50/80 via-white to-slate-50/60 border border-emerald-200/80 shadow-xs hover:border-emerald-300 transition-all">
+              <span className="font-medium text-sikoni-navy flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold">2</span>
+                Realisasi pengeluaran terhadap RAB
+              </span>
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">✓ Terhubung</span>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span>3. Bukti fisik pengeluaran / nota</span>
-              <span className="text-sikoni-amber font-bold">◷ 2 Belum valid</span>
+            <div className="flex justify-between items-center p-3 rounded-xl bg-gradient-to-r from-amber-50/80 via-white to-slate-50/60 border border-amber-200/80 shadow-xs hover:border-amber-300 transition-all">
+              <span className="font-medium text-sikoni-navy flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] font-bold">3</span>
+                Bukti fisik pengeluaran / nota
+              </span>
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100/80 text-amber-800 border border-amber-200">◷ 2 Belum valid</span>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span>4. Bukti kuitansi dan transfer pembayaran</span>
-              <span className="text-sikoni-amber font-bold">◷ 1 Belum ada</span>
+            <div className="flex justify-between items-center p-3 rounded-xl bg-gradient-to-r from-amber-50/80 via-white to-slate-50/60 border border-amber-200/80 shadow-xs hover:border-amber-300 transition-all">
+              <span className="font-medium text-sikoni-navy flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[10px] font-bold">4</span>
+                Bukti kuitansi & transfer pembayaran
+              </span>
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100/80 text-amber-800 border border-amber-200">◷ 1 Belum ada</span>
             </div>
-            <div className="py-2.5 flex justify-between items-center">
-              <span>5. Dokumentasi foto pelaksanaan kegiatan</span>
-              <span className="text-sikoni-green font-bold">✓ Lengkap</span>
+            <div className="flex justify-between items-center p-3 rounded-xl bg-gradient-to-r from-emerald-50/80 via-white to-slate-50/60 border border-emerald-200/80 shadow-xs hover:border-emerald-300 transition-all">
+              <span className="font-medium text-sikoni-navy flex items-center gap-2">
+                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold">5</span>
+                Dokumentasi foto kegiatan
+              </span>
+              <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100/80 text-emerald-800 border border-emerald-200">✓ Lengkap</span>
             </div>
           </div>
         </div>
 
-        <div className="card-sikoni space-y-3 flex flex-col justify-between">
-          <div>
+        <div className="card-sikoni relative overflow-hidden flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-teal via-sikoni-gold to-sikoni-navy" />
+          <div className="space-y-3">
             <h3 className="text-sm font-extrabold text-sikoni-navy">Kontrol Pemeriksaan & Validasi</h3>
             <p className="text-[11px] text-sikoni-muted">Ketentuan audit sebelum penetapan persetujuan final</p>
-            <p className="text-xs text-sikoni-ink mt-3 leading-relaxed">
-              LPJ tidak boleh dinyatakan final apabila terdapat item pengeluaran yang belum diverifikasi, bukti transaksi wajib belum lengkap, atau terdapat selisih lebih penggunaan dana panjar yang belum dikembalikan ke rekening kas KONI Surakarta.
-            </p>
+            <div className="p-4 rounded-xl bg-gradient-to-br from-amber-50/50 via-white to-amber-50/20 border border-amber-200/70 text-xs text-sikoni-ink space-y-2">
+              <div className="flex items-center gap-1.5 font-bold text-amber-900">
+                <AlertCircle size={14} className="text-amber-600" />
+                <span>Ketentuan Mutlak Verifikasi</span>
+              </div>
+              <p className="leading-relaxed text-slate-600">
+                LPJ tidak boleh dinyatakan final apabila terdapat item pengeluaran yang belum diverifikasi, bukti transaksi wajib belum lengkap, atau terdapat selisih lebih penggunaan dana panjar yang belum dikembalikan ke rekening kas KONI Surakarta.
+              </p>
+            </div>
           </div>
 
-          <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl text-xs text-sikoni-muted">
-            Format laporan mengikuti pedoman pertanggungjawaban bantuan hibah olahraga Pemkot Surakarta.
+          <div className="mt-4 p-3 bg-gradient-to-r from-slate-50 to-slate-100/60 border border-slate-200/80 rounded-xl text-xs text-sikoni-muted flex items-center gap-2">
+            <CheckCircle2 size={15} className="text-sikoni-teal shrink-0" />
+            <span>Format laporan mengikuti pedoman pertanggungjawaban bantuan hibah olahraga Pemkot Surakarta.</span>
           </div>
         </div>
       </div>
