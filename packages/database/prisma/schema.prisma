@@ -1,0 +1,844 @@
+// ==============================================================================
+// SIKONI — Prisma Schema for PostgreSQL
+// Sistem Informasi KONI Surakarta
+// ==============================================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ------------------------------------------------------------------------------
+// 1. IDENTITY, ROLES, PERMISSIONS & CABOR SCOPING
+// ------------------------------------------------------------------------------
+
+model User {
+  id           String      @id @default(uuid())
+  username     String      @unique
+  email        String      @unique
+  passwordHash String      @map("password_hash")
+  fullName     String      @map("full_name")
+  phoneNumber  String?     @map("phone_number")
+  isActive     Boolean     @default(true) @map("is_active")
+  mfaSecret    String?     @map("mfa_secret")
+  createdAt    DateTime    @default(now()) @map("created_at")
+  updatedAt    DateTime    @updatedAt @map("updated_at")
+  deletedAt    DateTime?   @map("deleted_at")
+
+  roles               UserRole[]
+  caborAssignments    UserCabor[]
+  createdRabs         Rab[]                @relation("RabCreator")
+  verifiedExpenses    Expense[]            @relation("ExpenseVerifier")
+  disbursedPayments   Payment[]            @relation("PaymentDisburser")
+  approvalActions     ApprovalAction[]
+  auditLogs           AuditLog[]
+  notifications       Notification[]
+  devices             NotificationDevice[]
+  publicationApprovals PublicationApproval[]
+
+  @@map("users")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique // SUPERADMIN, ADMIN_KONI, BENDAHARA, KETUA_UMUM, OPERATOR_CABOR, AUDITOR
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  userRoles       UserRole[]
+  rolePermissions RolePermission[]
+  approvalSteps   ApprovalStep[]
+
+  @@map("roles")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  code        String   @unique // e.g. rab:create, rab:approve_bendahara, expense:verify
+  description String?
+  module      String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  rolePermissions RolePermission[]
+
+  @@map("permissions")
+}
+
+model RolePermission {
+  id           String     @id @default(uuid())
+  roleId       String     @map("role_id")
+  permissionId String     @map("permission_id")
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@map("role_permissions")
+}
+
+model UserRole {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  roleId    String   @map("role_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
+}
+
+model Cabor {
+  id            String    @id @default(uuid())
+  code          String    @unique // PASI, PBSI, PSSI, PRSI, PERPANI, etc.
+  name          String
+  sportCategory String    @map("sport_category") // Permainan, Terukur, Bela Diri, Akurasi
+  leaderName    String    @map("leader_name")
+  officialEmail String    @map("official_email")
+  phoneNumber   String    @map("phone_number")
+  athleteCount  Int       @default(0) @map("athlete_count")
+  status        String    @default("Aktif") // Aktif, Tidak Aktif
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  deletedAt     DateTime? @map("deleted_at")
+
+  userAssignments   UserCabor[]
+  budgetAllocations BudgetAllocation[]
+  activities        Activity[]
+  rabs              Rab[]
+  expenses          Expense[]
+  lpjs              Lpj[]
+
+  @@index([code])
+  @@index([status])
+  @@map("cabor")
+}
+
+model UserCabor {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  caborId   String   @map("cabor_id")
+  isPrimary Boolean  @default(true) @map("is_primary")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cabor Cabor @relation(fields: [caborId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, caborId])
+  @@map("user_cabor")
+}
+
+// ------------------------------------------------------------------------------
+// 2. FISCAL YEARS, FUNDS, PROGRAMS & ALLOCATIONS
+// ------------------------------------------------------------------------------
+
+model FiscalYear {
+  id         String   @id @default(uuid())
+  year       Int      @unique
+  totalPagu  Decimal  @map("total_pagu") @db.Decimal(15, 2)
+  startDate  DateTime @map("start_date")
+  endDate    DateTime @map("end_date")
+  isActive   Boolean  @default(false) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  budgetAllocations BudgetAllocation[]
+  rabs              Rab[]
+  fundReceipts      FundReceipt[]
+
+  @@map("fiscal_years")
+}
+
+model FundSource {
+  id          String   @id @default(uuid())
+  code        String   @unique // HIB-PEMDA, BANTUAN-PROV, SPONSOR, LAINNYA
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  fundReceipts           FundReceipt[]
+  budgetAllocations      BudgetAllocation[]
+  rabFundingAllocations  RabFundingAllocation[]
+
+  @@map("fund_sources")
+}
+
+model FundReceipt {
+  id           String   @id @default(uuid())
+  referenceNo  String   @unique @map("reference_no") // HIB/001/2026
+  fundSourceId String   @map("fund_source_id")
+  fiscalYearId String   @map("fiscal_year_id")
+  amount       Decimal  @db.Decimal(15, 2)
+  receivedDate DateTime @map("received_date")
+  status       String   @default("Disetujui") // Menunggu, Disetujui, Ditolak
+  notes        String?
+  proofFileId  String?  @map("proof_file_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  fundSource FundSource @relation(fields: [fundSourceId], references: [id])
+  fiscalYear FiscalYear @relation(fields: [fiscalYearId], references: [id])
+  proofFile  File?       @relation(fields: [proofFileId], references: [id])
+
+  @@index([fundSourceId])
+  @@index([fiscalYearId])
+  @@map("fund_receipts")
+}
+
+model Program {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  activities        Activity[]
+  budgetAllocations BudgetAllocation[]
+
+  @@map("programs")
+}
+
+model Activity {
+  id          String   @id @default(uuid())
+  programId   String   @map("program_id")
+  caborId     String?  @map("cabor_id")
+  code        String   @unique
+  name        String
+  description String?
+  startDate   DateTime @map("start_date")
+  endDate     DateTime @map("end_date")
+  location    String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  program  Program   @relation(fields: [programId], references: [id])
+  cabor    Cabor?    @relation(fields: [caborId], references: [id])
+  rabs     Rab[]
+  expenses Expense[]
+  lpjs     Lpj[]
+
+  @@index([programId])
+  @@index([caborId])
+  @@map("activities")
+}
+
+model ExpenseCategory {
+  id          String   @id @default(uuid())
+  code        String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  rabItems     RabItem[]
+  expenseItems ExpenseItem[]
+
+  @@map("expense_categories")
+}
+
+model BudgetAllocation {
+  id              String   @id @default(uuid())
+  fiscalYearId    String   @map("fiscal_year_id")
+  caborId         String?  @map("cabor_id")
+  programId       String   @map("program_id")
+  fundSourceId    String   @map("fund_source_id")
+  allocatedAmount Decimal  @map("allocated_amount") @db.Decimal(15, 2)
+  notes           String?
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  fiscalYear FiscalYear @relation(fields: [fiscalYearId], references: [id])
+  cabor      Cabor?     @relation(fields: [caborId], references: [id])
+  program    Program    @relation(fields: [programId], references: [id])
+  fundSource FundSource @relation(fields: [fundSourceId], references: [id])
+
+  @@unique([fiscalYearId, caborId, programId, fundSourceId])
+  @@map("budget_allocations")
+}
+
+// ------------------------------------------------------------------------------
+// 3. RAB (RENCANA ANGGARAN BIAYA) & REVISIONS
+// ------------------------------------------------------------------------------
+
+model Rab {
+  id           String    @id @default(uuid())
+  rabNumber    String    @unique @map("rab_number") // RAB-026/VI/26
+  activityId   String    @map("activity_id")
+  caborId      String    @map("cabor_id")
+  fiscalYearId String    @map("fiscal_year_id")
+  name         String
+  description  String?
+  location     String?
+  startDate    DateTime  @map("start_date")
+  endDate      DateTime  @map("end_date")
+  totalAmount  Decimal   @default(0) @map("total_amount") @db.Decimal(15, 2)
+  status       String    @default("DRAFT") // DRAFT, SUBMITTED, VERIFYING, REVISION_REQUIRED, APPROVED, REJECTED, CANCELLED
+  createdById  String    @map("created_by_id")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+
+  activity           Activity               @relation(fields: [activityId], references: [id])
+  cabor              Cabor                  @relation(fields: [caborId], references: [id])
+  fiscalYear         FiscalYear             @relation(fields: [fiscalYearId], references: [id])
+  createdBy          User                   @relation("RabCreator", fields: [createdById], references: [id])
+  items              RabItem[]
+  revisions          RabRevision[]
+  fundingAllocations RabFundingAllocation[]
+  expenses           Expense[]
+
+  @@index([caborId])
+  @@index([status])
+  @@index([fiscalYearId])
+  @@map("rabs")
+}
+
+model RabItem {
+  id                String   @id @default(uuid())
+  rabId             String   @map("rab_id")
+  expenseCategoryId String   @map("expense_category_id")
+  itemOrder         Int      @default(1) @map("item_order")
+  description       String
+  volume            Decimal  @db.Decimal(10, 2)
+  unit              String
+  unitPrice         Decimal  @map("unit_price") @db.Decimal(15, 2)
+  totalAmount       Decimal  @map("total_amount") @db.Decimal(15, 2)
+  notes             String?
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  rab             Rab             @relation(fields: [rabId], references: [id], onDelete: Cascade)
+  expenseCategory ExpenseCategory @relation(fields: [expenseCategoryId], references: [id])
+
+  @@index([rabId])
+  @@map("rab_items")
+}
+
+model RabRevision {
+  id            String   @id @default(uuid())
+  rabId         String   @map("rab_id")
+  revisionNo    Int      @map("revision_no")
+  changeSummary String   @map("change_summary")
+  snapshotJson  Json     @map("snapshot_json")
+  createdById   String   @map("created_by_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  rab Rab @relation(fields: [rabId], references: [id], onDelete: Cascade)
+
+  @@index([rabId])
+  @@map("rab_revisions")
+}
+
+model RabFundingAllocation {
+  id           String   @id @default(uuid())
+  rabId        String   @map("rab_id")
+  fundSourceId String   @map("fund_source_id")
+  amount       Decimal  @db.Decimal(15, 2)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  rab        Rab        @relation(fields: [rabId], references: [id], onDelete: Cascade)
+  fundSource FundSource @relation(fields: [fundSourceId], references: [id])
+
+  @@unique([rabId, fundSourceId])
+  @@map("rab_funding_allocations")
+}
+
+// ------------------------------------------------------------------------------
+// 4. REALISASI PENGELUARAN (EXPENSES) & BUKTI
+// ------------------------------------------------------------------------------
+
+model Expense {
+  id            String    @id @default(uuid())
+  expenseNumber String    @unique @map("expense_number") // EXP-1126
+  rabId         String    @map("rab_id")
+  activityId    String    @map("activity_id")
+  caborId       String    @map("cabor_id")
+  expenseDate   DateTime  @map("expense_date")
+  description   String
+  amount        Decimal   @db.Decimal(15, 2)
+  paymentMethod String    @map("payment_method") // ADVANCE_PANJAR, REIMBURSEMENT, DIRECT_PAYMENT
+  status        String    @default("DRAFT") // DRAFT, SUBMITTED, VERIFIED, REJECTED
+  verifiedById  String?   @map("verified_by_id")
+  verifiedAt    DateTime? @map("verified_at")
+  notes         String?
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  rab             Rab                 @relation(fields: [rabId], references: [id])
+  activity        Activity            @relation(fields: [activityId], references: [id])
+  cabor           Cabor               @relation(fields: [caborId], references: [id])
+  verifiedBy      User?               @relation("ExpenseVerifier", fields: [verifiedById], references: [id])
+  items           ExpenseItem[]
+  attachments     ExpenseAttachment[]
+  payments        Payment[]
+  taxTransactions TaxTransaction[]
+  lpjExpenses     LpjExpense[]
+
+  @@index([rabId])
+  @@index([caborId])
+  @@index([status])
+  @@map("expenses")
+}
+
+model ExpenseItem {
+  id                String   @id @default(uuid())
+  expenseId         String   @map("expense_id")
+  expenseCategoryId String   @map("expense_category_id")
+  description       String
+  amount            Decimal  @db.Decimal(15, 2)
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  expense         Expense         @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  expenseCategory ExpenseCategory @relation(fields: [expenseCategoryId], references: [id])
+
+  @@index([expenseId])
+  @@map("expense_items")
+}
+
+model ExpenseAttachment {
+  id          String   @id @default(uuid())
+  expenseId   String   @map("expense_id")
+  fileId      String   @map("file_id")
+  title       String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  expense Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  file    File    @relation(fields: [fileId], references: [id])
+
+  @@index([expenseId])
+  @@map("expense_attachments")
+}
+
+// ------------------------------------------------------------------------------
+// 5. PEMBAYARAN (PAYMENTS) & REKONSILIASI
+// ------------------------------------------------------------------------------
+
+model Payment {
+  id               String   @id @default(uuid())
+  paymentNumber    String   @unique @map("payment_number") // PAY-091
+  expenseId        String   @map("expense_id")
+  paymentDate      DateTime @map("payment_date")
+  amountPaid       Decimal  @map("amount_paid") @db.Decimal(15, 2)
+  paymentReference String   @map("payment_reference")
+  status           String   @default("PAID") // PENDING, PARTIAL, PAID, CANCELLED
+  disbursedById    String   @map("disbursed_by_id")
+  notes            String?
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  expense     Expense             @relation(fields: [expenseId], references: [id])
+  disbursedBy User                @relation("PaymentDisburser", fields: [disbursedById], references: [id])
+  attachments PaymentAttachment[]
+
+  @@index([expenseId])
+  @@map("payments")
+}
+
+model PaymentAttachment {
+  id          String   @id @default(uuid())
+  paymentId   String   @map("payment_id")
+  fileId      String   @map("file_id")
+  title       String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  payment Payment @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  file    File    @relation(fields: [fileId], references: [id])
+
+  @@index([paymentId])
+  @@map("payment_attachments")
+}
+
+// ------------------------------------------------------------------------------
+// 6. LPJ (LAPORAN PERTANGGUNGJAWABAN)
+// ------------------------------------------------------------------------------
+
+model Lpj {
+  id                  String   @id @default(uuid())
+  lpjNumber           String   @unique @map("lpj_number") // LPJ-014/X/26
+  activityId          String   @map("activity_id")
+  caborId             String   @map("cabor_id")
+  submissionDate      DateTime @default(now()) @map("submission_date")
+  totalRealizedAmount Decimal  @map("total_realized_amount") @db.Decimal(15, 2)
+  varianceAmount      Decimal  @default(0) @map("variance_amount") @db.Decimal(15, 2)
+  status              String   @default("DRAFT") // DRAFT, SUBMITTED, VERIFYING, REVISION_REQUIRED, APPROVED, REJECTED
+  executiveSummary    String?  @map("executive_summary")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  activity    Activity        @relation(fields: [activityId], references: [id])
+  cabor       Cabor           @relation(fields: [caborId], references: [id])
+  sections    LpjSection[]
+  lpjExpenses LpjExpense[]
+  attachments LpjAttachment[]
+  revisions   LpjRevision[]
+
+  @@index([caborId])
+  @@index([status])
+  @@map("lpjs")
+}
+
+model LpjSection {
+  id          String   @id @default(uuid())
+  lpjId       String   @map("lpj_id")
+  sectionName String   @map("section_name") // Identitas, Realisasi vs RAB, Bukti Pengeluaran, Bukti Bayar, Foto
+  isCompleted Boolean  @default(false) @map("is_completed")
+  notes       String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  lpj Lpj @relation(fields: [lpjId], references: [id], onDelete: Cascade)
+
+  @@index([lpjId])
+  @@map("lpj_sections")
+}
+
+model LpjExpense {
+  id        String   @id @default(uuid())
+  lpjId     String   @map("lpj_id")
+  expenseId String   @map("expense_id")
+  amount    Decimal  @db.Decimal(15, 2)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  lpj     Lpj     @relation(fields: [lpjId], references: [id], onDelete: Cascade)
+  expense Expense @relation(fields: [expenseId], references: [id])
+
+  @@unique([lpjId, expenseId])
+  @@map("lpj_expenses")
+}
+
+model LpjAttachment {
+  id          String   @id @default(uuid())
+  lpjId       String   @map("lpj_id")
+  fileId      String   @map("file_id")
+  category    String   // LAPORAN_UTAMA, DOKUMENTASI_FOTO, PRESENSI, NOTA
+  title       String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  lpj  Lpj  @relation(fields: [lpjId], references: [id], onDelete: Cascade)
+  file File @relation(fields: [fileId], references: [id])
+
+  @@index([lpjId])
+  @@map("lpj_attachments")
+}
+
+model LpjRevision {
+  id            String   @id @default(uuid())
+  lpjId         String   @map("lpj_id")
+  revisionNo    Int      @map("revision_no")
+  notes         String
+  createdById   String   @map("created_by_id")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  lpj Lpj @relation(fields: [lpjId], references: [id], onDelete: Cascade)
+
+  @@index([lpjId])
+  @@map("lpj_revisions")
+}
+
+// ------------------------------------------------------------------------------
+// 7. APPROVAL WORKFLOW ENGINE
+// ------------------------------------------------------------------------------
+
+model ApprovalWorkflow {
+  id         String   @id @default(uuid())
+  moduleType String   @unique @map("module_type") // RAB, EXPENSE, LPJ, FUND_RECEIPT
+  name       String
+  isActive   Boolean  @default(true) @map("is_active")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  steps     ApprovalStep[]
+  instances ApprovalInstance[]
+
+  @@map("approval_workflows")
+}
+
+model ApprovalStep {
+  id             String   @id @default(uuid())
+  workflowId     String   @map("workflow_id")
+  stepOrder      Int      @map("step_order")
+  stepName       String   @map("step_name")
+  requiredRoleId String   @map("required_role_id")
+  minAmount      Decimal? @map("min_amount") @db.Decimal(15, 2)
+  maxAmount      Decimal? @map("max_amount") @db.Decimal(15, 2)
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  workflow     ApprovalWorkflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  requiredRole Role             @relation(fields: [requiredRoleId], references: [id])
+
+  @@unique([workflowId, stepOrder])
+  @@map("approval_steps")
+}
+
+model ApprovalInstance {
+  id            String   @id @default(uuid())
+  workflowId    String   @map("workflow_id")
+  entityType    String   @map("entity_type") // RAB, EXPENSE, LPJ
+  entityId      String   @map("entity_id")
+  currentStepNo Int      @default(1) @map("current_step_no")
+  status        String   @default("IN_PROGRESS") // IN_PROGRESS, APPROVED, REJECTED, REVISION_REQUIRED
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  workflow ApprovalWorkflow @relation(fields: [workflowId], references: [id])
+  actions  ApprovalAction[]
+
+  @@index([entityType, entityId])
+  @@map("approval_instances")
+}
+
+model ApprovalAction {
+  id         String   @id @default(uuid())
+  instanceId String   @map("instance_id")
+  stepNumber Int      @map("step_number")
+  actorId    String   @map("actor_id")
+  decision   String   // APPROVE, REJECT, REQUEST_REVISION
+  comments   String?
+  decidedAt  DateTime @default(now()) @map("decided_at")
+
+  instance ApprovalInstance @relation(fields: [instanceId], references: [id], onDelete: Cascade)
+  actor    User             @relation(fields: [actorId], references: [id])
+
+  @@index([instanceId])
+  @@map("approval_actions")
+}
+
+// ------------------------------------------------------------------------------
+// 8. AUDIT LOGS, FILES & DOCUMENTS
+// ------------------------------------------------------------------------------
+
+model AuditLog {
+  id           String   @id @default(uuid())
+  userId       String?  @map("user_id")
+  action       String   // CREATE, UPDATE, DELETE, APPROVE, REJECT, EXPORT
+  resourceType String   @map("resource_type") // RAB, EXPENSE, LPJ, USER, etc.
+  resourceId   String   @map("resource_id")
+  ipAddress    String?  @map("ip_address")
+  userAgent    String?  @map("user_agent")
+  payloadBefore Json?   @map("payload_before")
+  payloadAfter  Json?   @map("payload_after")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([resourceType, resourceId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model File {
+  id          String   @id @default(uuid())
+  storageKey  String   @unique @map("storage_key")
+  originalName String  @map("original_name")
+  mimeType    String   @map("mime_type")
+  byteSize    BigInt   @map("byte_size")
+  isPrivate   Boolean  @default(true) @map("is_private")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  fundReceipts       FundReceipt[]
+  expenseAttachments ExpenseAttachment[]
+  paymentAttachments PaymentAttachment[]
+  lpjAttachments     LpjAttachment[]
+  documents          Document[]
+  documentVersions   DocumentVersion[]
+  taxTransactions    TaxTransaction[]
+
+  @@map("files")
+}
+
+model Document {
+  id             String    @id @default(uuid())
+  documentNumber String    @unique @map("document_number") // SK-028/KONI/XI/26
+  title          String
+  category       String    // SURAT_KEPUTUSAN, SURAT_MASUK, SURAT_KELUAR, TEMPLATE, LPJ_ARSIP
+  dateIssued     DateTime  @map("date_issued")
+  ownerUnit      String    @map("owner_unit")
+  status         String    @default("Disetujui")
+  fileId         String    @map("file_id")
+  createdAt      DateTime  @default(now()) @map("created_at")
+  updatedAt      DateTime  @updatedAt @map("updated_at")
+
+  file            File              @relation(fields: [fileId], references: [id])
+  incomingLetters IncomingLetter[]
+  outgoingLetters OutgoingLetter[]
+  versions        DocumentVersion[]
+
+  @@index([category])
+  @@map("documents")
+}
+
+model IncomingLetter {
+  id          String   @id @default(uuid())
+  documentId  String   @unique @map("document_id")
+  senderName  String   @map("sender_name")
+  receivedAt  DateTime @map("received_at")
+  disposition String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("incoming_letters")
+}
+
+model OutgoingLetter {
+  id          String   @id @default(uuid())
+  documentId  String   @unique @map("document_id")
+  recipient   String
+  dispatchedAt DateTime @map("dispatched_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+
+  @@map("outgoing_letters")
+}
+
+model DocumentVersion {
+  id          String   @id @default(uuid())
+  documentId  String   @map("document_id")
+  versionNo   Int      @map("version_no")
+  fileId      String   @map("file_id")
+  changeNotes String?  @map("change_notes")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  document Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  file     File     @relation(fields: [fileId], references: [id])
+
+  @@index([documentId])
+  @@map("document_versions")
+}
+
+// ------------------------------------------------------------------------------
+// 9. PUBLICATIONS, TAX & PUBLIC SNAPSHOTS
+// ------------------------------------------------------------------------------
+
+model Publication {
+  id          String    @id @default(uuid())
+  title       String
+  slug        String    @unique
+  summary     String
+  content     String
+  category    String    // BERITA, PENGUMUMAN, TRANSPARANSI
+  publishedAt DateTime? @map("published_at")
+  status      String    @default("DRAFT") // DRAFT, APPROVED_FOR_PUBLICATION, ARCHIVED
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  approvals PublicationApproval[]
+
+  @@index([status])
+  @@map("publications")
+}
+
+model PublicationApproval {
+  id            String   @id @default(uuid())
+  publicationId String   @map("publication_id")
+  approvedById  String   @map("approved_by_id")
+  approvedAt    DateTime @default(now()) @map("approved_at")
+  notes         String?
+
+  publication Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  approvedBy  User        @relation(fields: [approvedById], references: [id])
+
+  @@map("publication_approvals")
+}
+
+model PublicDashboardSnapshot {
+  id                   String   @id @default(uuid())
+  periodLabel          String   @map("period_label") // "Tahun Anggaran 2026"
+  publishedDate        DateTime @map("published_date")
+  totalReceivedAmount  Decimal  @map("total_received_amount") @db.Decimal(15, 2)
+  totalAllocatedAmount Decimal  @map("total_allocated_amount") @db.Decimal(15, 2)
+  totalVerifiedAmount  Decimal  @map("total_verified_amount") @db.Decimal(15, 2)
+  totalRegisteredCabor Int      @map("total_registered_cabor")
+  totalAthletes        Int      @map("total_athletes")
+  totalPrograms        Int      @map("total_programs")
+  disclaimerNote       String   @map("disclaimer_note")
+  isApproved           Boolean  @default(false) @map("is_approved")
+  createdAt            DateTime @default(now()) @map("created_at")
+
+  @@map("public_dashboard_snapshots")
+}
+
+model TaxRule {
+  id             String   @id @default(uuid())
+  code           String   @unique // PPH21, PPH22, PPH23, PPN11
+  name           String
+  ratePercentage Decimal  @map("rate_percentage") @db.Decimal(5, 2)
+  description    String?
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  taxTransactions TaxTransaction[]
+
+  @@map("tax_rules")
+}
+
+model TaxTransaction {
+  id                 String    @id @default(uuid())
+  expenseId          String    @map("expense_id")
+  taxRuleId          String    @map("tax_rule_id")
+  taxableBase        Decimal   @map("taxable_base") @db.Decimal(15, 2)
+  taxAmount          Decimal   @map("tax_amount") @db.Decimal(15, 2)
+  depositDate        DateTime? @map("deposit_date")
+  depositProofFileId String?   @map("deposit_proof_file_id")
+  status             String    @default("Menunggu") // Menunggu, Dibayar
+  createdAt          DateTime  @default(now()) @map("created_at")
+
+  expense          Expense @relation(fields: [expenseId], references: [id], onDelete: Cascade)
+  taxRule          TaxRule @relation(fields: [taxRuleId], references: [id])
+  depositProofFile File?   @relation(fields: [depositProofFileId], references: [id])
+
+  @@index([expenseId])
+  @@map("tax_transactions")
+}
+
+// ------------------------------------------------------------------------------
+// 10. NOTIFICATIONS & SYSTEM SETTINGS
+// ------------------------------------------------------------------------------
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  title     String
+  body      String
+  category  String   // RAB, EXPENSE, LPJ, SISTEM
+  linkUrl   String?  @map("link_url")
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([isRead])
+  @@map("notifications")
+}
+
+model NotificationDevice {
+  id         String   @id @default(uuid())
+  userId     String   @map("user_id")
+  fcmToken   String   @unique @map("fcm_token")
+  deviceType String   @map("device_type") // ANDROID, IOS, WEB
+  lastUsedAt DateTime @default(now()) @map("last_used_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("notification_devices")
+}
+
+model SystemSetting {
+  id          String   @id @default(uuid())
+  key         String   @unique
+  value       String
+  description String?
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("system_settings")
+}
+

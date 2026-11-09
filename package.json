@@ -1,0 +1,38 @@
+{
+  "name": "sikoni-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SIKONI — Sistem Informasi KONI Surakarta (Web Publik, Web Admin, Mobile Android & NestJS Backend)",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev:web": "npm --workspace=@sikoni/web run dev",
+    "dev:api": "npm --workspace=@sikoni/api run start:dev",
+    "dev:mobile": "npm --workspace=@sikoni/mobile run start",
+    "build:packages": "npm --workspace=@sikoni/shared run build && npm --workspace=@sikoni/database run build",
+    "build:web": "npm --workspace=@sikoni/web run build",
+    "build:api": "npm --workspace=@sikoni/api run build",
+    "test:api": "npm --workspace=@sikoni/api run test",
+    "lint": "npm run -ws --if-present lint"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "next": "14.2.24"
+  },
+  "keywords": [
+    "koni",
+    "sikoni",
+    "surakarta",
+    "sports-management",
+    "monorepo",
+    "nestjs",
+    "nextjs",
+    "expo",
+    "prisma"
+  ],
+  "author": "KONI Surakarta",
+  "license": "UNLICENSED"
+}

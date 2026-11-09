@@ -1,0 +1,125 @@
+PROMPT IMPLEMENTASI SIKONI BERDASARKAN MOCKUP
+
+Gunakan file index.html dan folder screenshots sebagai acuan UI/UX visual. Baca juga README.md. Tugasmu adalah mengubah prototipe tersebut menjadi aplikasi SIKONI yang benar-benar terstruktur, bukan sekadar menyalin satu file HTML.
+
+KONTEKS PRODUK
+SIKONI adalah Sistem Informasi KONI Surakarta dengan tiga kanal yang menggunakan satu backend dan satu sumber data:
+1. Website publik untuk informasi umum, direktori cabor, berita, profil, dan ringkasan transparansi yang secara eksplisit telah disetujui untuk dipublikasikan.
+2. Web Admin KONI untuk pengelolaan organisasi, keuangan, pengajuan, approval, LPJ, dokumen, laporan, pengguna, dan konfigurasi.
+3. Aplikasi Android untuk operator cabor/pengurus: melihat ringkasan, membuat RAB, menginput pengeluaran dan bukti, memantau approval, mengelola LPJ, menerima notifikasi, dan mengelola akun.
+
+PRINSIP WAJIB
+- Satu backend API sebagai sumber aturan bisnis untuk web publik, web admin, dan Android.
+- Jangan menghubungkan frontend langsung ke database.
+- Jangan menganggap tampilan tombol atau menu sebagai sistem keamanan. Semua authorization wajib diperiksa di backend.
+- Pisahkan role dari scope data cabor. Operator cabor hanya dapat mengakses cabor yang ditugaskan kepadanya.
+- Maker tidak boleh menjadi satu-satunya approver untuk transaksi buatannya sendiri.
+- Pisahkan status RAB, pengeluaran, pembayaran, dan LPJ. Pengeluaran diverifikasi tidak otomatis berarti sudah dibayar.
+- Simpan histori revisi dan audit trail; jangan mengubah transaksi yang sudah disetujui tanpa proses revisi/koreksi yang tercatat.
+- Website publik hanya membaca data publikasi yang telah disetujui. Jangan expose tabel transaksi atau file privat.
+- Nilai uang menggunakan decimal-safe arithmetic, bukan floating point JavaScript untuk kalkulasi bisnis.
+- Cegah duplicate submission/payment akibat retry atau koneksi putus menggunakan idempotency mechanism.
+- Data pada mockup adalah data dummy. Jangan klaim nominal atau data tersebut sebagai data asli KONI.
+
+STACK YANG DIMINTA
+- Monorepo GitHub.
+- Web: Next.js App Router + TypeScript.
+- Mobile: React Native + Expo + TypeScript.
+- API: NestJS + TypeScript (modular monolith; jangan pecah ke microservices untuk MVP).
+- Database: PostgreSQL.
+- ORM: Prisma stable release, migrations terkontrol.
+- API contract: REST + OpenAPI/Swagger.
+- File storage: private S3-compatible object storage dengan signed URL berumur pendek.
+- Push notification: Firebase Cloud Messaging.
+- Deployment: Docker dan environment development/staging/production.
+
+MODUL WEB ADMIN
+- Dashboard.
+- Keuangan: Dana Masuk, Anggaran, Realisasi, Insentif, Pajak.
+- Pengajuan dan Persetujuan.
+- RAB: informasi kegiatan, rincian biaya, sumber pendanaan, dokumen pendukung, revisi, submit.
+- Pengeluaran: relasi ke kegiatan/RAB, tanggal, item, metode pembayaran (uang muka/panjar, reimbursement, pembayaran langsung), bukti, status verifikasi.
+- Pembayaran: pembayaran parsial, tanggal, referensi/bukti bayar, nilai dibayar, rekonsiliasi terhadap kewajiban terverifikasi.
+- LPJ: ringkasan kegiatan, perbandingan RAB vs realisasi, bukti pengeluaran, bukti pembayaran, dokumentasi, revisi, approval.
+- Data Cabor, Dokumen, Laporan, Pengaturan.
+
+WEBSITE PUBLIK
+- Beranda.
+- Transparansi: hanya agregat yang di-approve untuk publikasi. Tampilkan label periode, tanggal publikasi, dan disclaimer definisi data.
+- Cabang Olahraga.
+- Berita dan Kegiatan.
+- Profil KONI.
+- Login internal.
+
+ANDROID
+Bottom navigation maksimal lima menu: Beranda, Keuangan, Pengajuan, Notifikasi, Akun.
+Tambahkan shortcut pada Beranda: Buat RAB, Input Pengeluaran, LPJ, Notifikasi.
+Form harus mudah digunakan, label jelas, touch target memadai, validasi inline, dan mendukung draft.
+Draft boleh disimpan lokal dengan aman. Jangan izinkan approval transaksi finansial dilakukan offline.
+
+DATABASE DOMAIN MINIMUM
+users, roles, permissions, role_permissions, user_roles, cabor, user_cabor, fiscal_years, fund_sources, fund_receipts, programs, activities, expense_categories, budget_allocations, rabs, rab_items, rab_revisions, rab_funding_allocations, expenses, expense_items, expense_attachments, payments, payment_attachments, lpjs, lpj_sections, lpj_expenses, lpj_attachments, lpj_revisions, approval_workflows, approval_steps, approval_instances, approval_actions, audit_logs, files, documents, incoming_letters, outgoing_letters, document_versions, publications, publication_approvals, notifications, notification_devices, system_settings, tax_rules, tax_transactions, public_dashboard_snapshots.
+
+RELASI KONSEPTUAL
+Tahun anggaran -> program -> kegiatan -> RAB/revisi -> rincian RAB.
+Kegiatan/RAB -> pengeluaran -> item pengeluaran -> bukti.
+Pengeluaran terverifikasi -> kewajiban pembayaran -> pembayaran (dapat parsial).
+Kegiatan -> LPJ -> lampiran/revisi/approval.
+Sumber pendanaan -> alokasi pendanaan -> alokasi anggaran/RAB.
+Semua approval -> workflow instance -> approval action -> audit log.
+
+ATURAN KEUANGAN
+Jangan menyamakan:
+- Pagu anggaran.
+- Alokasi anggaran.
+- RAB disetujui.
+- Komitmen.
+- Realisasi pengeluaran terverifikasi.
+- Nilai yang telah dibayar.
+- Kewajiban yang belum dibayar.
+- Saldo kas aktual.
+
+Jangan mengklaim saldo kas aktual atau laporan akuntansi lengkap kecuali sistem sudah memiliki general ledger, jurnal debit-kredit, data rekening, dan rekonsiliasi bank. Untuk MVP, scope adalah administrasi anggaran dan pertanggungjawaban, bukan full accounting system.
+
+APPROVAL DAN WORKFLOW
+Buat approval matrix yang dapat dikonfigurasi berdasarkan tipe dokumen, nominal, program, dan kewenangan jabatan. Jangan hardcode satu urutan persetujuan sebelum SOP resmi diterima. Status harus terpisah dari status pembayaran. Dukungan keputusan approve, reject, return-for-revision, resubmit, cancel, dan delegated approver harus memiliki audit trail.
+
+KEAMANAN DAN RELIABILITY
+- Authentication aman, password hashing, session/token lifecycle, MFA untuk role sensitif bila disyaratkan.
+- Server-side RBAC + cabor scope pada setiap endpoint.
+- Validasi input dan file upload (tipe, ukuran, malware scanning bila tersedia).
+- Private storage; tidak ada URL publik untuk bukti transaksi.
+- Audit log append-oriented.
+- Database transaction dan concurrency control saat approval.
+- Idempotency key untuk operasi kritikal.
+- Backup database dan dokumen serta uji restore.
+- Rate limiting, secure headers, CSRF/CORS sesuai arsitektur auth, secrets di environment manager.
+- Jangan menggunakan data atlet pribadi yang tidak dibutuhkan. Terapkan minimisasi data dan pembatasan akses.
+
+OUTPUT YANG HARUS DIHASILKAN SECARA BERTAHAP
+Tahap 1: hasilkan project architecture, folder tree, ERD, data dictionary, status model, dan business rules yang masih perlu dikonfirmasi. Jangan langsung mengarang aturan approval.
+Tahap 2: hasilkan Prisma schema PostgreSQL dan migration awal, termasuk PK/FK, unique constraint, index, decimal type, audit structure, serta strategi soft-delete hanya untuk data master yang relevan.
+Tahap 3: implementasikan NestJS modules, authentication, authorization, cabor scoping, OpenAPI, unit/integration tests.
+Tahap 4: implementasikan business workflow RAB, expenses, payments, LPJ, audit log, report queries, public publication snapshot.
+Tahap 5: implementasikan Next.js untuk website publik dan web admin mengikuti screenshots. Gunakan komponen reusable dan form validation.
+Tahap 6: implementasikan React Native Expo Android mengikuti screenshots dan navigasi mobile.
+Tahap 7: buat test plan/UAT, security test, cabor isolation test, concurrency test, data reconciliation test, backup restore procedure, serta deployment guide.
+
+DESAIN UI/UX
+Ikuti identitas pada mockup:
+- Navy #142A43.
+- Teal #168B8B.
+- Gold #D7AC57.
+- Background #F4F6F9.
+- White cards, border tipis, radius 12-16 px, whitespace cukup.
+- Typography jelas dan mudah dibaca.
+- Sidebar admin di desktop; bottom navigation lima menu di mobile.
+- Tabel memiliki filter, status badge, dan aksi kontekstual.
+- Form panjang dibuat wizard bertahap dan mendukung draft.
+- Jangan membuat terlalu banyak menu pada Android.
+- Desain responsif untuk desktop, tablet, dan ponsel.
+
+CATATAN PENTING
+Mockup HTML adalah referensi visual/flow awal, bukan spesifikasi final aturan bisnis. Jangan mengubah dummy data menjadi data produksi. Buat daftar pertanyaan untuk owner pada semua keputusan yang belum ditentukan (khususnya approval matrix, sumber pendanaan, metode pembayaran, bukti wajib, kebijakan over-budget, template LPJ, dan retensi dokumen). Jangan mengimplementasikan peraturan pajak dengan tarif hardcoded tanpa dasar resmi.
+
+Mulai dengan Tahap 1 dan ajukan keputusan bisnis yang benar-benar blocking. Berikan hasil dalam file dan kode yang dapat dijalankan, bukan hanya penjelasan konseptual. Jangan melewati pengujian.
