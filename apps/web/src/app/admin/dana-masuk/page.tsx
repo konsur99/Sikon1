@@ -185,75 +185,101 @@ export default function FundReceiptsPage() {
 
       {/* Modal Dialog for Recording Fund Receipt */}
       {showModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-center">
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Catat Penerimaan Dana Masuk Baru</h3>
-              <button onClick={() => setShowModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs">
+                  <PlusCircle size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">Catat Penerimaan Dana Masuk</h3>
+                  <p className="text-[11px] text-sikoni-muted">Validasi kas masuk APBD Pemkot Surakarta atau sponsor resmi</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-slate-400 hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleSaveReceipt} className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Tanggal Penerimaan *</label>
-                <input
-                  type="text"
-                  value={newReceipt.date}
-                  onChange={(e) => setNewReceipt({ ...newReceipt, date: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2"
-                />
+            <form onSubmit={handleSaveReceipt} className="space-y-3.5 text-xs">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Tanggal Penerimaan *</label>
+                  <input
+                    type="text"
+                    value={newReceipt.date}
+                    onChange={(e) => setNewReceipt({ ...newReceipt, date: e.target.value })}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Nomor Referensi / SP2D *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="HIB/002/2026"
+                    value={newReceipt.reference}
+                    onChange={(e) => setNewReceipt({ ...newReceipt, reference: e.target.value })}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Sumber Dana *</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Sumber Pendanaan *</label>
                 <select
                   value={newReceipt.source}
                   onChange={(e) => setNewReceipt({ ...newReceipt, source: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2 bg-white"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                 >
-                  <option>Hibah Pemerintah Daerah</option>
-                  <option>Bantuan Pembinaan</option>
-                  <option>Sponsor Kegiatan</option>
-                  <option>Penerimaan Lainnya</option>
+                  <option>Hibah Pemerintah Daerah (APBD)</option>
+                  <option>Bantuan Pembinaan Khusus Provinsi</option>
+                  <option>Sponsor Kegiatan Perbankan</option>
+                  <option>Penerimaan lainnya yang sah</option>
                 </select>
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Nomor Referensi / SP2D *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="HIB/002/2026"
-                  value={newReceipt.reference}
-                  onChange={(e) => setNewReceipt({ ...newReceipt, reference: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2"
-                />
-              </div>
-
-              <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Nilai Penerimaan (Rp) *</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Nilai Penerimaan Kas (Rp) *</label>
                 <input
                   type="number"
                   required
-                  placeholder="50000000"
+                  placeholder="100000000"
                   value={newReceipt.amount}
                   onChange={(e) => setNewReceipt({ ...newReceipt, amount: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-sikoni-line">
+              {/* Themed Live Preview Sub-Box */}
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/60 via-white to-slate-50 border border-teal-200/70 shadow-xs flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-bold text-sikoni-teal uppercase tracking-wider block">Konfirmasi Nilai Masuk</span>
+                  <span className="text-[11px] text-slate-500">Rekening Giro Operasional KONI</span>
+                </div>
+                <div className="text-right">
+                  <b className="text-base font-black text-sikoni-teal">
+                    Rp {Number(newReceipt.amount || 0).toLocaleString('id-ID')}
+                  </b>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-3.5 py-2 rounded-lg border border-sikoni-line text-xs font-bold text-sikoni-muted"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-sikoni-teal text-white text-xs font-bold hover:bg-teal-700"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
                 >
                   Simpan Penerimaan
                 </button>

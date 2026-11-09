@@ -89,6 +89,46 @@ export default function PublicCaborPage() {
   const [category, setCategory] = useState('Semua kategori');
   const [selectedCabor, setSelectedCabor] = useState<CaborItem | null>(null);
 
+  const getCategoryStyles = (cat: string) => {
+    switch (cat) {
+      case 'Terukur':
+        return {
+          border: 'border-t-4 border-t-sikoni-navy',
+          badge: 'bg-slate-100 text-sikoni-navy border-slate-300/80',
+          glow: 'from-slate-700/15',
+          btn: 'from-sikoni-navy to-slate-800 hover:from-slate-800 hover:to-sikoni-teal',
+        };
+      case 'Permainan':
+        return {
+          border: 'border-t-4 border-t-sikoni-teal',
+          badge: 'bg-emerald-50 text-sikoni-teal border-emerald-200/90',
+          glow: 'from-teal-500/15',
+          btn: 'from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy',
+        };
+      case 'Bela Diri':
+        return {
+          border: 'border-t-4 border-t-sikoni-gold',
+          badge: 'bg-amber-50 text-amber-800 border-amber-200/90',
+          glow: 'from-amber-500/15',
+          btn: 'from-amber-600 to-amber-700 hover:from-amber-700 hover:to-sikoni-navy',
+        };
+      case 'Akurasi':
+        return {
+          border: 'border-t-4 border-t-indigo-600',
+          badge: 'bg-indigo-50 text-indigo-700 border-indigo-200/90',
+          glow: 'from-indigo-600/15',
+          btn: 'from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-sikoni-navy',
+        };
+      default:
+        return {
+          border: 'border-t-4 border-t-sikoni-teal',
+          badge: 'bg-emerald-50 text-sikoni-teal border-emerald-200',
+          glow: 'from-teal-500/15',
+          btn: 'from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy',
+        };
+    }
+  };
+
   const filtered = caborList.filter((c) => {
     const matchSearch =
       c.code.toLowerCase().includes(search.toLowerCase()) ||
@@ -100,133 +140,198 @@ export default function PublicCaborPage() {
   return (
     <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
       <div>
+        <div className="text-xs font-black text-sikoni-teal tracking-widest uppercase mb-1">
+          DIREKTORI RESMI CABANG OLAHRAGA
+        </div>
         <h1 className="text-3xl font-black text-sikoni-navy tracking-tight">Cabang Olahraga</h1>
-        <p className="text-xs text-sikoni-muted mt-1">
-          Temukan direktori cabang olahraga yang berada dalam pembinaan resmi KONI Kota Surakarta.
+        <p className="text-xs text-sikoni-muted mt-1 max-w-2xl leading-relaxed">
+          Temukan direktori cabang olahraga binaan resmi KONI Kota Surakarta lengkap dengan data atlet terdaftar, lokasi venue latihan, dan kontak pengurus kota.
         </p>
       </div>
 
-      {/* Toolbar Search & Filter */}
-      <div className="flex flex-wrap items-center gap-3 bg-white p-3 rounded-2xl border border-sikoni-line shadow-sm">
-        <div className="relative flex-1 min-w-[240px]">
-          <Search className="absolute left-3 top-2.5 text-sikoni-muted" size={15} />
-          <input
-            type="text"
-            placeholder="Cari cabang olahraga..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-[#f8fafc] border border-sikoni-line rounded-xl pl-9 pr-3 py-2 text-xs focus:outline-none focus:border-sikoni-teal"
-          />
-        </div>
-
-        <select
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="bg-white border border-sikoni-line rounded-xl px-3 py-2 text-xs text-sikoni-ink focus:outline-none"
-        >
-          <option>Semua kategori</option>
-          <option>Permainan</option>
-          <option>Terukur</option>
-          <option>Bela Diri</option>
-          <option>Akurasi</option>
-        </select>
-      </div>
-
-      {/* Cabor Card Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filtered.map((cabor) => (
-          <div
-            key={cabor.code}
-            className="card-sikoni flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden group border-t-4 border-t-sikoni-teal"
-          >
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-2xl grid place-items-center shadow-sm border border-emerald-100 group-hover:scale-105 transition-transform">
-                  {cabor.icon}
-                </div>
-                <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2.5 py-0.5 rounded-full">
-                  {cabor.category}
-                </span>
-              </div>
-
-              <div className="flex items-baseline gap-2">
-                <b className="text-base font-extrabold text-sikoni-navy group-hover:text-sikoni-teal transition-colors">
-                  {cabor.code}
-                </b>
-                <span className="text-xs text-slate-600 font-medium">— {cabor.name}</span>
-              </div>
-
-              <p className="text-xs text-slate-500 mt-2 leading-relaxed">
-                {cabor.athletes} • Tempat latihan resmi di {cabor.venue.split(',')[0]}.
-              </p>
-            </div>
-
-            <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-[10.5px] text-slate-400 font-medium">Binaan KONI Surakarta</span>
-              <button
-                onClick={() => setSelectedCabor(cabor)}
-                className="bg-emerald-50 hover:bg-emerald-100 text-sikoni-teal text-xs font-bold px-3 py-1.5 rounded-lg transition-all"
-              >
-                Lihat Profil Lengkap →
-              </button>
-            </div>
+      {/* Toolbar Search & Filter in Themed Elevated Container */}
+      <div className="card-sikoni relative overflow-hidden p-4">
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="relative flex-1 min-w-[240px]">
+            <Search className="absolute left-3.5 top-3 text-sikoni-muted" size={15} />
+            <input
+              type="text"
+              placeholder="Cari nama cabor, kode (PASI, PBSI), atau venue latihan..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-white border border-slate-200/90 rounded-xl pl-10 pr-3 py-2.5 text-xs text-sikoni-ink focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 shadow-xs transition-all"
+            />
           </div>
-        ))}
+
+          <div className="flex items-center gap-2 bg-white border border-slate-200/90 rounded-xl px-3 py-2 shadow-xs">
+            <span className="text-[10.5px] font-bold text-sikoni-muted uppercase">Kategori:</span>
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="bg-transparent border-none text-xs text-sikoni-ink font-bold focus:outline-none cursor-pointer"
+            >
+              <option>Semua kategori</option>
+              <option>Permainan</option>
+              <option>Terukur</option>
+              <option>Bela Diri</option>
+              <option>Akurasi</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      {/* Cabor Profile Modal */}
+      {/* Cabor Card Grid with Themed Sub-boxes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filtered.map((cabor) => {
+          const catStyle = getCategoryStyles(cabor.category);
+          return (
+            <div
+              key={cabor.code}
+              className={`card-sikoni flex flex-col justify-between hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 relative overflow-hidden group ${catStyle.border}`}
+            >
+              {/* Corner decorative ambient glow */}
+              <div
+                className={`absolute -top-10 -right-10 w-28 h-28 rounded-full bg-gradient-to-br ${catStyle.glow} via-transparent to-transparent pointer-events-none group-hover:scale-125 transition-transform duration-500`}
+              />
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between mb-3.5">
+                  <div className="w-13 h-13 p-2.5 rounded-2xl bg-white shadow-xs border border-slate-200/90 text-2xl grid place-items-center group-hover:scale-110 group-hover:rotate-2 transition-all duration-300">
+                    {cabor.icon}
+                  </div>
+                  <div className="flex flex-col items-end gap-1">
+                    <span
+                      className={`text-[9.5px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full border shadow-xs ${catStyle.badge}`}
+                    >
+                      {cabor.category}
+                    </span>
+                    <span className="text-[9.5px] font-semibold text-slate-400">Pengkot Aktif</span>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-baseline gap-2">
+                    <b className="text-lg font-black text-sikoni-navy group-hover:text-sikoni-teal transition-colors">
+                      {cabor.code}
+                    </b>
+                    <span className="text-xs text-slate-600 font-bold">— {cabor.name}</span>
+                  </div>
+                </div>
+
+                {/* Structured Sub-boxes for Cabor Information */}
+                <div className="grid grid-cols-2 gap-2 mt-3.5">
+                  <div className="p-2.5 rounded-xl bg-white/95 border border-slate-200/90 shadow-xs flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-teal-50 text-sikoni-teal flex items-center justify-center shrink-0">
+                      <Users size={13} />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[9px] font-extrabold text-sikoni-muted uppercase block leading-none">
+                        Atlet Binaan
+                      </span>
+                      <b className="text-[11px] text-sikoni-navy font-black truncate block mt-0.5">
+                        {cabor.athletes.split(' ')[0]} Atlet
+                      </b>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 rounded-xl bg-white/95 border border-slate-200/90 shadow-xs flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-amber-50 text-sikoni-gold flex items-center justify-center shrink-0">
+                      <MapPin size={13} />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-[9px] font-extrabold text-sikoni-muted uppercase block leading-none">
+                        Lokasi Latihan
+                      </span>
+                      <b className="text-[11px] text-sikoni-navy font-black truncate block mt-0.5">
+                        {cabor.venue.split(',')[0]}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sub-box Ketua Umum */}
+                <div className="mt-2 p-2.5 rounded-xl bg-gradient-to-r from-slate-50 via-white to-slate-50 border border-slate-200/80 flex items-center justify-between text-xs shadow-xs">
+                  <span className="text-[10px] text-slate-500 font-medium">Ketua Umum:</span>
+                  <b className="text-[11px] text-sikoni-navy font-bold truncate max-w-[170px]">
+                    {cabor.leader}
+                  </b>
+                </div>
+              </div>
+
+              {/* Bottom Card Footer */}
+              <div className="pt-3.5 mt-4 border-t border-slate-100 flex items-center justify-between relative z-10">
+                <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  KONI Surakarta
+                </span>
+                <button
+                  onClick={() => setSelectedCabor(cabor)}
+                  className={`bg-gradient-to-r ${catStyle.btn} text-white text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-xs hover:shadow-md transition-all flex items-center gap-1.5 group-hover:translate-x-0.5`}
+                >
+                  <span>Lihat Profil</span>
+                  <span className="text-[11px]">→</span>
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Cabor Profile Modal with Top Accent Line */}
       {selectedCabor && (
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
+          <div className="card-sikoni relative overflow-hidden w-full max-w-lg p-6 space-y-4 shadow-2xl">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-sikoni-teal2 text-2xl grid place-items-center">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 text-2xl grid place-items-center shadow-xs border border-emerald-200/70">
                   {selectedCabor.icon}
                 </div>
                 <div>
                   <h3 className="text-lg font-black text-sikoni-navy">
                     {selectedCabor.code} — {selectedCabor.name}
                   </h3>
-                  <span className="text-xs text-sikoni-teal font-bold">Kategori {selectedCabor.category}</span>
+                  <span className="text-xs text-sikoni-teal font-extrabold">Kategori {selectedCabor.category}</span>
                 </div>
               </div>
               <button
                 onClick={() => setSelectedCabor(null)}
-                className="text-sikoni-muted hover:text-sikoni-navy"
+                className="text-sikoni-muted hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
               >
                 <X size={18} />
               </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 shadow-xs">
                 <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Ketua Umum Pengkot</span>
                 <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.leader}</b>
               </div>
-              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 shadow-xs">
                 <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Tempat Latihan Resmi</span>
                 <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.venue}</b>
               </div>
-              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 shadow-xs">
                 <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Email Resmi</span>
                 <b className="text-xs text-sikoni-teal mt-0.5 block">{selectedCabor.email}</b>
               </div>
-              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
+              <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 shadow-xs">
                 <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Nomor Kontak WhatsApp</span>
                 <b className="text-xs text-sikoni-navy mt-0.5 block">{selectedCabor.phone}</b>
               </div>
-              <div className="sm:col-span-2 p-3 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70 flex justify-between items-center">
-                <span className="text-xs font-bold text-sikoni-navy">Data Pembinaan Atlet:</span>
-                <span className="px-3 py-1 rounded-full bg-sikoni-teal text-white font-extrabold text-xs">
+              <div className="sm:col-span-2 p-3.5 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70 flex justify-between items-center shadow-xs">
+                <span className="text-xs font-bold text-sikoni-navy">Total Atlet Binaan Terdaftar:</span>
+                <span className="px-3 py-1 rounded-full bg-sikoni-teal text-white font-black text-xs shadow-xs">
                   {selectedCabor.athletes}
                 </span>
               </div>
             </div>
 
-            <div className="flex justify-end pt-2 border-t border-sikoni-line">
+            <div className="flex justify-end pt-2 border-t border-slate-100">
               <button
                 onClick={() => setSelectedCabor(null)}
-                className="px-5 py-2 bg-sikoni-navy text-white text-xs font-bold rounded-xl"
+                className="px-5 py-2 bg-sikoni-navy hover:bg-slate-800 text-white text-xs font-bold rounded-xl transition-all shadow-sm"
               >
                 Tutup
               </button>

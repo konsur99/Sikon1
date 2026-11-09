@@ -215,32 +215,58 @@ export default function BudgetControlPage() {
 
       {/* Add Allocation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-center">
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Tambah Alokasi Anggaran Baru</h3>
-              <button onClick={() => setShowModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs">
+                  <FileSpreadsheet size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">Tambah Alokasi Anggaran Cabor</h3>
+                  <p className="text-[11px] text-sikoni-muted">Penetapan pagu tahun anggaran 2026 berdasarkan SK Ketua Umum</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-slate-400 hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleSaveAllocation} className="space-y-3 text-xs">
-              <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Tahun Anggaran</label>
-                <input
-                  type="text"
-                  value={newAllocation.year}
-                  onChange={(e) => setNewAllocation({ ...newAllocation, year: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
-                />
+            <form onSubmit={handleSaveAllocation} className="space-y-3.5 text-xs">
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Tahun Anggaran *</label>
+                  <input
+                    type="text"
+                    value={newAllocation.year}
+                    onChange={(e) => setNewAllocation({ ...newAllocation, year: e.target.value })}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Sumber Pendanaan *</label>
+                  <select
+                    value={newAllocation.fundSource}
+                    onChange={(e) => setNewAllocation({ ...newAllocation, fundSource: e.target.value })}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
+                  >
+                    <option>Hibah Pemerintah Daerah (APBD)</option>
+                    <option>Bantuan Pembinaan Khusus</option>
+                    <option>Sponsorship & Pendanaan Lainnya</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Program Olahraga</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Program Olahraga *</label>
                 <select
                   value={newAllocation.program}
                   onChange={(e) => setNewAllocation({ ...newAllocation, program: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                 >
                   <option>Pembinaan Atlet & Pelatih</option>
                   <option>Kompetisi & Kejuaraan Daerah</option>
@@ -250,11 +276,11 @@ export default function BudgetControlPage() {
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Cabang Olahraga / Unit</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Cabang Olahraga / Unit Penerima *</label>
                 <select
                   value={newAllocation.cabor}
                   onChange={(e) => setNewAllocation({ ...newAllocation, cabor: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                 >
                   <option>PASI — Atletik</option>
                   <option>PBSI — Bulutangkis</option>
@@ -266,19 +292,6 @@ export default function BudgetControlPage() {
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Sumber Dana</label>
-                <select
-                  value={newAllocation.fundSource}
-                  onChange={(e) => setNewAllocation({ ...newAllocation, fundSource: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
-                >
-                  <option>Hibah Pemerintah Daerah (APBD)</option>
-                  <option>Bantuan Pembinaan Khusus</option>
-                  <option>Sponsorship & Pendanaan Lainnya</option>
-                </select>
-              </div>
-
-              <div>
                 <label className="font-bold text-sikoni-navy block mb-1">Nilai Alokasi Pagu (Rp) *</label>
                 <input
                   type="number"
@@ -286,21 +299,35 @@ export default function BudgetControlPage() {
                   placeholder="Contoh: 150000000"
                   value={newAllocation.amount}
                   onChange={(e) => setNewAllocation({ ...newAllocation, amount: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-sikoni-line">
+              {/* Themed Live Preview Sub-Box */}
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/60 via-white to-slate-50 border border-teal-200/70 shadow-xs flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-bold text-sikoni-teal uppercase tracking-wider block">Pagu yang Dialokasikan</span>
+                  <span className="text-[11px] text-slate-500 font-medium">{newAllocation.cabor}</span>
+                </div>
+                <div className="text-right">
+                  <b className="text-base font-black text-sikoni-teal">
+                    Rp {Number(newAllocation.amount || 0).toLocaleString('id-ID')}
+                  </b>
+                  <span className="text-[9.5px] font-bold text-slate-500 block">Status: Pagu Murni 2026</span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-3.5 py-2 rounded-lg border border-sikoni-line text-xs font-bold text-sikoni-muted"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-sikoni-teal text-white text-xs font-bold hover:bg-teal-700"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
                 >
                   Simpan Alokasi
                 </button>

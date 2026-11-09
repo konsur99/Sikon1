@@ -120,23 +120,24 @@ export default function ApprovalsPage() {
       {/* Decision Review Modal with Multi-Stage Visual Stepper */}
       {selectedItem && (
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-xl p-6 space-y-4 shadow-2xl max-h-[92vh] overflow-y-auto">
+          <div className="card-sikoni relative overflow-hidden w-full max-w-xl p-6 space-y-4 shadow-2xl max-h-[92vh] overflow-y-auto">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
             <div className="flex justify-between items-start">
               <div>
-                <span className="text-[10px] font-bold text-sikoni-teal bg-teal-50 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-bold text-sikoni-teal bg-teal-50 px-2.5 py-0.5 rounded-full border border-teal-200">
                   {selectedItem.myStage}
                 </span>
-                <h3 className="text-base font-extrabold text-sikoni-navy mt-1">{selectedItem.number}</h3>
+                <h3 className="text-base font-extrabold text-sikoni-navy mt-1.5">{selectedItem.number}</h3>
                 <p className="text-xs text-sikoni-muted">{selectedItem.activity} • {selectedItem.applicant}</p>
               </div>
               <div className="text-right">
                 <span className="text-xs text-sikoni-muted block">Nilai Diajukan</span>
-                <b className="text-lg text-sikoni-navy">{selectedItem.amount}</b>
+                <b className="text-lg text-sikoni-navy font-black">{selectedItem.amount}</b>
               </div>
             </div>
 
             {/* Visual Multi-Stage Workflow Timeline */}
-            <div className="border border-sikoni-line rounded-xl p-3.5 bg-slate-50 space-y-2 text-xs">
+            <div className="border border-slate-200/90 rounded-2xl p-4 bg-gradient-to-br from-slate-50 to-white space-y-2.5 text-xs shadow-xs">
               <span className="font-extrabold text-sikoni-navy block text-[11px] uppercase tracking-wider">
                 Alur Persetujuan Bertingkat:
               </span>
@@ -167,7 +168,7 @@ export default function ApprovalsPage() {
                   </div>
                   <div className="flex-1 flex justify-between">
                     <span className="text-sikoni-navy font-bold">3. Verifikasi Pagu & Anggaran (Bendahara KONI)</span>
-                    <span className="text-[10px] font-bold text-sikoni-gold">Tahap Anda</span>
+                    <span className="text-[10px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Tahap Anda</span>
                   </div>
                 </div>
 
@@ -184,35 +185,37 @@ export default function ApprovalsPage() {
             </div>
 
             {/* Mandatory Supporting Documents Checklist */}
-            <div className="border border-sikoni-line rounded-xl p-3 text-xs space-y-2">
-              <span className="font-bold text-sikoni-navy block">Kelengkapan Dokumen Wajib:</span>
-              <div className="space-y-1.5">
-                <label className="flex items-center gap-2 cursor-pointer">
+            <div className="space-y-2 text-xs">
+              <span className="font-extrabold text-sikoni-navy block text-[11px] uppercase tracking-wider">
+                Kelengkapan Dokumen Wajib:
+              </span>
+              <div className="space-y-2">
+                <label className="flex items-center gap-2.5 p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 cursor-pointer hover:border-sikoni-teal transition-all shadow-xs">
                   <input
                     type="checkbox"
                     checked={checklist.proposal}
                     onChange={(e) => setChecklist({ ...checklist, proposal: e.target.checked })}
-                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                    className="w-4 h-4 rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
                   />
-                  <span>Proposal teknis dan rincian kebutuhan biaya per item</span>
+                  <span className="font-medium text-slate-700">Proposal teknis dan rincian kebutuhan biaya per item</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2.5 p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 cursor-pointer hover:border-sikoni-teal transition-all shadow-xs">
                   <input
                     type="checkbox"
                     checked={checklist.skCabor}
                     onChange={(e) => setChecklist({ ...checklist, skCabor: e.target.checked })}
-                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                    className="w-4 h-4 rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
                   />
-                  <span>Surat Keputusan (SK) Pengurus Cabor masa bakti aktif</span>
+                  <span className="font-medium text-slate-700">Surat Keputusan (SK) Pengurus Cabor masa bakti aktif</span>
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer">
+                <label className="flex items-center gap-2.5 p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 cursor-pointer hover:border-sikoni-teal transition-all shadow-xs">
                   <input
                     type="checkbox"
                     checked={checklist.rekomendasi}
                     onChange={(e) => setChecklist({ ...checklist, rekomendasi: e.target.checked })}
-                    className="rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
+                    className="w-4 h-4 rounded border-slate-300 text-sikoni-teal focus:ring-sikoni-teal"
                   />
-                  <span>Rekomendasi teknis dari Bidang Pembinaan Prestasi KONI</span>
+                  <span className="font-medium text-slate-700">Rekomendasi teknis dari Bidang Pembinaan Prestasi KONI</span>
                 </label>
               </div>
             </div>

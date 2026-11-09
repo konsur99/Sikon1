@@ -214,34 +214,46 @@ export default function LpjPage() {
 
       {/* Create LPJ Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-center">
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Buat Dokumen LPJ Baru</h3>
-              <button onClick={() => setShowCreateModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs">
+                  <FileCheck2 size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">Buat Dokumen LPJ Baru</h3>
+                  <p className="text-[11px] text-sikoni-muted">Penyusunan berkas pertanggungjawaban kegiatan cabang olahraga</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowCreateModal(false)}
+                className="text-slate-400 hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleCreateLpj} className="space-y-3 text-xs">
+            <form onSubmit={handleCreateLpj} className="space-y-3.5 text-xs">
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Pilih Kegiatan yang Telah Selesai *</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Nama Kegiatan yang Telah Selesai *</label>
                 <input
                   type="text"
                   required
                   placeholder="Contoh: Kejuaraan Renang Kota 2026"
                   value={newLpj.activity}
                   onChange={(e) => setNewLpj({ ...newLpj, activity: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Cabang Olahraga</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Cabang Olahraga Pemilik Kegiatan *</label>
                 <select
                   value={newLpj.cabor}
                   onChange={(e) => setNewLpj({ ...newLpj, cabor: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 >
                   <option>PASI</option>
                   <option>PBSI</option>
@@ -252,27 +264,39 @@ export default function LpjPage() {
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Total Realisasi Pertanggungjawaban (Rp)</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Total Realisasi Pertanggungjawaban (Rp) *</label>
                 <input
                   type="text"
-                  placeholder="Rp 25.000.000"
+                  placeholder="Contoh: Rp 25.000.000"
                   value={newLpj.amount}
                   onChange={(e) => setNewLpj({ ...newLpj, amount: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-sikoni-line">
+              {/* Themed Live Preview Sub-Box */}
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/60 via-white to-slate-50 border border-teal-200/70 shadow-xs flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-bold text-sikoni-teal uppercase tracking-wider block">Ringkasan Draf LPJ</span>
+                  <span className="text-[11px] text-slate-600 font-bold">{newLpj.cabor} — {newLpj.activity || 'Kegiatan'}</span>
+                </div>
+                <div className="text-right">
+                  <b className="text-base font-black text-sikoni-teal">{newLpj.amount || 'Rp 0'}</b>
+                  <span className="text-[9.5px] font-bold text-slate-500 block">Status: Masuk Antrean Telaah</span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowCreateModal(false)}
-                  className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 shadow-sm"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
                 >
                   Simpan Draf LPJ
                 </button>

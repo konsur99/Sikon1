@@ -152,21 +152,28 @@ export default function TaxPage() {
 
       {/* Record Tax Modal with Automatic Calculation */}
       {showModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl text-xs">
-            <div className="flex justify-between items-center">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-teal-50 text-sikoni-teal grid place-items-center">
-                  <Calculator size={18} />
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl text-xs relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs">
+                  <Calculator size={20} />
                 </div>
-                <h3 className="text-sm font-extrabold text-sikoni-navy">Kalkulator & Pencatatan Pajak Transaksi</h3>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">Kalkulator & Pencatatan Pajak Transaksi</h3>
+                  <p className="text-[11px] text-sikoni-muted">Perhitungan otomatis PPh 21, PPh 22, PPh 23, atau PPN</p>
+                </div>
               </div>
-              <button onClick={() => setShowModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
+              <button
+                onClick={() => setShowModal(false)}
+                className="text-slate-400 hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleSaveTax} className="space-y-3">
+            <form onSubmit={handleSaveTax} className="space-y-3.5">
               <div>
                 <label className="font-bold text-sikoni-navy block mb-1">Nomor Pengeluaran / SPJ Sumber *</label>
                 <input
@@ -175,16 +182,16 @@ export default function TaxPage() {
                   placeholder="Contoh: EXP-1130"
                   value={refNumber}
                   onChange={(e) => setRefNumber(e.target.value)}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Jenis Objek Pajak</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Jenis Objek Pajak *</label>
                 <select
                   value={taxType}
                   onChange={(e) => setTaxType(e.target.value)}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 >
                   <option value="PPH21">PPh 21 — Honorium Wasit / Pelatih / Atlet (Tarif Efektif 5%)</option>
                   <option value="PPH22">PPh 22 — Belanja Pengadaan Barang / Perlengkapan (Tarif 1.5%)</option>
@@ -200,33 +207,33 @@ export default function TaxPage() {
                   required
                   value={dppValue}
                   onChange={(e) => setDppValue(parseFloat(e.target.value) || 0)}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 />
               </div>
 
               {/* Live Calculation Preview Banner */}
-              <div className="bg-slate-50 border border-sikoni-line p-3.5 rounded-xl space-y-1.5">
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/60 via-white to-slate-50 border border-teal-200/70 shadow-xs space-y-1.5">
                 <div className="flex justify-between items-center text-sikoni-muted text-[11px]">
-                  <span>Tarif Pajak Terpilih:</span>
-                  <b className="text-sikoni-navy">{(getTaxRate(taxType) * 100).toFixed(1)}%</b>
+                  <span className="font-medium">Tarif Pajak Berlaku:</span>
+                  <b className="text-sikoni-navy font-bold">{(getTaxRate(taxType) * 100).toFixed(1)}%</b>
                 </div>
-                <div className="flex justify-between items-center text-xs">
+                <div className="flex justify-between items-center text-xs pt-1 border-t border-teal-100">
                   <span className="font-bold text-sikoni-navy">Nilai Potongan Pajak Otomatis:</span>
                   <b className="text-base font-black text-sikoni-teal">{MoneyMath.formatRupiah(calculatedTaxAmount)}</b>
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-sikoni-line">
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 shadow-sm"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
                 >
                   Simpan Transaksi Pajak
                 </button>

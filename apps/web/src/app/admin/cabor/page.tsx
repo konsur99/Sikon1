@@ -177,16 +177,28 @@ export default function AdminCaborPage() {
 
       {/* Add Cabor Modal */}
       {showAddModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-center">
-              <h3 className="text-sm font-extrabold text-sikoni-navy">Tambah Master Cabang Olahraga</h3>
-              <button onClick={() => setShowAddModal(false)} className="text-sikoni-muted hover:text-sikoni-navy">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start pb-3 border-b border-slate-100">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center shadow-xs">
+                  <Shield size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">Tambah Master Cabang Olahraga</h3>
+                  <p className="text-[11px] text-sikoni-muted">Registrasi cabang olahraga binaan baru ke dalam pangkalan data KONI Surakarta</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowAddModal(false)}
+                className="text-slate-400 hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
+              >
                 <X size={18} />
               </button>
             </div>
 
-            <form onSubmit={handleAddCabor} className="space-y-3 text-xs">
+            <form onSubmit={handleAddCabor} className="space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-sikoni-navy block mb-1">Kode Cabor *</label>
@@ -196,15 +208,15 @@ export default function AdminCaborPage() {
                     placeholder="Contoh: PERSILAT"
                     value={newCabor.code}
                     onChange={(e) => setNewCabor({ ...newCabor, code: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5"
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-sikoni-navy block mb-1">Kategori Olahraga</label>
+                  <label className="font-bold text-sikoni-navy block mb-1">Kategori Olahraga *</label>
                   <select
                     value={newCabor.category}
                     onChange={(e) => setNewCabor({ ...newCabor, category: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                   >
                     <option>Permainan</option>
                     <option>Terukur</option>
@@ -222,7 +234,7 @@ export default function AdminCaborPage() {
                   placeholder="Contoh: Ikatan Pencak Silat Indonesia"
                   value={newCabor.name}
                   onChange={(e) => setNewCabor({ ...newCabor, name: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                 />
               </div>
 
@@ -230,47 +242,60 @@ export default function AdminCaborPage() {
                 <label className="font-bold text-sikoni-navy block mb-1">Nama Ketua Umum Pengkot</label>
                 <input
                   type="text"
-                  placeholder="Nama lengkap ketua"
+                  placeholder="Nama lengkap ketua pengurus kota"
                   value={newCabor.leader}
                   onChange={(e) => setNewCabor({ ...newCabor, leader: e.target.value })}
-                  className="w-full border border-sikoni-line rounded-lg p-2.5"
+                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="font-bold text-sikoni-navy block mb-1">Email Resmi</label>
+                  <label className="font-bold text-sikoni-navy block mb-1">Email Resmi Sekretariat</label>
                   <input
                     type="email"
                     placeholder="cabor@koni-surakarta.id"
                     value={newCabor.email}
                     onChange={(e) => setNewCabor({ ...newCabor, email: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5"
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                   />
                 </div>
                 <div>
-                  <label className="font-bold text-sikoni-navy block mb-1">Nomor Kontak</label>
+                  <label className="font-bold text-sikoni-navy block mb-1">Nomor Kontak WhatsApp</label>
                   <input
                     type="text"
                     placeholder="0812..."
                     value={newCabor.phone}
                     onChange={(e) => setNewCabor({ ...newCabor, phone: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5"
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all"
                   />
                 </div>
               </div>
 
-              <div className="flex justify-end gap-2 pt-3 border-t border-sikoni-line">
+              {/* Themed Live Preview Sub-Box */}
+              <div className="p-3.5 rounded-xl bg-gradient-to-r from-teal-50/60 via-white to-slate-50 border border-teal-200/70 shadow-xs flex items-center justify-between">
+                <div>
+                  <span className="text-[10px] font-bold text-sikoni-teal uppercase tracking-wider block">Identitas Cabor Baru</span>
+                  <span className="text-[11px] text-slate-600 font-bold">{newCabor.code || 'KODE'} — {newCabor.name || 'Nama Cabor'}</span>
+                </div>
+                <div className="text-right">
+                  <span className="text-[10px] bg-white text-sikoni-navy font-bold px-2.5 py-1 rounded-full border border-slate-200 shadow-xs">
+                    {newCabor.category}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2.5 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
+                  className="px-4 py-2 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 transition-all"
                 >
                   Batal
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 shadow-sm"
+                  className="px-5 py-2 rounded-xl bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white text-xs font-bold shadow-md hover:shadow-lg transition-all"
                 >
                   Simpan Cabor
                 </button>
