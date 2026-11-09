@@ -3,10 +3,18 @@
 import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
-import { Award, Users, CheckCircle2, Clock, Plus, X } from 'lucide-react';
+import { Award, Users, CheckCircle2, Clock, Plus, X, Download, Check, CreditCard } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function IncentivePage() {
   const [showModal, setShowModal] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
   const [incentiveData, setIncentiveData] = useState([
     {
       name: 'Andi Pratama',
@@ -32,6 +40,14 @@ export default function IncentivePage() {
       amount: 'Rp 7.500.000',
       status: 'Verifikasi',
     },
+    {
+      name: 'Dewi Lestari',
+      cabor: 'Panahan (PERPANI)',
+      category: 'Atlet Berprestasi',
+      period: 'Okt 2026',
+      amount: 'Rp 5.000.000',
+      status: 'Menunggu',
+    },
   ]);
 
   const [newRecipient, setNewRecipient] = useState({
@@ -47,14 +63,15 @@ export default function IncentivePage() {
     if (!newRecipient.name) return;
 
     setIncentiveData([
-      ...incentiveData,
       {
         ...newRecipient,
         status: 'Menunggu',
       },
+      ...incentiveData,
     ]);
 
     setShowModal(false);
+    showToast(`Penerima insentif baru atas nama ${newRecipient.name} berhasil ditambahkan.`);
     setNewRecipient({
       name: '',
       cabor: 'Atletik (PASI)',
@@ -62,6 +79,13 @@ export default function IncentivePage() {
       period: 'Nov 2026',
       amount: 'Rp 5.000.000',
     });
+  };
+
+  const handleTogglePayment = (name: string) => {
+    setIncentiveData(
+      incentiveData.map((it) => (it.name === name ? { ...it, status: it.status === 'Dibayar' ? 'Verifikasi' : 'Dibayar' } : it)),
+    );
+    showToast(`Status transfer insentif ${name} berhasil diubah.`);
   };
 
   return (
@@ -75,12 +99,27 @@ export default function IncentivePage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
-        >
-          <Plus size={15} /> Tambah Insentif
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => {
+              exportToCsv(
+                'Rekap_Insentif_Atlet_Pelatih_2026',
+                ['Nama Penerima', 'Cabang Olahraga', 'Kategori', 'Periode', 'Nilai Insentif', 'Status Transfer'],
+                incentiveData.map((it) => [it.name, it.cabor, it.category, it.period, it.amount, it.status]),
+              );
+              showToast('Rekapitulasi penerima insentif (CSV / Excel) berhasil diunduh.');
+            }}
+            className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
+          >
+            <Download size={14} /> Export CSV
+          </button>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+          >
+            <Plus size={15} /> Tambah Insentif
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -100,6 +139,22 @@ export default function IncentivePage() {
           { header: 'Periode', accessor: 'period' },
           { header: 'Nilai Insentif', accessor: 'amount' },
           { header: 'Status Transfer', accessor: 'status', isStatus: true },
+          {
+            header: 'Aksi Bayar',
+            accessor: (row) => (
+              <button
+                onClick={() => handleTogglePayment(row.name)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm transition-colors ${
+                  row.status === 'Dibayar'
+                    ? 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    : 'bg-sikoni-teal text-white hover:bg-teal-700'
+                }`}
+              >
+                <CreditCard size={12} />
+                {row.status === 'Dibayar' ? 'Batal Bayar' : 'Proses Transfer'}
+              </button>
+            ),
+          },
         ]}
         data={incentiveData}
       />
@@ -140,6 +195,7 @@ export default function IncentivePage() {
                     <option>Bulutangkis (PBSI)</option>
                     <option>Sepak Bola (PSSI)</option>
                     <option>Renang (PRSI)</option>
+                    <option>Panahan (PERPANI)</option>
                   </select>
                 </div>
                 <div>
@@ -160,21 +216,27 @@ export default function IncentivePage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-sikoni-navy block mb-1">Periode Bulan</label>
-                  <input
-                    type="text"
+                  <select
                     value={newRecipient.period}
                     onChange={(e) => setNewRecipient({ ...newRecipient, period: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5"
-                  />
+                    className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  >
+                    <option>Nov 2026</option>
+                    <option>Des 2026</option>
+                    <option>Okt 2026</option>
+                  </select>
                 </div>
                 <div>
-                  <label className="font-bold text-sikoni-navy block mb-1">Nilai Insentif (Rp)</label>
-                  <input
-                    type="text"
+                  <label className="font-bold text-sikoni-navy block mb-1">Nominal Insentif</label>
+                  <select
                     value={newRecipient.amount}
                     onChange={(e) => setNewRecipient({ ...newRecipient, amount: e.target.value })}
-                    className="w-full border border-sikoni-line rounded-lg p-2.5"
-                  />
+                    className="w-full border border-sikoni-line rounded-lg p-2.5 bg-white"
+                  >
+                    <option value="Rp 5.000.000">Rp 5.000.000 (Atlet)</option>
+                    <option value="Rp 7.500.000">Rp 7.500.000 (Pelatih)</option>
+                    <option value="Rp 3.500.000">Rp 3.500.000 (Ofisial)</option>
+                  </select>
                 </div>
               </div>
 
@@ -195,6 +257,14 @@ export default function IncentivePage() {
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Toast Alert */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+          <Check size={16} className="text-sikoni-green" />
+          {toastMessage}
         </div>
       )}
     </div>

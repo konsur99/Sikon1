@@ -116,10 +116,38 @@ export default function AdminCaborPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Cabor Terdaftar" value="42" foot="Master database" icon={<Shield size={18} />} />
-        <KpiCard label="Cabor Aktif" value="39" foot="92,8% aktif membina" icon={<CheckCircle2 size={18} />} />
-        <KpiCard label="Akun Operator Cabor" value="76" foot="Terdaftar di sistem" icon={<Users size={18} />} />
-        <KpiCard label="Perlu Pembaruan SK" value="03" foot="Masa bakti pengurus" icon={<Clock size={18} />} />
+        <KpiCard
+          label="Cabor Terdaftar"
+          value="64"
+          foot="Master database KONI"
+          accentColor="navy"
+          badge="Resmi"
+          icon={<Shield size={19} />}
+        />
+        <KpiCard
+          label="Cabor Aktif"
+          value="58"
+          foot="90,6% aktif membina atlet"
+          accentColor="teal"
+          badge="Aktif"
+          icon={<CheckCircle2 size={19} />}
+        />
+        <KpiCard
+          label="Akun Operator Cabor"
+          value="128"
+          foot="Terdaftar di sistem SIKONI"
+          accentColor="green"
+          badge="Verified"
+          icon={<Users size={19} />}
+        />
+        <KpiCard
+          label="Perlu Pembaruan SK"
+          value="04"
+          foot="Masa bakti pengurus selesai"
+          accentColor="amber"
+          badge="Review SK"
+          icon={<Clock size={19} />}
+        />
       </div>
 
       <DataTable

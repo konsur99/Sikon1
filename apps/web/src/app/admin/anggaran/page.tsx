@@ -157,15 +157,46 @@ export default function BudgetControlPage() {
         </div>
       </div>
 
-      <div className="p-3 bg-amber-50 text-sikoni-amber rounded-xl text-xs border border-amber-200">
-        Kontrol anggaran wajib memakai nilai alokasi yang sah. Usulan RAB berstatus draft atau menunggu persetujuan tidak boleh dihitung sebagai realisasi kas.
+      <div className="p-3.5 bg-gradient-to-r from-amber-50 to-orange-50 text-amber-900 rounded-2xl text-xs border border-amber-200/80 shadow-sm flex items-center gap-3">
+        <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse flex-shrink-0" />
+        <span>
+          <b>Pedoman Alokasi Anggaran:</b> Kontrol anggaran wajib memakai nilai alokasi yang sah. Usulan RAB berstatus draft atau menunggu persetujuan tidak boleh dihitung sebagai realisasi kas.
+        </span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Total Pagu" value="Rp 2,45 M" foot="Disahkan APBD Surakarta" icon={<FileSpreadsheet size={18} />} />
-        <KpiCard label="Alokasi Program" value="Rp 1,82 M" foot="74,3% dari total pagu" icon={<Layers size={18} />} />
-        <KpiCard label="Komitmen Aktif" value="Rp 310 jt" foot="RAB disetujui, kegiatan berjalan" icon={<Clock size={18} />} />
-        <KpiCard label="Belum Dialokasikan" value="Rp 630 jt" foot="Bukan merupakan saldo kas" icon={<Plus size={18} />} />
+        <KpiCard
+          label="Total Pagu"
+          value="Rp 2,45 M"
+          foot="Disahkan APBD Surakarta"
+          accentColor="navy"
+          badge="DPA Murni"
+          icon={<FileSpreadsheet size={19} />}
+        />
+        <KpiCard
+          label="Alokasi Program"
+          value="Rp 1,82 M"
+          foot="74,3% dari total pagu"
+          accentColor="teal"
+          badge="42 Cabor"
+          icon={<Layers size={19} />}
+        />
+        <KpiCard
+          label="Komitmen Aktif"
+          value="Rp 310 jt"
+          foot="RAB disetujui, berjalan"
+          accentColor="amber"
+          badge="Berjalan"
+          icon={<Clock size={19} />}
+        />
+        <KpiCard
+          label="Belum Dialokasikan"
+          value="Rp 630 jt"
+          foot="Pagu cadangan tersedia"
+          accentColor="green"
+          badge="Tersedia"
+          icon={<Plus size={19} />}
+        />
       </div>
 
       <DataTable

@@ -15,6 +15,10 @@ import {
   Check,
   Send,
   FileCheck2,
+  TrendingUp,
+  ShieldCheck,
+  Activity,
+  Layers,
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
@@ -36,7 +40,7 @@ export default function AdminDashboardPage() {
     },
     {
       number: 'RAB-025/VI/26',
-      activity: 'Pemusatan Latihan',
+      activity: 'Pemusatan Latihan Porprov',
       cabor: 'PBSI',
       amount: 'Rp 32.000.000',
       date: '08 Nov 2026',
@@ -44,29 +48,42 @@ export default function AdminDashboardPage() {
     },
     {
       number: 'RAB-024/VI/26',
-      activity: 'Pengadaan Perlengkapan',
+      activity: 'Pengadaan Matras & Perlengkapan',
       cabor: 'PSSI',
       amount: 'Rp 18.750.000',
       date: '07 Nov 2026',
+      status: 'Disetujui',
+    },
+    {
+      number: 'RAB-023/VI/26',
+      activity: 'Sewa Lapangan & Wasit',
+      cabor: 'PBVSI',
+      amount: 'Rp 14.200.000',
+      date: '06 Nov 2026',
       status: 'Disetujui',
     },
   ];
 
   return (
     <div className="space-y-6">
-      {/* Breadcrumb & Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="text-[11px] text-sikoni-muted mb-1">
-            SIKONI <span className="text-slate-300">/</span> Dashboard
+      {/* Executive Welcome Hero Box with Theme Accent */}
+      <div className="card-hero-navy flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div className="space-y-1.5 z-10">
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-extrabold uppercase tracking-widest bg-white/15 px-2.5 py-0.5 rounded-full text-sikoni-gold border border-white/10">
+              KONI SURAKARTA • TAHUN ANGGARAN 2026
+            </span>
+            <span className="text-[10px] text-slate-300">• Dashboard Eksekutif</span>
           </div>
-          <h1 className="text-2xl font-black text-sikoni-navy tracking-tight">Dashboard</h1>
-          <p className="text-xs text-sikoni-muted mt-0.5">
-            Ringkasan kinerja, anggaran, dan aktivitas KONI Surakarta.
+          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+            Monitoring & Akuntabilitas Anggaran Olahraga
+          </h1>
+          <p className="text-xs text-slate-200/90 max-w-2xl leading-relaxed">
+            Sistem Informasi Pengelolaan Anggaran Terintegrasi untuk 64 Pengurus Cabang Olahraga se-Kota Surakarta secara transparan, akuntabel, dan bebas gratifikasi.
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 z-10 flex-wrap">
           <button
             onClick={() => {
               exportToCsv(
@@ -76,69 +93,82 @@ export default function AdminDashboardPage() {
               );
               showToast('Berkas ringkasan eksekutif (CSV / Excel) berhasil diunduh.');
             }}
-            className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 backdrop-blur-sm shadow-sm"
           >
             <Download size={14} /> Export CSV
           </button>
           <Link
             href="/admin/rab"
-            className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+            className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-lg"
           >
-            <Plus size={15} /> Buat RAB
+            <Plus size={15} /> Buat Usulan RAB
           </Link>
         </div>
       </div>
 
-      {/* 4 KPIs */}
+      {/* 4 KPIs with distinct accent borders & badges */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
           label="Total Pagu Anggaran"
           value="Rp 2,45 M"
-          foot="Tahun anggaran 2026"
-          icon={<FileSpreadsheet size={18} />}
+          foot="Alokasi APBD 2026"
+          accentColor="navy"
+          badge="KONI Surakarta"
+          icon={<FileSpreadsheet size={19} />}
         />
         <KpiCard
           label="RAB Disetujui"
           value="Rp 1,82 M"
-          foot="74,3% dari pagu"
-          icon={<CheckCircle2 size={18} />}
+          foot="74,3% dari total pagu"
+          accentColor="teal"
+          badge="42 Kegiatan"
+          icon={<CheckCircle2 size={19} />}
         />
         <KpiCard
           label="Realisasi Terverifikasi"
           value="Rp 1,21 M"
           foot="66,5% dari RAB disetujui"
-          icon={<ArrowUpRight size={18} />}
+          accentColor="green"
+          badge="SP2D Cair"
+          icon={<ArrowUpRight size={19} />}
         />
         <KpiCard
           label="Menunggu Persetujuan"
-          value="06 Pengajuan"
-          foot="Perlu tindak lanjut verifikasi"
-          icon={<Clock size={18} />}
+          value="06 Berkas"
+          foot="Memerlukan telaah verifikator"
+          accentColor="amber"
+          badge="Perlu Tindakan"
+          icon={<Clock size={19} />}
         />
       </div>
 
-      {/* Main Content Grid: Chart & Summary Lines */}
+      {/* Main Content Grid: Trend Chart & Financial Breakdown */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Monthly Trend Chart */}
+        {/* Monthly Trend Chart Box */}
         <div className="card-sikoni lg:col-span-2 flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-teal" />
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
               <div>
-                <h3 className="text-sm font-extrabold text-sikoni-navy">Ringkasan Anggaran & Realisasi</h3>
-                <p className="text-[11px] text-sikoni-muted">Tren bulanan tahun anggaran 2026</p>
+                <h3 className="text-sm font-extrabold text-sikoni-navy flex items-center gap-2">
+                  <TrendingUp size={16} className="text-sikoni-teal" /> Tren Anggaran & Realisasi Bulanan
+                </h3>
+                <p className="text-[11px] text-sikoni-muted mt-0.5">
+                  Pembandingan pagu alokasi bulanan dan realisasi kuitansi kas terverifikasi
+                </p>
               </div>
-              <div className="flex items-center gap-3 text-[11px] font-semibold">
-                <span className="flex items-center gap-1 text-sikoni-navy">
-                  <span className="w-2.5 h-2.5 bg-sikoni-navy rounded-sm" /> Anggaran
+              <div className="flex items-center gap-3 text-[11px] font-bold bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200/80">
+                <span className="flex items-center gap-1.5 text-sikoni-navy">
+                  <span className="w-2.5 h-2.5 bg-sikoni-navy rounded-sm" /> Usulan RAB
                 </span>
-                <span className="flex items-center gap-1 text-sikoni-gold">
-                  <span className="w-2.5 h-2.5 bg-sikoni-gold rounded-sm" /> Realisasi
+                <span className="flex items-center gap-1.5 text-sikoni-gold">
+                  <span className="w-2.5 h-2.5 bg-sikoni-gold rounded-sm" /> Realisasi Cair
                 </span>
               </div>
             </div>
 
             {/* Visual Bar representation */}
-            <div className="h-48 flex items-end justify-between gap-2 pt-6 pb-2 border-b border-sikoni-line">
+            <div className="h-52 flex items-end justify-between gap-2 pt-6 pb-2 border-b border-slate-100">
               {[
                 { m: 'Jan', a: 50, r: 25 },
                 { m: 'Feb', a: 62, r: 35 },
@@ -153,59 +183,85 @@ export default function AdminDashboardPage() {
                 { m: 'Nov', a: 72, r: 48 },
                 { m: 'Des', a: 90, r: 60 },
               ].map((bar, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                  <div className="w-full flex items-end justify-center gap-1 h-[80%]">
+                <div key={i} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                  <div className="w-full flex items-end justify-center gap-1 h-[82%]">
                     <div
-                      className="w-2 sm:w-3 bg-sikoni-navy rounded-t-sm"
+                      className="w-2 sm:w-3 bg-sikoni-navy rounded-t transition-all group-hover:brightness-125"
                       style={{ height: `${bar.a}%` }}
+                      title={`Pagu ${bar.m}: ${bar.a}%`}
                     />
                     <div
-                      className="w-2 sm:w-3 bg-sikoni-gold rounded-t-sm"
+                      className="w-2 sm:w-3 bg-sikoni-gold rounded-t transition-all group-hover:brightness-125"
                       style={{ height: `${bar.r}%` }}
+                      title={`Realisasi ${bar.m}: ${bar.r}%`}
                     />
                   </div>
-                  <span className="text-[9px] text-sikoni-muted">{bar.m}</span>
+                  <span className="text-[9.5px] font-bold text-slate-500 group-hover:text-sikoni-navy">{bar.m}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="text-[10px] text-sikoni-muted pt-3">
-            Grafik pembandingan pagu alokasi bulanan dan realisasi nota terverifikasi.
+          <div className="flex items-center justify-between text-[11px] text-sikoni-muted pt-3">
+            <span>Rata-rata serapan berjalan: <b className="text-sikoni-navy font-extrabold">68,4%</b></span>
+            <span className="text-sikoni-teal font-bold">Target Q4: 92%</span>
           </div>
         </div>
 
-        {/* Budget Breakdown Lines */}
+        {/* Budget Breakdown Box */}
         <div className="card-sikoni flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-gold" />
           <div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Posisi Anggaran</h3>
-            <p className="text-[11px] text-sikoni-muted">Berdasarkan data berjalan</p>
+            <div className="pb-3 border-b border-slate-100">
+              <h3 className="text-sm font-extrabold text-sikoni-navy flex items-center gap-2">
+                <Layers size={16} className="text-sikoni-gold" /> Posisi Alokasi Anggaran
+              </h3>
+              <p className="text-[11px] text-sikoni-muted mt-0.5">Ringkasan serapan tahun anggaran 2026</p>
+            </div>
 
-            <div className="space-y-3 mt-4 text-xs">
-              <div className="flex justify-between py-1.5 border-b border-sikoni-line">
-                <span className="text-sikoni-muted">Pagu tersedia</span>
+            {/* Visual Progress Bar */}
+            <div className="mt-4 mb-4">
+              <div className="flex justify-between text-[10px] font-bold text-sikoni-navy mb-1.5">
+                <span>Rasio Serapan: 74,3%</span>
+                <span className="text-sikoni-green">Sisa Rp 630 Jt</span>
+              </div>
+              <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+                <div style={{ width: '49.4%' }} className="bg-sikoni-teal" title="Realisasi Cair" />
+                <div style={{ width: '24.9%' }} className="bg-sikoni-gold" title="Komitmen Berjalan" />
+                <div style={{ width: '25.7%' }} className="bg-slate-200" title="Sisa Belum Teralokasi" />
+              </div>
+              <div className="flex items-center gap-3 text-[9.5px] text-slate-500 mt-2 font-medium">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sikoni-teal" /> Cair (49%)</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sikoni-gold" /> Komitmen (25%)</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-300" /> Sisa (26%)</span>
+              </div>
+            </div>
+
+            <div className="space-y-2.5 text-xs">
+              <div className="flex justify-between py-1.5 border-b border-slate-100">
+                <span className="text-slate-600 font-medium">Pagu DPA Murni</span>
                 <b className="text-sikoni-navy">Rp 2.450.000.000</b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-sikoni-line">
-                <span className="text-sikoni-muted">RAB disetujui</span>
+              <div className="flex justify-between py-1.5 border-b border-slate-100">
+                <span className="text-slate-600 font-medium">RAB Disetujui</span>
                 <b className="text-sikoni-navy">Rp 1.820.000.000</b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-sikoni-line">
-                <span className="text-sikoni-muted">Realisasi terverifikasi</span>
+              <div className="flex justify-between py-1.5 border-b border-slate-100">
+                <span className="text-slate-600 font-medium">Realisasi Nota Valid</span>
                 <b className="text-sikoni-navy">Rp 1.210.000.000</b>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-sikoni-line">
-                <span className="text-sikoni-muted">Komitmen belum terealisasi</span>
+              <div className="flex justify-between py-1.5 border-b border-slate-100">
+                <span className="text-slate-600 font-medium">Komitmen Berjalan</span>
                 <b className="text-sikoni-navy">Rp 310.000.000</b>
               </div>
-              <div className="flex justify-between py-1.5">
-                <span className="text-sikoni-muted">Sisa pagu belum dialokasi*</span>
-                <b className="text-sikoni-green">Rp 630.000.000</b>
+              <div className="flex justify-between py-1.5 bg-emerald-50/70 p-2 rounded-lg border border-emerald-100">
+                <span className="text-emerald-800 font-bold">Sisa Pagu Tersedia</span>
+                <b className="text-sikoni-green font-black">Rp 630.000.000</b>
               </div>
             </div>
           </div>
 
-          <div className="text-[10px] text-sikoni-muted italic pt-3 border-t border-sikoni-line">
-            *Definisi sisa pagu dan komitmen mengikuti kebijakan keuangan yang disahkan.
+          <div className="text-[10px] text-slate-400 italic pt-3 border-t border-slate-100">
+            *Alokasi dana diawasi oleh Inspektorat Kota Surakarta dan BPKAD.
           </div>
         </div>
       </div>
@@ -214,86 +270,108 @@ export default function AdminDashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2">
           <DataTable
-            title="Pengajuan Terbaru"
-            subtitle="Status pengajuan dari seluruh cabang olahraga"
+            title="Pengajuan Berkas Terbaru"
+            subtitle="Status verifikasi proposal RAB dan pertanggungjawaban cabor"
             actionButton={
-              <Link href="/admin/pengajuan" className="text-xs font-bold text-sikoni-teal hover:underline">
-                Lihat semua →
+              <Link
+                href="/admin/pengajuan"
+                className="text-xs font-bold text-sikoni-teal hover:text-teal-800 bg-emerald-50 px-3 py-1.5 rounded-lg border border-emerald-100 transition-colors"
+              >
+                Lihat semua pengajuan →
               </Link>
             }
             columns={[
-              { header: 'Nomor', accessor: 'number' },
-              { header: 'Kegiatan', accessor: 'activity' },
+              { header: 'Nomor Berkas', accessor: 'number' },
+              { header: 'Nama Kegiatan', accessor: 'activity' },
               { header: 'Cabor', accessor: 'cabor' },
-              { header: 'Nilai', accessor: 'amount' },
+              { header: 'Nilai Usulan', accessor: 'amount' },
               { header: 'Tanggal', accessor: 'date' },
-              { header: 'Status', accessor: 'status', isStatus: true },
+              { header: 'Status Verifikasi', accessor: 'status', isStatus: true },
             ]}
             data={recentSubmissions}
           />
         </div>
 
-        {/* Activity Stream */}
+        {/* Activity Stream Box */}
         <div className="card-sikoni space-y-4">
-          <div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Aktivitas Terbaru</h3>
-            <p className="text-[11px] text-sikoni-muted">Jejak aktivitas transaksi pengguna</p>
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-navy" />
+          <div className="pb-3 border-b border-slate-100">
+            <h3 className="text-sm font-extrabold text-sikoni-navy flex items-center gap-2">
+              <Activity size={16} className="text-sikoni-navy" /> Aktivitas Sistem Terbaru
+            </h3>
+            <p className="text-[11px] text-sikoni-muted mt-0.5">Audit trail aksi pengguna & verifikator</p>
           </div>
 
           <div className="space-y-3 text-xs">
             <Link
               href="/admin/pengajuan"
-              className="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-sikoni-line hover:bg-slate-100 transition-colors"
+              className="flex items-start gap-3 p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white hover:shadow-md transition-all group"
             >
-              <div className="w-7 h-7 rounded-lg bg-sikoni-green text-white grid place-items-center flex-shrink-0">
-                <Check size={14} />
+              <div className="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-700 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <Check size={16} />
               </div>
               <div>
-                <b className="text-sikoni-navy block">RAB-024 disetujui</b>
-                <p className="text-[11px] text-sikoni-muted">Pengadaan perlengkapan • PSSI</p>
-                <small className="text-[10px] text-sikoni-muted">Hari ini, 10:34</small>
+                <b className="text-sikoni-navy block group-hover:text-sikoni-teal">RAB-024 Disetujui</b>
+                <p className="text-[11px] text-slate-600 mt-0.5">Pengadaan perlengkapan tanding • PSSI Surakarta</p>
+                <small className="text-[10px] text-sikoni-muted font-medium">Hari ini, 10:34 WIB</small>
               </div>
             </Link>
 
             <Link
               href="/admin/persetujuan"
-              className="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-sikoni-line hover:bg-slate-100 transition-colors"
+              className="flex items-start gap-3 p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white hover:shadow-md transition-all group"
             >
-              <div className="w-7 h-7 rounded-lg bg-sikoni-teal text-white grid place-items-center flex-shrink-0">
-                <Send size={14} />
+              <div className="w-8 h-8 rounded-xl bg-teal-100 text-teal-700 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <Send size={16} />
               </div>
               <div>
-                <b className="text-sikoni-navy block">Pengajuan RAB baru</b>
-                <p className="text-[11px] text-sikoni-muted">Kejuaraan Atletik Kota • PASI</p>
-                <small className="text-[10px] text-sikoni-muted">Hari ini, 09:12</small>
+                <b className="text-sikoni-navy block group-hover:text-sikoni-teal">Usulan RAB Masuk</b>
+                <p className="text-[11px] text-slate-600 mt-0.5">Kejuaraan Atletik Kota • PASI Surakarta</p>
+                <small className="text-[10px] text-sikoni-muted font-medium">Hari ini, 09:12 WIB</small>
               </div>
             </Link>
 
             <Link
               href="/admin/lpj"
-              className="flex items-start gap-3 p-2.5 rounded-xl bg-slate-50 border border-sikoni-line hover:bg-slate-100 transition-colors"
+              className="flex items-start gap-3 p-3 rounded-xl bg-slate-50/80 border border-slate-200/70 hover:bg-white hover:shadow-md transition-all group"
             >
-              <div className="w-7 h-7 rounded-lg bg-sikoni-gold text-white grid place-items-center flex-shrink-0">
-                <FileCheck2 size={14} />
+              <div className="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform">
+                <FileCheck2 size={16} />
               </div>
               <div>
-                <b className="text-sikoni-navy block">LPJ dikirim untuk verifikasi</b>
-                <p className="text-[11px] text-sikoni-muted">Pemusatan Latihan • PBSI</p>
-                <small className="text-[10px] text-sikoni-muted">Kemarin, 16:40</small>
+                <b className="text-sikoni-navy block group-hover:text-sikoni-teal">LPJ Diajukan Verifikasi</b>
+                <p className="text-[11px] text-slate-600 mt-0.5">Pemusatan Latihan Porprov • PBSI Surakarta</p>
+                <small className="text-[10px] text-sikoni-muted font-medium">Kemarin, 16:40 WIB</small>
               </div>
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Info Strip */}
-      <div className="p-3 bg-[#e8f5f4] text-sikoni-teal rounded-xl text-xs font-medium border border-teal-200">
-        SIKONI v1.0: Seluruh hak akses dibatasi secara ketat berdasarkan role dan isolasi cabor.
+      {/* Enhanced Security & Isolation Banner */}
+      <div className="p-4 bg-gradient-to-r from-[#e8f5f4] via-[#f0f9f8] to-[#edf7f6] text-sikoni-teal rounded-2xl text-xs font-semibold border border-teal-200/80 shadow-sm flex items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-xl bg-sikoni-teal text-white grid place-items-center flex-shrink-0 shadow-sm">
+            <ShieldCheck size={20} />
+          </div>
+          <div>
+            <span className="text-sikoni-navy font-bold block text-sm">Prinsip Tata Kelola Hibah Olahraga SIKONI</span>
+            <span className="text-slate-600 text-[11px]">
+              Hak akses dibatasi secara ketat berdasarkan isolasi database cabor. Seluruh transaksi wajib mencantumkan bukti kuitansi sah & perpajakan PPh/PPN.
+            </span>
+          </div>
+        </div>
+        <Link
+          href="/transparansi"
+          className="bg-white text-sikoni-teal font-extrabold px-3 py-1.5 rounded-xl border border-teal-300 hover:bg-teal-50 flex-shrink-0 shadow-sm transition-all"
+        >
+          Lihat Transparansi Publik →
+        </Link>
       </div>
 
       {/* Toast Alert */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-in fade-in slide-in-from-bottom-3 duration-200 text-xs font-bold">
           <Check size={16} className="text-sikoni-green" />
           {toastMessage}
         </div>

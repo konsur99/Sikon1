@@ -80,10 +80,38 @@ export default function RealizationPage() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Pengeluaran Diajukan" value="Rp 1,36 M" foot="Termasuk menunggu verifikasi" icon={<ArrowUpRight size={18} />} />
-        <KpiCard label="Terverifikasi" value="Rp 1,21 M" foot="Layak dipertanggungjawabkan" icon={<CheckCircle2 size={18} />} />
-        <KpiCard label="Sudah Dibayar" value="Rp 985 jt" foot="Kuitansi transfer tercatat" icon={<Layers size={18} />} />
-        <KpiCard label="Kewajiban Belum Dibayar" value="Rp 225 jt" foot="Menunggu pencairan kas" icon={<Clock size={18} />} />
+        <KpiCard
+          label="Pengeluaran Diajukan"
+          value="Rp 1,36 M"
+          foot="Termasuk menunggu verifikasi"
+          accentColor="amber"
+          badge="Masuk"
+          icon={<ArrowUpRight size={19} />}
+        />
+        <KpiCard
+          label="Terverifikasi Valid"
+          value="Rp 1,21 M"
+          foot="Layak dipertanggungjawabkan"
+          accentColor="teal"
+          badge="Lolos Audit"
+          icon={<CheckCircle2 size={19} />}
+        />
+        <KpiCard
+          label="Sudah Dibayarkan"
+          value="Rp 985 jt"
+          foot="Kuitansi transfer bank tercatat"
+          accentColor="green"
+          badge="SP2D Cair"
+          icon={<Layers size={19} />}
+        />
+        <KpiCard
+          label="Kewajiban Kas"
+          value="Rp 225 jt"
+          foot="Menunggu pencairan kasir"
+          accentColor="navy"
+          badge="Antrean Cair"
+          icon={<Clock size={19} />}
+        />
       </div>
 
       <DataTable

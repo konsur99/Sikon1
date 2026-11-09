@@ -3,10 +3,19 @@
 import React, { useState } from 'react';
 import { KpiCard } from '../../../components/common/KpiCard';
 import { DataTable } from '../../../components/common/DataTable';
-import { FolderArchive, Inbox, Send, Clock, Plus, UploadCloud, X } from 'lucide-react';
+import { FolderArchive, Inbox, Send, Clock, Plus, UploadCloud, X, Download, Eye, FileText, Check } from 'lucide-react';
+import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function AdminDocumentsPage() {
   const [showModal, setShowModal] = useState(false);
+  const [selectedDoc, setSelectedDoc] = useState<any | null>(null);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => setToastMessage(null), 3000);
+  };
+
   const [documentsList, setDocumentsList] = useState([
     {
       number: 'SK-028/KONI/XI/26',
@@ -30,6 +39,14 @@ export default function AdminDocumentsPage() {
       category: 'Laporan Pertanggungjawaban',
       date: '04 Nov 2026',
       owner: 'PASI Surakarta',
+      status: 'Disetujui',
+    },
+    {
+      number: 'SK-024/KONI/X/26',
+      subject: 'Penetapan Standar Biaya Masukan Pembinaan Atlet',
+      category: 'Surat Keputusan (SK)',
+      date: '28 Okt 2026',
+      owner: 'Bidang Keuangan',
       status: 'Disetujui',
     },
   ]);
@@ -58,6 +75,7 @@ export default function AdminDocumentsPage() {
     ]);
 
     setShowModal(false);
+    showToast(`Dokumen ${newDoc.number} berhasil diunggah ke arsip digital.`);
     setNewDoc({ number: '', subject: '', category: 'Surat Masuk', owner: 'PASI Surakarta' });
   };
 
@@ -72,12 +90,27 @@ export default function AdminDocumentsPage() {
           </p>
         </div>
 
-        <button
-          onClick={() => setShowModal(true)}
-          className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
-        >
-          <Plus size={15} /> Upload Dokumen
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button
+            onClick={() => {
+              exportToCsv(
+                'Arsip_Dokumen_KONI_2026',
+                ['Nomor Dokumen', 'Perihal Surat', 'Kategori', 'Tanggal Dokumen', 'Unit Pemilik', 'Status Berkas'],
+                documentsList.map((d) => [d.number, d.subject, d.category, d.date, d.owner, d.status]),
+              );
+              showToast('Daftar arsip dokumen format CSV / Excel berhasil diunduh.');
+            }}
+            className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
+          >
+            <Download size={14} /> Export CSV
+          </button>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-sikoni-teal text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+          >
+            <Plus size={15} /> Upload Dokumen
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -97,6 +130,17 @@ export default function AdminDocumentsPage() {
           { header: 'Tanggal Dokumen', accessor: 'date' },
           { header: 'Unit / Pengirim', accessor: 'owner' },
           { header: 'Status Berkas', accessor: 'status', isStatus: true },
+          {
+            header: 'Aksi',
+            accessor: (row) => (
+              <button
+                onClick={() => setSelectedDoc(row)}
+                className="bg-white border border-sikoni-line text-sikoni-navy px-2.5 py-1 rounded-lg text-xs font-bold hover:bg-slate-50 flex items-center gap-1 shadow-sm"
+              >
+                <Eye size={13} /> Pratinjau
+              </button>
+            ),
+          },
         ]}
         data={documentsList}
       />
@@ -163,10 +207,10 @@ export default function AdminDocumentsPage() {
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Unggah Berkas PDF / Lampiran</label>
-                <div className="border border-dashed border-sikoni-line rounded-xl p-4 text-center bg-slate-50">
-                  <UploadCloud size={24} className="mx-auto text-sikoni-teal mb-1" />
-                  <span className="text-[11px] text-sikoni-muted">Klik untuk memilih file PDF atau seret ke sini</span>
+                <label className="font-bold text-sikoni-navy block mb-1">Unggah File (PDF / Gambar) *</label>
+                <div className="border border-dashed border-sikoni-line rounded-lg p-3 text-center bg-slate-50 text-sikoni-muted">
+                  <UploadCloud size={20} className="mx-auto text-sikoni-teal mb-1" />
+                  <span>Klik untuk memilih berkas dokumen digital</span>
                 </div>
               </div>
 
@@ -182,11 +226,74 @@ export default function AdminDocumentsPage() {
                   type="submit"
                   className="px-5 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 shadow-sm"
                 >
-                  Simpan & Unggah
+                  Simpan Dokumen
                 </button>
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* Document Preview Modal */}
+      {selectedDoc && (
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
+            <div className="flex justify-between items-start">
+              <div className="flex items-center gap-2.5">
+                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center">
+                  <FileText size={20} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-sikoni-navy">{selectedDoc.number}</h3>
+                  <p className="text-xs text-sikoni-muted">{selectedDoc.category} • {selectedDoc.date}</p>
+                </div>
+              </div>
+              <button onClick={() => setSelectedDoc(null)} className="text-sikoni-muted hover:text-sikoni-navy">
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="p-3 bg-slate-50 border border-sikoni-line rounded-xl text-xs space-y-2">
+              <div className="flex justify-between">
+                <span className="text-sikoni-muted">Perihal:</span>
+                <b className="text-sikoni-navy text-right max-w-xs">{selectedDoc.subject}</b>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sikoni-muted">Pengirim / Pemilik:</span>
+                <b>{selectedDoc.owner}</b>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-sikoni-muted">Status:</span>
+                <b>{selectedDoc.status}</b>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center pt-3 border-t border-sikoni-line">
+              <button
+                onClick={() => setSelectedDoc(null)}
+                className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
+              >
+                Tutup
+              </button>
+              <button
+                onClick={() => {
+                  showToast(`Mengunduh berkas fisik ${selectedDoc.number}.pdf...`);
+                  setSelectedDoc(null);
+                }}
+                className="px-4 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+              >
+                <Download size={14} /> Unduh Berkas Digital
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Toast Alert */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+          <Check size={16} className="text-sikoni-green" />
+          {toastMessage}
         </div>
       )}
     </div>

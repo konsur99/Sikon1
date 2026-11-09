@@ -50,22 +50,28 @@ export default function TransparencyPage() {
       {/* 3 KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <KpiCard
-          label="Dana Diterima"
+          label="Dana Hibah APBD Masuk"
           value="Rp 2,45 M"
-          foot="Ringkasan tahun 2026"
-          icon={<Coins size={18} />}
+          foot="Ringkasan penyaluran 2026"
+          accentColor="teal"
+          badge="Kas Daerah"
+          icon={<Coins size={19} />}
         />
         <KpiCard
           label="Anggaran Dialokasikan"
           value="Rp 1,82 M"
           foot="74,3% dari total pagu"
-          icon={<FileSpreadsheet size={18} />}
+          accentColor="navy"
+          badge="42 Program"
+          icon={<FileSpreadsheet size={19} />}
         />
         <KpiCard
           label="Realisasi Terverifikasi"
           value="Rp 1,21 M"
           foot="66,5% dari alokasi disetujui"
-          icon={<CheckCircle2 size={18} />}
+          accentColor="green"
+          badge="Audit Sah"
+          icon={<CheckCircle2 size={19} />}
         />
       </div>
 

@@ -3,7 +3,20 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { KpiCard } from '../../../components/common/KpiCard';
-import { Coins, FileSpreadsheet, ArrowUpRight, CheckCircle2, ArrowRight, Download, Check } from 'lucide-react';
+import {
+  Coins,
+  FileSpreadsheet,
+  ArrowUpRight,
+  CheckCircle2,
+  ArrowRight,
+  Download,
+  Check,
+  PieChart,
+  TrendingUp,
+  Percent,
+  Award,
+  PlusCircle,
+} from 'lucide-react';
 import { exportToCsv } from '../../../lib/exportCsv';
 
 export default function FinanceOverviewPage() {
@@ -15,21 +28,61 @@ export default function FinanceOverviewPage() {
   };
 
   const financeModules = [
-    { title: '＋ Dana Masuk', desc: 'Pencatatan penerimaan dana dan sumber pendanaan APBD/Sponsor.', href: '/admin/dana-masuk' },
-    { title: '▤ Anggaran', desc: 'Pagu, alokasi program, RAB disetujui, dan komitmen berjalan.', href: '/admin/anggaran' },
-    { title: '⇧ Realisasi', desc: 'Pengeluaran terverifikasi dan status kewajiban kas.', href: '/admin/realisasi' },
-    { title: '☆ Insentif', desc: 'Data penerima honorium atlet, pelatih, dan ofisial.', href: '/admin/insentif' },
-    { title: '％ Pajak', desc: 'Rekap potongan PPh/PPN dan bukti setor pajak.', href: '/admin/pajak' },
+    {
+      title: 'Dana Masuk & Hibah',
+      desc: 'Pencatatan pencairan dana hibah APBD Pemkot Surakarta & sponsorship.',
+      href: '/admin/dana-masuk',
+      icon: <PlusCircle size={20} className="text-sikoni-teal" />,
+      accent: 'border-l-4 border-sikoni-teal',
+      badge: 'Giro Aktif',
+    },
+    {
+      title: 'Kontrol Anggaran & Pagu',
+      desc: 'Pengawasan pagu 64 cabor, RAB disetujui, dan komitmen berjalan.',
+      href: '/admin/anggaran',
+      icon: <FileSpreadsheet size={20} className="text-sikoni-navy" />,
+      accent: 'border-l-4 border-sikoni-navy',
+      badge: '64 Cabor',
+    },
+    {
+      title: 'Realisasi Pengeluaran',
+      desc: 'Verifikasi bukti nota kas, kuitansi bermeterai, dan SP2D pencairan.',
+      href: '/admin/realisasi',
+      icon: <ArrowUpRight size={20} className="text-emerald-600" />,
+      accent: 'border-l-4 border-emerald-500',
+      badge: 'Audit Kas',
+    },
+    {
+      title: 'Insentif Atlet & Pelatih',
+      desc: 'Penyaluran honorarium bulanan, uang saku TC, dan bonus medali.',
+      href: '/admin/insentif',
+      icon: <Award size={20} className="text-sikoni-gold" />,
+      accent: 'border-l-4 border-sikoni-gold',
+      badge: 'Transfer Bank',
+    },
+    {
+      title: 'Pajak Transaksi PPh/PPN',
+      desc: 'Kalkulasi otomatis & monitoring penyetoran PPh 21, PPh 23, dan PPN.',
+      href: '/admin/pajak',
+      icon: <Percent size={20} className="text-rose-500" />,
+      accent: 'border-l-4 border-rose-500',
+      badge: 'e-Billing',
+    },
   ];
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="text-[11px] text-sikoni-muted mb-1">SIKONI / Keuangan</div>
-          <h1 className="text-2xl font-black text-sikoni-navy tracking-tight">Keuangan</h1>
+          <div className="text-[11px] text-sikoni-muted mb-1">
+            SIKONI <span className="text-slate-300">/</span> Keuangan
+          </div>
+          <h1 className="text-2xl font-black text-sikoni-navy tracking-tight">
+            Sentral Manajemen Keuangan
+          </h1>
           <p className="text-xs text-sikoni-muted mt-0.5">
-            Pemantauan dana masuk, alokasi anggaran, realisasi terverifikasi, insentif, dan perpajakan.
+            Monitoring dana masuk hibah, alokasi anggaran, realisasi kas, insentif prestasi, dan kepatuhan pajak.
           </p>
         </div>
 
@@ -49,39 +102,73 @@ export default function FinanceOverviewPage() {
             );
             showToast('Ekspor pembukuan keuangan format Excel/CSV berhasil diunduh.');
           }}
-          className="bg-white border border-sikoni-line text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm"
+          className="bg-white border border-slate-200 text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm transition-all"
         >
-          <Download size={14} /> Ekspor Data Keuangan
+          <Download size={14} /> Ekspor Rekapitulasi Keuangan
         </button>
       </div>
 
+      {/* 4 KPIs with colorful accents */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <KpiCard label="Dana Diterima" value="Rp 2,45 M" foot="Akumulasi tahun 2026" icon={<Coins size={18} />} />
-        <KpiCard label="Dialokasikan" value="Rp 1,82 M" foot="74,3% dari dana diterima" icon={<FileSpreadsheet size={18} />} />
-        <KpiCard label="Realisasi Valid" value="Rp 1,21 M" foot="Sudah diverifikasi nota" icon={<ArrowUpRight size={18} />} />
-        <KpiCard label="Pembayaran Kas" value="Rp 985 jt" foot="Sudah dicairkan kasir" icon={<CheckCircle2 size={18} />} />
+        <KpiCard
+          label="Dana Masuk Hibah"
+          value="Rp 2,45 M"
+          foot="Akumulasi Termin I & II"
+          accentColor="teal"
+          badge="APBD Surakarta"
+          icon={<Coins size={19} />}
+        />
+        <KpiCard
+          label="Teralokasi ke Program"
+          value="Rp 1,82 M"
+          foot="74,3% dari total dana masuk"
+          accentColor="navy"
+          badge="42 Proposal"
+          icon={<FileSpreadsheet size={19} />}
+        />
+        <KpiCard
+          label="Realisasi Terverifikasi"
+          value="Rp 1,21 M"
+          foot="Bukti nota kas tervalidasi"
+          accentColor="green"
+          badge="Audit Lolos"
+          icon={<ArrowUpRight size={19} />}
+        />
+        <KpiCard
+          label="Pencairan Kasir Kas"
+          value="Rp 985 jt"
+          foot="Pindahbuku rekening cabor"
+          accentColor="amber"
+          badge="Bank Jateng"
+          icon={<CheckCircle2 size={19} />}
+        />
       </div>
 
       {/* Visual Trends: Monthly Usage Trend Chart & Donut Composition */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="card-sikoni lg:col-span-2 flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-teal" />
           <div>
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
               <div>
-                <h3 className="text-sm font-extrabold text-sikoni-navy">Tren Penggunaan Dana</h3>
-                <p className="text-[11px] text-sikoni-muted">Alokasi anggaran vs realisasi kas bulanan tahun 2026</p>
+                <h3 className="text-sm font-extrabold text-sikoni-navy flex items-center gap-2">
+                  <TrendingUp size={16} className="text-sikoni-teal" /> Tren Penggunaan & Penyerapan Dana
+                </h3>
+                <p className="text-[11px] text-sikoni-muted mt-0.5">
+                  Alokasi usulan anggaran vs realisasi kas bulanan tahun 2026
+                </p>
               </div>
-              <div className="flex items-center gap-3 text-[11px] font-semibold">
-                <span className="flex items-center gap-1 text-sikoni-teal">
-                  <span className="w-2.5 h-2.5 bg-sikoni-teal rounded-sm" /> Anggaran
+              <div className="flex items-center gap-3 text-[11px] font-bold bg-slate-50 px-3 py-1.5 rounded-lg border border-slate-200/80">
+                <span className="flex items-center gap-1.5 text-sikoni-teal">
+                  <span className="w-2.5 h-2.5 bg-sikoni-teal rounded-sm" /> Alokasi RAB
                 </span>
-                <span className="flex items-center gap-1 text-sikoni-gold">
-                  <span className="w-2.5 h-2.5 bg-sikoni-gold rounded-sm" /> Realisasi
+                <span className="flex items-center gap-1.5 text-sikoni-gold">
+                  <span className="w-2.5 h-2.5 bg-sikoni-gold rounded-sm" /> Realisasi Cair
                 </span>
               </div>
             </div>
 
-            <div className="h-44 flex items-end justify-between gap-2 pt-4 pb-2 border-b border-sikoni-line">
+            <div className="h-48 flex items-end justify-between gap-2 pt-4 pb-2 border-b border-slate-100">
               {[
                 { m: 'Jan', a: 48, r: 24 },
                 { m: 'Feb', a: 61, r: 32 },
@@ -96,97 +183,128 @@ export default function FinanceOverviewPage() {
                 { m: 'Nov', a: 74, r: 48 },
                 { m: 'Des', a: 91, r: 60 },
               ].map((bar, i) => (
-                <div key={i} className="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                  <div className="w-full flex items-end justify-center gap-1 h-[80%]">
+                <div key={i} className="flex-1 flex flex-col items-center gap-1.5 h-full justify-end group">
+                  <div className="w-full flex items-end justify-center gap-1 h-[82%]">
                     <div
-                      className="w-2 sm:w-2.5 bg-sikoni-teal rounded-t-sm"
+                      className="w-2 sm:w-2.5 bg-sikoni-teal rounded-t transition-all group-hover:brightness-125"
                       style={{ height: `${bar.a}%` }}
+                      title={`Alokasi: ${bar.a}%`}
                     />
                     <div
-                      className="w-2 sm:w-2.5 bg-sikoni-gold rounded-t-sm"
+                      className="w-2 sm:w-2.5 bg-sikoni-gold rounded-t transition-all group-hover:brightness-125"
                       style={{ height: `${bar.r}%` }}
+                      title={`Realisasi: ${bar.r}%`}
                     />
                   </div>
-                  <span className="text-[9px] text-sikoni-muted">{bar.m}</span>
+                  <span className="text-[9.5px] font-bold text-slate-500 group-hover:text-sikoni-navy">{bar.m}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="text-[10px] text-sikoni-muted pt-3">
-            Data pemantauan penyerapan anggaran per bulan dari seluruh cabang olahraga.
+          <div className="text-[11px] text-slate-500 pt-3 flex items-center justify-between">
+            <span>Data serapan gabungan seluruh 64 cabang olahraga</span>
+            <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
+              Serapan Optimal
+            </span>
           </div>
         </div>
 
-        {/* Donut Chart: Budget Composition */}
+        {/* Donut Chart: Budget Composition Box */}
         <div className="card-sikoni flex flex-col justify-between">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-sikoni-gold" />
           <div>
-            <h3 className="text-sm font-extrabold text-sikoni-navy">Distribusi Anggaran</h3>
-            <p className="text-[11px] text-sikoni-muted">Komposisi penggunaan anggaran 2026</p>
-          </div>
-
-          <div className="flex items-center gap-5 my-3">
-            <div className="relative w-28 h-28 rounded-full border-[12px] border-sikoni-teal flex items-center justify-center flex-shrink-0">
-              <div className="text-center">
-                <span className="text-lg font-black text-sikoni-navy block leading-none">68%</span>
-                <span className="text-[8px] text-sikoni-muted font-bold">Realisasi</span>
-              </div>
+            <div className="pb-3 border-b border-slate-100">
+              <h3 className="text-sm font-extrabold text-sikoni-navy flex items-center gap-2">
+                <PieChart size={16} className="text-sikoni-gold" /> Distribusi Bidang Anggaran
+              </h3>
+              <p className="text-[11px] text-sikoni-muted mt-0.5">Komposisi pengeluaran APBD 2026</p>
             </div>
 
-            <div className="space-y-1.5 text-[11px] flex-1">
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-sikoni-teal" />
-                  Program olahraga
-                </span>
-                <b>44%</b>
+            <div className="flex items-center gap-5 my-4">
+              <div className="relative w-28 h-28 rounded-full border-[12px] border-sikoni-teal flex items-center justify-center flex-shrink-0 shadow-inner">
+                <div className="text-center">
+                  <span className="text-xl font-black text-sikoni-navy block leading-none">68%</span>
+                  <span className="text-[8.5px] text-slate-400 font-extrabold uppercase">Realisasi</span>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-sikoni-gold" />
-                  Pembinaan atlet
-                </span>
-                <b>25%</b>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#9cb8ca]" />
-                  Operasional
-                </span>
-                <b>18%</b>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-[#e9edf1]" />
-                  Belum dialokasi
-                </span>
-                <b>13%</b>
+
+              <div className="space-y-2 text-xs flex-1">
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-sikoni-teal" />
+                    Program Tanding
+                  </span>
+                  <b className="text-sikoni-navy">44%</b>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-sikoni-gold" />
+                    Pembinaan Atlet
+                  </span>
+                  <b className="text-sikoni-navy">25%</b>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-slate-400" />
+                    Operasional KONI
+                  </span>
+                  <b className="text-sikoni-navy">18%</b>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 text-slate-600">
+                    <span className="w-2.5 h-2.5 rounded-full bg-slate-200" />
+                    Cadangan Pagu
+                  </span>
+                  <b className="text-sikoni-navy">13%</b>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="text-[10px] text-sikoni-muted pt-2 border-t border-sikoni-line">
-            *Berdasarkan alokasi pagu APBD Surakarta 2026.
+          <div className="text-[10.5px] text-slate-400 italic pt-2.5 border-t border-slate-100">
+            *Mengacu pada Naskah Perjanjian Hibah Daerah (NPHD) Kota Surakarta.
           </div>
         </div>
       </div>
 
       {/* Module Navigation Cards */}
       <div className="card-sikoni">
-        <h3 className="text-sm font-extrabold text-sikoni-navy mb-1">Akses Modul Keuangan</h3>
-        <p className="text-[11px] text-sikoni-muted mb-4">Pilih modul untuk melihat dan mencatat data transaksi terinci</p>
+        <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+        <div className="mb-4 pb-3 border-b border-slate-100">
+          <h3 className="text-base font-extrabold text-sikoni-navy">Akses Modul Keuangan Lengkap</h3>
+          <p className="text-xs text-sikoni-muted mt-0.5">
+            Pilih modul untuk melihat pembukuan dan memproses transaksi secara mendalam
+          </p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {financeModules.map((mod, idx) => (
-            <div key={idx} className="bg-slate-50 border border-sikoni-line p-4 rounded-xl flex flex-col justify-between">
+            <div
+              key={idx}
+              className={`bg-white border border-slate-200/90 p-4 rounded-xl shadow-sm hover:shadow-md transition-all flex flex-col justify-between group ${mod.accent}`}
+            >
               <div>
-                <b className="text-xs text-sikoni-navy block">{mod.title}</b>
-                <p className="text-[11px] text-sikoni-muted mt-1 leading-relaxed">{mod.desc}</p>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="p-2 bg-slate-50 rounded-lg group-hover:scale-105 transition-transform">
+                    {mod.icon}
+                  </div>
+                  <span className="text-[10px] font-bold bg-slate-100 text-slate-700 px-2 py-0.5 rounded-full">
+                    {mod.badge}
+                  </span>
+                </div>
+                <b className="text-xs text-sikoni-navy block group-hover:text-sikoni-teal transition-colors">
+                  {mod.title}
+                </b>
+                <p className="text-[11px] text-sikoni-muted mt-1 leading-relaxed">
+                  {mod.desc}
+                </p>
               </div>
               <Link
                 href={mod.href}
-                className="mt-4 text-[11px] font-bold text-sikoni-teal hover:underline flex items-center gap-1"
+                className="mt-4 text-xs font-bold text-sikoni-teal hover:text-teal-800 flex items-center justify-between pt-2 border-t border-slate-100 group-hover:underline"
               >
-                Buka modul <ArrowRight size={13} />
+                <span>Buka Modul</span>
+                <ArrowRight size={13} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           ))}
@@ -195,7 +313,7 @@ export default function FinanceOverviewPage() {
 
       {/* Toast Alert */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-fade-in text-xs font-bold">
+        <div className="fixed bottom-6 right-6 bg-sikoni-navy text-white px-5 py-3 rounded-xl shadow-2xl z-50 flex items-center gap-2 border border-slate-700 animate-in fade-in slide-in-from-bottom-3 duration-200 text-xs font-bold">
           <Check size={16} className="text-sikoni-green" />
           {toastMessage}
         </div>
