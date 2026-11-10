@@ -37,6 +37,7 @@ import {
   CheckCheck,
 } from 'lucide-react';
 import { StatusBadge } from '../common/StatusBadge';
+import { generateLpjWordDocument } from '../../lib/generateLpjWord';
 
 export type UserPersona = 'publik' | 'cabor' | 'pengurus';
 
@@ -1041,31 +1042,94 @@ export const MobilePreview: React.FC = () => {
             {/* CABOR: TAB 4 - LPJ */}
             {caborTab === 'lpj' && (
               <div className="space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Pertanggungjawaban</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">Penyusunan LPJ</h2>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <div className="text-[11px] text-sikoni-muted">Pertanggungjawaban</div>
+                    <h2 className="text-lg font-black text-sikoni-navy">Penyusunan LPJ</h2>
+                  </div>
+                  <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-2 py-0.5 rounded-full border border-emerald-200">
+                    Auto Word
+                  </span>
+                </div>
+
+                {/* Mobile Auto Word Generator Card */}
+                <div className="bg-gradient-to-br from-teal-50 via-white to-slate-50 p-3.5 rounded-2xl border border-teal-200 shadow-sm text-xs space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <div className="w-7 h-7 rounded-lg bg-sikoni-teal text-white grid place-items-center shadow-xs">
+                      <FileText size={15} />
+                    </div>
+                    <div>
+                      <b className="text-xs text-sikoni-navy block">Generator File Word LPJ</b>
+                      <span className="text-[10px] text-slate-500">Kop resmi, rincian anggaran, & 4 tanda tangan</span>
+                    </div>
+                  </div>
+
+                  <div className="p-2.5 bg-white rounded-xl border border-slate-200/90 text-[11px] space-y-1">
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Kegiatan:</span>
+                      <b className="text-sikoni-navy">Kejurda Atletik 2026</b>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-slate-500">Realisasi Belanja:</span>
+                      <b className="text-sikoni-teal">Rp 42.100.000</b>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      generateLpjWordDocument({
+                        number: 'LPJ-015/XI/KONI/2026',
+                        activity: 'Kejuaraan Atletik Pelajar Surakarta 2026',
+                        cabor: 'Persatuan Atletik Seluruh Indonesia (PASI)',
+                        caborCode: 'PASI',
+                        skNumber: 'SK-042/KONI-SKA/VIII/2026',
+                        budgetGrant: 45000000,
+                        period: '12 – 15 November 2026',
+                        location: 'Stadion Sriwedari, Surakarta',
+                        targetParticipants: '180 Atlet & 24 Ofisial',
+                        achievements: 'Meraih 8 Medali Emas, 5 Perak, 6 Perunggu',
+                        background: 'Laporan pertanggungjawaban pemanfaatan dana hibah olahraga APBD Surakarta 2026.',
+                        closingNotes: 'Demikian LPJ ini disusun dengan penuh tanggung jawab.',
+                        leaderName: 'Dr. Bambang Setiawan, M.Pd.',
+                        secretaryName: 'Wahyu Hidayat, S.Or.',
+                        treasurerName: 'Siti Aminah, S.E.',
+                        koniLeaderName: 'Drs. H. Sri Nugroho, M.Si.',
+                        cityDate: 'Surakarta, 10 November 2026',
+                        items: [
+                          { id: 1, item: 'Sewa lintasan & venue Stadion Sriwedari', proofNumber: 'KWT-01', volume: 3, unit: 'Hari', unitPrice: 3500000 },
+                          { id: 2, item: 'Konsumsi atlet & ofisial pertandingan', proofNumber: 'NOTA-02', volume: 180, unit: 'Paket', unitPrice: 45000 },
+                          { id: 3, item: 'Honor wasit & juri berlisensi nasional', proofNumber: 'KWT-03', volume: 16, unit: 'Orang', unitPrice: 400000 },
+                          { id: 4, item: 'Medali kejuaraan & trofi', proofNumber: 'INV-04', volume: 1, unit: 'Paket', unitPrice: 6500000 },
+                        ],
+                      });
+                      showToast('File Word LPJ (.doc) berhasil digenerate dan diunduh!');
+                    }}
+                    className="w-full py-2 bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white rounded-xl font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-all"
+                  >
+                    <Download size={13} /> Generate & Unduh File Word LPJ
+                  </button>
                 </div>
 
                 <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-3">
-                  <b className="text-xs text-sikoni-navy block">Upload Berkas LPJ Digital</b>
-                  <div className="border-2 border-dashed border-slate-200 rounded-xl p-4 text-center space-y-1 hover:border-sikoni-teal cursor-pointer">
-                    <UploadCloud size={24} className="mx-auto text-sikoni-teal" />
-                    <span className="text-[11px] font-bold text-sikoni-navy block">
-                      Pilih Dokumen LPJ (PDF / ZIP)
+                  <b className="text-xs text-sikoni-navy block">Upload Berkas Lampiran Tambahan</b>
+                  <div className="border-2 border-dashed border-slate-200 rounded-xl p-3 text-center space-y-1 hover:border-sikoni-teal cursor-pointer">
+                    <UploadCloud size={20} className="mx-auto text-sikoni-teal" />
+                    <span className="text-[10.5px] font-bold text-sikoni-navy block">
+                      Unggah Bukti Kuitansi & Foto Fisik
                     </span>
-                    <span className="text-[9.5px] text-slate-400">
-                      Maks. 25 MB (Termasuk kuitansi & foto kegiatan)
+                    <span className="text-[9px] text-slate-400">
+                      Format PDF / ZIP (Maksimal 25 MB)
                     </span>
                   </div>
 
                   <button
                     onClick={() => {
-                      showToast('Dokumen LPJ Kejuaraan berhasil diunggah untuk diverifikasi!');
+                      showToast('Dokumen LPJ Kejuaraan berhasil dikirim ke verifikator KONI!');
                       setCaborTab('home');
                     }}
-                    className="w-full py-2.5 bg-sikoni-teal text-white rounded-xl font-bold text-xs shadow-sm"
+                    className="w-full py-2 bg-white border border-slate-200 text-sikoni-navy hover:bg-slate-50 rounded-xl font-bold text-xs shadow-xs transition-all"
                   >
-                    Kirim LPJ ke Tim Verifikator KONI
+                    Kirim ke Verifikator KONI
                   </button>
                 </div>
               </div>
