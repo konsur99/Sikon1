@@ -40,9 +40,8 @@ export const PublicHeader: React.FC = () => {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-[13px] font-semibold transition-colors ${
-                isActive ? 'text-sikoni-teal font-bold' : 'text-[#4a5568] hover:text-sikoni-navy'
-              }`}
+              className={`text-[13px] font-semibold transition-colors ${isActive ? 'text-sikoni-teal font-bold' : 'text-[#4a5568] hover:text-sikoni-navy'
+                }`}
             >
               {link.label}
             </Link>
@@ -122,11 +121,10 @@ export const PublicHeader: React.FC = () => {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
-                    isActive
-                      ? 'bg-emerald-50 text-sikoni-teal font-bold border border-emerald-200/80'
-                      : 'text-slate-700 hover:bg-slate-50'
-                  }`}
+                  className={`px-3 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${isActive
+                    ? 'bg-emerald-50 text-sikoni-teal font-bold border border-emerald-200/80'
+                    : 'text-slate-700 hover:bg-slate-50'
+                    }`}
                 >
                   <span>{link.label}</span>
                   {isActive && <span className="w-1.5 h-1.5 rounded-full bg-sikoni-teal" />}
