@@ -1,0 +1,21 @@
+{
+  "name": "SIKONI — Sistem Informasi Olahraga KONI Surakarta",
+  "short_name": "SIKONI",
+  "description": "Sistem Informasi Terpadu KONI Kota Surakarta untuk Layanan Publik, Pengurus Cabor, dan Pengurus KONI.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#142a43",
+  "theme_color": "#142a43",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "id",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["sports", "finance", "productivity"]
+}

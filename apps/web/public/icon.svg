@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#142a43" />
+      <stop offset="50%" stop-color="#1a385c" />
+      <stop offset="100%" stop-color="#168b8b" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd56b" />
+      <stop offset="50%" stop-color="#d7ac57" />
+      <stop offset="100%" stop-color="#b68936" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="url(#navyGrad)" />
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-dasharray="16 10" opacity="0.6" />
+  <!-- KONI Olympic Rings Inspired Elements -->
+  <circle cx="180" cy="210" r="42" fill="none" stroke="#d7ac57" stroke-width="10" />
+  <circle cx="256" cy="210" r="42" fill="none" stroke="#ffffff" stroke-width="10" />
+  <circle cx="332" cy="210" r="42" fill="none" stroke="#168b8b" stroke-width="10" />
+  <circle cx="218" cy="250" r="42" fill="none" stroke="#ffd56b" stroke-width="10" />
+  <circle cx="294" cy="250" r="42" fill="none" stroke="#23846d" stroke-width="10" />
+  <!-- SIKONI Text Mark -->
+  <text x="256" y="360" font-family="system-ui, -apple-system, sans-serif" font-size="64" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="4">SIKONI</text>
+  <text x="256" y="396" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#ffd56b" text-anchor="middle" letter-spacing="6">KONI SURAKARTA</text>
+</svg>

@@ -7,6 +7,16 @@ import { FloatingModeSwitcher } from '../components/common/FloatingModeSwitcher'
 export const metadata: Metadata = {
   title: 'SIKONI — Sistem Informasi KONI Surakarta',
   description: 'Sistem Informasi Terpadu KONI Kota Surakarta (Website Publik & Web Admin Responsif Desktop & Android)',
+  manifest: '/manifest.json',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'SIKONI',
+  },
 };
 
 export const viewport: Viewport = {

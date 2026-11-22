@@ -13,7 +13,7 @@ export const FloatingModeSwitcher: React.FC = () => {
       <button
         onClick={() => setIsMinimized(false)}
         aria-label="Buka Mode Switcher"
-        className="fixed bottom-20 right-3 z-50 bg-[#142a43] text-sikoni-gold p-2.5 rounded-full shadow-2xl border border-white/20 hover:scale-105 transition-all flex items-center justify-center backdrop-blur-md"
+        className="fixed bottom-24 sm:bottom-4 right-3 sm:right-4 z-50 bg-[#142a43] text-sikoni-gold p-2.5 rounded-full shadow-2xl border border-white/20 hover:scale-105 transition-all flex items-center justify-center backdrop-blur-md"
         title="Buka Pengalih Mode Tampilan (Android / Desktop)"
       >
         {isAndroid ? <Smartphone size={18} /> : <Monitor size={18} />}
@@ -22,7 +22,7 @@ export const FloatingModeSwitcher: React.FC = () => {
   }
 
   return (
-    <div className="fixed bottom-20 sm:bottom-4 right-3 sm:right-4 z-50 flex items-center gap-1.5 bg-[#142a43]/95 backdrop-blur-md text-white p-1.5 rounded-full shadow-[0_8px_30px_rgba(20,42,67,0.4)] border border-white/20 text-xs animate-in fade-in slide-in-from-bottom-2 duration-200">
+    <div className="fixed bottom-24 sm:bottom-4 right-3 sm:right-4 z-50 flex items-center gap-1.5 bg-[#142a43]/95 backdrop-blur-md text-white p-1.5 rounded-full shadow-[0_8px_30px_rgba(20,42,67,0.4)] border border-white/20 text-xs animate-in fade-in slide-in-from-bottom-2 duration-200">
       <div className="flex items-center gap-1 pl-2 pr-1 text-[10.5px] font-bold text-slate-300">
         <Sparkles size={13} className="text-sikoni-gold" />
         <span className="hidden sm:inline">Mode:</span>

@@ -36,6 +36,10 @@ import {
   Users,
   CheckCheck,
   Monitor,
+  Trash2,
+  Camera,
+  FileUp,
+  Sparkles,
 } from 'lucide-react';
 import { StatusBadge } from '../common/StatusBadge';
 import { generateLpjWordDocument } from '../../lib/generateLpjWord';
@@ -112,6 +116,68 @@ export const MobilePreview: React.FC = () => {
       desc: 'Training camp intensif 14 atlet bulu tangkis persiapan Kejurprov.',
     },
   ]);
+
+  // Interactive Mobile LPJ State (Columns / Isian)
+  const [mobileLpjForm, setMobileLpjForm] = useState({
+    number: 'LPJ-015/XI/KONI/2026',
+    activity: 'Kejuaraan Atletik Pelajar Surakarta 2026',
+    cabor: 'Persatuan Atletik Seluruh Indonesia (PASI)',
+    caborCode: 'PASI',
+    skNumber: 'SK-042/KONI-SKA/VIII/2026',
+    budgetGrant: 45000000,
+    period: '12 – 15 November 2026',
+    location: 'Stadion Sriwedari, Surakarta',
+    targetParticipants: '180 Atlet & 24 Ofisial',
+    achievements: 'Meraih 8 Medali Emas, 5 Perak, 6 Perunggu',
+    background: 'Laporan pertanggungjawaban pemanfaatan dana hibah olahraga APBD Surakarta 2026.',
+    closingNotes: 'Demikian LPJ ini disusun dengan penuh tanggung jawab demi kejayaan olahraga Surakarta.',
+    leaderName: 'Dr. Bambang Setiawan, M.Pd.',
+    secretaryName: 'Wahyu Hidayat, S.Or.',
+    treasurerName: 'Siti Aminah, S.E.',
+    koniLeaderName: 'Drs. H. Sri Nugroho, M.Si.',
+    cityDate: 'Surakarta, 10 November 2026',
+  });
+
+  const [mobileLpjItems, setMobileLpjItems] = useState([
+    { id: 1, item: 'Sewa lintasan & venue Stadion Sriwedari', proofNumber: 'KWT-01', volume: 3, unit: 'Hari', unitPrice: 3500000 },
+    { id: 2, item: 'Konsumsi atlet & ofisial pertandingan', proofNumber: 'NOTA-02', volume: 180, unit: 'Paket', unitPrice: 45000 },
+    { id: 3, item: 'Honor wasit & juri berlisensi nasional', proofNumber: 'KWT-03', volume: 16, unit: 'Orang', unitPrice: 400000 },
+    { id: 4, item: 'Medali kejuaraan & trofi', proofNumber: 'INV-04', volume: 1, unit: 'Paket', unitPrice: 6500000 },
+  ]);
+
+  const totalMobileLpjRealization = mobileLpjItems.reduce(
+    (acc, curr) => acc + curr.volume * curr.unitPrice,
+    0
+  );
+
+  const handleAddMobileLpjItem = () => {
+    const nextId = mobileLpjItems.length > 0 ? Math.max(...mobileLpjItems.map((i) => i.id)) + 1 : 1;
+    setMobileLpjItems([
+      ...mobileLpjItems,
+      {
+        id: nextId,
+        item: 'Pengeluaran Kegiatan Tambahan',
+        proofNumber: `KWT-${String(nextId).padStart(2, '0')}`,
+        volume: 1,
+        unit: 'Paket',
+        unitPrice: 1000000,
+      },
+    ]);
+  };
+
+  const handleRemoveMobileLpjItem = (id: number) => {
+    if (mobileLpjItems.length <= 1) {
+      showToast('Minimal harus ada 1 item rincian belanja');
+      return;
+    }
+    setMobileLpjItems(mobileLpjItems.filter((i) => i.id !== id));
+  };
+
+  const handleUpdateMobileLpjItem = (id: number, field: string, val: any) => {
+    setMobileLpjItems(
+      mobileLpjItems.map((item) => (item.id === id ? { ...item, [field]: val } : item))
+    );
+  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -1107,95 +1173,285 @@ export const MobilePreview: React.FC = () => {
 
             {/* CABOR: TAB 4 - LPJ */}
             {caborTab === 'lpj' && (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <div>
-                    <div className="text-[11px] text-sikoni-muted">Pertanggungjawaban</div>
-                    <h2 className="text-lg font-black text-sikoni-navy">Penyusunan LPJ</h2>
+                    <div className="text-[11px] text-sikoni-muted">Pertanggungjawaban Keuangan</div>
+                    <h2 className="text-lg font-black text-sikoni-navy">Penyusunan LPJ Cabor</h2>
                   </div>
-                  <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-2 py-0.5 rounded-full border border-emerald-200">
-                    Auto Word
+                  <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1 shadow-xs">
+                    <Sparkles size={11} /> Kolom Isian
                   </span>
                 </div>
 
-                {/* Mobile Auto Word Generator Card */}
-                <div className="bg-gradient-to-br from-teal-50 via-white to-slate-50 p-3.5 rounded-2xl border border-teal-200 shadow-sm text-xs space-y-2.5">
-                  <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-sikoni-teal text-white grid place-items-center shadow-xs">
-                      <FileText size={15} />
-                    </div>
+                {/* Banner Panduan Kolom Isian */}
+                <div className="bg-gradient-to-r from-teal-50 to-emerald-50 p-3 rounded-2xl border border-teal-200 text-xs">
+                  <b className="text-sikoni-teal font-black block text-[11.5px]">Isi Kolom & Otomatis Generate Word:</b>
+                  <p className="text-[10.5px] text-slate-600 mt-0.5 leading-relaxed">
+                    Lengkapi kolom kegiatan dan rincian belanja di bawah. Setelah selesai, klik tombol <b>Generate File Word LPJ</b> untuk mengunduh dokumen resmi siap cetak lengkap dengan Kop KONI dan tanda tangan.
+                  </p>
+                </div>
+
+                {/* Bagian 1: Data Pokok Laporan */}
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 text-xs">
+                  <b className="text-xs font-black text-sikoni-navy block border-b border-slate-100 pb-1.5">
+                    1. Data Pokok Kegiatan & Nomor LPJ
+                  </b>
+
+                  <div className="space-y-2">
                     <div>
-                      <b className="text-xs text-sikoni-navy block">Generator File Word LPJ</b>
-                      <span className="text-[10px] text-slate-500">Kop resmi, rincian anggaran, & 4 tanda tangan</span>
+                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Nomor Surat LPJ</label>
+                      <input
+                        type="text"
+                        value={mobileLpjForm.number}
+                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, number: e.target.value })}
+                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-sikoni-navy focus:bg-white focus:border-sikoni-teal focus:outline-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Nama Kegiatan Resmi</label>
+                      <input
+                        type="text"
+                        value={mobileLpjForm.activity}
+                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, activity: e.target.value })}
+                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-sikoni-navy focus:bg-white focus:border-sikoni-teal focus:outline-none"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Periode Pelaksanaan</label>
+                        <input
+                          type="text"
+                          value={mobileLpjForm.period}
+                          onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, period: e.target.value })}
+                          className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:bg-white focus:border-sikoni-teal focus:outline-none"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Lokasi Kegiatan</label>
+                        <input
+                          type="text"
+                          value={mobileLpjForm.location}
+                          onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, location: e.target.value })}
+                          className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:bg-white focus:border-sikoni-teal focus:outline-none"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Pagu Dana Hibah Diterima (Rp)</label>
+                      <input
+                        type="number"
+                        value={mobileLpjForm.budgetGrant}
+                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, budgetGrant: Number(e.target.value) })}
+                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-sikoni-teal focus:bg-white focus:border-sikoni-teal focus:outline-none"
+                      />
                     </div>
                   </div>
+                </div>
 
-                  <div className="p-2.5 bg-white rounded-xl border border-slate-200/90 text-[11px] space-y-1">
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Kegiatan:</span>
-                      <b className="text-sikoni-navy">Kejurda Atletik 2026</b>
+                {/* Bagian 2: Kolom Rincian Belanja Riil */}
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
+                  <div className="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                    <b className="text-xs font-black text-sikoni-navy">2. Rincian Belanja ({mobileLpjItems.length} Item)</b>
+                    <button
+                      onClick={handleAddMobileLpjItem}
+                      className="px-2.5 py-1 bg-emerald-50 text-sikoni-teal hover:bg-emerald-100 rounded-lg text-[10.5px] font-bold border border-emerald-200 flex items-center gap-1"
+                    >
+                      <Plus size={12} /> Tambah Item
+                    </button>
+                  </div>
+
+                  <div className="space-y-2.5 max-h-80 overflow-y-auto pr-0.5">
+                    {mobileLpjItems.map((item, idx) => (
+                      <div key={item.id} className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/90 space-y-1.5">
+                        <div className="flex justify-between items-center">
+                          <span className="font-bold text-[10.5px] text-sikoni-teal">Item #{idx + 1}</span>
+                          <button
+                            onClick={() => handleRemoveMobileLpjItem(item.id)}
+                            className="text-slate-400 hover:text-rose-500 p-0.5 transition-colors"
+                            title="Hapus baris"
+                          >
+                            <Trash2 size={13} />
+                          </button>
+                        </div>
+
+                        <input
+                          type="text"
+                          value={item.item}
+                          placeholder="Uraian belanja barang / jasa"
+                          onChange={(e) => handleUpdateMobileLpjItem(item.id, 'item', e.target.value)}
+                          className="w-full p-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-medium text-sikoni-navy focus:border-sikoni-teal focus:outline-none"
+                        />
+
+                        <div className="grid grid-cols-4 gap-1.5">
+                          <div>
+                            <span className="text-[9px] text-slate-500 block">No Bukti</span>
+                            <input
+                              type="text"
+                              value={item.proofNumber}
+                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'proofNumber', e.target.value)}
+                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center"
+                            />
+                          </div>
+                          <div>
+                            <span className="text-[9px] text-slate-500 block">Vol</span>
+                            <input
+                              type="number"
+                              value={item.volume}
+                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'volume', Number(e.target.value))}
+                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center font-bold"
+                            />
+                          </div>
+                          <div>
+                            <span className="text-[9px] text-slate-500 block">Satuan</span>
+                            <input
+                              type="text"
+                              value={item.unit}
+                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'unit', e.target.value)}
+                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center"
+                            />
+                          </div>
+                          <div>
+                            <span className="text-[9px] text-slate-500 block">Harga (Rp)</span>
+                            <input
+                              type="number"
+                              value={item.unitPrice}
+                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'unitPrice', Number(e.target.value))}
+                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-right font-bold text-sikoni-navy"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="flex justify-between items-center pt-1 border-t border-slate-200 text-[10.5px]">
+                          <span className="text-slate-500">Subtotal Item:</span>
+                          <b className="text-sikoni-teal">
+                            Rp {(item.volume * item.unitPrice).toLocaleString('id-ID')}
+                          </b>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Ringkasan Total Realisasi Belanja */}
+                  <div className="p-2.5 bg-gradient-to-r from-slate-100 to-white rounded-xl border border-slate-300 space-y-1">
+                    <div className="flex justify-between items-center text-xs">
+                      <span className="font-bold text-slate-700">Total Realisasi Belanja:</span>
+                      <b className="text-sm font-black text-sikoni-navy">
+                        Rp {totalMobileLpjRealization.toLocaleString('id-ID')}
+                      </b>
                     </div>
-                    <div className="flex justify-between">
-                      <span className="text-slate-500">Realisasi Belanja:</span>
-                      <b className="text-sikoni-teal">Rp 42.100.000</b>
+                    <div className="flex justify-between items-center text-[10.5px] text-slate-500">
+                      <span>Sisa Saldo Kas Cabor:</span>
+                      <b className={mobileLpjForm.budgetGrant >= totalMobileLpjRealization ? 'text-emerald-600' : 'text-rose-600'}>
+                        Rp {(mobileLpjForm.budgetGrant - totalMobileLpjRealization).toLocaleString('id-ID')}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Bagian 3: Penandatangan */}
+                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2 text-xs">
+                  <b className="text-xs font-black text-sikoni-navy block border-b border-slate-100 pb-1.5">
+                    3. Pejabat Penandatangan Laporan
+                  </b>
+                  <div className="grid grid-cols-2 gap-2">
+                    <div>
+                      <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Ketua Pengkot Cabor</label>
+                      <input
+                        type="text"
+                        value={mobileLpjForm.leaderName}
+                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, leaderName: e.target.value })}
+                        className="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10.5px] text-slate-700"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Bendahara Cabor</label>
+                      <input
+                        type="text"
+                        value={mobileLpjForm.treasurerName}
+                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, treasurerName: e.target.value })}
+                        className="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10.5px] text-slate-700"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* TOMBOL UTAMA: GENERATE & UNDUH FILE WORD LPJ */}
+                <div className="bg-gradient-to-br from-[#142a43] to-[#1c3a5e] p-4 rounded-2xl text-white shadow-lg space-y-2">
+                  <div className="flex items-center gap-2">
+                    <FileText size={18} className="text-sikoni-gold" />
+                    <div>
+                      <b className="text-xs block text-white font-extrabold">Generate File Word LPJ (.doc)</b>
+                      <span className="text-[10px] text-slate-300">File Word resmi dengan Kop KONI dan 4 kolom tanda tangan</span>
                     </div>
                   </div>
 
                   <button
                     onClick={() => {
                       generateLpjWordDocument({
-                        number: 'LPJ-015/XI/KONI/2026',
-                        activity: 'Kejuaraan Atletik Pelajar Surakarta 2026',
-                        cabor: 'Persatuan Atletik Seluruh Indonesia (PASI)',
-                        caborCode: 'PASI',
-                        skNumber: 'SK-042/KONI-SKA/VIII/2026',
-                        budgetGrant: 45000000,
-                        period: '12 – 15 November 2026',
-                        location: 'Stadion Sriwedari, Surakarta',
-                        targetParticipants: '180 Atlet & 24 Ofisial',
-                        achievements: 'Meraih 8 Medali Emas, 5 Perak, 6 Perunggu',
-                        background: 'Laporan pertanggungjawaban pemanfaatan dana hibah olahraga APBD Surakarta 2026.',
-                        closingNotes: 'Demikian LPJ ini disusun dengan penuh tanggung jawab.',
-                        leaderName: 'Dr. Bambang Setiawan, M.Pd.',
-                        secretaryName: 'Wahyu Hidayat, S.Or.',
-                        treasurerName: 'Siti Aminah, S.E.',
-                        koniLeaderName: 'Drs. H. Sri Nugroho, M.Si.',
-                        cityDate: 'Surakarta, 10 November 2026',
-                        items: [
-                          { id: 1, item: 'Sewa lintasan & venue Stadion Sriwedari', proofNumber: 'KWT-01', volume: 3, unit: 'Hari', unitPrice: 3500000 },
-                          { id: 2, item: 'Konsumsi atlet & ofisial pertandingan', proofNumber: 'NOTA-02', volume: 180, unit: 'Paket', unitPrice: 45000 },
-                          { id: 3, item: 'Honor wasit & juri berlisensi nasional', proofNumber: 'KWT-03', volume: 16, unit: 'Orang', unitPrice: 400000 },
-                          { id: 4, item: 'Medali kejuaraan & trofi', proofNumber: 'INV-04', volume: 1, unit: 'Paket', unitPrice: 6500000 },
-                        ],
+                        number: mobileLpjForm.number,
+                        activity: mobileLpjForm.activity,
+                        cabor: mobileLpjForm.cabor,
+                        caborCode: mobileLpjForm.caborCode,
+                        skNumber: mobileLpjForm.skNumber,
+                        budgetGrant: mobileLpjForm.budgetGrant,
+                        period: mobileLpjForm.period,
+                        location: mobileLpjForm.location,
+                        targetParticipants: mobileLpjForm.targetParticipants,
+                        achievements: mobileLpjForm.achievements,
+                        background: mobileLpjForm.background,
+                        closingNotes: mobileLpjForm.closingNotes,
+                        leaderName: mobileLpjForm.leaderName,
+                        secretaryName: mobileLpjForm.secretaryName,
+                        treasurerName: mobileLpjForm.treasurerName,
+                        koniLeaderName: mobileLpjForm.koniLeaderName,
+                        cityDate: mobileLpjForm.cityDate,
+                        items: mobileLpjItems,
                       });
-                      showToast('File Word LPJ (.doc) berhasil digenerate dan diunduh!');
+                      showToast('✓ Berhasil! Dokumen Word LPJ telah digenerate dan otomatis terunduh.');
                     }}
-                    className="w-full py-2 bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-700 hover:to-sikoni-navy text-white rounded-xl font-bold text-xs shadow-sm flex items-center justify-center gap-1.5 transition-all"
+                    className="w-full py-3 bg-gradient-to-r from-sikoni-gold via-amber-400 to-sikoni-gold hover:from-amber-300 hover:to-amber-500 text-sikoni-navy font-black text-xs rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
                   >
-                    <Download size={13} /> Generate & Unduh File Word LPJ
+                    <Download size={15} />
+                    <span>Selesai & Unduh Dokumen Word LPJ</span>
                   </button>
                 </div>
 
+                {/* Upload Lampiran Bukti Kuitansi & Nota */}
                 <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-3">
-                  <b className="text-xs text-sikoni-navy block">Upload Berkas Lampiran Tambahan</b>
-                  <div className="border-2 border-dashed border-slate-200 rounded-xl p-3 text-center space-y-1 hover:border-sikoni-teal cursor-pointer">
+                  <b className="text-xs text-sikoni-navy block">Unggah Berkas Lampiran Kuitansi / Foto Fisik</b>
+                  <label className="border-2 border-dashed border-slate-200 hover:border-sikoni-teal rounded-xl p-3 text-center block space-y-1.5 cursor-pointer bg-slate-50/50 transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*,application/pdf,application/zip"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) {
+                          showToast(`✓ Berkas "${file.name}" berhasil dilampirkan.`);
+                        }
+                      }}
+                    />
                     <UploadCloud size={20} className="mx-auto text-sikoni-teal" />
                     <span className="text-[10.5px] font-bold text-sikoni-navy block">
-                      Unggah Bukti Kuitansi & Foto Fisik
+                      Pilih Dokumen PDF / Foto Struk Fisik
                     </span>
-                    <span className="text-[9px] text-slate-400">
-                      Format PDF / ZIP (Maksimal 25 MB)
+                    <span className="text-[9px] text-slate-400 block">
+                      Klik untuk membuka galeri foto atau kamera perangkat (Maks 25 MB)
                     </span>
-                  </div>
+                  </label>
 
                   <button
                     onClick={() => {
-                      showToast('Dokumen LPJ Kejuaraan berhasil dikirim ke verifikator KONI!');
+                      showToast('✓ Dokumen LPJ beserta lampiran berhasil diserahkan ke verifikator KONI!');
                       setCaborTab('home');
                     }}
-                    className="w-full py-2 bg-white border border-slate-200 text-sikoni-navy hover:bg-slate-50 rounded-xl font-bold text-xs shadow-xs transition-all"
+                    className="w-full py-2.5 bg-sikoni-teal hover:bg-teal-700 text-white rounded-xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
                   >
-                    Kirim ke Verifikator KONI
+                    Kirim LPJ Lengkap ke KONI Surakarta
                   </button>
                 </div>
               </div>
@@ -1241,25 +1497,40 @@ export const MobilePreview: React.FC = () => {
                     <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
                       Lampiran Dokumen Proposal
                     </label>
-                    <div className="border border-dashed border-slate-300 rounded-lg p-2.5 text-center text-[10.5px] text-slate-500">
-                      📄 Proposal_PASI_2026.pdf (1.8 MB)
-                    </div>
+                    <label className="border-2 border-dashed border-slate-300 hover:border-sikoni-teal rounded-xl p-3 text-center block cursor-pointer bg-slate-50 transition-colors">
+                      <input
+                        type="file"
+                        accept="application/pdf,application/zip"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) showToast(`✓ Dokumen proposal "${f.name}" berhasil diunggah.`);
+                        }}
+                      />
+                      <div className="flex items-center justify-center gap-2 text-sikoni-teal font-bold text-xs mb-1">
+                        <FileUp size={16} />
+                        <span>Pilih Dokumen Proposal PDF</span>
+                      </div>
+                      <span className="text-[9.5px] text-slate-500 block">
+                        Format PDF (Maksimal 10 MB) • Otomatis verifikasi tanda tangan digital
+                      </span>
+                    </label>
                   </div>
                 </div>
 
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="flex-1 py-2 border border-slate-200 rounded-xl font-bold text-slate-600"
+                    className="flex-1 py-2 border border-slate-200 rounded-xl font-bold text-slate-600 active:scale-95 transition-all"
                   >
                     Batal
                   </button>
                   <button
                     onClick={() => {
-                      showToast('Usulan RAB berhasil dikirim ke antrean verifikasi KONI!');
+                      showToast('✓ Usulan RAB berhasil dikirim ke antrean verifikasi KONI!');
                       setCaborTab('home');
                     }}
-                    className="flex-1 py-2 bg-sikoni-teal text-white rounded-xl font-bold"
+                    className="flex-1 py-2 bg-sikoni-teal text-white rounded-xl font-bold active:scale-95 transition-all"
                   >
                     Kirim RAB
                   </button>
@@ -1305,11 +1576,27 @@ export const MobilePreview: React.FC = () => {
 
                   <div>
                     <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
-                      Foto Kuitansi Bermeterai
+                      Foto Kuitansi / Bukti Pembayaran
                     </label>
-                    <div className="border border-dashed border-slate-300 rounded-lg p-2.5 text-center text-[10.5px] text-slate-500">
-                      📷 Struk_Katering_Atlet.jpg (980 KB)
-                    </div>
+                    <label className="border-2 border-dashed border-slate-300 hover:border-sikoni-teal rounded-xl p-3 text-center block cursor-pointer bg-slate-50 transition-colors">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        capture="environment"
+                        className="hidden"
+                        onChange={(e) => {
+                          const f = e.target.files?.[0];
+                          if (f) showToast(`✓ Foto "${f.name}" berhasil diambil via kamera.`);
+                        }}
+                      />
+                      <div className="flex items-center justify-center gap-2 text-sikoni-teal font-bold text-xs mb-1">
+                        <Camera size={16} />
+                        <span>Ambil Foto via Kamera / Galeri</span>
+                      </div>
+                      <span className="text-[9.5px] text-slate-500 block">
+                        Format JPG/PNG • Otomatis geotag & kompresi foto kuitansi
+                      </span>
+                    </label>
                   </div>
                 </div>
 
@@ -1665,81 +1952,125 @@ export const MobilePreview: React.FC = () => {
           </div>
         )}
 
-        {/* Selected Cabor Detail Modal (For Publik) */}
+        {/* Selected Cabor Detail Bottom Sheet (Android Native Style) */}
         {selectedCaborDetail && (
-          <div className="absolute inset-x-3 bottom-16 bg-white rounded-2xl p-4 shadow-2xl border border-slate-200 z-50 text-xs space-y-2.5 animate-in fade-in slide-in-from-bottom-3 duration-200">
-            <div className="flex justify-between items-start">
-              <div>
-                <span className="text-[10px] font-bold text-sikoni-teal uppercase block">
-                  {selectedCaborDetail.category}
-                </span>
-                <b className="text-sm font-black text-sikoni-navy">{selectedCaborDetail.name}</b>
-              </div>
-              <button
+          <div
+            className="fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex items-end justify-center animate-in fade-in duration-150"
+            onClick={() => setSelectedCaborDetail(null)}
+          >
+            <div
+              className="w-full bg-white rounded-t-[32px] p-5 pb-8 shadow-2xl border-t border-slate-200/90 text-xs space-y-3 animate-in slide-in-from-bottom duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Drag Handle */}
+              <div
+                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer"
                 onClick={() => setSelectedCaborDetail(null)}
-                className="text-slate-400 hover:text-sikoni-navy"
-              >
-                <X size={16} />
-              </button>
-            </div>
+              />
 
-            <div className="space-y-1.5 pt-1 border-t border-slate-100 text-[11px]">
-              <div className="flex items-center gap-1.5 text-slate-600">
-                <User size={13} className="text-sikoni-teal" />
-                <span>Ketua: <b>{selectedCaborDetail.ketua}</b></span>
+              <div className="flex justify-between items-start">
+                <div>
+                  <span className="text-[10.5px] font-extrabold text-sikoni-teal uppercase tracking-wider block">
+                    {selectedCaborDetail.category}
+                  </span>
+                  <b className="text-base font-black text-sikoni-navy">{selectedCaborDetail.name}</b>
+                </div>
+                <button
+                  onClick={() => setSelectedCaborDetail(null)}
+                  className="text-slate-400 hover:text-sikoni-navy p-1 rounded-full hover:bg-slate-100 transition-colors"
+                >
+                  <X size={18} />
+                </button>
               </div>
-              <div className="flex items-center gap-1.5 text-slate-600">
-                <MapPin size={13} className="text-sikoni-teal" />
-                <span>{selectedCaborDetail.sekretariat}</span>
-              </div>
-              <div className="flex items-center gap-1.5 text-slate-600">
-                <Award size={13} className="text-sikoni-gold" />
-                <span>Prestasi: {selectedCaborDetail.prestasi}</span>
-              </div>
-            </div>
 
-            <div className="pt-2 flex gap-2">
-              <button
-                onClick={() => {
-                  showToast(`Membuka WhatsApp Sekretariat ${selectedCaborDetail.code}...`);
-                  setSelectedCaborDetail(null);
-                }}
-                className="flex-1 py-2 bg-emerald-600 text-white rounded-xl font-bold flex items-center justify-center gap-1 shadow-sm"
-              >
-                <Phone size={13} /> Kontak WhatsApp
-              </button>
-              <button
-                onClick={() => setSelectedCaborDetail(null)}
-                className="py-2 px-3 border border-slate-200 rounded-xl font-bold text-slate-600"
-              >
-                Tutup
-              </button>
+              <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
+                <div className="flex items-center gap-2 text-slate-700">
+                  <User size={15} className="text-sikoni-teal flex-shrink-0" />
+                  <span>Ketua Umum: <b>{selectedCaborDetail.ketua}</b></span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-700">
+                  <MapPin size={15} className="text-sikoni-teal flex-shrink-0" />
+                  <span>Sekretariat: {selectedCaborDetail.sekretariat}</span>
+                </div>
+                <div className="flex items-center gap-2 text-slate-700">
+                  <Award size={15} className="text-sikoni-gold flex-shrink-0" />
+                  <span>Prestasi: <b className="text-sikoni-navy">{selectedCaborDetail.prestasi}</b></span>
+                </div>
+                <div className="flex items-center gap-4 text-xs font-bold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                  <div>🏃 {selectedCaborDetail.atlet} Atlet Binaan</div>
+                  <div>👨‍🏫 {selectedCaborDetail.pelatih} Pelatih Berlisensi</div>
+                </div>
+              </div>
+
+              <div className="pt-2 flex gap-2">
+                <button
+                  onClick={() => {
+                    showToast(`✓ Menghubungi WhatsApp Sekretariat ${selectedCaborDetail.code} (${selectedCaborDetail.phone})...`);
+                    setSelectedCaborDetail(null);
+                  }}
+                  className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
+                >
+                  <Phone size={14} /> Hubungi WhatsApp
+                </button>
+                <button
+                  onClick={() => setSelectedCaborDetail(null)}
+                  className="py-3 px-4 border border-slate-200 hover:bg-slate-50 rounded-xl font-bold text-slate-600 active:scale-95 transition-all cursor-pointer"
+                >
+                  Tutup
+                </button>
+              </div>
             </div>
           </div>
         )}
 
-        {/* Selected Generic Item Detail Popup */}
+        {/* Selected Generic Item Detail Bottom Sheet (Android Native Style) */}
         {selectedMobileItem && (
-          <div className="absolute inset-x-3 bottom-16 bg-white rounded-2xl p-4 shadow-2xl border border-slate-200 z-50 text-xs space-y-2 animate-in fade-in slide-in-from-bottom-2 duration-150">
-            <div className="flex justify-between items-start">
-              <div>
-                <b className="text-sikoni-navy text-sm block">{selectedMobileItem.title}</b>
-                <small className="text-sikoni-muted">{selectedMobileItem.sub}</small>
+          <div
+            className="fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex items-end justify-center animate-in fade-in duration-150"
+            onClick={() => setSelectedMobileItem(null)}
+          >
+            <div
+              className="w-full bg-white rounded-t-[32px] p-5 pb-8 shadow-2xl border-t border-slate-200/90 text-xs space-y-3 animate-in slide-in-from-bottom duration-200"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Drag Handle */}
+              <div
+                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer"
+                onClick={() => setSelectedMobileItem(null)}
+              />
+
+              <div className="flex justify-between items-start">
+                <div>
+                  <b className="text-sm font-black text-sikoni-navy block">{selectedMobileItem.title}</b>
+                  <small className="text-[11px] text-sikoni-muted">{selectedMobileItem.sub}</small>
+                </div>
+                <button
+                  onClick={() => setSelectedMobileItem(null)}
+                  className="text-slate-400 hover:text-sikoni-navy p-1 rounded-full hover:bg-slate-100 transition-colors"
+                >
+                  <X size={18} />
+                </button>
               </div>
+
+              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div>
+                  <span className="text-[10px] text-slate-500 block uppercase font-bold">Nominal Berkas</span>
+                  <span className="font-black text-base text-sikoni-navy">{selectedMobileItem.val}</span>
+                </div>
+                <StatusBadge status={selectedMobileItem.status} />
+              </div>
+
+              <p className="text-xs text-slate-600 leading-relaxed bg-slate-50/50 p-2.5 rounded-xl border border-slate-100">
+                {selectedMobileItem.desc}
+              </p>
+
               <button
                 onClick={() => setSelectedMobileItem(null)}
-                className="text-slate-400 hover:text-sikoni-navy"
+                className="w-full py-2.5 bg-sikoni-navy text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
               >
-                <X size={16} />
+                Tutup Detail
               </button>
             </div>
-            <div className="flex items-center justify-between pt-1">
-              <span className="font-bold text-sikoni-navy">{selectedMobileItem.val}</span>
-              <StatusBadge status={selectedMobileItem.status} />
-            </div>
-            <p className="text-[11px] text-slate-600 pt-1 border-t border-slate-100">
-              {selectedMobileItem.desc}
-            </p>
           </div>
         )}
 
