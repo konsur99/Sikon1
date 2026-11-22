@@ -215,10 +215,10 @@ export const MobilePreview: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center py-6 min-h-[calc(100vh-72px)] bg-[#e9edf1]">
-      {/* Top Multi-Persona Selector Bar */}
-      <div className="mb-4 flex flex-col items-center gap-2">
-        <div className="text-[11px] font-extrabold text-sikoni-muted tracking-widest uppercase">
+    <div className="w-full flex flex-col items-center justify-center sm:py-6 min-h-screen sm:min-h-[calc(100vh-56px)] bg-[#0d1c2d] sm:bg-[#e9edf1]">
+      {/* Top Multi-Persona Selector Bar for Desktop / Laptop Preview */}
+      <div className="hidden sm:flex mb-4 flex-col items-center gap-2">
+        <div className="text-[11px] font-extrabold text-slate-600 sm:text-sikoni-muted tracking-widest uppercase">
           Pilih Peran Pengguna Aplikasi Android SIKONI
         </div>
 
@@ -249,7 +249,7 @@ export const MobilePreview: React.FC = () => {
                 : 'text-slate-600 hover:bg-slate-100'
             }`}
           >
-            <Award size={14} /> Operator Cabor (PASI)
+            <Award size={14} /> Pengurus Cabor (PASI)
           </button>
 
           <button
@@ -267,15 +267,56 @@ export const MobilePreview: React.FC = () => {
           </button>
         </div>
 
-        <p className="text-[11px] text-slate-500 font-medium">
+        <p className="text-[11px] text-slate-500 font-medium text-center max-w-md">
           {persona === 'publik' && 'Mode Publik: Jelajahi direktori 64 cabor, transparansi APBD, jadwal event & berita olahraga.'}
-          {persona === 'cabor' && 'Mode Cabor: Ajukan RAB kegiatan, input nota kas, susun LPJ, & kelola insentif atlet binaan.'}
+          {persona === 'cabor' && 'Mode Cabor: Ajukan RAB kegiatan, input nota kas, susun LPJ & Word, serta kelola insentif atlet binaan.'}
           {persona === 'pengurus' && 'Mode Pengurus: Dashboard eksekutif, verifikasi & approval berkas, monitoring 64 cabor, & mutasi giro.'}
         </p>
       </div>
 
-      {/* Android Device Mockup Frame */}
-      <div className="w-[395px] h-[800px] bg-white rounded-[40px] shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-[11px] border-[#142a43] flex flex-col overflow-hidden relative">
+      {/* Android Device Frame (Edge-to-Edge on Phones, Elegant Smartphone Frame on Desktops) */}
+      <div className="w-full sm:w-[412px] h-[100dvh] sm:h-[830px] bg-white rounded-none sm:rounded-[44px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43] flex flex-col overflow-hidden relative mx-auto">
+        {/* Android Native Status Bar */}
+        <div className="h-6 bg-[#142a43] text-white px-4 flex items-center justify-between text-[10px] font-bold tracking-wider select-none flex-shrink-0">
+          <span>12:30</span>
+          <div className="flex items-center gap-1.5 text-[9.5px]">
+            <span className="text-[9px] font-black tracking-normal text-sikoni-gold">5G</span>
+            <span>📶</span>
+            <span>100% 🔋</span>
+          </div>
+        </div>
+
+        {/* Mobile Quick Role Switcher for Android Phones */}
+        <div className="sm:hidden bg-[#142a43] px-3 py-1.5 flex items-center justify-between gap-1 border-b border-white/10 flex-shrink-0">
+          <span className="text-[9px] text-slate-300 font-bold uppercase">Peran:</span>
+          <div className="flex items-center gap-1 flex-1 justify-end">
+            <button
+              onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
+                persona === 'publik' ? 'bg-white text-sikoni-navy shadow-xs' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Publik
+            </button>
+            <button
+              onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
+                persona === 'cabor' ? 'bg-sikoni-teal text-white shadow-xs' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Cabor
+            </button>
+            <button
+              onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
+              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
+                persona === 'pengurus' ? 'bg-sikoni-gold text-sikoni-navy shadow-xs' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              Pengurus
+            </button>
+          </div>
+        </div>
+
         {/* Mobile Top Header */}
         <div className="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between flex-shrink-0 z-20">
           <div className="flex items-center gap-2">

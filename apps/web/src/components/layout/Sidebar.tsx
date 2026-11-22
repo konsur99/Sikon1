@@ -19,6 +19,7 @@ import {
   BarChart3,
   Settings,
   X,
+  Smartphone,
 } from 'lucide-react';
 
 interface NavItem {
@@ -43,6 +44,7 @@ const navGroups: NavGroup[] = [
     caption: 'RINGKASAN',
     items: [
       { href: '/admin/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={17} /> },
+      { href: '/android-preview', label: 'SIKONI Android', icon: <Smartphone size={17} /> },
     ],
   },
   {

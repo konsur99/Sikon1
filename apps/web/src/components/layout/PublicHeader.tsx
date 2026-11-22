@@ -45,7 +45,15 @@ export const PublicHeader: React.FC = () => {
           );
         })}
 
-        <div className="flex items-center gap-3 pl-4 border-l border-sikoni-line">
+        <div className="flex items-center gap-2.5 pl-4 border-l border-sikoni-line">
+          {/* SIKONI Android App Link */}
+          <Link
+            href="/android-preview"
+            className="text-xs font-bold text-sikoni-teal bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
+          >
+            <span>📱 Versi Android</span>
+          </Link>
+
           {/* Quick switcher to Admin */}
           <button
             onClick={() => router.push('/admin/dashboard')}
@@ -106,6 +114,13 @@ export const PublicHeader: React.FC = () => {
             })}
 
             <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              <Link
+                href="/android-preview"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full text-center text-xs font-bold text-white bg-gradient-to-r from-sikoni-teal to-teal-700 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5"
+              >
+                <span>📱 Buka SIKONI Versi Android (3 Peran)</span>
+              </Link>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);

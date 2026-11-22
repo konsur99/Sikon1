@@ -278,7 +278,14 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar, isSidebarOpen }
           )}
         </div>
 
-        {/* Quick Portal Switcher & Device Responsive Badge */}
+        {/* Quick Portal Switcher & Android App Shortcut */}
+        <Link
+          href="/android-preview"
+          className="text-xs font-bold text-sikoni-teal hover:text-teal-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-2.5 sm:px-3 py-1.5 rounded-xl transition-all flex items-center gap-1 shadow-xs"
+        >
+          <span>📱 Mode Android</span>
+        </Link>
+
         {isAdmin ? (
           <Link
             href="/"

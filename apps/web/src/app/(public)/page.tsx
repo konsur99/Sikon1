@@ -24,7 +24,13 @@ export default function HomePage() {
             Portal informasi resmi dan layanan terpadu pembinaan olahraga Kota Surakarta. Akses direktori 64 cabang olahraga, agenda kejuaraan daerah, serta transparansi dana hibah APBD secara terbuka dan akuntabel.
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto">
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto flex-wrap">
+            <Link
+              href="/android-preview"
+              className="bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-emerald-300/30"
+            >
+              <span>📱 Buka SIKONI Versi Android</span>
+            </Link>
             <Link
               href="/cabor"
               className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy font-black text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105"
@@ -39,7 +45,7 @@ export default function HomePage() {
             </Link>
             <Link
               href="/admin/dashboard"
-              className="bg-emerald-600/90 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl border border-emerald-400/30 transition-all backdrop-blur-sm text-center"
+              className="bg-white/15 hover:bg-white/25 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/20 transition-all backdrop-blur-sm text-center"
             >
               🏛️ Portal Admin & LPJ →
             </Link>
