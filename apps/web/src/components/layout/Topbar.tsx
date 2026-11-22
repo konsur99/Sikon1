@@ -14,7 +14,13 @@ import {
   Percent,
   AlertCircle,
   ExternalLink,
+  Menu,
 } from 'lucide-react';
+
+interface TopbarProps {
+  onToggleSidebar?: () => void;
+  isSidebarOpen?: boolean;
+}
 
 interface SearchResult {
   label: string;
@@ -104,7 +110,7 @@ const searchableItems: SearchResult[] = [
   { label: 'Direktori Cabor Publik', category: 'Publik', href: '/cabor' },
 ];
 
-export const Topbar: React.FC = () => {
+export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar, isSidebarOpen }) => {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -126,7 +132,6 @@ export const Topbar: React.FC = () => {
     pathname.startsWith('/berita') ||
     pathname.startsWith('/profil');
   const isAdmin = pathname.startsWith('/admin');
-  const isMobile = pathname.startsWith('/android-preview');
 
   const unreadCount = notifications.filter((n) => n.unread).length;
 
@@ -184,32 +189,41 @@ export const Topbar: React.FC = () => {
     : [];
 
   return (
-    <header className="h-[72px] bg-white border-b border-sikoni-line flex items-center justify-between px-7 sticky top-0 z-30 shadow-[0_2px_10px_rgba(20,42,67,0.03)]">
-      <div className="flex items-center gap-3 min-w-[240px]">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="brand-mark group-hover:scale-105 transition-transform">SK</div>
-          <div>
-            <div className="text-[15px] font-extrabold tracking-wide text-sikoni-navy flex items-center gap-1.5">
+    <header className="h-[72px] bg-white border-b border-sikoni-line flex items-center justify-between px-3 sm:px-7 sticky top-0 z-30 shadow-[0_2px_10px_rgba(20,42,67,0.03)]">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+        {onToggleSidebar && (
+          <button
+            onClick={onToggleSidebar}
+            aria-label="Toggle Menu Admin"
+            className="lg:hidden p-2 text-sikoni-navy hover:bg-slate-100 rounded-xl border border-slate-200 transition-colors flex-shrink-0"
+          >
+            <Menu size={19} />
+          </button>
+        )}
+        <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0">
+          <div className="brand-mark group-hover:scale-105 transition-transform flex-shrink-0">SK</div>
+          <div className="min-w-0">
+            <div className="text-[14px] sm:text-[15px] font-extrabold tracking-wide text-sikoni-navy flex items-center gap-1.5 truncate">
               SIKONI
-              <span className="text-[9px] bg-sikoni-teal2 text-sikoni-teal font-bold px-1.5 py-0.5 rounded">
+              <span className="hidden sm:inline-block text-[9px] bg-sikoni-teal2 text-sikoni-teal font-bold px-1.5 py-0.5 rounded">
                 v2.1
               </span>
             </div>
-            <div className="text-[10px] text-sikoni-muted tracking-wider">
-              SISTEM INFORMASI KONI SURAKARTA
+            <div className="text-[9px] sm:text-[10px] text-sikoni-muted tracking-wider truncate">
+              KONI KOTA SURAKARTA
             </div>
           </div>
         </Link>
       </div>
 
-      <div className="flex items-center gap-3.5">
-        {/* Interactive Global Searchbox with Instant Dropdown */}
-        <div className="relative" ref={searchRef}>
-          <div className="h-[38px] w-[240px] md:w-[280px] bg-[#f7f9fb] border border-sikoni-line rounded-[10px] px-3 flex items-center gap-2 text-sikoni-muted focus-within:border-sikoni-teal focus-within:bg-white transition-all shadow-inner">
+      <div className="flex items-center gap-2 sm:gap-3.5">
+        {/* Interactive Global Searchbox */}
+        <div className="relative hidden sm:block" ref={searchRef}>
+          <div className="h-[38px] w-[180px] md:w-[260px] bg-[#f7f9fb] border border-sikoni-line rounded-[10px] px-3 flex items-center gap-2 text-sikoni-muted focus-within:border-sikoni-teal focus-within:bg-white transition-all shadow-inner">
             <Search size={16} />
             <input
               type="text"
-              placeholder="Cari menu, dokumen, atau kegiatan..."
+              placeholder="Cari menu, dokumen..."
               value={searchQuery}
               onFocus={() => setIsSearchOpen(true)}
               onChange={(e) => {
@@ -264,26 +278,26 @@ export const Topbar: React.FC = () => {
           )}
         </div>
 
-        {/* 3-Channel Mode Switcher matching Mockup */}
-        <div className="flex items-center gap-1 bg-[#edf2f7] p-1 rounded-full border border-slate-200/60">
-          <button
-            onClick={() => router.push('/')}
-            className={`mode-pill ${isPublic ? 'active' : 'inactive'}`}
+        {/* Quick Portal Switcher & Device Responsive Badge */}
+        {isAdmin ? (
+          <Link
+            href="/"
+            className="text-xs font-bold text-sikoni-navy hover:text-sikoni-teal bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl transition-all hidden sm:flex items-center gap-1 shadow-xs"
           >
-            Publik
-          </button>
-          <button
-            onClick={() => router.push('/admin/dashboard')}
-            className={`mode-pill ${isAdmin ? 'active' : 'inactive'}`}
+            <span>← Web Publik</span>
+          </Link>
+        ) : (
+          <Link
+            href="/admin/dashboard"
+            className="text-xs font-bold text-sikoni-teal hover:text-teal-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-xl transition-all hidden sm:flex items-center gap-1 shadow-xs"
           >
-            Admin
-          </button>
-          <button
-            onClick={() => router.push('/android-preview')}
-            className={`mode-pill ${isMobile ? 'active' : 'inactive'}`}
-          >
-            Android
-          </button>
+            <span>Portal Admin →</span>
+          </Link>
+        )}
+
+        <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 text-slate-600 text-[10.5px] font-bold border border-slate-200/80">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span>Responsif Android & Laptop</span>
         </div>
 
         {/* Notification Bell with Floating Dropdown Menu (Popover) */}

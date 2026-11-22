@@ -1,10 +1,17 @@
 import React from 'react';
 import '../styles/globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 
 export const metadata: Metadata = {
   title: 'SIKONI — Sistem Informasi KONI Surakarta',
-  description: 'Sistem Informasi Terpadu KONI Kota Surakarta (Website Publik, Web Admin, dan Android)',
+  description: 'Sistem Informasi Terpadu KONI Kota Surakarta (Website Publik & Web Admin Responsif Desktop & Android)',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#142a43',
 };
 
 export default function RootLayout({

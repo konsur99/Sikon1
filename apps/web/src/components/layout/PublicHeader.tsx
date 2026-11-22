@@ -1,12 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 
 export const PublicHeader: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { href: '/', label: 'Beranda' },
@@ -17,16 +19,17 @@ export const PublicHeader: React.FC = () => {
   ];
 
   return (
-    <header className="h-[75px] bg-white border-b border-sikoni-line flex items-center justify-between px-8 sticky top-0 z-30 shadow-sm">
-      <Link href="/" className="flex items-center gap-3">
+    <header className="h-[75px] bg-white border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-sm">
+      <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setMobileMenuOpen(false)}>
         <div className="brand-mark">SK</div>
         <div>
-          <div className="text-[16px] font-extrabold tracking-wide text-sikoni-navy">KONI SURAKARTA</div>
-          <div className="text-[10px] text-sikoni-muted tracking-widest font-semibold">SISTEM INFORMASI TERPADU</div>
+          <div className="text-[14px] sm:text-[16px] font-extrabold tracking-wide text-sikoni-navy">KONI SURAKARTA</div>
+          <div className="text-[9px] sm:text-[10px] text-sikoni-muted tracking-widest font-semibold">SISTEM INFORMASI TERPADU</div>
         </div>
       </Link>
 
-      <nav className="flex items-center gap-6">
+      {/* Desktop Navigation Links (Laptop / PC) */}
+      <nav className="hidden md:flex items-center gap-6">
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
@@ -46,7 +49,7 @@ export const PublicHeader: React.FC = () => {
           {/* Quick switcher to Admin */}
           <button
             onClick={() => router.push('/admin/dashboard')}
-            className="text-xs font-semibold text-sikoni-navy bg-[#edf2f7] px-3 py-1.5 rounded-lg hover:bg-slate-200"
+            className="text-xs font-semibold text-sikoni-navy bg-[#edf2f7] px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors"
           >
             Portal Admin →
           </button>
@@ -58,14 +61,73 @@ export const PublicHeader: React.FC = () => {
           </Link>
         </div>
       </nav>
+
+      {/* Mobile Hamburger Button (Android / Smartphone) */}
+      <div className="flex items-center gap-2 md:hidden">
+        <Link
+          href="/login"
+          className="bg-sikoni-teal text-white text-[11px] font-bold px-3 py-1.5 rounded-lg shadow-sm"
+        >
+          Masuk
+        </Link>
+        <button
+          onClick={() => setMobileMenuOpen((prev) => !prev)}
+          aria-label="Toggle Mobile Menu"
+          className="p-2 text-sikoni-navy hover:bg-slate-100 rounded-lg transition-colors border border-slate-200"
+        >
+          {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile Drawer Dropdown Menu (Android Screen Adaptive) */}
+      {mobileMenuOpen && (
+        <div className="absolute top-[75px] left-0 right-0 bg-white border-b border-slate-200 shadow-xl p-5 z-40 md:hidden animate-in fade-in slide-in-from-top-3 duration-200">
+          <div className="flex flex-col space-y-3">
+            <span className="text-[10px] font-bold text-sikoni-muted uppercase tracking-wider px-2">
+              Menu Navigasi
+            </span>
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`px-3 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center justify-between ${
+                    isActive
+                      ? 'bg-emerald-50 text-sikoni-teal font-bold border border-emerald-200/80'
+                      : 'text-slate-700 hover:bg-slate-50'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-sikoni-teal" />}
+                </Link>
+              );
+            })}
+
+            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  router.push('/admin/dashboard');
+                }}
+                className="w-full text-center text-xs font-bold text-sikoni-navy bg-slate-100 py-2.5 rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-1.5"
+              >
+                <span>Buka Portal Admin Pengurus</span>
+                <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };
 
 export const PublicFooter: React.FC = () => {
   return (
-    <footer className="py-12 px-6 mt-auto">
-      <div className="max-w-6xl mx-auto bg-gradient-to-br from-[#142a43] via-[#1b3a5c] to-[#142a43] rounded-3xl p-8 sm:p-10 text-white shadow-2xl border border-white/10 relative overflow-hidden">
+    <footer className="py-12 px-4 sm:px-6 mt-auto">
+      <div className="max-w-6xl mx-auto bg-gradient-to-br from-[#142a43] via-[#1b3a5c] to-[#142a43] rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-white/10 relative overflow-hidden">
         {/* Top Decorative Line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-sikoni-gold via-sikoni-teal to-sikoni-gold" />
 
@@ -87,7 +149,7 @@ export const PublicFooter: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-xs w-full md:w-auto">
             <div className="space-y-2">
               <b className="text-[11px] font-extrabold text-sikoni-gold uppercase tracking-wider block">
                 Navigasi Publik
@@ -106,8 +168,8 @@ export const PublicFooter: React.FC = () => {
                 Layanan Digital
               </b>
               <ul className="space-y-1.5 text-slate-300">
-                <li><Link href="/android-preview" className="hover:text-white transition-colors">📱 Aplikasi Android</Link></li>
                 <li><Link href="/admin/dashboard" className="hover:text-white transition-colors">🏛️ Portal Admin KONI</Link></li>
+                <li><Link href="/admin/lpj" className="hover:text-white transition-colors">📄 Generator Word LPJ</Link></li>
                 <li><Link href="/login" className="hover:text-white transition-colors">🔐 Login Pengurus & Cabor</Link></li>
               </ul>
             </div>
@@ -127,7 +189,7 @@ export const PublicFooter: React.FC = () => {
         <div className="mt-8 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-300 gap-2 relative z-10">
           <span>© 2026 Komite Olahraga Nasional Indonesia (KONI) Kota Surakarta.</span>
           <span className="text-[11px] text-sikoni-gold font-semibold">
-            SIKONI v2.1 • Akuntabel & Berprestasi
+            SIKONI v2.1 • Responsif Android & Desktop
           </span>
         </div>
       </div>

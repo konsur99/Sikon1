@@ -401,3 +401,4 @@ export function generateLpjWordDocument(data: LpjDocumentData): void {
   document.body.removeChild(anchor);
   URL.revokeObjectURL(url);
 }
+

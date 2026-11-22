@@ -38,10 +38,10 @@ export default function HomePage() {
               Lihat Transparansi Anggaran
             </Link>
             <Link
-              href="/android-preview"
+              href="/admin/dashboard"
               className="bg-emerald-600/80 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl border border-emerald-400/30 transition-all backdrop-blur-sm"
             >
-              📱 Coba SIKONI Android
+              🏛️ Portal Admin & LPJ →
             </Link>
           </div>
         </div>
