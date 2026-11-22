@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/swc-win32-x64-msvc": "14.2.24",
     "@sikoni/shared": "*",
     "clsx": "^2.1.0",
     "lucide-react": "^0.344.0",
