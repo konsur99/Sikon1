@@ -83,7 +83,7 @@ export default function AdminDashboardPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5 z-10 flex-wrap">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 z-10 w-full sm:w-auto">
           <button
             onClick={() => {
               exportToCsv(
@@ -93,13 +93,13 @@ export default function AdminDashboardPage() {
               );
               showToast('Berkas ringkasan eksekutif (CSV / Excel) berhasil diunduh.');
             }}
-            className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 backdrop-blur-sm shadow-sm"
+            className="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 backdrop-blur-sm shadow-sm"
           >
             <Download size={14} /> Export CSV
           </button>
           <Link
             href="/admin/rab"
-            className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-1.5 shadow-lg"
+            className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-lg"
           >
             <Plus size={15} /> Buat Usulan RAB
           </Link>

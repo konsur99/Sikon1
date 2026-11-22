@@ -34,12 +34,12 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 space-y-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-10">
       <div>
-        <div className="text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
+        <div className="text-[11px] sm:text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
           TENTANG ORGANISASI
         </div>
-        <h1 className="text-3xl font-black text-sikoni-navy tracking-tight mt-1">Profil KONI Surakarta</h1>
+        <h1 className="text-2xl sm:text-3xl font-black text-sikoni-navy tracking-tight mt-1">Profil KONI Surakarta</h1>
         <p className="text-xs text-sikoni-muted mt-1 max-w-2xl leading-relaxed">
           Komite Olahraga Nasional Indonesia (KONI) Kota Surakarta adalah wadah tunggal gerakan pembinaan dan pengembangan keolahragaan prestasi di Kota Bengawan.
         </p>

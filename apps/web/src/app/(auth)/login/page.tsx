@@ -26,8 +26,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-160px)] flex items-center justify-center py-12 px-4">
-      <div className="card-sikoni relative overflow-hidden w-full max-w-md p-8 space-y-6 shadow-2xl border border-slate-200/90">
+    <div className="min-h-[calc(100vh-160px)] flex items-center justify-center py-6 sm:py-12 px-3.5 sm:px-4">
+      <div className="card-sikoni relative overflow-hidden w-full max-w-md p-5 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl border border-slate-200/90">
         <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
         <div className="text-center space-y-2">
           <div className="brand-mark mx-auto mb-3">SK</div>
@@ -138,8 +138,8 @@ export default function LoginPage() {
 
       {/* Help Modal */}
       {showHelpModal && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni relative overflow-hidden w-full max-w-sm p-6 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni relative overflow-hidden w-[94vw] sm:w-full max-w-sm p-4 sm:p-6 space-y-4 shadow-2xl">
             <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
             <div className="flex justify-between items-center">
               <h3 className="text-sm font-extrabold text-sikoni-navy">Bantuan Akun & Reset Akses</h3>

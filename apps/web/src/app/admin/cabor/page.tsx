@@ -199,7 +199,7 @@ export default function AdminCaborPage() {
             </div>
 
             <form onSubmit={handleAddCabor} className="space-y-3.5 text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-sikoni-navy block mb-1">Kode Cabor *</label>
                   <input
@@ -249,7 +249,7 @@ export default function AdminCaborPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-sikoni-navy block mb-1">Email Resmi Sekretariat</label>
                   <input

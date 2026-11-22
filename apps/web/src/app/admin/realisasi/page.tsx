@@ -170,7 +170,7 @@ export default function RealizationPage() {
                   {selectedExpense.proof}
                 </b>
               </div>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
                   <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Metode Pembayaran</span>
                   <b className="text-xs text-sikoni-navy">{selectedExpense.method}</b>

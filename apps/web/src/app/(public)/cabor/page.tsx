@@ -138,12 +138,12 @@ export default function PublicCaborPage() {
   });
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
       <div>
-        <div className="text-xs font-black text-sikoni-teal tracking-widest uppercase mb-1">
+        <div className="text-[11px] sm:text-xs font-black text-sikoni-teal tracking-widest uppercase mb-1">
           DIREKTORI RESMI CABANG OLAHRAGA
         </div>
-        <h1 className="text-3xl font-black text-sikoni-navy tracking-tight">Cabang Olahraga</h1>
+        <h1 className="text-2xl sm:text-3xl font-black text-sikoni-navy tracking-tight">Cabang Olahraga</h1>
         <p className="text-xs text-sikoni-muted mt-1 max-w-2xl leading-relaxed">
           Temukan direktori cabang olahraga binaan resmi KONI Kota Surakarta lengkap dengan data atlet terdaftar, lokasi venue latihan, dan kontak pengurus kota.
         </p>
@@ -280,8 +280,8 @@ export default function PublicCaborPage() {
 
       {/* Cabor Profile Modal with Top Accent Line */}
       {selectedCabor && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni relative overflow-hidden w-full max-w-lg p-6 space-y-4 shadow-2xl">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni relative overflow-hidden w-[94vw] sm:w-full max-w-lg p-4 sm:p-6 space-y-4 shadow-2xl">
             <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
             <div className="flex justify-between items-start">
               <div className="flex items-center gap-3">

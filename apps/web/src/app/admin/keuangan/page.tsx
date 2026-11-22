@@ -102,7 +102,7 @@ export default function FinanceOverviewPage() {
             );
             showToast('Ekspor pembukuan keuangan format Excel/CSV berhasil diunduh.');
           }}
-          className="bg-white border border-slate-200 text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center gap-1.5 shadow-sm transition-all"
+          className="bg-white border border-slate-200 text-sikoni-ink px-3.5 py-2 rounded-xl text-xs font-bold hover:bg-slate-50 flex items-center justify-center gap-1.5 shadow-sm transition-all self-start md:self-auto"
         >
           <Download size={14} /> Ekspor Rekapitulasi Keuangan
         </button>

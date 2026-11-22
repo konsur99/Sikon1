@@ -6,40 +6,40 @@ export default function HomePage() {
   return (
     <div className="space-y-12 pb-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#142a43] via-[#1b395a] to-[#168b8b] text-white py-20 px-8 relative overflow-hidden shadow-xl">
-        <div className="max-w-5xl mx-auto text-center space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-sikoni-gold font-bold text-xs tracking-wider uppercase border border-white/15 backdrop-blur-sm shadow-sm">
-            <Trophy size={14} className="text-sikoni-gold" />
-            KONI KOTA SURAKARTA • SISTEM INFORMASI OLAHRAGA
+      <section className="bg-gradient-to-br from-[#142a43] via-[#1b395a] to-[#168b8b] text-white py-12 sm:py-20 px-4 sm:px-8 relative overflow-hidden shadow-xl">
+        <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-sikoni-gold font-bold text-[10.5px] sm:text-xs tracking-wider uppercase border border-white/15 backdrop-blur-sm shadow-sm">
+            <Trophy size={14} className="text-sikoni-gold flex-shrink-0" />
+            <span className="truncate">KONI SURAKARTA • SISTEM OLAHRAGA TERPADU</span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
             Membangun Prestasi Juara.<br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-sikoni-gold via-amber-200 to-sikoni-gold">
               Memperkuat Tata Kelola Akuntabel.
             </span>
           </h1>
 
-          <p className="text-slate-200 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-slate-200 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Portal informasi resmi dan layanan terpadu pembinaan olahraga Kota Surakarta. Akses direktori 64 cabang olahraga, agenda kejuaraan daerah, serta transparansi dana hibah APBD secara terbuka dan akuntabel.
           </p>
 
-          <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
+          <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto">
             <Link
               href="/cabor"
-              className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy font-black text-xs px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transition-transform hover:scale-105"
+              className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy font-black text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105"
             >
-              Jelajahi 64 Cabang Olahraga <ArrowRight size={16} />
+              <span>Jelajahi 64 Cabor</span> <ArrowRight size={15} />
             </Link>
             <Link
               href="/transparansi"
-              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-6 py-3 rounded-xl border border-white/25 transition-all backdrop-blur-sm"
+              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/25 transition-all backdrop-blur-sm text-center"
             >
-              Lihat Transparansi Anggaran
+              Transparansi Anggaran
             </Link>
             <Link
               href="/admin/dashboard"
-              className="bg-emerald-600/80 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl border border-emerald-400/30 transition-all backdrop-blur-sm"
+              className="bg-emerald-600/90 hover:bg-emerald-600 text-white font-bold text-xs px-5 py-3 rounded-xl border border-emerald-400/30 transition-all backdrop-blur-sm text-center"
             >
               🏛️ Portal Admin & LPJ →
             </Link>
@@ -48,30 +48,30 @@ export default function HomePage() {
       </section>
 
       {/* 4 Big Public Stats in Premium Elevated Box */}
-      <section className="max-w-6xl mx-auto px-6 -mt-8 relative z-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-[0_12px_36px_rgba(20,42,67,0.12)] border border-slate-200/90 relative overflow-hidden">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8 relative z-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 bg-white/95 backdrop-blur-md p-3.5 sm:p-6 rounded-2xl shadow-[0_12px_36px_rgba(20,42,67,0.12)] border border-slate-200/90 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
-          <div className="text-center p-3">
-            <div className="text-3xl font-black text-sikoni-navy">64</div>
-            <div className="text-xs text-sikoni-muted mt-1 font-bold">Cabang Olahraga Resmi</div>
+          <div className="text-center p-2.5 sm:p-3">
+            <div className="text-2xl sm:text-3xl font-black text-sikoni-navy">64</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Cabang Olahraga</div>
           </div>
-          <div className="text-center p-3 border-l border-slate-200">
-            <div className="text-3xl font-black text-sikoni-teal">1.450+</div>
-            <div className="text-xs text-sikoni-muted mt-1 font-bold">Atlet & Pelatih Terdata</div>
+          <div className="text-center p-2.5 sm:p-3 border-l border-slate-200">
+            <div className="text-2xl sm:text-3xl font-black text-sikoni-teal">1.450+</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Atlet & Pelatih</div>
           </div>
-          <div className="text-center p-3 border-l border-slate-200">
-            <div className="text-3xl font-black text-sikoni-gold">124</div>
-            <div className="text-xs text-sikoni-muted mt-1 font-bold">Medali Emas Porprov</div>
+          <div className="text-center p-2.5 sm:p-3 border-t sm:border-t-0 md:border-l border-slate-200">
+            <div className="text-2xl sm:text-3xl font-black text-sikoni-gold">124</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Medali Porprov</div>
           </div>
-          <div className="text-center p-3 border-l border-slate-200">
-            <div className="text-3xl font-black text-emerald-600">Rp 12,8 M</div>
-            <div className="text-xs text-sikoni-muted mt-1 font-bold">Hibah APBD Terbuka</div>
+          <div className="text-center p-2.5 sm:p-3 border-t sm:border-t-0 border-l border-slate-200">
+            <div className="text-2xl sm:text-3xl font-black text-emerald-600">Rp 12,8 M</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Hibah APBD Terbuka</div>
           </div>
         </div>
       </section>
 
       {/* Feature Navigation Cards */}
-      <section className="max-w-6xl mx-auto px-6 space-y-6">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-2 pb-2 border-b border-slate-200">
           <div>
             <h2 className="text-2xl font-black text-sikoni-navy tracking-tight">Informasi dan Layanan Publik</h2>

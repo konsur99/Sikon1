@@ -61,8 +61,8 @@ export function DataTable<T extends Record<string, any>>({
       )}
 
       {showFilterbar && (
-        <div className="flex flex-wrap items-center gap-3 mb-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-3 rounded-xl border border-slate-200/80 shadow-sm">
-          <div className="relative flex-1 min-w-[220px]">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 mb-4 bg-gradient-to-r from-slate-50 via-white to-slate-50 p-3 rounded-xl border border-slate-200/80 shadow-sm">
+          <div className="relative flex-1 min-w-0 sm:min-w-[220px]">
             <Search className="absolute left-3 top-2.5 text-sikoni-muted" size={15} />
             <input
               type="text"
@@ -73,12 +73,15 @@ export function DataTable<T extends Record<string, any>>({
             />
           </div>
 
-          <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-lg px-2.5 py-1">
-            <Filter size={13} className="text-sikoni-muted" />
+          <div className="flex items-center justify-between sm:justify-start gap-2 bg-white border border-slate-200 rounded-lg px-2.5 py-1">
+            <div className="flex items-center gap-1.5 text-slate-500">
+              <Filter size={13} className="text-sikoni-muted" />
+              <span className="sm:hidden text-[11px] font-bold">Filter:</span>
+            </div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-transparent border-none text-xs text-sikoni-ink font-medium focus:outline-none cursor-pointer"
+              className="bg-transparent border-none text-xs text-sikoni-ink font-medium focus:outline-none cursor-pointer flex-1 sm:flex-initial"
             >
               <option>Semua status</option>
               <option>Menunggu</option>
@@ -90,8 +93,14 @@ export function DataTable<T extends Record<string, any>>({
         </div>
       )}
 
+      {/* Mobile scroll hint */}
+      <div className="sm:hidden flex items-center justify-between text-[10px] text-slate-400 italic mb-1.5 px-1">
+        <span>⟷ Geser tabel untuk kolom lengkap</span>
+        <span className="font-semibold text-sikoni-teal">{filteredData.length} data</span>
+      </div>
+
       <div className="overflow-x-auto rounded-xl border border-slate-200/90 shadow-sm">
-        <table className="w-full text-left border-collapse text-xs">
+        <table className="w-full text-left border-collapse text-xs min-w-[560px]">
           <thead>
             <tr className="bg-gradient-to-r from-slate-50 via-[#f5f8fb] to-slate-50 border-b border-slate-200 text-sikoni-navy font-black text-[10.5px] uppercase tracking-wider">
               {columns.map((col, idx) => (

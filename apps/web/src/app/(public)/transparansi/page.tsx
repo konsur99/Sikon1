@@ -51,12 +51,12 @@ export default function TransparencyPage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
       <div>
-        <div className="text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
+        <div className="text-[11px] sm:text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
           INFORMASI PUBLIK
         </div>
-        <h1 className="text-3xl font-black text-sikoni-navy tracking-tight mt-1">Transparansi Anggaran</h1>
+        <h1 className="text-2xl sm:text-3xl font-black text-sikoni-navy tracking-tight mt-1">Transparansi Anggaran</h1>
         <p className="text-xs text-sikoni-muted mt-1 max-w-2xl leading-relaxed">
           Ringkasan anggaran publikasi tahun 2026. Informasi yang ditampilkan telah melalui rekonsiliasi dan persetujuan pengurus KONI Surakarta.
         </p>
@@ -110,7 +110,7 @@ export default function TransparencyPage() {
 
           <div className="space-y-2.5 text-xs">
             {/* Box 1: Pembinaan */}
-            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex items-center justify-between hover:shadow-md hover:border-sikoni-teal/40 transition-all border-l-4 border-l-sikoni-teal group">
+            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 hover:shadow-md hover:border-sikoni-teal/40 transition-all border-l-4 border-l-sikoni-teal group">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-emerald-50 text-sikoni-teal grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
                   <Trophy size={16} />
@@ -120,14 +120,14 @@ export default function TransparencyPage() {
                   <span className="text-[10.5px] text-slate-500 font-medium">Honorarium, nutrisi, uang saku TC</span>
                 </div>
               </div>
-              <div className="text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm">
+              <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm self-start sm:self-auto">
                 <b className="text-sikoni-navy font-black text-xs block">Rp 540.000.000</b>
                 <span className="text-[9.5px] font-bold text-sikoni-teal">29,7% Alokasi</span>
               </div>
             </div>
 
             {/* Box 2: Kompetisi */}
-            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex items-center justify-between hover:shadow-md hover:border-sikoni-gold/40 transition-all border-l-4 border-l-sikoni-gold group">
+            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 hover:shadow-md hover:border-sikoni-gold/40 transition-all border-l-4 border-l-sikoni-gold group">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-amber-50 text-sikoni-gold grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
                   <Award size={16} />
@@ -137,14 +137,14 @@ export default function TransparencyPage() {
                   <span className="text-[10.5px] text-slate-500 font-medium">Piala Walikota, Porprov, Kejurkot</span>
                 </div>
               </div>
-              <div className="text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm">
+              <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm self-start sm:self-auto">
                 <b className="text-sikoni-navy font-black text-xs block">Rp 420.000.000</b>
                 <span className="text-[9.5px] font-bold text-amber-600">23,1% Alokasi</span>
               </div>
             </div>
 
             {/* Box 3: Operasional */}
-            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex items-center justify-between hover:shadow-md hover:border-sikoni-navy/40 transition-all border-l-4 border-l-sikoni-navy group">
+            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 hover:shadow-md hover:border-sikoni-navy/40 transition-all border-l-4 border-l-sikoni-navy group">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-slate-100 text-sikoni-navy grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
                   <Building2 size={16} />
@@ -154,14 +154,14 @@ export default function TransparencyPage() {
                   <span className="text-[10.5px] text-slate-500 font-medium">Administrasi, ATK, rapat koordinasi</span>
                 </div>
               </div>
-              <div className="text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm">
+              <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm self-start sm:self-auto">
                 <b className="text-sikoni-navy font-black text-xs block">Rp 250.000.000</b>
                 <span className="text-[9.5px] font-bold text-slate-600">13,7% Alokasi</span>
               </div>
             </div>
 
             {/* Box 4: Program pendukung */}
-            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex items-center justify-between hover:shadow-md hover:border-emerald-500/40 transition-all border-l-4 border-l-emerald-600 group">
+            <div className="p-3 bg-gradient-to-r from-slate-50 via-white to-slate-50 rounded-xl border border-slate-200/90 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 hover:shadow-md hover:border-emerald-500/40 transition-all border-l-4 border-l-emerald-600 group">
               <div className="flex items-center gap-3">
                 <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 grid place-items-center flex-shrink-0 group-hover:scale-105 transition-transform shadow-sm">
                   <Layers size={16} />
@@ -171,7 +171,7 @@ export default function TransparencyPage() {
                   <span className="text-[10.5px] text-slate-500 font-medium">Peralatan tanding, tes medis & gizi</span>
                 </div>
               </div>
-              <div className="text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm">
+              <div className="text-left sm:text-right bg-white px-3 py-1.5 rounded-lg border border-slate-200/80 shadow-sm self-start sm:self-auto">
                 <b className="text-sikoni-navy font-black text-xs block">Rp 610.000.000</b>
                 <span className="text-[9.5px] font-bold text-emerald-600">33,5% Alokasi</span>
               </div>
@@ -323,9 +323,10 @@ export default function TransparencyPage() {
 
       {/* Document Preview Modal */}
       {selectedDoc && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-start">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="card-sikoni relative overflow-hidden w-[94vw] sm:w-full max-w-lg p-4 sm:p-6 space-y-4 shadow-2xl">
+            <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
+            <div className="flex justify-between items-start gap-2">
               <div className="flex items-center gap-2.5">
                 <div className="w-10 h-10 rounded-xl bg-sikoni-teal2 text-sikoni-teal grid place-items-center">
                   <FileText size={20} />

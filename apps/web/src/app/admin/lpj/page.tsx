@@ -890,18 +890,18 @@ export default function LpjPage() {
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full sm:w-auto justify-end">
                 <button
                   type="button"
                   onClick={() => setShowPreviewModal(true)}
-                  className="px-4 py-2.5 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all flex items-center gap-1.5"
+                  className="px-4 py-2.5 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all flex items-center justify-center gap-1.5"
                 >
                   <Eye size={15} /> Pratinjau
                 </button>
 
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sikoni-gold via-amber-300 to-sikoni-gold hover:from-amber-400 hover:to-amber-500 text-sikoni-navy font-black text-xs shadow-lg hover:shadow-xl transition-all flex items-center gap-2 transform hover:scale-[1.02]"
+                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sikoni-gold via-amber-300 to-sikoni-gold hover:from-amber-400 hover:to-amber-500 text-sikoni-navy font-black text-xs shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 transform hover:scale-[1.02]"
                 >
                   <FileText size={16} /> Selesai & Generate File Word LPJ
                 </button>
@@ -1047,7 +1047,7 @@ export default function LpjPage() {
             </div>
 
             {/* Simulated Word Sheet Preview */}
-            <div className="p-8 bg-white border border-slate-300 rounded-xl shadow-inner font-serif text-[11px] leading-relaxed text-black space-y-4">
+            <div className="p-4 sm:p-8 bg-white border border-slate-300 rounded-xl shadow-inner font-serif text-[11px] leading-relaxed text-black space-y-4">
               {/* Kop Surat */}
               <div className="text-center border-b-2 border-black pb-2 mb-4">
                 <div className="font-bold text-xs uppercase">KOMITE OLAHRAGA NASIONAL INDONESIA (KONI) KOTA SURAKARTA</div>
@@ -1069,47 +1069,49 @@ export default function LpjPage() {
               <div className="space-y-1 pt-2">
                 <b>BAB I. PENDAHULUAN</b>
                 <p className="text-justify indent-6">{formData.background}</p>
-                <div className="grid grid-cols-3 gap-1 pt-1 text-[10.5px]">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 pt-1 text-[10.5px]">
                   <span>Nama Kegiatan:</span>
-                  <span className="col-span-2 font-bold">{formData.activity}</span>
+                  <span className="sm:col-span-2 font-bold">{formData.activity}</span>
                   <span>Waktu & Lokasi:</span>
-                  <span className="col-span-2">{formData.period} • {formData.location}</span>
+                  <span className="sm:col-span-2">{formData.period} • {formData.location}</span>
                   <span>Dana Hibah APBD:</span>
-                  <span className="col-span-2 font-bold">{formatRupiah(formData.budgetGrant)}</span>
+                  <span className="sm:col-span-2 font-bold">{formatRupiah(formData.budgetGrant)}</span>
                 </div>
               </div>
 
               {/* Rincian Belanja */}
               <div className="space-y-1 pt-2">
                 <b>BAB III. REALISASI KEUANGAN & BUKTI BELANJA</b>
-                <table className="w-full border-collapse border border-black text-[10px] mt-1">
-                  <thead>
-                    <tr className="bg-slate-100 border-b border-black">
-                      <th className="border border-black p-1 text-center w-6">No</th>
-                      <th className="border border-black p-1 text-left">Uraian Belanja</th>
-                      <th className="border border-black p-1 text-center">No. Bukti</th>
-                      <th className="border border-black p-1 text-center">Vol</th>
-                      <th className="border border-black p-1 text-right">Harga</th>
-                      <th className="border border-black p-1 text-right">Jumlah</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {formData.items.map((it, idx) => (
-                      <tr key={idx} className="border-b border-black">
-                        <td className="border border-black p-1 text-center">{idx + 1}</td>
-                        <td className="border border-black p-1">{it.item}</td>
-                        <td className="border border-black p-1 text-center font-mono">{it.proofNumber}</td>
-                        <td className="border border-black p-1 text-center">{it.volume} {it.unit}</td>
-                        <td className="border border-black p-1 text-right">{formatRupiah(it.unitPrice)}</td>
-                        <td className="border border-black p-1 text-right font-bold">{formatRupiah(it.volume * it.unitPrice)}</td>
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse border border-black text-[10px] mt-1 min-w-[480px]">
+                    <thead>
+                      <tr className="bg-slate-100 border-b border-black">
+                        <th className="border border-black p-1 text-center w-6">No</th>
+                        <th className="border border-black p-1 text-left">Uraian Belanja</th>
+                        <th className="border border-black p-1 text-center">No. Bukti</th>
+                        <th className="border border-black p-1 text-center">Vol</th>
+                        <th className="border border-black p-1 text-right">Harga</th>
+                        <th className="border border-black p-1 text-right">Jumlah</th>
                       </tr>
-                    ))}
-                    <tr className="bg-slate-50 font-bold">
-                      <td colSpan={5} className="border border-black p-1 text-right">TOTAL REALISASI BELANJA :</td>
-                      <td className="border border-black p-1 text-right">{formatRupiah(totalRealization)}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {formData.items.map((it, idx) => (
+                        <tr key={idx} className="border-b border-black">
+                          <td className="border border-black p-1 text-center">{idx + 1}</td>
+                          <td className="border border-black p-1">{it.item}</td>
+                          <td className="border border-black p-1 text-center font-mono">{it.proofNumber}</td>
+                          <td className="border border-black p-1 text-center">{it.volume} {it.unit}</td>
+                          <td className="border border-black p-1 text-right">{formatRupiah(it.unitPrice)}</td>
+                          <td className="border border-black p-1 text-right font-bold">{formatRupiah(it.volume * it.unitPrice)}</td>
+                        </tr>
+                      ))}
+                      <tr className="bg-slate-50 font-bold">
+                        <td colSpan={5} className="border border-black p-1 text-right">TOTAL REALISASI BELANJA :</td>
+                        <td className="border border-black p-1 text-right">{formatRupiah(totalRealization)}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               {/* 4 Kolom Tanda Tangan */}

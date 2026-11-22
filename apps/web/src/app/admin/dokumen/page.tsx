@@ -169,7 +169,7 @@ export default function AdminDocumentsPage() {
             </div>
 
             <form onSubmit={handleSave} className="space-y-3.5 text-xs">
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
                   <label className="font-bold text-sikoni-navy block mb-1">Jenis Dokumen *</label>
                   <select
@@ -274,7 +274,7 @@ export default function AdminDocumentsPage() {
                 <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Perihal Dokumen</span>
                 <b className="text-xs text-sikoni-navy mt-0.5 block leading-relaxed">{selectedDoc.subject}</b>
               </div>
-              <div className="grid grid-cols-2 gap-2.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
                   <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Unit Pengirim</span>
                   <b className="text-xs text-sikoni-navy">{selectedDoc.owner}</b>

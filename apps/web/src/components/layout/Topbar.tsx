@@ -323,7 +323,7 @@ export const Topbar: React.FC<TopbarProps> = ({ onToggleSidebar, isSidebarOpen }
 
           {/* Floating Notification Dropdown Popover */}
           {isNotifOpen && (
-            <div className="absolute right-0 top-12 w-[390px] sm:w-[420px] bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(20,42,67,0.22)] border border-slate-200/90 z-50 overflow-hidden text-xs animate-in fade-in slide-in-from-top-3 duration-200">
+            <div className="absolute right-[-8px] sm:right-0 top-12 w-[calc(100vw-28px)] sm:w-[420px] max-w-[420px] bg-white rounded-2xl shadow-[0_20px_60px_-15px_rgba(20,42,67,0.22)] border border-slate-200/90 z-50 overflow-hidden text-xs animate-in fade-in slide-in-from-top-3 duration-200">
               {/* Header Box */}
               <div className="p-4 bg-gradient-to-r from-sikoni-navy via-[#1b3652] to-sikoni-navy text-white flex items-center justify-between">
                 <div className="flex items-center gap-2.5">

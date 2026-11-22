@@ -50,12 +50,12 @@ export default function NewsPage() {
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-10 space-y-8">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-6 sm:py-10 space-y-6 sm:space-y-8">
       <div>
-        <div className="text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
+        <div className="text-[11px] sm:text-xs font-extrabold text-sikoni-teal tracking-wider uppercase">
           PUBLIKASI RESMI
         </div>
-        <h1 className="text-3xl font-black text-sikoni-navy tracking-tight mt-1">Berita & Kegiatan</h1>
+        <h1 className="text-2xl sm:text-3xl font-black text-sikoni-navy tracking-tight mt-1">Berita & Kegiatan</h1>
         <p className="text-xs text-sikoni-muted mt-1 max-w-2xl leading-relaxed">
           Informasi agenda kegiatan keolahragaan, pengumuman resmi organisasi, dan kabar prestasi atlet Kota Surakarta.
         </p>
@@ -107,8 +107,8 @@ export default function NewsPage() {
 
       {/* Full Article Modal */}
       {selectedNews && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="bg-white rounded-2xl w-full max-w-xl p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto border border-slate-200">
+        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl w-[94vw] sm:w-full max-w-xl p-4 sm:p-6 space-y-4 shadow-2xl max-h-[90vh] overflow-y-auto border border-slate-200">
             <div className="flex justify-between items-start pb-3 border-b border-slate-100">
               <div>
                 <span className="text-[10px] font-bold text-sikoni-teal bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">

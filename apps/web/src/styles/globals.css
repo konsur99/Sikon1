@@ -189,6 +189,25 @@ body {
   background: #e2e8f0;
 }
 
+/* Responsive Adaptive Tweaks for Mobile (Android) & Desktop */
+@media (max-width: 640px) {
+  .card-sikoni {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .card-sikoni-accent {
+    padding: 16px;
+    border-radius: 14px;
+  }
+  .card-hero-navy {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .kpi-value {
+    font-size: 22px;
+  }
+}
+
 /* Custom Sleek Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
