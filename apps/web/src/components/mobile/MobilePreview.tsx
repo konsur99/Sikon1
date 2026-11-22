@@ -299,32 +299,35 @@ export const MobilePreview: React.FC = () => {
         </div>
 
         {/* Mobile Quick Role Switcher for Android Phones */}
-        <div className="sm:hidden bg-[#142a43] px-3 py-1.5 flex items-center justify-between gap-1 border-b border-white/10 flex-shrink-0">
-          <span className="text-[9px] text-slate-300 font-bold uppercase">Peran:</span>
-          <div className="flex items-center gap-1 flex-1 justify-end">
+        <div className="sm:hidden bg-[#142a43] px-3 py-2 flex items-center justify-between gap-1.5 border-b border-white/10 flex-shrink-0 shadow-inner">
+          <span className="text-[10px] text-slate-300 font-bold uppercase tracking-wider">Peran:</span>
+          <div className="flex items-center gap-1 bg-black/25 p-1 rounded-xl flex-1 max-w-[280px] justify-between">
             <button
               onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
-              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
-                persona === 'publik' ? 'bg-white text-sikoni-navy shadow-xs' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${
+                persona === 'publik' ? 'bg-white text-sikoni-navy shadow-sm' : 'text-slate-300 hover:text-white'
               }`}
             >
-              Publik
+              <Users size={12} />
+              <span>Publik</span>
             </button>
             <button
               onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
-              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
-                persona === 'cabor' ? 'bg-sikoni-teal text-white shadow-xs' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${
+                persona === 'cabor' ? 'bg-sikoni-teal text-white shadow-sm' : 'text-slate-300 hover:text-white'
               }`}
             >
-              Cabor
+              <Award size={12} />
+              <span>Cabor</span>
             </button>
             <button
               onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
-              className={`px-2.5 py-1 rounded-lg text-[10px] font-black transition-all ${
-                persona === 'pengurus' ? 'bg-sikoni-gold text-sikoni-navy shadow-xs' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${
+                persona === 'pengurus' ? 'bg-sikoni-gold text-sikoni-navy shadow-sm' : 'text-slate-300 hover:text-white'
               }`}
             >
-              Pengurus
+              <Building2 size={12} />
+              <span>Pengurus</span>
             </button>
           </div>
         </div>
@@ -450,7 +453,7 @@ export const MobilePreview: React.FC = () => {
             SCREEN CONTENT: PERSONA 1 - PUBLIK
            ======================================================== */}
         {persona === 'publik' && (
-          <div className="flex-1 overflow-y-auto p-4 bg-[#f4f6f9] space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 pb-24 overscroll-contain bg-[#f4f6f9] space-y-4">
             {/* PUBLIK: TAB 1 - BERANDA */}
             {publikTab === 'home' && (
               <div className="space-y-4">
@@ -849,7 +852,7 @@ export const MobilePreview: React.FC = () => {
             SCREEN CONTENT: PERSONA 2 - OPERATOR CABOR (PASI)
            ======================================================== */}
         {persona === 'cabor' && (
-          <div className="flex-1 overflow-y-auto p-4 bg-[#f4f6f9] space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 pb-24 overscroll-contain bg-[#f4f6f9] space-y-4">
             {/* CABOR: TAB 1 - BERANDA */}
             {caborTab === 'home' && (
               <div className="space-y-4">
@@ -1375,7 +1378,7 @@ export const MobilePreview: React.FC = () => {
             SCREEN CONTENT: PERSONA 3 - PENGURUS KONI
            ======================================================== */}
         {persona === 'pengurus' && (
-          <div className="flex-1 overflow-y-auto p-4 bg-[#f4f6f9] space-y-4">
+          <div className="flex-1 overflow-y-auto p-4 pb-24 overscroll-contain bg-[#f4f6f9] space-y-4">
             {/* PENGURUS: TAB 1 - DASHBOARD EKSEKUTIF */}
             {pengurusTab === 'dashboard' && (
               <div className="space-y-4">
@@ -1747,59 +1750,129 @@ export const MobilePreview: React.FC = () => {
           </div>
         )}
 
-        {/* Mobile 5-Tab Bottom Navigation Bar (Tailored to active Persona) */}
-        <div className="h-16 bg-white border-t border-slate-200 flex items-center justify-around flex-shrink-0 px-1 z-10 shadow-[0_-4px_10px_rgba(0,0,0,0.03)]">
+        {/* Mobile 5-Tab Bottom Navigation Bar (Material 3 Style) */}
+        <div className="h-[68px] bg-white/95 backdrop-blur-md border-t border-slate-200/90 flex items-center justify-around flex-shrink-0 px-1 z-20 shadow-[0_-4px_16px_rgba(0,0,0,0.04)]">
           {/* TAB BAR FOR: PUBLIK */}
           {persona === 'publik' && (
             <>
               <button
                 onClick={() => setPublikTab('home')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  publikTab === 'home' ? 'text-sikoni-navy font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Home size={18} />
-                <span className="text-[9px]">Beranda</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    publikTab === 'home'
+                      ? 'bg-sikoni-navy/10 text-sikoni-navy'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Home size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    publikTab === 'home'
+                      ? 'font-black text-sikoni-navy'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Beranda
+                </span>
               </button>
 
               <button
                 onClick={() => setPublikTab('cabor-dir')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  publikTab === 'cabor-dir' ? 'text-sikoni-navy font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Award size={18} />
-                <span className="text-[9px]">64 Cabor</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    publikTab === 'cabor-dir'
+                      ? 'bg-sikoni-navy/10 text-sikoni-navy'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Award size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    publikTab === 'cabor-dir'
+                      ? 'font-black text-sikoni-navy'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  64 Cabor
+                </span>
               </button>
 
               <button
                 onClick={() => setPublikTab('transparansi')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  publikTab === 'transparansi' ? 'text-sikoni-navy font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <TrendingUp size={18} />
-                <span className="text-[9px]">Transparansi</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    publikTab === 'transparansi'
+                      ? 'bg-sikoni-navy/10 text-sikoni-navy'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <TrendingUp size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    publikTab === 'transparansi'
+                      ? 'font-black text-sikoni-navy'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Transparansi
+                </span>
               </button>
 
               <button
                 onClick={() => setPublikTab('jadwal')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  publikTab === 'jadwal' ? 'text-sikoni-navy font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Calendar size={18} />
-                <span className="text-[9px]">Jadwal</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    publikTab === 'jadwal'
+                      ? 'bg-sikoni-navy/10 text-sikoni-navy'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Calendar size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    publikTab === 'jadwal'
+                      ? 'font-black text-sikoni-navy'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Jadwal
+                </span>
               </button>
 
               <button
                 onClick={() => setPublikTab('info')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  publikTab === 'info' ? 'text-sikoni-navy font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Info size={18} />
-                <span className="text-[9px]">Profil</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    publikTab === 'info'
+                      ? 'bg-sikoni-navy/10 text-sikoni-navy'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Info size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    publikTab === 'info'
+                      ? 'font-black text-sikoni-navy'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Profil
+                </span>
               </button>
             </>
           )}
@@ -1809,54 +1882,122 @@ export const MobilePreview: React.FC = () => {
             <>
               <button
                 onClick={() => setCaborTab('home')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  caborTab === 'home' ? 'text-sikoni-teal font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Home size={18} />
-                <span className="text-[9px]">Beranda</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    caborTab === 'home'
+                      ? 'bg-sikoni-teal/15 text-sikoni-teal'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Home size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    caborTab === 'home'
+                      ? 'font-black text-sikoni-teal'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Beranda
+                </span>
               </button>
 
               <button
                 onClick={() => setCaborTab('finance')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  caborTab === 'finance' ? 'text-sikoni-teal font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Coins size={18} />
-                <span className="text-[9px]">Keuangan</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    caborTab === 'finance'
+                      ? 'bg-sikoni-teal/15 text-sikoni-teal'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Coins size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    caborTab === 'finance'
+                      ? 'font-black text-sikoni-teal'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Keuangan
+                </span>
               </button>
 
               <button
                 onClick={() => setCaborTab('submissions')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
-                    ? 'text-sikoni-teal font-black'
-                    : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Send size={18} />
-                <span className="text-[9px]">Pengajuan</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
+                      ? 'bg-sikoni-teal/15 text-sikoni-teal'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Send size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
+                      ? 'font-black text-sikoni-teal'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Pengajuan
+                </span>
               </button>
 
               <button
                 onClick={() => setCaborTab('lpj')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  caborTab === 'lpj' ? 'text-sikoni-teal font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <FileCheck size={18} />
-                <span className="text-[9px]">LPJ</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    caborTab === 'lpj'
+                      ? 'bg-sikoni-teal/15 text-sikoni-teal'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <FileCheck size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    caborTab === 'lpj'
+                      ? 'font-black text-sikoni-teal'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  LPJ Word
+                </span>
               </button>
 
               <button
                 onClick={() => setCaborTab('account')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  caborTab === 'account' ? 'text-sikoni-teal font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <User size={18} />
-                <span className="text-[9px]">Akun</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    caborTab === 'account'
+                      ? 'bg-sikoni-teal/15 text-sikoni-teal'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <User size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    caborTab === 'account'
+                      ? 'font-black text-sikoni-teal'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Akun
+                </span>
               </button>
             </>
           )}
@@ -1866,55 +2007,130 @@ export const MobilePreview: React.FC = () => {
             <>
               <button
                 onClick={() => setPengurusTab('dashboard')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  pengurusTab === 'dashboard' ? 'text-amber-700 font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Building2 size={18} />
-                <span className="text-[9px]">Dashboard</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    pengurusTab === 'dashboard'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Building2 size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    pengurusTab === 'dashboard'
+                      ? 'font-black text-amber-800'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Dashboard
+                </span>
               </button>
 
               <button
                 onClick={() => setPengurusTab('approval')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  pengurusTab === 'approval' ? 'text-amber-700 font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <CheckCircle2 size={18} />
-                <span className="text-[9px]">Approval</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    pengurusTab === 'approval'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <CheckCircle2 size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    pengurusTab === 'approval'
+                      ? 'font-black text-amber-800'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Approval
+                </span>
               </button>
 
               <button
                 onClick={() => setPengurusTab('monitoring')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  pengurusTab === 'monitoring' ? 'text-amber-700 font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <TrendingUp size={18} />
-                <span className="text-[9px]">64 Cabor</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    pengurusTab === 'monitoring'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <TrendingUp size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    pengurusTab === 'monitoring'
+                      ? 'font-black text-amber-800'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  64 Cabor
+                </span>
               </button>
 
               <button
                 onClick={() => setPengurusTab('kas')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  pengurusTab === 'kas' ? 'text-amber-700 font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <Coins size={18} />
-                <span className="text-[9px]">Giro Kas</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    pengurusTab === 'kas'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <Coins size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    pengurusTab === 'kas'
+                      ? 'font-black text-amber-800'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Giro Kas
+                </span>
               </button>
 
               <button
                 onClick={() => setPengurusTab('profil')}
-                className={`flex flex-col items-center gap-0.5 ${
-                  pengurusTab === 'profil' ? 'text-amber-700 font-black' : 'text-sikoni-muted'
-                }`}
+                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
               >
-                <User size={18} />
-                <span className="text-[9px]">Pejabat</span>
+                <div
+                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                    pengurusTab === 'profil'
+                      ? 'bg-amber-100 text-amber-800'
+                      : 'text-slate-400 hover:text-slate-600'
+                  }`}
+                >
+                  <User size={19} />
+                </div>
+                <span
+                  className={`text-[10px] leading-tight transition-colors ${
+                    pengurusTab === 'profil'
+                      ? 'font-black text-amber-800'
+                      : 'font-semibold text-slate-500'
+                  }`}
+                >
+                  Pejabat
+                </span>
               </button>
             </>
           )}
+        </div>
+
+        {/* Android Native Gesture Navigation Bar Pill */}
+        <div className="h-4 bg-white flex items-center justify-center flex-shrink-0 select-none pb-1">
+          <div className="w-28 h-1 bg-slate-300 rounded-full" />
         </div>
       </div>
     </div>
