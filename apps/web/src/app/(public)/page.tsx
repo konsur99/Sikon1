@@ -1,8 +1,30 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
-import { Shield, BarChart3, Newspaper, ArrowRight, Award, Trophy, Users, CheckCircle2 } from 'lucide-react';
+import {
+  Shield,
+  BarChart3,
+  Newspaper,
+  ArrowRight,
+  Award,
+  Trophy,
+  Users,
+  CheckCircle2,
+  Smartphone,
+} from 'lucide-react';
+import { useDisplayMode } from '../../context/DisplayModeContext';
+import { MobilePreview } from '../../components/mobile/MobilePreview';
 
 export default function HomePage() {
+  const { isAndroid, setMode } = useDisplayMode();
+
+  // If in Android mode (automatic on mobile phones, or chosen via switcher)
+  if (isAndroid) {
+    return <MobilePreview />;
+  }
+
+  // Desktop / Laptop Website View
   return (
     <div className="space-y-12 pb-16">
       {/* Hero Section */}
@@ -25,12 +47,13 @@ export default function HomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto flex-wrap">
-            <Link
-              href="/android-preview"
-              className="bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-emerald-300/30"
+            <button
+              onClick={() => setMode('android')}
+              className="bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-emerald-300/30 cursor-pointer"
             >
+              <Smartphone size={16} />
               <span>📱 Buka SIKONI Versi Android</span>
-            </Link>
+            </button>
             <Link
               href="/cabor"
               className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy font-black text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105"

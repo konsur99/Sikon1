@@ -35,13 +35,16 @@ import {
   Info,
   Users,
   CheckCheck,
+  Monitor,
 } from 'lucide-react';
 import { StatusBadge } from '../common/StatusBadge';
 import { generateLpjWordDocument } from '../../lib/generateLpjWord';
+import { useDisplayMode } from '../../context/DisplayModeContext';
 
 export type UserPersona = 'publik' | 'cabor' | 'pengurus';
 
 export const MobilePreview: React.FC = () => {
+  const { setMode } = useDisplayMode();
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
   const [persona, setPersona] = useState<UserPersona>('cabor');
 
@@ -218,8 +221,17 @@ export const MobilePreview: React.FC = () => {
     <div className="w-full flex flex-col items-center justify-center sm:py-6 min-h-screen sm:min-h-[calc(100vh-56px)] bg-[#0d1c2d] sm:bg-[#e9edf1]">
       {/* Top Multi-Persona Selector Bar for Desktop / Laptop Preview */}
       <div className="hidden sm:flex mb-4 flex-col items-center gap-2">
-        <div className="text-[11px] font-extrabold text-slate-600 sm:text-sikoni-muted tracking-widest uppercase">
-          Pilih Peran Pengguna Aplikasi Android SIKONI
+        <div className="flex items-center gap-3">
+          <div className="text-[11px] font-extrabold text-slate-600 sm:text-sikoni-muted tracking-widest uppercase">
+            Pilih Peran Pengguna Aplikasi Android SIKONI
+          </div>
+          <button
+            onClick={() => setMode('desktop')}
+            className="text-[11px] font-bold text-sikoni-navy bg-white hover:bg-slate-100 px-3 py-1 rounded-full border border-slate-300 shadow-xs flex items-center gap-1.5 transition-all"
+            title="Buka versi web desktop"
+          >
+            <Monitor size={13} className="text-sikoni-teal" /> Mode Laptop / Desktop
+          </button>
         </div>
 
         {/* 3-Role Persona Switcher Pill */}
@@ -331,7 +343,17 @@ export const MobilePreview: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5">
+            {/* Quick Switch to Desktop */}
+            <button
+              onClick={() => setMode('desktop')}
+              className="text-[9.5px] font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded-lg border border-slate-200 flex items-center gap-1 transition-colors"
+              title="Ganti ke Tampilan Web Desktop"
+            >
+              <Monitor size={11} className="text-sikoni-navy" />
+              <span>Web</span>
+            </button>
+
             {/* Persona Badge */}
             <span
               className={`text-[9.5px] font-bold px-2 py-0.5 rounded-full ${

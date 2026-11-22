@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Smartphone } from 'lucide-react';
+import { useDisplayMode } from '../../context/DisplayModeContext';
 
 export const PublicHeader: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
+  const { setMode } = useDisplayMode();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -46,13 +48,17 @@ export const PublicHeader: React.FC = () => {
         })}
 
         <div className="flex items-center gap-2.5 pl-4 border-l border-sikoni-line">
-          {/* SIKONI Android App Link */}
-          <Link
-            href="/android-preview"
-            className="text-xs font-bold text-sikoni-teal bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1"
+          {/* SIKONI Android App Button */}
+          <button
+            onClick={() => {
+              setMode('android');
+              router.push('/');
+            }}
+            className="text-xs font-bold text-sikoni-teal bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
           >
+            <Smartphone size={13} />
             <span>📱 Versi Android</span>
-          </Link>
+          </button>
 
           {/* Quick switcher to Admin */}
           <button
@@ -114,13 +120,17 @@ export const PublicHeader: React.FC = () => {
             })}
 
             <div className="pt-3 border-t border-slate-100 flex flex-col gap-2">
-              <Link
-                href="/android-preview"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full text-center text-xs font-bold text-white bg-gradient-to-r from-sikoni-teal to-teal-700 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5"
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setMode('android');
+                  router.push('/');
+                }}
+                className="w-full text-center text-xs font-bold text-white bg-gradient-to-r from-sikoni-teal to-teal-700 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
               >
+                <Smartphone size={14} />
                 <span>📱 Buka SIKONI Versi Android (3 Peran)</span>
-              </Link>
+              </button>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);

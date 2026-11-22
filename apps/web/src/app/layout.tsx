@@ -1,6 +1,8 @@
 import React from 'react';
 import '../styles/globals.css';
 import type { Metadata, Viewport } from 'next';
+import { DisplayModeProvider } from '../context/DisplayModeContext';
+import { FloatingModeSwitcher } from '../components/common/FloatingModeSwitcher';
 
 export const metadata: Metadata = {
   title: 'SIKONI — Sistem Informasi KONI Surakarta',
@@ -21,8 +23,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className="bg-sikoni-bg text-sikoni-ink min-h-screen flex flex-col">{children}</body>
+      <body className="bg-sikoni-bg text-sikoni-ink min-h-screen flex flex-col">
+        <DisplayModeProvider>
+          {children}
+          <FloatingModeSwitcher />
+        </DisplayModeProvider>
+      </body>
     </html>
   );
 }
-
