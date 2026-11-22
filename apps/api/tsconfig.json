@@ -10,6 +10,10 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@sikoni/shared": ["../../packages/shared/src/index.ts", "../../packages/shared/dist/index.d.ts"],
+      "@sikoni/database": ["../../packages/database/src/index.ts", "../../packages/database/dist/index.d.ts"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,

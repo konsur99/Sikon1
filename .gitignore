@@ -1,6 +1,10 @@
 node_modules/
 .next/
 dist/
+!packages/shared/dist/
+!packages/shared/dist/**
+!packages/database/dist/
+!packages/database/dist/**
 build/
 .expo/
 *.log

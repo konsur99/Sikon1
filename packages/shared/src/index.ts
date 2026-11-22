@@ -79,17 +79,19 @@ export class MoneyMath {
     const str = typeof val === 'number' ? val.toFixed(2) : parseFloat(val || '0').toFixed(2);
     const [intPart, decPart = '00'] = str.split('.');
     const cleanDec = (decPart + '00').slice(0, 2);
-    return BigInt(intPart) * 100n + BigInt(cleanDec);
+    return BigInt(intPart) * BigInt(100) + BigInt(cleanDec);
   }
 
   /**
    * Mengonversi bigint sen kembali ke string angka dengan 2 desimal
    */
   static fromCents(cents: bigint): string {
-    const sign = cents < 0n ? '-' : '';
-    const abs = cents < 0n ? -cents : cents;
-    const intPart = (abs / 100n).toString();
-    const decPart = (abs % 100n).toString().padStart(2, '0');
+    const zero = BigInt(0);
+    const hundred = BigInt(100);
+    const sign = cents < zero ? '-' : '';
+    const abs = cents < zero ? -cents : cents;
+    const intPart = (abs / hundred).toString();
+    const decPart = (abs % hundred).toString().padStart(2, '0');
     return `${sign}${intPart}.${decPart}`;
   }
 
@@ -103,7 +105,7 @@ export class MoneyMath {
 
   static multiply(a: number | string, factor: number): string {
     const factorCents = Math.round(factor * 100);
-    const resultCents = (this.toCents(a) * BigInt(factorCents)) / 100n;
+    const resultCents = (this.toCents(a) * BigInt(factorCents)) / BigInt(100);
     return this.fromCents(resultCents);
   }
 
