@@ -19,45 +19,75 @@ export default function TaxPage() {
   const [taxTransactions, setTaxTransactions] = useState([
     {
       reference: 'EXP-1108',
-      type: 'PPh 23 (Sewa Sarana & Venue - 2%)',
+      type: 'PPh 23 (Sewa Venue - NPWP 2%)',
       taxableBase: 'Rp 12.000.000',
       taxAmount: 'Rp 240.000',
+      ntpn: 'NTPN: 994821A8829C',
       date: '06 Nov 2026',
       status: 'Dibayar',
     },
     {
       reference: 'EXP-1097',
-      type: 'PPN 11% (Pengadaan Peralatan Pertandingan)',
+      type: 'PPN 11% (Faktur Pajak Peralatan Tanding)',
       taxableBase: 'Rp 25.000.000',
       taxAmount: 'Rp 2.750.000',
+      ntpn: 'Billing: 821940182749',
       date: '03 Nov 2026',
       status: 'Menunggu',
     },
     {
       reference: 'EXP-1085',
-      type: 'PPh 21 (Honorium Wasit & Juri - 5%)',
+      type: 'PPh 21 (Honor Wasit Ber-NPWP - 5%)',
       taxableBase: 'Rp 15.000.000',
       taxAmount: 'Rp 750.000',
+      ntpn: 'NTPN: 772183B1093A',
       date: '01 Nov 2026',
       status: 'Dibayar',
+    },
+    {
+      reference: 'EXP-1072',
+      type: 'PPh 21 (Honor Narasumber PNS Gol IV - 15%)',
+      taxableBase: 'Rp 6.000.000',
+      taxAmount: 'Rp 900.000',
+      ntpn: 'NTPN: 618293C4491D',
+      date: '28 Okt 2026',
+      status: 'Dibayar',
+    },
+    {
+      reference: 'EXP-1065',
+      type: 'PPh 21 (Honor Pelatih Non-NPWP - 6%)',
+      taxableBase: 'Rp 8.000.000',
+      taxAmount: 'Rp 480.000',
+      ntpn: 'Billing: 739102839401',
+      date: '25 Okt 2026',
+      status: 'Menunggu',
     },
   ]);
 
   const [dppValue, setDppValue] = useState<number>(10000000);
-  const [taxType, setTaxType] = useState('PPH21');
+  const [taxType, setTaxType] = useState('PPH21_NPWP');
   const [refNumber, setRefNumber] = useState('');
+  const [billingCode, setBillingCode] = useState('');
 
-  // Auto calculate tax rate
+  // Auto calculate tax rate according to official Indonesian DJP tax regulations
   const getTaxRate = (type: string) => {
     switch (type) {
-      case 'PPH21':
+      case 'PPH21_NPWP':
         return 0.05; // 5%
-      case 'PPH22':
-        return 0.015; // 1.5%
-      case 'PPH23':
-        return 0.02; // 2%
+      case 'PPH21_NON_NPWP':
+        return 0.06; // 6% (Tarif 20% lebih tinggi UU HPP)
+      case 'PPH21_PNS4':
+        return 0.15; // 15% Final PNS Golongan IV
+      case 'PPH21_PNS3':
+        return 0.05; // 5% Final PNS Golongan III
+      case 'PPH23_NPWP':
+        return 0.02; // 2% Jasa/Sewa dengan NPWP
+      case 'PPH23_NON_NPWP':
+        return 0.04; // 4% Jasa/Sewa non NPWP (Tarif 100% lebih tinggi)
       case 'PPN11':
-        return 0.11; // 11%
+        return 0.11; // 11% Faktur Pajak Standar
+      case 'PPN12':
+        return 0.12; // 12% Tarif DPP Baru
       default:
         return 0.05;
     }
@@ -70,17 +100,22 @@ export default function TaxPage() {
     if (!refNumber) return;
 
     const typeLabels: Record<string, string> = {
-      PPH21: 'PPh 21 (Honorium - 5%)',
-      PPH22: 'PPh 22 (Belanja Barang - 1.5%)',
-      PPH23: 'PPh 23 (Sewa & Jasa - 2%)',
+      PPH21_NPWP: 'PPh 21 (Honor Wasit Ber-NPWP - 5%)',
+      PPH21_NON_NPWP: 'PPh 21 (Honor Non-NPWP - 6%)',
+      PPH21_PNS4: 'PPh 21 (Honor PNS Gol IV - 15%)',
+      PPH21_PNS3: 'PPh 21 (Honor PNS Gol III - 5%)',
+      PPH23_NPWP: 'PPh 23 (Sewa & Jasa NPWP - 2%)',
+      PPH23_NON_NPWP: 'PPh 23 (Sewa & Jasa Non-NPWP - 4%)',
       PPN11: 'PPN 11% (Faktur Pajak)',
+      PPN12: 'PPN 12% (Faktur Baru)',
     };
 
     const newRecord = {
       reference: refNumber,
-      type: typeLabels[taxType] || 'PPh 21 (Honorium - 5%)',
+      type: typeLabels[taxType] || 'PPh 21 (Honor - 5%)',
       taxableBase: MoneyMath.formatRupiah(dppValue),
       taxAmount: MoneyMath.formatRupiah(calculatedTaxAmount),
+      ntpn: billingCode ? `Billing: ${billingCode}` : 'Billing Dalam Proses',
       date: '09 Nov 2026',
       status: 'Menunggu',
     };
@@ -89,6 +124,7 @@ export default function TaxPage() {
     setShowModal(false);
     showToast(`Pemotongan pajak ${refNumber} sebesar ${newRecord.taxAmount} berhasil dicatat.`);
     setRefNumber('');
+    setBillingCode('');
   };
 
   return (
@@ -138,13 +174,14 @@ export default function TaxPage() {
 
       <DataTable
         title="Daftar Transaksi Pajak Terhubung"
-        subtitle="Potongan pajak yang dikaitkan langsung dengan nomor pengeluaran / SPJ"
+        subtitle="Potongan pajak yang dikaitkan langsung dengan nomor pengeluaran / SPJ dan NTPN Kementerian Keuangan"
         columns={[
           { header: 'Referensi Transaksi', accessor: 'reference' },
-          { header: 'Jenis Pajak', accessor: 'type' },
+          { header: 'Jenis Objek Pajak', accessor: 'type' },
           { header: 'Dasar Pengenaan Pajak', accessor: 'taxableBase' },
-          { header: 'Nilai Potongan Pajak', accessor: 'taxAmount' },
-          { header: 'Tanggal Setor', accessor: 'date' },
+          { header: 'Nilai Pajak', accessor: 'taxAmount' },
+          { header: 'NTPN / E-Billing', accessor: 'ntpn' },
+          { header: 'Tanggal', accessor: 'date' },
           { header: 'Status Setor', accessor: 'status', isStatus: true },
         ]}
         data={taxTransactions}
@@ -162,7 +199,7 @@ export default function TaxPage() {
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-sikoni-navy">Kalkulator & Pencatatan Pajak Transaksi</h3>
-                  <p className="text-[11px] text-sikoni-muted">Perhitungan otomatis PPh 21, PPh 22, PPh 23, atau PPN</p>
+                  <p className="text-[11px] text-sikoni-muted">Perhitungan otomatis standar DJP (PPh 21, PPh 23, PPN)</p>
                 </div>
               </div>
               <button
@@ -174,29 +211,45 @@ export default function TaxPage() {
             </div>
 
             <form onSubmit={handleSaveTax} className="space-y-3.5">
-              <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Nomor Pengeluaran / SPJ Sumber *</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Contoh: EXP-1130"
-                  value={refNumber}
-                  onChange={(e) => setRefNumber(e.target.value)}
-                  className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
-                />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Nomor Pengeluaran / SPJ *</label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Contoh: EXP-1130"
+                    value={refNumber}
+                    onChange={(e) => setRefNumber(e.target.value)}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
+                  />
+                </div>
+                <div>
+                  <label className="font-bold text-sikoni-navy block mb-1">Kode E-Billing / NTPN</label>
+                  <input
+                    type="text"
+                    placeholder="Contoh: 821940182749"
+                    value={billingCode}
+                    onChange={(e) => setBillingCode(e.target.value)}
+                    className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
+                  />
+                </div>
               </div>
 
               <div>
-                <label className="font-bold text-sikoni-navy block mb-1">Jenis Objek Pajak *</label>
+                <label className="font-bold text-sikoni-navy block mb-1">Jenis Objek Pajak (Peraturan DJP) *</label>
                 <select
                   value={taxType}
                   onChange={(e) => setTaxType(e.target.value)}
                   className="w-full bg-slate-50/60 border border-slate-200/90 rounded-xl px-3 py-2 text-xs focus:bg-white focus:outline-none focus:border-sikoni-teal focus:ring-2 focus:ring-sikoni-teal/10 transition-all font-semibold"
                 >
-                  <option value="PPH21">PPh 21 — Honorium Wasit / Pelatih / Atlet (Tarif Efektif 5%)</option>
-                  <option value="PPH22">PPh 22 — Belanja Pengadaan Barang / Perlengkapan (Tarif 1.5%)</option>
-                  <option value="PPH23">PPh 23 — Sewa Sarana, Venue, & Jasa EO (Tarif 2%)</option>
-                  <option value="PPN11">PPN — Faktur Pajak Pertambahan Nilai (Tarif 11%)</option>
+                  <option value="PPH21_NPWP">PPh 21 — Honor Wasit/Pelatih/Atlet (Ber-NPWP: 5%)</option>
+                  <option value="PPH21_NON_NPWP">PPh 21 — Honor Non-NPWP (+20% UU HPP: 6%)</option>
+                  <option value="PPH21_PNS4">PPh 21 Final — Honor Pejabat/PNS Gol IV (15%)</option>
+                  <option value="PPH21_PNS3">PPh 21 Final — Honor ASN/PNS Gol III (5%)</option>
+                  <option value="PPH23_NPWP">PPh 23 — Sewa Venue & Jasa EO (Ber-NPWP: 2%)</option>
+                  <option value="PPH23_NON_NPWP">PPh 23 — Sewa Venue & Jasa Non-NPWP (4%)</option>
+                  <option value="PPN11">PPN 11% — Faktur Pajak Standar UU Harmonisasi Perpajakan</option>
+                  <option value="PPN12">PPN 12% — Tarif Baru DPP</option>
                 </select>
               </div>
 

@@ -3,13 +3,15 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X, ArrowRight, ShieldCheck, Smartphone } from 'lucide-react';
+import { Menu, X, ArrowRight, ShieldCheck, Smartphone, Building2, User } from 'lucide-react';
 import { useDisplayMode } from '../../context/DisplayModeContext';
+import { useAuth } from '../../context/AuthContext';
 
 export const PublicHeader: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { setMode } = useDisplayMode();
+  const { user } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -54,25 +56,38 @@ export const PublicHeader: React.FC = () => {
               setMode('android');
               router.push('/');
             }}
-            className="text-xs font-bold text-sikoni-teal bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+            className="text-xs font-bold text-sikoni-teal bg-emerald-50 hover:bg-emerald-100 border border-emerald-200/80 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <Smartphone size={13} />
-            <span>📱 Versi Android</span>
+            <span>Versi Android</span>
           </button>
 
-          {/* Quick switcher to Admin */}
-          <button
-            onClick={() => router.push('/admin/dashboard')}
-            className="text-xs font-semibold text-sikoni-navy bg-[#edf2f7] px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors"
-          >
-            Portal Admin →
-          </button>
-          <Link
-            href="/login"
-            className="bg-sikoni-teal text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-teal-700 shadow-sm transition-all"
-          >
-            Masuk
-          </Link>
+          {/* Quick switcher to Admin with Auth Check */}
+          {user ? (
+            <Link
+              href="/admin/dashboard"
+              className="text-xs font-bold text-sikoni-navy bg-[#edf2f7] hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1.5"
+            >
+              <User size={13} className="text-sikoni-teal" />
+              <span>{user.name.split(',')[0]} (Admin) →</span>
+            </Link>
+          ) : (
+            <>
+              <button
+                onClick={() => router.push('/login?redirect=/admin/dashboard')}
+                className="text-xs font-semibold text-sikoni-navy bg-[#edf2f7] px-3 py-1.5 rounded-lg hover:bg-slate-200 transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                <Building2 size={13} className="text-sikoni-teal" />
+                <span>Portal Admin →</span>
+              </button>
+              <Link
+                href="/login"
+                className="bg-sikoni-teal text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-teal-700 shadow-sm transition-all"
+              >
+                Masuk
+              </Link>
+            </>
+          )}
         </div>
       </nav>
 
@@ -129,16 +144,21 @@ export const PublicHeader: React.FC = () => {
                 className="w-full text-center text-xs font-bold text-white bg-gradient-to-r from-sikoni-teal to-teal-700 py-2.5 rounded-xl shadow-sm flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 <Smartphone size={14} />
-                <span>📱 Buka SIKONI Versi Android (3 Peran)</span>
+                <span>Buka SIKONI Versi Android</span>
               </button>
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);
-                  router.push('/admin/dashboard');
+                  if (user) {
+                    router.push('/admin/dashboard');
+                  } else {
+                    router.push('/login?redirect=/admin/dashboard');
+                  }
                 }}
-                className="w-full text-center text-xs font-bold text-sikoni-navy bg-slate-100 py-2.5 rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-1.5"
+                className="w-full text-center text-xs font-bold text-sikoni-navy bg-slate-100 py-2.5 rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                <span>Buka Portal Admin Pengurus</span>
+                <Building2 size={14} className="text-sikoni-teal" />
+                <span>{user ? 'Dashboard Administrasi' : 'Masuk Portal Admin'}</span>
                 <ArrowRight size={14} />
               </button>
             </div>

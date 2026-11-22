@@ -109,25 +109,25 @@ export default function AdminDashboardPage() {
       {/* 4 KPIs with distinct accent borders & badges */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
-          label="Total Pagu Anggaran"
+          label="Pagu Kas Diterima (Termin I)"
           value="Rp 2,45 M"
-          foot="Alokasi APBD 2026"
+          foot="Pagu Induk APBD 2026: Rp 12,8 M"
           accentColor="navy"
-          badge="KONI Surakarta"
+          badge="Kas BPKAD"
           icon={<FileSpreadsheet size={19} />}
         />
         <KpiCard
-          label="RAB Disetujui"
+          label="Alokasi Program Cabor"
           value="Rp 1,82 M"
-          foot="74,3% dari total pagu"
+          foot="74,3% dari pagu termin I"
           accentColor="teal"
-          badge="42 Kegiatan"
+          badge="42 Usulan Disetujui"
           icon={<CheckCircle2 size={19} />}
         />
         <KpiCard
           label="Realisasi Terverifikasi"
           value="Rp 1,21 M"
-          foot="66,5% dari RAB disetujui"
+          foot="66,5% dari alokasi (49,4% pagu)"
           accentColor="green"
           badge="SP2D Cair"
           icon={<ArrowUpRight size={19} />}
@@ -218,21 +218,23 @@ export default function AdminDashboardPage() {
               <p className="text-[11px] text-sikoni-muted mt-0.5">Ringkasan serapan tahun anggaran 2026</p>
             </div>
 
-            {/* Visual Progress Bar */}
+            {/* Visual Progress Bar (100% Reconciled Math) */}
             <div className="mt-4 mb-4">
-              <div className="flex justify-between text-[10px] font-bold text-sikoni-navy mb-1.5">
-                <span>Rasio Serapan: 74,3%</span>
-                <span className="text-sikoni-green">Sisa Rp 630 Jt</span>
+              <div className="flex justify-between text-[10.5px] font-bold text-sikoni-navy mb-1.5">
+                <span>Alokasi Cabor: 74,3% (Rp 1,82 M)</span>
+                <span className="text-sikoni-green">Cadangan Kas: Rp 630 Jt</span>
               </div>
-              <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
-                <div style={{ width: '49.4%' }} className="bg-sikoni-teal" title="Realisasi Cair" />
-                <div style={{ width: '24.9%' }} className="bg-sikoni-gold" title="Komitmen Berjalan" />
-                <div style={{ width: '25.7%' }} className="bg-slate-200" title="Sisa Belum Teralokasi" />
+              <div className="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+                <div style={{ width: '49.4%' }} className="bg-sikoni-teal" title="Realisasi Cair: 49,4% (Rp 1,21 M)" />
+                <div style={{ width: '12.7%' }} className="bg-sikoni-gold" title="Komitmen Berjalan: 12,7% (Rp 310 Jt)" />
+                <div style={{ width: '12.2%' }} className="bg-sky-400" title="Sisa Alokasi Cabor: 12,2% (Rp 300 Jt)" />
+                <div style={{ width: '25.7%' }} className="bg-slate-300" title="Cadangan Kas Belum Dialokasikan: 25,7% (Rp 630 Jt)" />
               </div>
-              <div className="flex items-center gap-3 text-[9.5px] text-slate-500 mt-2 font-medium">
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sikoni-teal" /> Cair (49%)</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-sikoni-gold" /> Komitmen (25%)</span>
-                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-slate-300" /> Sisa (26%)</span>
+              <div className="grid grid-cols-2 gap-1.5 text-[9.5px] text-slate-500 mt-2.5 font-medium">
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-sikoni-teal flex-shrink-0" /> Cair: 49,4% (Rp 1,21 M)</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-sikoni-gold flex-shrink-0" /> Komitmen: 12,7% (Rp 310 Jt)</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-sky-400 flex-shrink-0" /> Sisa Cabor: 12,2% (Rp 300 Jt)</span>
+                <span className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-slate-300 flex-shrink-0" /> Cadangan Kas: 25,7% (Rp 630 Jt)</span>
               </div>
             </div>
 
@@ -240,7 +242,7 @@ export default function AdminDashboardPage() {
               <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-navy">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-sikoni-navy" />
-                  <span className="text-slate-700 font-medium">Pagu DPA Murni</span>
+                  <span className="text-slate-700 font-semibold">Pagu Kas Termin I</span>
                 </div>
                 <b className="text-sikoni-navy bg-white px-2.5 py-0.5 rounded-md border border-slate-200 shadow-sm font-black">
                   Rp 2.450.000.000
@@ -250,37 +252,47 @@ export default function AdminDashboardPage() {
               <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-teal">
                 <div className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-sikoni-teal" />
-                  <span className="text-slate-700 font-medium">RAB Disetujui</span>
+                  <span className="text-slate-700 font-semibold">Alokasi Program Cabor (74,3%)</span>
                 </div>
                 <b className="text-sikoni-navy bg-white px-2.5 py-0.5 rounded-md border border-slate-200 shadow-sm font-black">
                   Rp 1.820.000.000
                 </b>
               </div>
 
-              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-emerald-600">
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-emerald-600 pl-6">
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                  <span className="text-slate-700 font-medium">Realisasi Nota Valid</span>
+                  <span className="text-slate-400">├</span>
+                  <span className="text-slate-700 font-medium">Realisasi SP2D Cair (49,4%)</span>
                 </div>
-                <b className="text-emerald-700 bg-white px-2.5 py-0.5 rounded-md border border-emerald-200 shadow-sm font-black">
+                <b className="text-emerald-700 bg-white px-2.5 py-0.5 rounded-md border border-emerald-200 shadow-sm font-bold text-[11.5px]">
                   Rp 1.210.000.000
                 </b>
               </div>
 
-              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold">
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sikoni-gold pl-6">
                 <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sikoni-gold" />
-                  <span className="text-slate-700 font-medium">Komitmen Berjalan</span>
+                  <span className="text-slate-400">├</span>
+                  <span className="text-slate-700 font-medium">Komitmen Berjalan (12,7%)</span>
                 </div>
-                <b className="text-amber-800 bg-white px-2.5 py-0.5 rounded-md border border-amber-200 shadow-sm font-black">
+                <b className="text-amber-800 bg-white px-2.5 py-0.5 rounded-md border border-amber-200 shadow-sm font-bold text-[11.5px]">
                   Rp 310.000.000
+                </b>
+              </div>
+
+              <div className="p-2.5 bg-slate-50/90 rounded-xl border border-slate-200/80 flex items-center justify-between hover:bg-white hover:shadow-sm transition-all border-l-4 border-l-sky-400 pl-6">
+                <div className="flex items-center gap-2">
+                  <span className="text-slate-400">└</span>
+                  <span className="text-slate-700 font-medium">Sisa Alokasi Cabor (12,2%)</span>
+                </div>
+                <b className="text-sky-700 bg-white px-2.5 py-0.5 rounded-md border border-sky-200 shadow-sm font-bold text-[11.5px]">
+                  Rp 300.000.000
                 </b>
               </div>
 
               <div className="p-2.5 bg-gradient-to-r from-emerald-50 via-white to-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between shadow-sm border-l-4 border-l-emerald-600">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-emerald-900 font-extrabold">Sisa Pagu Tersedia</span>
+                  <span className="text-emerald-900 font-extrabold">Cadangan Kas Belum Dialokasikan (25,7%)</span>
                 </div>
                 <b className="text-sikoni-green bg-white px-2.5 py-0.5 rounded-md border border-emerald-200 shadow-sm font-black text-sm">
                   Rp 630.000.000

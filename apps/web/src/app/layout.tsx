@@ -2,6 +2,7 @@ import React from 'react';
 import '../styles/globals.css';
 import type { Metadata, Viewport } from 'next';
 import { DisplayModeProvider } from '../context/DisplayModeContext';
+import { AuthProvider } from '../context/AuthContext';
 import { FloatingModeSwitcher } from '../components/common/FloatingModeSwitcher';
 
 export const metadata: Metadata = {
@@ -34,10 +35,12 @@ export default function RootLayout({
   return (
     <html lang="id">
       <body className="bg-sikoni-bg text-sikoni-ink min-h-screen flex flex-col">
-        <DisplayModeProvider>
-          {children}
-          <FloatingModeSwitcher />
-        </DisplayModeProvider>
+        <AuthProvider>
+          <DisplayModeProvider>
+            {children}
+            <FloatingModeSwitcher />
+          </DisplayModeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

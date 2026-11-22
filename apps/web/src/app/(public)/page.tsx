@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Shield,
   BarChart3,
@@ -12,12 +13,17 @@ import {
   Users,
   CheckCircle2,
   Smartphone,
+  Building2,
+  Lock,
 } from 'lucide-react';
 import { useDisplayMode } from '../../context/DisplayModeContext';
+import { useAuth } from '../../context/AuthContext';
 import { MobilePreview } from '../../components/mobile/MobilePreview';
 
 export default function HomePage() {
+  const router = useRouter();
   const { isAndroid, setMode } = useDisplayMode();
+  const { user } = useAuth();
 
   // If in Android mode (automatic on mobile phones, or chosen via switcher)
   if (isAndroid) {
@@ -51,8 +57,8 @@ export default function HomePage() {
               onClick={() => setMode('android')}
               className="bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-emerald-300/30 cursor-pointer"
             >
-              <Smartphone size={16} />
-              <span>📱 Buka SIKONI Versi Android</span>
+              <Smartphone size={15} />
+              <span>Buka SIKONI Versi Android</span>
             </button>
             <Link
               href="/cabor"
@@ -66,35 +72,45 @@ export default function HomePage() {
             >
               Transparansi Anggaran
             </Link>
-            <Link
-              href="/admin/dashboard"
-              className="bg-white/15 hover:bg-white/25 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/20 transition-all backdrop-blur-sm text-center"
+            <button
+              onClick={() => {
+                if (user) {
+                  router.push('/admin/dashboard');
+                } else {
+                  router.push('/login?redirect=/admin/dashboard');
+                }
+              }}
+              className="bg-white/15 hover:bg-white/25 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/20 transition-all backdrop-blur-sm flex items-center justify-center gap-1.5 cursor-pointer"
             >
-              🏛️ Portal Admin & LPJ →
-            </Link>
+              <Building2 size={14} className="text-sikoni-gold" />
+              <span>{user ? 'Dashboard Admin →' : 'Portal Admin & LPJ →'}</span>
+            </button>
           </div>
         </div>
       </section>
 
-      {/* 4 Big Public Stats in Premium Elevated Box */}
+      {/* 4 Big Public Stats in Premium Elevated Box with Clear Accounting Hierarchy */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 -mt-6 sm:-mt-8 relative z-20">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 bg-white/95 backdrop-blur-md p-3.5 sm:p-6 rounded-2xl shadow-[0_12px_36px_rgba(20,42,67,0.12)] border border-slate-200/90 relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
           <div className="text-center p-2.5 sm:p-3">
             <div className="text-2xl sm:text-3xl font-black text-sikoni-navy">64</div>
-            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Cabang Olahraga</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Cabang Olahraga Binaan</div>
           </div>
           <div className="text-center p-2.5 sm:p-3 border-l border-slate-200">
             <div className="text-2xl sm:text-3xl font-black text-sikoni-teal">1.450+</div>
-            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Atlet & Pelatih</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Atlet & Pelatih Resmi</div>
           </div>
           <div className="text-center p-2.5 sm:p-3 border-t sm:border-t-0 md:border-l border-slate-200">
             <div className="text-2xl sm:text-3xl font-black text-sikoni-gold">124</div>
-            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Medali Porprov</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Medali Porprov Jateng</div>
           </div>
           <div className="text-center p-2.5 sm:p-3 border-t sm:border-t-0 border-l border-slate-200">
             <div className="text-2xl sm:text-3xl font-black text-emerald-600">Rp 12,8 M</div>
-            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-1 font-bold">Hibah APBD Terbuka</div>
+            <div className="text-[10px] sm:text-xs text-sikoni-muted mt-0.5 font-bold">Pagu Induk APBD 2026</div>
+            <div className="text-[9px] text-emerald-700 font-extrabold bg-emerald-50 px-1.5 py-0.5 rounded mt-0.5 inline-block">
+              Cair Termin I: Rp 2,45 M
+            </div>
           </div>
         </div>
       </section>

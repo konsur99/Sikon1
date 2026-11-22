@@ -136,36 +136,36 @@ export default function FundReceiptsPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <KpiCard
-          label="Total Penerimaan"
+          label="Total Akumulasi Kas"
           value="Rp 2,45 M"
-          foot="Tahun anggaran berjalan"
+          foot="Termin I APBD & Sponsor"
           accentColor="teal"
-          badge="Kas Daerah"
+          badge="Kas Berjalan"
           icon={<PlusCircle size={19} />}
         />
         <KpiCard
-          label="Sumber Pendanaan"
-          value="04 Sumber"
-          foot="APBD, sponsor & bantuan"
-          accentColor="navy"
-          badge="Resmi"
-          icon={<Layers size={19} />}
-        />
-        <KpiCard
-          label="Transaksi Kasda"
-          value="12 Transaksi"
-          foot="Tervalidasi di giro bank"
+          label="Kas Giro Terverifikasi"
+          value="Rp 2,40 M"
+          foot="SP2D BPKAD tervalidasi"
           accentColor="green"
-          badge="Rekening Giro"
+          badge="Kliring Valid"
           icon={<CheckCircle2 size={19} />}
         />
         <KpiCard
-          label="Perlu Verifikasi"
-          value="01 Transaksi"
-          foot="Cek fisik rekening koran"
+          label="Menunggu Kliring"
+          value="Rp 50 Jt"
+          foot="Cek rekening koran Bank Jateng"
           accentColor="amber"
-          badge="Review"
+          badge="Proses Kliring"
           icon={<Clock size={19} />}
+        />
+        <KpiCard
+          label="Pagu Induk NPHD"
+          value="Rp 12,8 M"
+          foot="Pencairan saat ini: 19,1%"
+          accentColor="navy"
+          badge="APBD 2026"
+          icon={<Layers size={19} />}
         />
       </div>
 
