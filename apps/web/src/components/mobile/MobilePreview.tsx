@@ -707,6 +707,20 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             </button>
           </div>
 
+          {/* Active Persona Scope Description Pill */}
+          <div className="hidden lg:flex items-center gap-2 text-xs font-medium text-slate-600">
+            <span className={`w-2 h-2 rounded-full ${
+              persona === 'cabor' ? 'bg-[#d32f2f]' : persona === 'pengurus' ? 'bg-amber-500' : 'bg-sikoni-navy'
+            }`} />
+            <span className="text-slate-500 text-[11.5px] font-semibold">
+              {persona === 'publik'
+                ? 'Portal Publik: Keterbukaan APBD 2026, Direktori 64 Cabor, & Jadwal Lomba'
+                : persona === 'cabor'
+                  ? 'Portal Cabor: Pengajuan Pagu RAB, Pencairan SP2D Kasda, & e-SPJ Termin'
+                  : 'Portal Pengurus: Otoritas Approval Berkas, Monitoring 64 Cabor, & Giro Kasda'}
+            </span>
+          </div>
+
           {/* Active Mode Indicator (Switch mode via bottom FloatingModeSwitcher) */}
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-500">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
@@ -4191,12 +4205,22 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'approval' ? (
-                      <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                      <div className="relative w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
                         <span className="material-symbols-outlined text-[22px] drop-shadow-md">fact_check</span>
+                        {approvalList.filter((a) => a.status === 'Menunggu').length > 0 && (
+                          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-400 text-onyx text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
+                            {approvalList.filter((a) => a.status === 'Menunggu').length}
+                          </span>
+                        )}
                       </div>
                     ) : (
-                      <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                      <div className="relative w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
                         <span className="material-symbols-outlined text-[19px]">fact_check</span>
+                        {approvalList.filter((a) => a.status === 'Menunggu').length > 0 && (
+                          <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#d32f2f] text-white text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
+                            {approvalList.filter((a) => a.status === 'Menunggu').length}
+                          </span>
+                        )}
                       </div>
                     )}
                     <span
