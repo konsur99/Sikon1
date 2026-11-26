@@ -1202,40 +1202,40 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
                   <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
-                    <div className="flex items-center justify-between gap-1.5">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[9px] sm:text-[10px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         <span>KOTA SURAKARTA JUARA • PORPROV 2026</span>
                       </div>
-                      <span className="font-label-md text-[9px] sm:text-[10px] uppercase tracking-wider text-white/80 font-bold shrink-0">
+                      <span className="font-label-md text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-white/80 font-bold shrink-0">
                         64 CABOR RESMI
                       </span>
                     </div>
 
                     <div className="my-2">
-                      <span className="font-label-md text-[10px] sm:text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
+                      <span className="font-label-md text-[9.5px] sm:text-[10.5px] uppercase tracking-wider text-amber-200/90 font-bold block">
                         Prestasi Emas Surakarta
                       </span>
-                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5">
+                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5 leading-tight">
                         124 Medali Emas
                       </div>
-                      <p className="font-body-sm text-[10.5px] sm:text-xs text-white/85 mt-1 leading-snug">
+                      <p className="font-body-sm text-[10px] sm:text-[11px] text-white/85 mt-1 leading-snug">
                         88 Perak • 95 Perunggu • Rekor Juara Umum Kontingen Surakarta
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
-                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                    <div className="pt-2 border-t border-white/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap sm:flex-nowrap">
                         <button
                           onClick={() => setPublikTab('cabor-dir')}
-                          className="px-2.5 sm:px-3 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">military_tech</span>
                           <span>64 Cabor</span>
                         </button>
                         <button
                           onClick={() => setPublikTab('transparansi')}
-                          className="px-2.5 sm:px-3 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">trending_up</span>
                           <span>APBD 2026</span>
@@ -1243,7 +1243,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9.5px] sm:text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9px] sm:text-[10px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
                       >
                         <span>Katalog Publik</span>
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
@@ -1256,40 +1256,40 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                   <div
                     onClick={() => setPublikTab('transparansi')}
-                    className="bg-surface-container-lowest rounded-[22px] sm:rounded-[24px] p-3 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-amber-400/60 transition-all active:scale-98"
+                    className="bg-surface-container-lowest rounded-[20px] sm:rounded-[24px] p-3 sm:p-3.5 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-amber-400/60 transition-all active:scale-98"
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
-                        <span className="material-symbols-outlined text-[16px] sm:text-[18px]">account_balance</span>
+                        <span className="material-symbols-outlined text-[15px] sm:text-[17px]">account_balance</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-amber-800 px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-100 border border-amber-300/40">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold tracking-wider text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100 border border-amber-300/40">
                         APBD 2026
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight">
+                    <div className="font-data-metric text-[14px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       Rp 12,8 Miliar
                     </div>
-                    <span className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 block font-medium truncate">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant mt-0.5 block font-medium truncate">
                       Serapan Kasda 68,4%
                     </span>
                   </div>
 
                   <div
                     onClick={() => setPublikTab('cabor-dir')}
-                    className="bg-surface-container-lowest rounded-[22px] sm:rounded-[24px] p-3 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-emerald-400/60 transition-all active:scale-98"
+                    className="bg-surface-container-lowest rounded-[20px] sm:rounded-[24px] p-3 sm:p-3.5 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-emerald-400/60 transition-all active:scale-98"
                   >
                     <div className="flex items-center justify-between mb-1.5">
                       <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
-                        <span className="material-symbols-outlined text-[16px] sm:text-[18px]">sports</span>
+                        <span className="material-symbols-outlined text-[15px] sm:text-[17px]">sports</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-emerald-800 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold tracking-wider text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
                         ATLET AKTIF
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight truncate">
+                    <div className="font-data-metric text-[13.5px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       1.450+ Insan Olahraga
                     </div>
-                    <span className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 block font-medium truncate">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant mt-0.5 block font-medium truncate">
                       64 Cabor Terbina
                     </span>
                   </div>
@@ -1680,27 +1680,27 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         }
                         className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
                       >
-                        <div className="relative h-28 w-full overflow-hidden">
+                        <div className="relative h-26 sm:h-28 w-full overflow-hidden">
                           <img
                             alt="Pelatnas Porprov Atletik Solo"
                             className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                             src="/images/sprinter_solo.jpg"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-white font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-white font-label-md text-[8.5px] sm:text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
                             Atletik Solo
                           </span>
                         </div>
                         <div className="p-2.5 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            <h3 className="font-title-md text-[12px] sm:text-[13px] font-bold text-onyx leading-tight line-clamp-1">
                               Pelatnas Atlet Solo
                             </h3>
-                            <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            <p className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 line-clamp-1">
                               Stadion Manahan
                             </p>
                           </div>
-                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-primary font-label-md text-[10px] font-bold uppercase">
+                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-primary font-label-md text-[9.5px] sm:text-[10px] font-bold uppercase">
                             <span className="flex items-center gap-0.5">
                               <span className="material-symbols-outlined text-[13px]">military_tech</span>Emas
                             </span>
@@ -1722,27 +1722,27 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         }
                         className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
                       >
-                        <div className="relative h-28 w-full overflow-hidden">
+                        <div className="relative h-26 sm:h-28 w-full overflow-hidden">
                           <img
                             alt="Stadion Sriwedari dan Kawasan Manahan Solo"
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             src="/images/sriwedari_manahan.jpg"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-400 text-onyx font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-400 text-onyx font-label-md text-[8.5px] sm:text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
                             Heritage Solo
                           </span>
                         </div>
                         <div className="p-2.5 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            <h3 className="font-title-md text-[12px] sm:text-[13px] font-bold text-onyx leading-tight line-clamp-1">
                               Kota Atlet & Budaya
                             </h3>
-                            <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            <p className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 line-clamp-1">
                               Sriwedari & Manahan
                             </p>
                           </div>
-                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-secondary-dark font-label-md text-[10px] font-bold uppercase">
+                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-secondary-dark font-label-md text-[9.5px] sm:text-[10px] font-bold uppercase">
                             <span className="flex items-center gap-0.5">
                               <span className="material-symbols-outlined text-[13px]">stadium</span>Kawasan
                             </span>
@@ -2080,30 +2080,30 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/90 to-[#d32f2f]/80 backdrop-blur-[1px]" />
                     <div className="absolute inset-0 carbon-pattern opacity-25" />
                     {/* Banner Header Meta */}
-                    <div className="relative z-10 flex items-center justify-between mb-3">
+                    <div className="relative z-10 flex flex-wrap items-center justify-between gap-1.5 mb-2.5">
                       <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-amber-300/40 shadow-inner">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        <span className="font-label-md text-[9px] sm:text-[10px] tracking-wider uppercase text-amber-300 font-extrabold">
+                        <span className="font-label-md text-[8.5px] sm:text-[9.5px] tracking-wider uppercase text-amber-300 font-extrabold">
                           HIBAH APBD 2025 TERVERIFIKASI
                         </span>
                       </div>
                       <div className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20">
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px] text-amber-300">verified</span>
-                        <span className="font-label-md text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider text-white">
+                        <span className="font-label-md text-[8px] sm:text-[9px] font-extrabold uppercase tracking-wider text-white">
                           KONI SOLO
                         </span>
                       </div>
                     </div>
                     {/* Title & Cabor Identity */}
-                    <div className="relative z-10 mb-4">
-                      <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+                    <div className="relative z-10 mb-3.5">
+                      <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-wider">
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px]">sports_score</span>
                         CABOR ATLETIK RESMI
                       </div>
                       <h1 className="font-headline-lg text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
                         KONI SURAKARTA
                       </h1>
-                      <p className="font-body-sm text-[11px] sm:text-[12px] text-white/90 mt-1 flex items-center gap-1 font-medium">
+                      <p className="font-body-sm text-[10.5px] sm:text-[11.5px] text-white/90 mt-1 flex items-start sm:items-center gap-1 font-medium leading-snug">
                         <span className="material-symbols-outlined text-[14px] sm:text-[15px] text-amber-400 shrink-0">location_on</span>
                         Basis Pembinaan: Stadion Manahan & Stadion Sriwedari
                       </p>
@@ -2112,17 +2112,17 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div className="relative z-10 grid grid-cols-2 gap-2 pt-1">
                       <button
                         onClick={() => setCaborTab('rab-form')}
-                        className="gold-shimmer py-2.5 px-2.5 sm:px-3.5 rounded-xl sm:rounded-2xl shadow-[0_6px_16px_rgba(255,168,0,0.35)] border-t border-white/50 active:scale-95 transition-all flex items-center justify-center gap-1.5 text-onyx font-label-md text-[11px] sm:text-[12px] uppercase font-black tracking-wide whitespace-nowrap cursor-pointer"
+                        className="gold-shimmer py-2 px-2 sm:px-3 rounded-xl sm:rounded-2xl shadow-[0_6px_16px_rgba(255,168,0,0.35)] border-t border-white/50 active:scale-95 transition-all flex items-center justify-center gap-1.5 text-onyx font-label-md text-[10px] sm:text-[11px] uppercase font-black tracking-wide shrink min-w-0 cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[16px] sm:text-[18px] font-black shrink-0">add_circle</span>
-                        <span>+ Buat RAB Baru</span>
+                        <span className="material-symbols-outlined text-[15px] sm:text-[17px] font-black shrink-0">add_circle</span>
+                        <span className="truncate">+ Buat RAB Baru</span>
                       </button>
                       <button
                         onClick={() => showToast('Membuka Juknis Hibah Olahraga KONI Surakarta 2026...')}
-                        className="py-2.5 px-2.5 sm:px-3.5 rounded-xl sm:rounded-2xl bg-white/15 hover:bg-white/20 backdrop-blur-md border border-amber-300/40 text-white active:scale-95 transition-all flex items-center justify-center gap-1.5 font-label-md text-[11px] sm:text-[12px] uppercase font-bold tracking-wide shadow-sm whitespace-nowrap cursor-pointer"
+                        className="py-2 px-2 sm:px-3 rounded-xl sm:rounded-2xl bg-white/15 hover:bg-white/20 backdrop-blur-md border border-amber-300/40 text-white active:scale-95 transition-all flex items-center justify-center gap-1.5 font-label-md text-[10px] sm:text-[11px] uppercase font-bold tracking-wide shadow-sm shrink min-w-0 cursor-pointer"
                       >
                         <span className="material-symbols-outlined text-[15px] sm:text-[17px] text-amber-300 shrink-0">menu_book</span>
-                        <span>Juknis & Panduan</span>
+                        <span className="truncate">Juknis & Panduan</span>
                       </button>
                     </div>
                   </div>
@@ -2662,27 +2662,27 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         }
                         className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
                       >
-                        <div className="relative h-28 w-full overflow-hidden">
+                        <div className="relative h-26 sm:h-28 w-full overflow-hidden">
                           <img
                             alt="Pelatnas Porprov Atletik Solo"
                             className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
                             src="/images/sprinter_solo.jpg"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-white font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-white font-label-md text-[8.5px] sm:text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
                             Sprint 100m/400m
                           </span>
                         </div>
                         <div className="p-2.5 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            <h3 className="font-title-md text-[12px] sm:text-[13px] font-bold text-onyx leading-tight line-clamp-1">
                               Pelatnas Porprov 2026
                             </h3>
-                            <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            <p className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 line-clamp-1">
                               38 Atlet Terbina di Manahan
                             </p>
                           </div>
-                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-primary font-label-md text-[10px] font-bold uppercase">
+                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-primary font-label-md text-[9.5px] sm:text-[10px] font-bold uppercase">
                             <span className="flex items-center gap-0.5">
                               <span className="material-symbols-outlined text-[13px]">military_tech</span>Emas
                             </span>
@@ -2703,27 +2703,27 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         }
                         className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
                       >
-                        <div className="relative h-28 w-full overflow-hidden">
+                        <div className="relative h-26 sm:h-28 w-full overflow-hidden">
                           <img
                             alt="Stadion Sriwedari dan Kawasan Manahan Solo"
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                             src="/images/sriwedari_manahan.jpg"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-400 text-onyx font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-400 text-onyx font-label-md text-[8.5px] sm:text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
                             Heritage Solo
                           </span>
                         </div>
                         <div className="p-2.5 flex-1 flex flex-col justify-between">
                           <div>
-                            <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            <h3 className="font-title-md text-[12px] sm:text-[13px] font-bold text-onyx leading-tight line-clamp-1">
                               Kota Atlet & Budaya Solo
                             </h3>
-                            <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            <p className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 line-clamp-1">
                               Sriwedari & Manahan
                             </p>
                           </div>
-                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-secondary-dark font-label-md text-[10px] font-bold uppercase">
+                          <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-secondary-dark font-label-md text-[9.5px] sm:text-[10px] font-bold uppercase">
                             <span className="flex items-center gap-0.5">
                               <span className="material-symbols-outlined text-[13px]">stadium</span>Kawasan
                             </span>
@@ -3091,44 +3091,44 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#1e293b]/95 to-[#0f172a]/90 backdrop-blur-[1px]" />
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
-                  <div className="relative z-10 flex flex-col justify-between min-h-[175px]">
-                    <div className="flex items-center justify-between">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[10px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         <span>DASHBOARD EKSEKUTIF • APBD 2026</span>
                       </div>
-                      <span className="font-label-md text-[10px] uppercase tracking-wider text-emerald-300 font-extrabold flex items-center gap-1">
+                      <span className="font-label-md text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-emerald-300 font-extrabold flex items-center gap-1 shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                         BANK JATENG HOST
                       </span>
                     </div>
 
                     <div className="my-2">
-                      <span className="font-label-md text-[10px] sm:text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
+                      <span className="font-label-md text-[9.5px] sm:text-[10.5px] uppercase tracking-wider text-amber-200/90 font-bold block">
                         Total Pagu Induk Hibah Olahraga
                       </span>
-                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5">
+                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5 leading-tight">
                         Rp 12.800.000.000
                       </div>
-                      <div className="flex items-center gap-1.5 sm:gap-2 mt-1 text-[10px] sm:text-[11px] text-white/85 flex-wrap">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mt-1 text-[9.5px] sm:text-[10.5px] text-white/85 flex-wrap">
                         <span>Serapan: <strong className="text-amber-300 font-bold">Rp 8,75 M (68,4%)</strong></span>
                         <span>•</span>
                         <span>Sisa Giro Kasda: <strong className="text-emerald-300 font-bold">Rp 4,05 M</strong></span>
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
-                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
+                    <div className="pt-2 border-t border-white/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap sm:flex-nowrap">
                         <button
                           onClick={() => setPengurusTab('approval')}
-                          className="px-2.5 sm:px-3 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9.5px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">fact_check</span>
                           <span>Inbox Approval ({approvalList.filter((a) => a.status === 'Menunggu').length})</span>
                         </button>
                         <button
                           onClick={() => setPengurusTab('kas')}
-                          className="px-2.5 sm:px-3 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9.5px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">account_balance</span>
                           <span>Mutasi Giro</span>
@@ -3136,7 +3136,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9.5px] sm:text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9px] sm:text-[9.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
                       >
                         <span>Katalog Modul</span>
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
@@ -3146,23 +3146,23 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 </div>
 
                 {/* 2. 4 KPIS EKSEKUTIF (BENTO GRID 2-KOLOM / 4-KOLOM DESKTOP) */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
                   <div
                     onClick={() => setPengurusTab('approval')}
                     className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-amber-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
-                        <span className="material-symbols-outlined text-[15px]">hourglass_top</span>
+                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
+                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">hourglass_top</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100 tracking-wider">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100 tracking-wider">
                         ANTREAN
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
+                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       {approvalList.filter((a) => a.status === 'Menunggu').length} Berkas
                     </div>
-                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       Menunggu TTD
                     </span>
                   </div>
@@ -3172,17 +3172,17 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-emerald-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
-                        <span className="material-symbols-outlined text-[15px]">receipt_long</span>
+                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">receipt_long</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100 tracking-wider">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100 tracking-wider">
                         SAH
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
+                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       04 Laporan
                     </div>
-                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       LPJ Terverifikasi
                     </span>
                   </div>
@@ -3192,17 +3192,17 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-sky-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-600 shrink-0">
-                        <span className="material-symbols-outlined text-[15px]">payments</span>
+                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-600 shrink-0">
+                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">payments</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-sky-800 px-1.5 py-0.5 rounded-full bg-sky-100 tracking-wider">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-sky-800 px-1.5 py-0.5 rounded-full bg-sky-100 tracking-wider">
                         PAJAK
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
+                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       Rp 184 Juta
                     </div>
-                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       PPh & PPN Terkumpul
                     </span>
                   </div>
@@ -3212,17 +3212,17 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-indigo-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 shrink-0">
-                        <span className="material-symbols-outlined text-[15px]">military_tech</span>
+                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 shrink-0">
+                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">military_tech</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-indigo-800 px-1.5 py-0.5 rounded-full bg-indigo-100 tracking-wider">
+                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-indigo-800 px-1.5 py-0.5 rounded-full bg-indigo-100 tracking-wider">
                         CABOR
                       </span>
                     </div>
-                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
+                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       64 Cabor
                     </div>
-                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       Binaan Aktif
                     </span>
                   </div>
@@ -3769,21 +3769,20 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
-                <div className="absolute bottom-2.5 left-3 right-3 text-white flex items-end justify-between">
-                  <div>
-                    <span className="text-[9.5px] font-black uppercase text-amber-300 tracking-wider block">
-                      CABOR {selectedCaborDetail.category} · RESMI KONI
-                    </span>
-                    <span className="text-base font-black text-white leading-tight block drop-shadow-sm">
-                      {selectedCaborDetail.code} • {selectedCaborDetail.name}
-                    </span>
-                  </div>
-                  <button
-                    onClick={() => setSelectedCaborDetail(null)}
-                    className="text-white/80 hover:text-white p-1 rounded-full bg-black/40 backdrop-blur-xs transition-colors shrink-0"
-                  >
-                    <X size={16} />
-                  </button>
+                <button
+                  onClick={() => setSelectedCaborDetail(null)}
+                  className="absolute top-2.5 right-2.5 text-white/90 hover:text-white p-1 rounded-full bg-black/50 backdrop-blur-xs transition-colors z-20 cursor-pointer shadow-sm"
+                  aria-label="Tutup"
+                >
+                  <X size={16} />
+                </button>
+                <div className="absolute bottom-2.5 left-3 right-3 text-white">
+                  <span className="text-[9.5px] font-black uppercase text-amber-300 tracking-wider block">
+                    CABOR {selectedCaborDetail.category} · RESMI KONI
+                  </span>
+                  <span className="text-base font-black text-white leading-tight block drop-shadow-sm truncate">
+                    {selectedCaborDetail.code} • {selectedCaborDetail.name}
+                  </span>
                 </div>
               </div>
 
@@ -3843,14 +3842,15 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 onClick={() => setSelectedMobileItem(null)}
               />
 
-              <div className="flex justify-between items-start">
-                <div>
-                  <b className="text-sm font-black text-sikoni-navy block">{selectedMobileItem.title}</b>
-                  <small className="text-[11px] text-sikoni-muted">{selectedMobileItem.sub}</small>
+              <div className="flex justify-between items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <b className="text-sm font-black text-sikoni-navy block leading-snug">{selectedMobileItem.title}</b>
+                  <small className="text-[11px] text-sikoni-muted block mt-0.5">{selectedMobileItem.sub}</small>
                 </div>
                 <button
                   onClick={() => setSelectedMobileItem(null)}
-                  className="text-slate-400 hover:text-sikoni-navy p-1 rounded-full hover:bg-slate-100 transition-colors"
+                  className="text-slate-400 hover:text-sikoni-navy p-1 rounded-full hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
+                  aria-label="Tutup"
                 >
                   <X size={18} />
                 </button>
