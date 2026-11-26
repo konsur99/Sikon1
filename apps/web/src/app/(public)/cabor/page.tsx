@@ -5,6 +5,7 @@ import { Search, Shield, X, MapPin, Mail, Phone, Users } from 'lucide-react';
 
 interface CaborItem {
   icon: string;
+  image?: string;
   code: string;
   name: string;
   category: string;
@@ -18,28 +19,31 @@ interface CaborItem {
 const caborList: CaborItem[] = [
   {
     icon: '🏃',
+    image: '/images/cabor/atletik.jpg',
     code: 'PASI',
     name: 'Atletik',
     category: 'Terukur',
     athletes: '42 atlet terdata',
-    leader: 'Dr. Bambang Setiawan',
+    leader: 'Dr. H. Sugiyanto, M.Pd',
     venue: 'Stadion Sriwedari, Surakarta',
     email: 'pasi@koni-surakarta.id',
-    phone: '08112233441',
+    phone: '081228394401',
   },
   {
     icon: '🏸',
+    image: '/images/cabor/bulutangkis.jpg',
     code: 'PBSI',
     name: 'Bulutangkis',
     category: 'Permainan',
     athletes: '36 atlet terdata',
-    leader: 'H. Suryanto',
+    leader: 'Ir. FX Rudiatmoko',
     venue: 'GOR Manahan, Surakarta',
     email: 'pbsi@koni-surakarta.id',
-    phone: '08112233442',
+    phone: '08112640192',
   },
   {
     icon: '⚽',
+    image: '/images/cabor/sepakbola.jpg',
     code: 'PSSI',
     name: 'Sepak Bola',
     category: 'Permainan',
@@ -47,43 +51,47 @@ const caborList: CaborItem[] = [
     leader: 'Agus Wibowo, S.E.',
     venue: 'Stadion Manahan & Lapangan Kota Barat',
     email: 'pssi@koni-surakarta.id',
-    phone: '08112233443',
+    phone: '081328901122',
   },
   {
     icon: '🏊',
+    image: '/images/cabor/renang.jpg',
     code: 'PRSI',
-    name: 'Renang',
+    name: 'Renang (Akuatik)',
     category: 'Terukur',
     athletes: '24 atlet terdata',
-    leader: 'Dra. Endang Purwanti',
+    leader: 'dr. H. Wahyu Hidayat, Sp.OT',
     venue: 'Kolam Renang Tirtomoyo Manahan',
     email: 'prsi@koni-surakarta.id',
-    phone: '08112233444',
+    phone: '081567124409',
   },
   {
     icon: '🏹',
+    image: '/images/cabor/panahan.jpg',
     code: 'PERPANI',
     name: 'Panahan',
     category: 'Akurasi',
     athletes: '18 atlet terdata',
-    leader: 'Joko Susilo',
+    leader: 'Joko Susilo, S.T.',
     venue: 'Lapangan Panahan Manahan',
     email: 'perpani@koni-surakarta.id',
-    phone: '08112233445',
+    phone: '081233445566',
   },
   {
     icon: '🥋',
+    image: '/images/cabor/silat.jpg',
     code: 'IPSI',
     name: 'Pencak Silat',
     category: 'Bela Diri',
     athletes: '64 atlet terdata',
-    leader: 'M. Taufik, M.Pd.',
-    venue: 'Padepokan Silat Surakarta',
+    leader: 'H. Bambang Sumantri',
+    venue: 'Padepokan Silat Danukusuman Surakarta',
     email: 'ipsi@koni-surakarta.id',
-    phone: '08112233446',
+    phone: '085741003320',
   },
   {
     icon: '🥋',
+    image: '/images/cabor/taekwondo.jpg',
     code: 'TI',
     name: 'Taekwondo',
     category: 'Bela Diri',
@@ -91,10 +99,11 @@ const caborList: CaborItem[] = [
     leader: 'Master Donny Prasetyo',
     venue: 'Dojo Manahan Surakarta',
     email: 'ti@koni-surakarta.id',
-    phone: '08112233447',
+    phone: '081122334477',
   },
   {
     icon: '🥋',
+    image: '/images/cabor/silat.jpg',
     code: 'FORKI',
     name: 'Karate',
     category: 'Bela Diri',
@@ -106,14 +115,63 @@ const caborList: CaborItem[] = [
   },
   {
     icon: '🏓',
+    image: '/images/cabor/tenismeja.jpg',
     code: 'PTMSI',
     name: 'Tenis Meja',
-    category: 'Permainan',
+    category: 'Akurasi',
     athletes: '22 atlet terdata',
-    leader: 'Ir. Budi Hartono',
-    venue: 'GOR Banyuanyar',
+    leader: 'Drs. Supriyanto',
+    venue: 'Hall Tenis Meja Manahan',
     email: 'ptmsi@koni-surakarta.id',
-    phone: '08112233449',
+    phone: '081288776655',
+  },
+  {
+    icon: '🏐',
+    image: '/images/cabor/voli.jpg',
+    code: 'PBVSI',
+    name: 'Bola Voli',
+    category: 'Permainan',
+    athletes: '45 atlet terdata',
+    leader: 'Kombes Pol (Purn) Suryadi',
+    venue: 'GOR Manahan Solo Blok D-2',
+    email: 'pbvsi@koni-surakarta.id',
+    phone: '081390228190',
+  },
+  {
+    icon: '🏀',
+    image: '/images/cabor/basket.jpg',
+    code: 'PERBASI',
+    name: 'Bola Basket',
+    category: 'Permainan',
+    athletes: '40 atlet terdata',
+    leader: 'Drs. Hendro Wibowo',
+    venue: 'Sritex Arena, Laweyan',
+    email: 'perbasi@koni-surakarta.id',
+    phone: '082134508811',
+  },
+  {
+    icon: '🎯',
+    image: '/images/cabor/menembak.jpg',
+    code: 'PERBAKIN',
+    name: 'Menembak',
+    category: 'Akurasi',
+    athletes: '20 atlet terdata',
+    leader: 'Kolonel (Purn) Sunardi',
+    venue: 'Lapangan Tembak Manahan',
+    email: 'perbakin@koni-surakarta.id',
+    phone: '08112233457',
+  },
+  {
+    icon: '🧗',
+    image: '/images/cabor/panjat_tebing.jpg',
+    code: 'FPTI',
+    name: 'Panjat Tebing',
+    category: 'Terukur',
+    athletes: '28 atlet terdata',
+    leader: 'Eko Yulianto',
+    venue: 'Wall Climbing Kompleks Manahan',
+    email: 'fpti@koni-surakarta.id',
+    phone: '08112233459',
   },
   {
     icon: '🎾',
@@ -125,28 +183,6 @@ const caborList: CaborItem[] = [
     venue: 'Lapangan Tenis Manahan',
     email: 'pelti@koni-surakarta.id',
     phone: '08112233450',
-  },
-  {
-    icon: '🏐',
-    code: 'PBVSI',
-    name: 'Bola Voli',
-    category: 'Permainan',
-    athletes: '32 atlet terdata',
-    leader: 'Drs. Slamet Raharjo',
-    venue: 'GOR Manahan',
-    email: 'pbvsi@koni-surakarta.id',
-    phone: '08112233451',
-  },
-  {
-    icon: '🏀',
-    code: 'PERBASI',
-    name: 'Bola Basket',
-    category: 'Permainan',
-    athletes: '30 atlet terdata',
-    leader: 'Christian Ronald, B.Sc.',
-    venue: 'Sritex Arena Surakarta',
-    email: 'perbasi@koni-surakarta.id',
-    phone: '08112233452',
   },
   {
     icon: '♟️',
@@ -395,8 +431,16 @@ export default function PublicCaborPage() {
 
               <div className="relative z-10">
                 <div className="flex items-center justify-between mb-3.5">
-                  <div className="w-13 h-13 p-2.5 rounded-2xl bg-white shadow-xs border border-slate-200/90 text-2xl grid place-items-center group-hover:scale-110 group-hover:rotate-2 transition-all duration-300">
-                    {cabor.icon}
+                  <div className="relative w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm bg-slate-900 group-hover:scale-105 transition-transform duration-300">
+                    <img
+                      src={cabor.image || '/images/cabor/atletik.jpg'}
+                      alt={cabor.name}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <span className="absolute bottom-0.5 inset-x-0 text-center font-black text-white text-[9px] drop-shadow-sm tracking-wider">
+                      {cabor.code}
+                    </span>
                   </div>
                   <div className="flex flex-col items-end gap-1">
                     <span
@@ -481,24 +525,31 @@ export default function PublicCaborPage() {
         <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-in fade-in duration-200">
           <div className="card-sikoni relative overflow-hidden w-[94vw] sm:w-full max-w-lg p-4 sm:p-6 space-y-4 shadow-2xl">
             <div className="absolute top-0 left-0 right-0 h-[3.5px] bg-gradient-to-r from-sikoni-navy via-sikoni-teal to-sikoni-gold" />
-            <div className="flex justify-between items-start">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 text-2xl grid place-items-center shadow-xs border border-emerald-200/70">
-                  {selectedCabor.icon}
-                </div>
+            
+            {/* Modal Hero Banner Photo */}
+            <div className="relative h-32 w-full rounded-2xl overflow-hidden -mt-1 mb-2 border border-slate-200 shadow-sm bg-slate-900">
+              <img
+                src={selectedCabor.image || '/images/cabor/atletik.jpg'}
+                alt={selectedCabor.name}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent" />
+              <div className="absolute bottom-2.5 left-3 right-3 text-white flex items-end justify-between">
                 <div>
-                  <h3 className="text-lg font-black text-sikoni-navy">
+                  <span className="text-[9.5px] font-black uppercase text-amber-300 tracking-wider block">
+                    CABOR {selectedCabor.category} · RESMI KONI
+                  </span>
+                  <span className="text-base font-black text-white leading-tight block drop-shadow-sm">
                     {selectedCabor.code} — {selectedCabor.name}
-                  </h3>
-                  <span className="text-xs text-sikoni-teal font-extrabold">Kategori {selectedCabor.category}</span>
+                  </span>
                 </div>
+                <button
+                  onClick={() => setSelectedCabor(null)}
+                  className="text-white/80 hover:text-white p-1 rounded-full bg-black/40 backdrop-blur-xs transition-colors shrink-0"
+                >
+                  <X size={16} />
+                </button>
               </div>
-              <button
-                onClick={() => setSelectedCabor(null)}
-                className="text-sikoni-muted hover:text-sikoni-navy p-1 rounded-lg hover:bg-slate-100 transition-colors"
-              >
-                <X size={18} />
-              </button>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">

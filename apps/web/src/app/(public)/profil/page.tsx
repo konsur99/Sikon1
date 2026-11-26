@@ -3,11 +3,36 @@ import { Target, Compass, Users, MapPin, Mail, Phone, Clock, Award, ShieldCheck,
 
 export default function ProfilePage() {
   const leadershipBoard = [
-    { name: 'Drs. H. Sri Nugroho, M.Si.', role: 'Ketua Umum', cabor: 'KONI Kota Surakarta' },
-    { name: 'Bambang Triyono, S.H.', role: 'Wakil Ketua Umum I', cabor: 'Bidang Organisasi & Hukum' },
-    { name: 'Dr. Agus Hariyanto, M.Pd.', role: 'Wakil Ketua Umum II', cabor: 'Bidang Pembinaan Prestasi' },
-    { name: 'Eko Sulistyo, S.Sos.', role: 'Sekretaris Umum', cabor: 'Sekretariat & Administrasi' },
-    { name: 'Hj. Wahyuningsih, S.E., Ak.', role: 'Bendahara Umum', cabor: 'Keuangan & Perbendaharaan' },
+    {
+      name: 'Her Suprabu, S.P., M.M.',
+      role: 'Ketua Umum',
+      cabor: 'KONI Kota Surakarta (2025–2029)',
+      image: '/images/pengurus/her_suprabu.png',
+    },
+    {
+      name: 'Rudi Jauhari',
+      role: 'Bendahara Umum',
+      cabor: 'Keuangan & Perbendaharaan',
+      image: '/images/pengurus/rudi_jauhari.jpg',
+    },
+    {
+      name: 'Bambang',
+      role: 'Organisasi & MSD',
+      cabor: 'Hukum & Tata Kelola Cabor',
+      image: '/images/pengurus/bambang.jpg',
+    },
+    {
+      name: 'Dwi Puspita Ningrum',
+      role: 'Ketua Bidang Humas',
+      cabor: 'Media & Hubungan Publik',
+      image: '/images/pengurus/dwi_puspita.jpg',
+    },
+    {
+      name: 'Antonius',
+      role: 'Wakil Bendahara',
+      cabor: 'Verifikasi Kasda & Giro',
+      image: '/images/pengurus/rudi_jauhari.jpg',
+    },
   ];
 
   const missionItems = [
@@ -133,8 +158,12 @@ export default function ProfilePage() {
               key={idx}
               className="bg-gradient-to-b from-slate-50 to-white border border-slate-200/90 p-4 rounded-xl text-center space-y-2.5 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all border-t-4 border-t-sikoni-teal group"
             >
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-sikoni-navy to-slate-700 text-white mx-auto grid place-items-center font-bold text-xs shadow-md group-hover:scale-105 transition-transform">
-                {leader.name.split(' ')[0][0] + (leader.name.split(' ')[1] ? leader.name.split(' ')[1][0] : '')}
+              <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-sikoni-gold mx-auto shadow-md group-hover:scale-105 transition-transform bg-slate-800">
+                <img
+                  src={leader.image}
+                  alt={leader.name}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
               <div>
                 <b className="text-xs text-sikoni-navy block leading-snug group-hover:text-sikoni-teal transition-colors">
