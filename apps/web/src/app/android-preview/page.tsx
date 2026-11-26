@@ -32,7 +32,7 @@ export default function AndroidPreviewPage() {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-center">
-        <MobilePreview />
+        <MobilePreview defaultDeviceView="mobile" />
       </main>
     </div>
   );

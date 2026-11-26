@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Home,
   Coins,
@@ -208,8 +208,17 @@ export interface MobilePreviewProps {
 }
 
 export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView }) => {
-  const { setMode } = useDisplayMode();
+  const { isAndroid, setMode } = useDisplayMode();
   const [deviceView, setDeviceView] = useState<DeviceView>(defaultDeviceView || 'desktop');
+
+  // Synchronize deviceView with global display mode (FloatingModeSwitcher / isAndroid)
+  useEffect(() => {
+    if (defaultDeviceView) {
+      setDeviceView(defaultDeviceView);
+    } else {
+      setDeviceView(isAndroid ? 'mobile' : 'desktop');
+    }
+  }, [isAndroid, defaultDeviceView]);
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
   const [persona, setPersona] = useState<UserPersona>('cabor');
 
@@ -503,7 +512,10 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
             <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider hidden lg:inline">Layar:</span>
             <button
-              onClick={() => setDeviceView('mobile')}
+              onClick={() => {
+                setDeviceView('mobile');
+                setMode('android');
+              }}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
                 deviceView === 'mobile' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
               }`}
@@ -512,7 +524,10 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               <Smartphone size={13} /> HP (412px)
             </button>
             <button
-              onClick={() => setDeviceView('tablet')}
+              onClick={() => {
+                setDeviceView('tablet');
+                setMode('android');
+              }}
               className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
                 deviceView === 'tablet' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
               }`}
@@ -521,7 +536,10 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               <Tablet size={13} /> Tablet (768px)
             </button>
             <button
-              onClick={() => setDeviceView('desktop')}
+              onClick={() => {
+                setDeviceView('desktop');
+                setMode('desktop');
+              }}
               className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
                 deviceView === 'desktop' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
               }`}
@@ -3611,7 +3629,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
         {/* Mobile Bottom Navigation Bar: Floating Circular Athletic Dock for ALL personas */}
         {caborTab !== 'skb-doc' && (
-          <nav className="absolute bottom-3 inset-x-0 z-30 px-4 pointer-events-none">
+          <nav className={`z-30 px-4 pointer-events-none ${deviceView === 'desktop' ? 'sticky bottom-3 mt-auto' : 'absolute bottom-3 inset-x-0'}`}>
             <div className="pointer-events-auto max-w-[340px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
               {/* PERSONA 1: CABOR */}
               {persona === 'cabor' && (
