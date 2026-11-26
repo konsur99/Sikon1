@@ -1159,95 +1159,95 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/95 to-[#d32f2f]/85 backdrop-blur-[1px]" />
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
-                  <div className="relative z-10 flex flex-col justify-between min-h-[175px]">
-                    <div className="flex items-center justify-between">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[10px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[9px] sm:text-[10px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         <span>KOTA SURAKARTA JUARA • PORPROV 2026</span>
                       </div>
-                      <span className="font-label-md text-[10px] uppercase tracking-wider text-white/80 font-bold">
+                      <span className="font-label-md text-[9px] sm:text-[10px] uppercase tracking-wider text-white/80 font-bold shrink-0">
                         64 CABOR RESMI
                       </span>
                     </div>
 
                     <div className="my-2">
-                      <span className="font-label-md text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
+                      <span className="font-label-md text-[10px] sm:text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
                         Prestasi Emas Surakarta
                       </span>
-                      <div className="font-headline-lg text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">
+                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5">
                         124 Medali Emas
                       </div>
-                      <p className="font-body-sm text-[11px] sm:text-xs text-white/85 mt-1 leading-snug">
+                      <p className="font-body-sm text-[10.5px] sm:text-xs text-white/85 mt-1 leading-snug">
                         88 Perak • 95 Perunggu • Rekor Juara Umum Kontingen Surakarta
                       </p>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                         <button
                           onClick={() => setPublikTab('cabor-dir')}
-                          className="px-3.5 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[11px] font-black uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
-                          <span className="material-symbols-outlined text-[14px]">military_tech</span>
+                          <span className="material-symbols-outlined text-[13px] sm:text-[14px]">military_tech</span>
                           <span>64 Cabor</span>
                         </button>
                         <button
                           onClick={() => setPublikTab('transparansi')}
-                          className="px-3.5 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[11px] font-black uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
-                          <span className="material-symbols-outlined text-[14px]">trending_up</span>
+                          <span className="material-symbols-outlined text-[13px] sm:text-[14px]">trending_up</span>
                           <span>APBD 2026</span>
                         </button>
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9.5px] sm:text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
                       >
                         <span>Katalog Publik</span>
-                        <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* 2. RINGKASAN STATISTIK PUBLIK (BENTO 2-KOLOM) */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                   <div
                     onClick={() => setPublikTab('transparansi')}
-                    className="bg-surface-container-lowest rounded-[24px] p-3.5 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-amber-400/60 transition-colors"
+                    className="bg-surface-container-lowest rounded-[22px] sm:rounded-[24px] p-3 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-amber-400/60 transition-all active:scale-98"
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <div className="w-8 h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600">
-                        <span className="material-symbols-outlined text-[18px]">account_balance</span>
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[18px]">account_balance</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-amber-800 px-2 py-0.5 rounded-full bg-amber-100 border border-amber-300/40">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-amber-800 px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-100 border border-amber-300/40">
                         APBD 2026
                       </span>
                     </div>
-                    <div className="font-data-metric text-[16px] sm:text-[18px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight">
                       Rp 12,8 Miliar
                     </div>
-                    <span className="font-body-sm text-[10.5px] text-on-surface-variant mt-0.5 block font-medium">
+                    <span className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 block font-medium truncate">
                       Serapan Kasda 68,4%
                     </span>
                   </div>
 
                   <div
                     onClick={() => setPublikTab('cabor-dir')}
-                    className="bg-surface-container-lowest rounded-[24px] p-3.5 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-emerald-400/60 transition-colors"
+                    className="bg-surface-container-lowest rounded-[22px] sm:rounded-[24px] p-3 sm:p-4 border border-outline-variant/60 shadow-[0_8px_24px_rgba(18,19,22,0.04)] cursor-pointer hover:border-emerald-400/60 transition-all active:scale-98"
                   >
                     <div className="flex items-center justify-between mb-1.5">
-                      <div className="w-8 h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600">
-                        <span className="material-symbols-outlined text-[18px]">sports</span>
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[18px]">sports</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-emerald-800 px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-emerald-800 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
                         ATLET AKTIF
                       </span>
                     </div>
-                    <div className="font-data-metric text-[16px] sm:text-[18px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight truncate">
                       1.450+ Insan Olahraga
                     </div>
-                    <span className="font-body-sm text-[10.5px] text-on-surface-variant mt-0.5 block font-medium">
+                    <span className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 block font-medium truncate">
                       64 Cabor Terbina
                     </span>
                   </div>
@@ -1989,48 +1989,48 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div className="absolute inset-0 carbon-pattern opacity-25" />
                     {/* Banner Header Meta */}
                     <div className="relative z-10 flex items-center justify-between mb-3">
-                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-amber-300/40 shadow-inner">
-                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                        <span className="font-label-md text-[10px] tracking-widest uppercase text-amber-300 font-bold">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 backdrop-blur-md border border-amber-300/40 shadow-inner">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                        <span className="font-label-md text-[9px] sm:text-[10px] tracking-wider uppercase text-amber-300 font-extrabold">
                           HIBAH APBD 2025 TERVERIFIKASI
                         </span>
                       </div>
-                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20">
-                        <span className="material-symbols-outlined text-[13px] text-amber-300">verified</span>
-                        <span className="font-label-md text-[9.5px] font-extrabold uppercase tracking-widest text-white">
+                      <div className="inline-flex items-center gap-1 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20">
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px] text-amber-300">verified</span>
+                        <span className="font-label-md text-[8.5px] sm:text-[9.5px] font-extrabold uppercase tracking-wider text-white">
                           KONI SOLO
                         </span>
                       </div>
                     </div>
                     {/* Title & Cabor Identity */}
                     <div className="relative z-10 mb-4">
-                      <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[11px] font-bold uppercase tracking-[0.2em]">
-                        <span className="material-symbols-outlined text-[14px]">sports_score</span>
+                      <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+                        <span className="material-symbols-outlined text-[13px] sm:text-[14px]">sports_score</span>
                         CABOR ATLETIK RESMI
                       </div>
-                      <h1 className="font-headline-lg text-[30px] font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
+                      <h1 className="font-headline-lg text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
                         KONI SURAKARTA
                       </h1>
-                      <p className="font-body-sm text-[12px] text-white/90 mt-1 flex items-center gap-1 font-medium">
-                        <span className="material-symbols-outlined text-[15px] text-amber-400">location_on</span>
+                      <p className="font-body-sm text-[11px] sm:text-[12px] text-white/90 mt-1 flex items-center gap-1 font-medium">
+                        <span className="material-symbols-outlined text-[14px] sm:text-[15px] text-amber-400 shrink-0">location_on</span>
                         Basis Pembinaan: Stadion Manahan & Stadion Sriwedari
                       </p>
                     </div>
                     {/* Quick Action Buttons 3D */}
-                    <div className="relative z-10 grid grid-cols-2 gap-2.5 pt-1">
+                    <div className="relative z-10 grid grid-cols-2 gap-2 pt-1">
                       <button
                         onClick={() => setCaborTab('rab-form')}
-                        className="gold-shimmer py-3 px-3.5 rounded-2xl shadow-[0_8px_18px_rgba(255,168,0,0.45)] border-t border-white/50 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-onyx font-label-lg text-[12.5px] uppercase font-black tracking-wide"
+                        className="gold-shimmer py-2.5 px-2.5 sm:px-3.5 rounded-xl sm:rounded-2xl shadow-[0_6px_16px_rgba(255,168,0,0.35)] border-t border-white/50 active:scale-95 transition-all flex items-center justify-center gap-1.5 text-onyx font-label-md text-[11px] sm:text-[12px] uppercase font-black tracking-wide whitespace-nowrap cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[20px] font-black">add_circle</span>
-                        + Buat RAB Baru
+                        <span className="material-symbols-outlined text-[16px] sm:text-[18px] font-black shrink-0">add_circle</span>
+                        <span>+ Buat RAB Baru</span>
                       </button>
                       <button
                         onClick={() => showToast('Membuka Juknis Hibah Olahraga KONI Surakarta 2026...')}
-                        className="py-3 px-3.5 rounded-2xl bg-white/15 hover:bg-white/20 backdrop-blur-md border border-amber-300/40 text-white active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-label-lg text-[12.5px] uppercase font-bold tracking-wide shadow-sm"
+                        className="py-2.5 px-2.5 sm:px-3.5 rounded-xl sm:rounded-2xl bg-white/15 hover:bg-white/20 backdrop-blur-md border border-amber-300/40 text-white active:scale-95 transition-all flex items-center justify-center gap-1.5 font-label-md text-[11px] sm:text-[12px] uppercase font-bold tracking-wide shadow-sm whitespace-nowrap cursor-pointer"
                       >
-                        <span className="material-symbols-outlined text-[18px] text-amber-300">menu_book</span>
-                        Juknis & Panduan
+                        <span className="material-symbols-outlined text-[15px] sm:text-[17px] text-amber-300 shrink-0">menu_book</span>
+                        <span>Juknis & Panduan</span>
                       </button>
                     </div>
                   </div>
@@ -2180,38 +2180,38 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       {/* Bento 1: Sisa Kas */}
                       <div
                         onClick={() => setCaborTab('finance')}
-                        className="relative overflow-hidden bg-gradient-to-br from-amber-50/60 to-surface-container-low p-3.5 rounded-2xl border border-amber-300/40 shadow-xs cursor-pointer hover:border-amber-400 transition-colors"
+                        className="relative overflow-hidden bg-gradient-to-br from-amber-50/60 to-surface-container-low p-3 sm:p-3.5 rounded-2xl border border-amber-300/40 shadow-xs cursor-pointer hover:border-amber-400 transition-all active:scale-98"
                       >
                         <div className="flex items-center justify-between mb-1.5">
-                          <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600">
-                            <span className="material-symbols-outlined text-[17px]">account_balance_wallet</span>
+                          <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
+                            <span className="material-symbols-outlined text-[16px] sm:text-[17px]">account_balance_wallet</span>
                           </div>
-                          <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-amber-700 px-2 py-0.5 rounded-full bg-amber-200/50">
+                          <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-amber-700 px-1.5 sm:px-2 py-0.5 rounded-full bg-amber-200/50">
                             SISA KAS
                           </span>
                         </div>
-                        <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                        <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight">
                           Rp 48.000.000
                         </div>
-                        <span className="font-body-sm text-[10.5px] text-on-surface-variant mt-0.5 block font-medium">
+                        <span className="font-body-sm text-[10px] sm:text-[10.5px] text-on-surface-variant mt-0.5 block font-medium truncate">
                           Alokasi Smt. 2 (40%)
                         </span>
                       </div>
                       {/* Bento 2: Target Realisasi */}
-                      <div className="relative overflow-hidden bg-gradient-to-br from-rose-50/60 to-surface-container-low p-3.5 rounded-2xl border border-rose-300/40 shadow-xs">
+                      <div className="relative overflow-hidden bg-gradient-to-br from-rose-50/60 to-surface-container-low p-3 sm:p-3.5 rounded-2xl border border-rose-300/40 shadow-xs">
                         <div className="flex items-center justify-between mb-1.5">
-                          <div className="w-7 h-7 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary">
-                            <span className="material-symbols-outlined text-[17px]">trending_up</span>
+                          <div className="w-7 h-7 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+                            <span className="material-symbols-outlined text-[16px] sm:text-[17px]">trending_up</span>
                           </div>
-                          <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-emerald-700 px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
+                          <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold tracking-wider text-emerald-700 px-1.5 sm:px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
                             +10% Ahead
                           </span>
                         </div>
-                        <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
-                          50% <span className="text-[12px] font-medium text-on-surface-variant">Target Smt 1</span>
+                        <div className="font-data-metric text-[15px] sm:text-[17px] font-extrabold text-onyx mt-1 leading-tight">
+                          50% <span className="text-[11px] sm:text-[12px] font-medium text-on-surface-variant">Target Smt 1</span>
                         </div>
-                        <span className="font-body-sm text-[10.5px] text-emerald-700 mt-0.5 flex items-center gap-1 font-semibold">
-                          <span className="material-symbols-outlined text-[13px]">check_circle</span> Tercapai Aman
+                        <span className="font-body-sm text-[10px] sm:text-[10.5px] text-emerald-700 mt-0.5 flex items-center gap-1 font-semibold truncate">
+                          <span className="material-symbols-outlined text-[12px] sm:text-[13px]">check_circle</span> Tercapai Aman
                         </span>
                       </div>
                     </div>
@@ -3009,125 +3009,125 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
 
                     <div className="my-2">
-                      <span className="font-label-md text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
+                      <span className="font-label-md text-[10px] sm:text-[11px] uppercase tracking-wider text-amber-200/90 font-bold block">
                         Total Pagu Induk Hibah Olahraga
                       </span>
-                      <div className="font-headline-lg text-2xl sm:text-3xl font-black text-white tracking-tight mt-0.5">
+                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5">
                         Rp 12.800.000.000
                       </div>
-                      <div className="flex items-center gap-2 mt-1 text-[11px] text-white/85">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mt-1 text-[10px] sm:text-[11px] text-white/85 flex-wrap">
                         <span>Serapan: <strong className="text-amber-300 font-bold">Rp 8,75 M (68,4%)</strong></span>
                         <span>•</span>
                         <span>Sisa Giro Kasda: <strong className="text-emerald-300 font-bold">Rp 4,05 M</strong></span>
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                    <div className="pt-2 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                         <button
                           onClick={() => setPengurusTab('approval')}
-                          className="px-3.5 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[11px] font-black uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
-                          <span className="material-symbols-outlined text-[14px]">fact_check</span>
+                          <span className="material-symbols-outlined text-[13px] sm:text-[14px]">fact_check</span>
                           <span>Inbox Approval ({approvalList.filter((a) => a.status === 'Menunggu').length})</span>
                         </button>
                         <button
                           onClick={() => setPengurusTab('kas')}
-                          className="px-3.5 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[11px] font-black uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[10px] sm:text-[11px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
-                          <span className="material-symbols-outlined text-[14px]">account_balance</span>
+                          <span className="material-symbols-outlined text-[13px] sm:text-[14px]">account_balance</span>
                           <span>Mutasi Giro</span>
                         </button>
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9.5px] sm:text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
                       >
                         <span>Katalog Modul</span>
-                        <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* 2. 4 KPIS EKSEKUTIF (BENTO GRID 2-KOLOM / 4-KOLOM DESKTOP) */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
                   <div
                     onClick={() => setPengurusTab('approval')}
-                    className="bg-surface-container-lowest rounded-2xl p-3 border border-outline-variant/60 shadow-xs hover:border-amber-400 cursor-pointer transition-colors"
+                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-amber-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600">
-                        <span className="material-symbols-outlined text-[16px]">hourglass_top</span>
+                      <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
+                        <span className="material-symbols-outlined text-[15px]">hourglass_top</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100 tracking-wider">
                         ANTREAN
                       </span>
                     </div>
-                    <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
                       {approvalList.filter((a) => a.status === 'Menunggu').length} Berkas
                     </div>
-                    <span className="font-body-sm text-[10px] text-on-surface-variant font-medium">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       Menunggu TTD
                     </span>
                   </div>
 
                   <div
                     onClick={() => setPengurusTab('approval')}
-                    className="bg-surface-container-lowest rounded-2xl p-3 border border-outline-variant/60 shadow-xs hover:border-emerald-400 cursor-pointer transition-colors"
+                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-emerald-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600">
-                        <span className="material-symbols-outlined text-[16px]">receipt_long</span>
+                      <div className="w-7 h-7 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
+                        <span className="material-symbols-outlined text-[15px]">receipt_long</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100 tracking-wider">
                         SAH
                       </span>
                     </div>
-                    <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
                       04 Laporan
                     </div>
-                    <span className="font-body-sm text-[10px] text-on-surface-variant font-medium">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       LPJ Terverifikasi
                     </span>
                   </div>
 
                   <div
                     onClick={() => setPengurusTab('kas')}
-                    className="bg-surface-container-lowest rounded-2xl p-3 border border-outline-variant/60 shadow-xs hover:border-sky-400 cursor-pointer transition-colors"
+                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-sky-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-600">
-                        <span className="material-symbols-outlined text-[16px]">payments</span>
+                      <div className="w-7 h-7 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-600 shrink-0">
+                        <span className="material-symbols-outlined text-[15px]">payments</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold text-sky-800 px-1.5 py-0.5 rounded-full bg-sky-100">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-sky-800 px-1.5 py-0.5 rounded-full bg-sky-100 tracking-wider">
                         PAJAK
                       </span>
                     </div>
-                    <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
                       Rp 184 Juta
                     </div>
-                    <span className="font-body-sm text-[10px] text-on-surface-variant font-medium">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       PPh & PPN Terkumpul
                     </span>
                   </div>
 
                   <div
                     onClick={() => setPengurusTab('monitoring')}
-                    className="bg-surface-container-lowest rounded-2xl p-3 border border-outline-variant/60 shadow-xs hover:border-indigo-400 cursor-pointer transition-colors"
+                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-indigo-400 cursor-pointer active:scale-98 transition-all"
                   >
                     <div className="flex items-center justify-between mb-1">
-                      <div className="w-7 h-7 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600">
-                        <span className="material-symbols-outlined text-[16px]">military_tech</span>
+                      <div className="w-7 h-7 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 shrink-0">
+                        <span className="material-symbols-outlined text-[15px]">military_tech</span>
                       </div>
-                      <span className="font-label-md text-[9px] uppercase font-extrabold text-indigo-800 px-1.5 py-0.5 rounded-full bg-indigo-100">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-extrabold text-indigo-800 px-1.5 py-0.5 rounded-full bg-indigo-100 tracking-wider">
                         CABOR
                       </span>
                     </div>
-                    <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                    <div className="font-data-metric text-[15px] sm:text-[16px] font-extrabold text-onyx mt-1 leading-tight">
                       64 Cabor
                     </div>
-                    <span className="font-body-sm text-[10px] text-on-surface-variant font-medium">
+                    <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-medium mt-0.5 block truncate">
                       Binaan Aktif
                     </span>
                   </div>
