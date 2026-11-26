@@ -842,7 +842,13 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             SCREEN CONTENT: PERSONA 1 - PUBLIK
            ======================================================== */}
         {persona === 'publik' && (
-          <div className="flex-1 overflow-y-auto p-3 sm:p-4 pb-24 overscroll-contain bg-surface text-on-surface space-y-4">
+          <div
+            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] text-on-surface ${
+              deviceView === 'desktop'
+                ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
+                : 'p-3 sm:p-4 pb-24 space-y-4'
+            }`}
+          >
             {/* PUBLIK: TAB 1 - BERANDA */}
             {publikTab === 'home' && (
               <div className="space-y-4">
@@ -1193,7 +1199,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                             </b>
                             <span className="text-[11px] text-on-surface-variant flex items-center gap-1 mt-1 truncate">
                               <span className="material-symbols-outlined text-[13px] text-primary">stadium</span>
-                              Stadion Sriwedari • PASI Surakarta
+                              Stadion Sriwedari • KONI Surakarta
                             </span>
                           </div>
                           <span className="material-symbols-outlined text-[16px] text-on-surface-variant self-center">
@@ -1449,8 +1455,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   ))}
                 </div>
 
-                {/* Cabor List */}
-                <div className="space-y-2">
+                {/* Cabor List: Responsive Grid on Desktop, Stack on Mobile */}
+                <div className={`grid gap-2.5 ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {filteredCaborList.map((c, idx) => (
                     <div
                       key={idx}
@@ -1559,7 +1565,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   </h2>
                 </div>
 
-                <div className="space-y-2 text-xs">
+                <div className={`grid gap-2.5 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
                     <span className="text-[9px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
                       Mendatang • 15 Nov 2026
@@ -1568,7 +1574,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       Kejuaraan Daerah Atletik Pelajar Solo
                     </b>
                     <p className="text-[10.5px] text-slate-500">
-                      Diselenggarakan oleh PASI Surakarta di Stadion Sriwedari. Terbuka untuk umum.
+                      Diselenggarakan oleh KONI Surakarta bersama Pengcab di Stadion Sriwedari. Terbuka untuk umum.
                     </p>
                   </div>
 
@@ -2661,7 +2667,13 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             SCREEN CONTENT: PERSONA 3 - PENGURUS KONI
            ======================================================== */}
         {persona === 'pengurus' && (
-          <div className="flex-1 overflow-y-auto p-3 sm:p-4 pb-24 overscroll-contain bg-surface text-on-surface space-y-4">
+          <div
+            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] text-on-surface ${
+              deviceView === 'desktop'
+                ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
+                : 'p-3 sm:p-4 pb-24 space-y-4'
+            }`}
+          >
             {/* PENGURUS: TAB 1 - DASHBOARD EKSEKUTIF */}
             {pengurusTab === 'dashboard' && (
               <div className="space-y-4">
@@ -3141,7 +3153,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <h2 className="text-lg font-black text-sikoni-navy">Inbox Persetujuan</h2>
                 </div>
 
-                <div className="space-y-2.5 text-xs">
+                <div className={`grid gap-3 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {approvalList.map((item) => (
                     <div
                       key={item.id}
@@ -3200,7 +3212,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <h2 className="text-lg font-black text-sikoni-navy">Monitoring 64 Cabor</h2>
                 </div>
 
-                <div className="space-y-2 text-xs">
+                <div className={`grid gap-2.5 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {caborDirectory.map((c, i) => (
                     <div
                       key={i}
