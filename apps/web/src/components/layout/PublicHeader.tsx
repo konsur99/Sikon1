@@ -23,21 +23,21 @@ export const PublicHeader: React.FC = () => {
   ];
 
   return (
-    <header className="h-[75px] bg-white border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-sm">
+    <header className="h-16 sm:h-[68px] bg-white/95 backdrop-blur-md border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-2xs">
       <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setMobileMenuOpen(false)}>
-        <div className="relative h-11 w-11 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-slate-200/80">
+        <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0 flex items-center justify-center p-0.5 rounded-xl bg-white shadow-2xs border border-slate-200/80">
           <img
             alt="Logo KONI Surakarta"
-            className="h-full w-full object-contain filter drop-shadow-sm"
+            className="h-full w-full object-contain filter drop-shadow-2xs"
             src="/images/logo_koni.png"
           />
         </div>
         <div>
-          <div className="text-[14px] sm:text-[16px] font-extrabold tracking-wide text-onyx flex items-center gap-1.5">
+          <div className="text-[13px] sm:text-[15px] font-black tracking-tight text-onyx flex items-center gap-1.5 leading-none">
             <span>KONI SURAKARTA</span>
             <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
           </div>
-          <div className="text-[9px] sm:text-[10px] text-on-surface-variant tracking-widest font-bold uppercase">
+          <div className="text-[8.5px] sm:text-[9.5px] text-slate-400 tracking-wider font-extrabold uppercase mt-0.5">
             KOTA SURAKARTA · SISTEM INFORMASI TERPADU
           </div>
         </div>

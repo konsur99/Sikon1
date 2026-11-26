@@ -951,25 +951,26 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
         {/* 1. TOP APP BAR & BRAND IDENTITY */}
         {(persona !== 'cabor' || caborTab === 'home' || deviceView === 'desktop') && (
-          <header className={`sticky top-0 inset-x-0 z-30 pt-safe bg-surface/90 backdrop-blur-xl border-b border-outline-variant/50 ${deviceView === 'desktop' ? 'px-4 lg:px-6' : ''
+          <header className={`sticky top-0 inset-x-0 z-30 pt-safe bg-surface/95 backdrop-blur-xl border-b border-outline-variant/40 ${deviceView === 'desktop' ? 'px-4 lg:px-6' : ''
             }`}>
-            <div className="h-16 px-4 flex items-center justify-between">
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="relative h-12 w-12 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-outline-variant/60">
+            <div className="h-13 sm:h-14 px-3 sm:px-4 flex items-center justify-between">
+              {/* Brand Logo & Title */}
+              <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
+                <div className="relative h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 shrink-0 flex items-center justify-center p-1 rounded-xl bg-white shadow-2xs border border-outline-variant/50">
                   <img
                     alt="Logo KONI Surakarta"
-                    className="h-full w-full object-contain filter drop-shadow-sm"
+                    className="h-full w-full object-contain filter drop-shadow-2xs"
                     src="/images/logo_koni.png"
                   />
                 </div>
                 <div className="flex flex-col justify-center min-w-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="font-headline-md text-[15px] font-extrabold tracking-tight uppercase text-onyx leading-none">
+                    <span className="font-headline-md text-[13px] sm:text-[14px] font-black tracking-tight uppercase text-onyx leading-none">
                       KONI SURAKARTA
                     </span>
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
                   </div>
-                  <span className="font-label-md text-[9.5px] uppercase tracking-[0.14em] text-on-surface-variant font-bold leading-tight mt-1 truncate">
+                  <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase tracking-[0.12em] text-on-surface-variant font-extrabold leading-none mt-0.5 truncate">
                     {persona === 'publik'
                       ? 'PORTAL INFORMASI RESMI'
                       : persona === 'pengurus'
@@ -981,25 +982,25 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
               {/* Desktop Nav Items (when deviceView === 'desktop') */}
               {deviceView === 'desktop' && (
-                <div className="hidden lg:flex items-center gap-1.5">
+                <div className="hidden lg:flex items-center gap-1">
                   {persona === 'cabor' && (
-                    <nav className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 shadow-inner">
+                    <nav className="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-xl border border-slate-200/80 shadow-inner">
                       {[
                         { id: 'home', label: 'Beranda', icon: 'dashboard' },
-                        { id: 'submissions', label: 'Portal RAB & LPJ', icon: 'assignment_add' },
-                        { id: 'sp2d', label: 'SP2D & Kasda', icon: 'savings' },
+                        { id: 'submissions', label: 'Proposal RAB', icon: 'assignment_add' },
+                        { id: 'sp2d', label: 'SP2D Kasda', icon: 'savings' },
                         { id: 'lpj', label: 'SPJ Termin II', icon: 'receipt_long' },
-                        { id: 'archive', label: 'Arsip Dokumen', icon: 'folder_open' },
+                        { id: 'archive', label: 'Arsip', icon: 'folder_open' },
                       ].map((tab) => (
                         <button
                           key={tab.id}
                           onClick={() => setCaborTab(tab.id as any)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${caborTab === tab.id
-                            ? 'bg-[#d32f2f] text-white shadow-sm'
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${caborTab === tab.id
+                            ? 'bg-[#d32f2f] text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
-                          <span className="material-symbols-outlined text-[16px]">{tab.icon}</span>
+                          <span className="material-symbols-outlined text-[15px]">{tab.icon}</span>
                           <span>{tab.label}</span>
                         </button>
                       ))}
@@ -1007,23 +1008,23 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   )}
 
                   {persona === 'publik' && (
-                    <nav className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 shadow-inner">
+                    <nav className="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-xl border border-slate-200/80 shadow-inner">
                       {[
                         { id: 'home', label: 'Beranda', icon: 'home' },
-                        { id: 'cabor-dir', label: 'Direktori 64 Cabor', icon: 'military_tech' },
+                        { id: 'cabor-dir', label: '64 Cabor', icon: 'military_tech' },
                         { id: 'transparansi', label: 'Transparansi APBD', icon: 'trending_up' },
-                        { id: 'jadwal', label: 'Jadwal Kejuaraan', icon: 'calendar_month' },
+                        { id: 'jadwal', label: 'Jadwal', icon: 'calendar_month' },
                         { id: 'info', label: 'Profil KONI', icon: 'info' },
                       ].map((tab) => (
                         <button
                           key={tab.id}
                           onClick={() => setPublikTab(tab.id as any)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${publikTab === tab.id
-                            ? 'bg-sikoni-navy text-white shadow-sm'
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${publikTab === tab.id
+                            ? 'bg-sikoni-navy text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
-                          <span className="material-symbols-outlined text-[16px]">{tab.icon}</span>
+                          <span className="material-symbols-outlined text-[15px]">{tab.icon}</span>
                           <span>{tab.label}</span>
                         </button>
                       ))}
@@ -1031,23 +1032,23 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   )}
 
                   {persona === 'pengurus' && (
-                    <nav className="flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/80 shadow-inner">
+                    <nav className="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-xl border border-slate-200/80 shadow-inner">
                       {[
-                        { id: 'dashboard', label: 'Dashboard Eksekutif', icon: 'dashboard' },
-                        { id: 'approval', label: 'Inbox Persetujuan', icon: 'check_circle' },
-                        { id: 'monitoring', label: 'Monitoring 64 Cabor', icon: 'monitoring' },
-                        { id: 'kas', label: 'Mutasi Giro Kasda', icon: 'payments' },
-                        { id: 'profil', label: 'Pejabat & RBAC', icon: 'admin_panel_settings' },
+                        { id: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
+                        { id: 'approval', label: 'Approval', icon: 'check_circle' },
+                        { id: 'monitoring', label: 'Monitoring', icon: 'monitoring' },
+                        { id: 'kas', label: 'Giro Kasda', icon: 'payments' },
+                        { id: 'profil', label: 'Pejabat', icon: 'admin_panel_settings' },
                       ].map((tab) => (
                         <button
                           key={tab.id}
                           onClick={() => setPengurusTab(tab.id as any)}
-                          className={`px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${pengurusTab === tab.id
-                            ? 'bg-amber-600 text-white shadow-sm'
+                          className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${pengurusTab === tab.id
+                            ? 'bg-amber-600 text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
-                          <span className="material-symbols-outlined text-[16px]">{tab.icon}</span>
+                          <span className="material-symbols-outlined text-[15px]">{tab.icon}</span>
                           <span>{tab.label}</span>
                         </button>
                       ))}
@@ -1056,14 +1057,15 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 </div>
               )}
 
-              <div className="flex items-center gap-2">
+              {/* Right Side Compact Controls */}
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   onClick={() => setIsAllServicesSheetOpen(true)}
-                  className={`hidden md:flex text-xs font-extrabold px-3 py-1.5 rounded-xl items-center gap-1.5 transition-all cursor-pointer shadow-2xs ${persona === 'cabor'
-                    ? 'text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200'
+                  className={`hidden md:flex text-[11px] font-extrabold px-2.5 py-1 rounded-lg items-center gap-1 transition-all cursor-pointer shadow-2xs ${persona === 'cabor'
+                    ? 'text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200/80'
                     : persona === 'pengurus'
-                      ? 'text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200'
-                      : 'text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200'
+                      ? 'text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200/80'
+                      : 'text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200/80'
                     }`}
                   title={
                     persona === 'cabor'
@@ -1073,38 +1075,40 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         : 'Buka Katalog Layanan Publik'
                   }
                 >
-                  <span className="material-symbols-outlined text-[16px]">
+                  <span className="material-symbols-outlined text-[15px]">
                     {persona === 'publik' ? 'menu_book' : persona === 'pengurus' ? 'shield_person' : 'apps'}
                   </span>
                   <span>
                     {persona === 'cabor'
-                      ? '15 Layar Cabor'
+                      ? '15 Layar'
                       : persona === 'pengurus'
-                        ? 'Katalog Modul'
-                        : 'Katalog Publik'}
+                        ? 'Katalog'
+                        : 'Katalog'}
                   </span>
                 </button>
 
+                {/* Notifications Pill */}
                 <button
                   onClick={() => setIsMobileNotifOpen((prev) => !prev)}
                   aria-label="Notifikasi"
-                  className="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
+                  className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-2xs"
                 >
-                  <span className="material-symbols-outlined text-[21px]">notifications</span>
-                  <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-white animate-pulse" />
+                  <span className="material-symbols-outlined text-[18px]">notifications</span>
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-1.5 ring-white animate-pulse" />
                 </button>
 
+                {/* Profile Pill */}
                 <div
                   onClick={() => {
                     if (persona === 'cabor') setCaborTab('account');
                     else if (persona === 'pengurus') setPengurusTab('profil');
                     else setPublikTab('info');
                   }}
-                  className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-sm cursor-pointer active:scale-95 transition-transform"
+                  className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-2xs cursor-pointer active:scale-95 transition-transform"
                   title="Profil Pengguna"
                 >
                   <div className="w-full h-full rounded-full bg-onyx flex items-center justify-center text-white overflow-hidden">
-                    <span className="material-symbols-outlined text-[20px] text-amber-300">person</span>
+                    <span className="material-symbols-outlined text-[17px] text-amber-300">person</span>
                   </div>
                 </div>
               </div>
