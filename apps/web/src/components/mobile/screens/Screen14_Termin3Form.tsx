@@ -22,8 +22,8 @@ export const Screen14_Termin3Form: React.FC<Screen14Termin3FormProps> = ({
     setTimeout(() => {
       setIsSubmitting(false);
       onShowToast?.('Pengajuan Pencairan Termin III Rp 50.000.000 Berhasil Dikirim!');
-      onNavigate?.('submissions');
-    }, 1000);
+      onNavigate?.('termin3-success');
+    }, 600);
   };
 
   return (

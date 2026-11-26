@@ -57,6 +57,7 @@ import { Screen11_Milestone } from './screens/Screen11_Milestone';
 import { Screen12_SkbDoc } from './screens/Screen12_SkbDoc';
 import { Screen13_Archive } from './screens/Screen13_Archive';
 import { Screen14_Termin3Form } from './screens/Screen14_Termin3Form';
+import { Screen15_Termin3Success } from './screens/Screen15_Termin3Success';
 
 
 export type UserPersona = 'publik' | 'cabor' | 'pengurus';
@@ -84,6 +85,7 @@ export const MobilePreview: React.FC = () => {
     | 'skb-doc'
     | 'archive'
     | 'termin3'
+    | 'termin3-success'
   >('home');
   const [isOcrModalOpen, setIsOcrModalOpen] = useState(false);
 
@@ -407,6 +409,7 @@ export const MobilePreview: React.FC = () => {
               { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
               { id: 'archive', label: '13. Arsip SPJ' },
               { id: 'termin3', label: '14. Termin III' },
+              { id: 'termin3-success', label: '15. e-Termin III' },
             ].map((scr) => (
               <button
                 key={scr.id}
@@ -1719,6 +1722,15 @@ export const MobilePreview: React.FC = () => {
             {/* CABOR SCREEN 14: FORMULIR PENCAIRAN TERMIN III */}
             {caborTab === 'termin3' && (
               <Screen14_Termin3Form
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
+
+            {/* CABOR SCREEN 15: KONFIRMASI PENCAIRAN TERMIN III */}
+            {caborTab === 'termin3-success' && (
+              <Screen15_Termin3Success
                 onBack={() => setCaborTab('home')}
                 onNavigate={(k) => setCaborTab(k as any)}
                 onShowToast={showToast}
