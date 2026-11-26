@@ -1201,29 +1201,87 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/95 to-[#d32f2f]/85 backdrop-blur-[1px]" />
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
-                  <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
-                    <div className="flex flex-wrap items-center justify-between gap-1.5">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
+                  <div className="relative z-10 flex flex-col justify-between min-h-[185px]">
+                    {/* Top Row: PORPROV JATENG & 64 CABOR RESMI (Clean, Balanced & Never Cut Off) */}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 text-amber-300 font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-xs shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        <span>KOTA SURAKARTA JUARA • PORPROV 2026</span>
+                        <span>PORPROV JATENG 2026</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-white/80 font-bold shrink-0">
-                        64 CABOR RESMI
-                      </span>
+                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/15 text-white font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-white/25 backdrop-blur-md shadow-xs shrink-0">
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px] text-amber-300">verified</span>
+                        <span>64 CABOR RESMI</span>
+                      </div>
                     </div>
 
-                    <div className="my-2">
-                      <span className="font-label-md text-[9.5px] sm:text-[10.5px] uppercase tracking-wider text-amber-200/90 font-bold block">
-                        Prestasi Emas Surakarta
-                      </span>
-                      <div className="font-headline-lg text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight mt-0.5 leading-tight">
-                        124 Medali Emas
+                    {/* Middle Row: Prestasi Emas Showcase with 3D Medal Graphic & Trio Badges */}
+                    <div className="my-3 flex items-center justify-between gap-3">
+                      {/* Left Side: Championship Titles & Trio Medal Badges */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-[14px] text-amber-300">military_tech</span>
+                          <span className="font-label-md text-[9.5px] sm:text-[10.5px] uppercase tracking-wider text-amber-200 font-extrabold">
+                            Prestasi Emas Surakarta
+                          </span>
+                        </div>
+
+                        <div className="flex items-baseline gap-2 mt-0.5">
+                          <div className="font-headline-lg text-2xl sm:text-3xl font-black text-white tracking-tight leading-none drop-shadow-sm">
+                            124 Medali Emas
+                          </div>
+                          <span className="px-2 py-0.5 rounded-full bg-amber-400/25 border border-amber-300/40 text-amber-200 font-extrabold text-[8.5px] sm:text-[9px] uppercase tracking-wider whitespace-nowrap">
+                            Juara Umum
+                          </span>
+                        </div>
+
+                        {/* Trio Medal Badges: Emas, Perak, Perunggu */}
+                        <div className="grid grid-cols-3 gap-1.5 mt-2">
+                          {/* 1. Emas (Gold) */}
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-400/30 to-amber-600/20 border border-amber-300/40 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥇</span>
+                            <div className="min-w-0">
+                              <span className="text-[11.5px] font-black text-amber-200 leading-tight block">124</span>
+                              <span className="text-[7.5px] font-extrabold uppercase text-amber-100/80 tracking-wider block leading-none">Emas</span>
+                            </div>
+                          </div>
+
+                          {/* 2. Perak (Silver) */}
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-slate-200/25 to-slate-400/15 border border-slate-200/35 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥈</span>
+                            <div className="min-w-0">
+                              <span className="text-[11.5px] font-black text-slate-100 leading-tight block">88</span>
+                              <span className="text-[7.5px] font-extrabold uppercase text-slate-200/80 tracking-wider block leading-none">Perak</span>
+                            </div>
+                          </div>
+
+                          {/* 3. Perunggu (Bronze) */}
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-800/30 to-amber-950/25 border border-amber-500/35 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥉</span>
+                            <div className="min-w-0">
+                              <span className="text-[11.5px] font-black text-amber-300 leading-tight block">95</span>
+                              <span className="text-[7.5px] font-extrabold uppercase text-amber-200/80 tracking-wider block leading-none">Perunggu</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <p className="font-body-sm text-[9.5px] sm:text-[10px] text-white/85 mt-2 flex items-center gap-1 font-medium truncate">
+                          <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+                          <span>Total 307 Medali • Rekor Juara Umum Kontingen Surakarta</span>
+                        </p>
                       </div>
-                      <p className="font-body-sm text-[10px] sm:text-[11px] text-white/85 mt-1 leading-snug">
-                        88 Perak • 95 Perunggu • Rekor Juara Umum Kontingen Surakarta
-                      </p>
+
+                      {/* Right Side: Authentic 3D Championship Gold Medal Graphic */}
+                      <div className="relative shrink-0 flex items-center justify-center p-1">
+                        <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-xl pointer-events-none" />
+                        <img
+                          src="/images/gold_medal.png"
+                          alt="Medali Emas Porprov Surakarta"
+                          className="relative w-18 h-18 sm:w-22 sm:h-22 object-contain filter drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)] hover:scale-105 transition-transform duration-300 select-none"
+                        />
+                      </div>
                     </div>
 
+                    {/* Bottom Action Buttons */}
                     <div className="pt-2 border-t border-white/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
                       <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap sm:flex-nowrap">
                         <button
