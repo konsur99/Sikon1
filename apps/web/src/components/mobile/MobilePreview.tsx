@@ -491,7 +491,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 persona === 'cabor' ? 'bg-[#d32f2f] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
               }`}
             >
-              <Award size={13} /> Cabor PASI
+              <Award size={13} /> Cabor
             </button>
             <button
               onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
@@ -655,7 +655,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       ? 'PORTAL INFORMASI RESMI'
                       : persona === 'pengurus'
                         ? 'PENGURUS KONI SURAKARTA'
-                        : 'KOTA SURAKARTA · PENGKOT PASI'}
+                        : 'KOTA SURAKARTA'}
                   </span>
                 </div>
               </div>
@@ -1664,7 +1664,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
               <div className="space-y-4 pb-12">
-                {/* 2. HERO BANNER CABOR "PASI SURAKARTA" */}
+                {/* 2. HERO BANNER CABOR "KONI SURAKARTA" */}
                 <div>
                   <div className="relative w-full overflow-hidden rounded-[28px] shadow-[0_18px_36px_-10px_rgba(139,0,0,0.45)] p-5 text-white border border-amber-400/30">
                     {/* Background Athletic Photo */}
@@ -1698,7 +1698,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         CABOR ATLETIK RESMI
                       </div>
                       <h1 className="font-headline-lg text-[30px] font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
-                        PASI SURAKARTA
+                        KONI SURAKARTA
                       </h1>
                       <p className="font-body-sm text-[12px] text-white/90 mt-1 flex items-center gap-1 font-medium">
                         <span className="material-symbols-outlined text-[15px] text-amber-400">location_on</span>
