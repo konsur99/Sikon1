@@ -2924,7 +2924,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   </button>
                   <div>
                     <div className="text-[11px] text-sikoni-muted font-bold">Profil Kepengurusan</div>
-                    <h2 className="text-base font-black text-sikoni-navy leading-tight">PASI Surakarta</h2>
+                    <h2 className="text-base font-black text-sikoni-navy leading-tight">KONI Surakarta</h2>
                   </div>
                 </div>
 
