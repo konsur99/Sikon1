@@ -3,7 +3,6 @@
 import React from 'react';
 import { usePathname } from 'next/navigation';
 import { PublicHeader, PublicFooter } from '../../components/layout/PublicHeader';
-import { useDisplayMode } from '../../context/DisplayModeContext';
 
 export default function PublicLayout({
   children,
@@ -11,14 +10,14 @@ export default function PublicLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const { isAndroid } = useDisplayMode();
 
-  // If on homepage and in Android mode, render edge-to-edge without website header/footer
-  const isPureMobileAppView = pathname === '/' && isAndroid;
+  // Jika di beranda (/), render edge-to-edge tampilan terpadu SIKONI (Desktop & Mobile)
+  // dengan kontrol perangkat interaktif (HP, Tablet, Desktop) tanpa duplikasi header/footer website lama.
+  const isPureAppView = pathname === '/';
 
-  if (isPureMobileAppView) {
+  if (isPureAppView) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#0d1c2d] sm:bg-[#e9edf1]">
+      <div className="min-h-screen flex flex-col bg-slate-900 sm:bg-slate-100">
         <main className="flex-1 flex flex-col">{children}</main>
       </div>
     );
