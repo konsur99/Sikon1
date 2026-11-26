@@ -392,59 +392,69 @@ export const MobilePreview: React.FC = () => {
           </div>
         </div>
 
-        {/* Mobile Top Header */}
-        <div className="h-14 bg-white border-b border-slate-200 px-4 flex items-center justify-between flex-shrink-0 z-20">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sikoni-navy to-slate-700 text-white font-extrabold grid place-items-center text-xs shadow-sm">
-              SK
+        {/* 1. TOP APP BAR & BRAND IDENTITY */}
+        <header className="sticky top-0 inset-x-0 z-30 pt-safe bg-surface/90 backdrop-blur-xl border-b border-outline-variant/50">
+          <div className="h-16 px-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="relative h-12 w-12 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-outline-variant/60">
+                <img
+                  alt="Logo KONI Surakarta"
+                  className="h-full w-full object-contain filter drop-shadow-sm"
+                  src="/images/logo_koni.png"
+                />
+              </div>
+              <div className="flex flex-col justify-center min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="font-headline-md text-[15px] font-extrabold tracking-tight uppercase text-onyx leading-none">
+                    KONI SURAKARTA
+                  </span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                </div>
+                <span className="font-label-md text-[9.5px] uppercase tracking-[0.14em] text-on-surface-variant font-bold leading-tight mt-1 truncate">
+                  {persona === 'publik'
+                    ? 'PORTAL INFORMASI RESMI'
+                    : persona === 'pengurus'
+                      ? 'PENGURUS KONI SURAKARTA'
+                      : 'KOTA SURAKARTA · PENGKOT PASI'}
+                </span>
+              </div>
             </div>
-            <div>
-              <span className="font-extrabold text-sm text-sikoni-navy tracking-tight block leading-tight">
-                SIKONI Mobile
-              </span>
-              <span className="text-[9px] text-sikoni-muted block">KONI Kota Surakarta</span>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setMode('desktop')}
+                className="hidden sm:flex text-[9.5px] font-bold text-slate-600 bg-white hover:bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-200 items-center gap-1 transition-colors shadow-xs"
+                title="Buka Tampilan Desktop"
+              >
+                <Monitor size={12} className="text-primary" />
+                <span>Web</span>
+              </button>
+
+              <button
+                onClick={() => setIsMobileNotifOpen((prev) => !prev)}
+                aria-label="Notifikasi"
+                className="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
+              >
+                <span className="material-symbols-outlined text-[21px]">notifications</span>
+                <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-white animate-pulse" />
+              </button>
+
+              <div
+                onClick={() => {
+                  if (persona === 'cabor') setCaborTab('account');
+                  else if (persona === 'pengurus') setPengurusTab('profil');
+                  else setPublikTab('info');
+                }}
+                className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-sm cursor-pointer active:scale-95 transition-transform"
+                title="Profil Pengguna"
+              >
+                <div className="w-full h-full rounded-full bg-onyx flex items-center justify-center text-white overflow-hidden">
+                  <span className="material-symbols-outlined text-[20px] text-amber-300">person</span>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div className="flex items-center gap-1.5 sm:gap-2.5">
-            {/* Quick Switch to Desktop */}
-            <button
-              onClick={() => setMode('desktop')}
-              className="text-[9.5px] font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2 py-1 rounded-lg border border-slate-200 flex items-center gap-1 transition-colors"
-              title="Ganti ke Tampilan Web Desktop"
-            >
-              <Monitor size={11} className="text-sikoni-navy" />
-              <span>Web</span>
-            </button>
-
-            {/* Persona Badge */}
-            <span
-              className={`text-[9.5px] font-bold px-2 py-0.5 rounded-full ${persona === 'publik'
-                ? 'bg-sky-50 text-sky-700 border border-sky-200'
-                : persona === 'cabor'
-                  ? 'bg-emerald-50 text-sikoni-teal border border-emerald-200'
-                  : 'bg-amber-50 text-amber-700 border border-amber-200'
-                }`}
-            >
-              {persona === 'publik' && 'Publik'}
-              {persona === 'cabor' && 'PASI (Cabor)'}
-              {persona === 'pengurus' && 'Pengurus KONI'}
-            </span>
-
-            {/* In-App Notification Bell Toggle */}
-            <button
-              onClick={() => setIsMobileNotifOpen((prev) => !prev)}
-              aria-label="Notifikasi Mobile"
-              className={`relative p-1.5 rounded-lg transition-colors ${isMobileNotifOpen
-                ? 'bg-slate-100 text-sikoni-navy'
-                : 'text-sikoni-muted hover:text-sikoni-navy'
-                }`}
-            >
-              <Bell size={18} />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full border border-white" />
-            </button>
-          </div>
-        </div>
+        </header>
 
         {/* Floating In-App Mobile Notification Dropdown Popover */}
         {isMobileNotifOpen && (
@@ -910,147 +920,655 @@ export const MobilePreview: React.FC = () => {
            ======================================================== */}
         {persona === 'cabor' && (
           <div className="flex-1 overflow-y-auto p-4 pb-24 overscroll-contain bg-[#f4f6f9] space-y-4">
-            {/* CABOR: TAB 1 - BERANDA */}
+            {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
-              <div className="space-y-4">
+              <div className="space-y-4 pb-12">
+                {/* 2. HERO BANNER CABOR "PASI SURAKARTA" */}
                 <div>
-                  <div className="text-[11px] text-sikoni-muted">Selamat bertugas, Operator Cabor</div>
-                  <h2 className="text-xl font-black text-sikoni-navy tracking-tight">
-                    PASI Surakarta
-                  </h2>
+                  <div className="relative w-full overflow-hidden rounded-[28px] shadow-[0_18px_36px_-10px_rgba(139,0,0,0.45)] p-5 text-white border border-amber-400/30">
+                    {/* Background Athletic Photo */}
+                    <img
+                      alt="Stadion Manahan Solo Athletic Track"
+                      className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+                      src="/images/track_manahan.jpg"
+                    />
+                    {/* Obsidian to Crimson Flame Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/90 to-[#d32f2f]/80 backdrop-blur-[1px]" />
+                    <div className="absolute inset-0 carbon-pattern opacity-25" />
+                    {/* Banner Header Meta */}
+                    <div className="relative z-10 flex items-center justify-between mb-3">
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/40 backdrop-blur-md border border-amber-300/40 shadow-inner">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                        <span className="font-label-md text-[10px] tracking-widest uppercase text-amber-300 font-bold">
+                          HIBAH APBD 2025 TERVERIFIKASI
+                        </span>
+                      </div>
+                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/15 backdrop-blur-md border border-white/20">
+                        <span className="material-symbols-outlined text-[13px] text-amber-300">verified</span>
+                        <span className="font-label-md text-[9.5px] font-extrabold uppercase tracking-widest text-white">
+                          KONI SOLO
+                        </span>
+                      </div>
+                    </div>
+                    {/* Title & Cabor Identity */}
+                    <div className="relative z-10 mb-4">
+                      <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[11px] font-bold uppercase tracking-[0.2em]">
+                        <span className="material-symbols-outlined text-[14px]">sports_score</span>
+                        CABOR ATLETIK RESMI
+                      </div>
+                      <h1 className="font-headline-lg text-[30px] font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
+                        PASI SURAKARTA
+                      </h1>
+                      <p className="font-body-sm text-[12px] text-white/90 mt-1 flex items-center gap-1 font-medium">
+                        <span className="material-symbols-outlined text-[15px] text-amber-400">location_on</span>
+                        Basis Pembinaan: Stadion Manahan & Stadion Sriwedari
+                      </p>
+                    </div>
+                    {/* Quick Action Buttons 3D */}
+                    <div className="relative z-10 grid grid-cols-2 gap-2.5 pt-1">
+                      <button
+                        onClick={() => setCaborTab('rab-form')}
+                        className="gold-shimmer py-3 px-3.5 rounded-2xl shadow-[0_8px_18px_rgba(255,168,0,0.45)] border-t border-white/50 active:scale-[0.98] transition-all flex items-center justify-center gap-2 text-onyx font-label-lg text-[12.5px] uppercase font-black tracking-wide"
+                      >
+                        <span className="material-symbols-outlined text-[20px] font-black">add_circle</span>
+                        + Buat RAB Baru
+                      </button>
+                      <button
+                        onClick={() => showToast('Membuka Juknis Hibah Olahraga KONI Surakarta 2026...')}
+                        className="py-3 px-3.5 rounded-2xl bg-white/15 hover:bg-white/20 backdrop-blur-md border border-amber-300/40 text-white active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-label-lg text-[12.5px] uppercase font-bold tracking-wide shadow-sm"
+                      >
+                        <span className="material-symbols-outlined text-[18px] text-amber-300">menu_book</span>
+                        Juknis & Panduan
+                      </button>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Summary Card */}
-                <div className="bg-gradient-to-br from-sikoni-navy via-[#1e3c5d] to-sikoni-teal text-white p-4 rounded-2xl shadow-md relative overflow-hidden">
-                  <div className="text-[10px] tracking-wider text-sikoni-gold uppercase font-bold">
-                    PAGU ANGGARAN CABOR 2026
-                  </div>
-                  <div className="text-2xl font-black mt-1">Rp 120.000.000</div>
-                  <div className="text-[11px] text-slate-200 mt-1 font-medium">
-                    Realisasi Valid: Rp 48.000.000 • Sisa: Rp 72.000.000
+                {/* 3. FLOATING STATUS ALERT (URGENT REVISION PILL) */}
+                <div>
+                  <div className="relative overflow-hidden bg-gradient-to-r from-[#9b0b14] via-[#c62828] to-[#d32f2f] rounded-2xl p-3 shadow-[0_6px_20px_rgba(198,40,40,0.28)] border-l-4 border-amber-400">
+                    <div className="absolute inset-0 carbon-pattern opacity-20 pointer-events-none" />
+                    <div className="relative z-10 flex items-center justify-between gap-2.5">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-8 h-8 rounded-xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 text-amber-300">
+                          <span className="material-symbols-outlined text-[20px] animate-pulse">warning</span>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <span className="font-label-md text-[10px] uppercase font-extrabold tracking-wider text-amber-300">
+                              PERLU REVISI SEGERA
+                            </span>
+                            <span className="font-body-sm text-[10px] text-white/80 font-medium">· Batas 18 Mei</span>
+                          </div>
+                          <p className="font-body-sm text-[12px] font-semibold text-white truncate leading-tight mt-0.5">
+                            RAB Pra-Porprov Atletik (Koreksi Uang Saku)
+                          </p>
+                        </div>
+                      </div>
+                      <button
+                        onClick={() =>
+                          setSelectedMobileItem({
+                            title: 'RAB Pra-Porprov Atletik (Koreksi Uang Saku)',
+                            sub: 'RAB-REV-01 • Batas 18 Mei 2026',
+                            val: 'Rp 35.000.000',
+                            status: 'Verifikasi',
+                            desc: 'Catatan Tim Verifikasi KONI: Perbaiki rincian uang saku atlet dan transport agar disesuaikan dengan standar biaya umum (SBU) Pemkot Surakarta.',
+                          })
+                        }
+                        className="shrink-0 px-3 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-onyx font-label-md text-[11px] font-extrabold uppercase tracking-wide flex items-center gap-0.5 shadow-sm active:scale-95 transition-transform"
+                      >
+                        Perbaiki
+                        <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {/* 4 Mini KPIs */}
-                <div className="grid grid-cols-2 gap-2.5">
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <div className="text-[10px] text-sikoni-muted font-medium">Pengajuan diproses</div>
-                    <div className="text-lg font-bold text-sikoni-navy mt-1">03 Berkas</div>
-                  </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <div className="text-[10px] text-sikoni-muted font-medium">Perlu tindakan</div>
-                    <div className="text-lg font-bold text-amber-600 mt-1">01 Revisi</div>
-                  </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <div className="text-[10px] text-sikoni-muted font-medium">Dana cair termin</div>
-                    <div className="text-lg font-bold text-sikoni-green mt-1">Rp 40 jt</div>
-                  </div>
-                  <div className="bg-white p-3 rounded-xl border border-slate-200 shadow-sm">
-                    <div className="text-[10px] text-sikoni-muted font-medium">LPJ disetujui</div>
-                    <div className="text-lg font-bold text-sikoni-teal mt-1">04 Laporan</div>
+                {/* 4. REALISASI ANGGARAN DANA HIBAH (GAUGE FUTURISTIK & LUXURY BENTO) */}
+                <div>
+                  <div className="bg-surface-container-lowest rounded-[28px] p-5 shadow-[0_12px_32px_rgba(18,19,22,0.05)] border border-outline-variant/60 relative overflow-hidden">
+                    {/* Glow ambient background */}
+                    <div className="absolute -top-16 -right-16 w-48 h-48 bg-amber-400/10 rounded-full blur-3xl pointer-events-none" />
+                    <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
+                    {/* Card Title */}
+                    <div className="flex items-center justify-between mb-2 relative z-10">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-5 rounded-full bg-gradient-to-b from-primary via-secondary to-amber-300" />
+                        <h2 className="font-headline-md text-[17px] font-extrabold text-onyx tracking-tight">
+                          Realisasi Dana Hibah
+                        </h2>
+                      </div>
+                      <span className="px-2.5 py-1 rounded-full bg-surface-container font-label-md text-[10px] uppercase font-bold text-on-surface-variant flex items-center gap-1.5 border border-outline-variant/50">
+                        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                        T.A. 2025
+                      </span>
+                    </div>
+                    {/* Cyber Athletic Neon Arc Gauge */}
+                    <div className="relative flex flex-col items-center justify-center pt-1 pb-2 z-10">
+                      <div className="relative w-64 h-36 flex items-center justify-center">
+                        <svg className="w-64 h-36 overflow-visible drop-shadow-sm" viewBox="0 0 200 115">
+                          <defs>
+                            <linearGradient id="cyberGauge" x1="0%" x2="100%" y1="100%" y2="0%">
+                              <stop offset="0%" stopColor="#e53935" />
+                              <stop offset="50%" stopColor="#ff9800" />
+                              <stop offset="100%" stopColor="#ffc107" />
+                            </linearGradient>
+                            <filter height="150%" id="neonGlow" width="150%" x="-25%" y="-25%">
+                              <feDropShadow dx="0" dy="2" floodColor="#ff9800" floodOpacity="0.5" stdDeviation="4" />
+                            </filter>
+                          </defs>
+                          {/* Background Arc Track */}
+                          <path
+                            d="M 24 105 A 76 76 0 0 1 176 105"
+                            fill="none"
+                            opacity="0.3"
+                            stroke="#cbd5e1"
+                            strokeLinecap="round"
+                            strokeWidth="14"
+                          />
+                          {/* Futuristic Ticks Arc */}
+                          <path
+                            d="M 24 105 A 76 76 0 0 1 176 105"
+                            fill="none"
+                            opacity="0.4"
+                            stroke="#8f6f6c"
+                            strokeDasharray="2 7"
+                            strokeWidth="2"
+                          />
+                          {/* Glowing Filled Arc (60% of ~238.7 length = offset ~95.5) */}
+                          <path
+                            d="M 24 105 A 76 76 0 0 1 176 105"
+                            fill="none"
+                            filter="url(#neonGlow)"
+                            stroke="url(#cyberGauge)"
+                            strokeDasharray="238.7"
+                            strokeDashoffset="95.5"
+                            strokeLinecap="round"
+                            strokeWidth="14"
+                          />
+                          {/* Indicator Needle Dot at ~60% arc position (around 108 deg) */}
+                          <circle
+                            className="drop-shadow-lg"
+                            cx="127"
+                            cy="34"
+                            fill="#ffffff"
+                            r="7"
+                            stroke="#ffc107"
+                            strokeWidth="3.5"
+                          />
+                          <circle cx="127" cy="34" fill="#d32f2f" r="2.5" />
+                        </svg>
+                        {/* Center Floating Badge */}
+                        <div className="absolute bottom-2 flex flex-col items-center">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gradient-to-r from-onyx to-[#2b080d] text-white shadow-md border border-amber-400/40">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                            <span className="font-data-metric text-[22px] font-black text-amber-300 leading-none">
+                              60%
+                            </span>
+                            <span className="font-label-md text-[10px] tracking-wider uppercase font-bold text-white/90">
+                              TERSERAP
+                            </span>
+                          </div>
+                          <span className="font-label-md text-[9.5px] uppercase tracking-widest text-on-surface-variant font-bold mt-1.5 flex items-center gap-1">
+                            <span className="material-symbols-outlined text-[13px] text-amber-500">speed</span>
+                            REAL-TIME SYNC
+                          </span>
+                        </div>
+                      </div>
+                      {/* Main Nominal */}
+                      <div className="w-full text-center mt-1">
+                        <span className="font-label-md text-[11px] uppercase tracking-wider text-on-surface-variant font-bold">
+                          Total Dana Dicairkan
+                        </span>
+                        <div className="font-data-metric text-[30px] text-primary font-black tracking-tight leading-none mt-1">
+                          Rp 72.000.000
+                        </div>
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/60 mt-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-secondary-dark" />
+                          <span className="font-body-sm text-[11px] text-on-surface-variant">
+                            Pagu Tahunan: <strong className="text-onyx font-bold">Rp 120.000.000</strong> (T.A. 2025)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Bento Satelite Cards */}
+                    <div className="grid grid-cols-2 gap-3 pt-3.5 mt-2 border-t border-outline-variant/50 relative z-10">
+                      {/* Bento 1: Sisa Kas */}
+                      <div
+                        onClick={() => setCaborTab('finance')}
+                        className="relative overflow-hidden bg-gradient-to-br from-amber-50/60 to-surface-container-low p-3.5 rounded-2xl border border-amber-300/40 shadow-xs cursor-pointer hover:border-amber-400 transition-colors"
+                      >
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="w-7 h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600">
+                            <span className="material-symbols-outlined text-[17px]">account_balance_wallet</span>
+                          </div>
+                          <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-amber-700 px-2 py-0.5 rounded-full bg-amber-200/50">
+                            SISA KAS
+                          </span>
+                        </div>
+                        <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                          Rp 48.000.000
+                        </div>
+                        <span className="font-body-sm text-[10.5px] text-on-surface-variant mt-0.5 block font-medium">
+                          Alokasi Smt. 2 (40%)
+                        </span>
+                      </div>
+                      {/* Bento 2: Target Realisasi */}
+                      <div className="relative overflow-hidden bg-gradient-to-br from-rose-50/60 to-surface-container-low p-3.5 rounded-2xl border border-rose-300/40 shadow-xs">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <div className="w-7 h-7 rounded-xl bg-primary/15 border border-primary/30 flex items-center justify-center text-primary">
+                            <span className="material-symbols-outlined text-[17px]">trending_up</span>
+                          </div>
+                          <span className="font-label-md text-[9px] uppercase font-extrabold tracking-wider text-emerald-700 px-2 py-0.5 rounded-full bg-emerald-100 border border-emerald-300/40">
+                            +10% Ahead
+                          </span>
+                        </div>
+                        <div className="font-data-metric text-[17px] font-extrabold text-onyx mt-1">
+                          50% <span className="text-[12px] font-medium text-on-surface-variant">Target Smt 1</span>
+                        </div>
+                        <span className="font-body-sm text-[10.5px] text-emerald-700 mt-0.5 flex items-center gap-1 font-semibold">
+                          <span className="material-symbols-outlined text-[13px]">check_circle</span> Tercapai Aman
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                {/* Quick Action Shortcuts */}
-                <div className="grid grid-cols-4 gap-2">
-                  <button
-                    onClick={() => setCaborTab('rab-form')}
-                    className="bg-white p-2.5 rounded-xl border border-slate-200 flex flex-col items-center text-center gap-1.5 hover:bg-slate-50 transition-colors shadow-sm"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-emerald-50 text-sikoni-teal grid place-items-center font-bold">
-                      <Plus size={16} />
+                {/* 5. 6 MENU UTAMA LAYANAN CABOR (3D LUXURY SQUIRCLE ICONS) */}
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-5 rounded-full bg-primary" />
+                      <h2 className="font-headline-md text-[17px] font-extrabold text-onyx tracking-tight">
+                        Layanan Administrasi Cabor
+                      </h2>
                     </div>
-                    <span className="text-[10px] font-bold text-sikoni-navy">Buat RAB</span>
-                  </button>
-
-                  <button
-                    onClick={() => setCaborTab('expense-form')}
-                    className="bg-white p-2.5 rounded-xl border border-slate-200 flex flex-col items-center text-center gap-1.5 hover:bg-slate-50 transition-colors shadow-sm"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-amber-50 text-sikoni-gold grid place-items-center font-bold">
-                      <ArrowUpRight size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold text-sikoni-navy">Input Nota</span>
-                  </button>
-
-                  <button
-                    onClick={() => setCaborTab('lpj')}
-                    className="bg-white p-2.5 rounded-xl border border-slate-200 flex flex-col items-center text-center gap-1.5 hover:bg-slate-50 transition-colors shadow-sm"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-600 grid place-items-center font-bold">
-                      <FileCheck size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold text-sikoni-navy">Susun LPJ</span>
-                  </button>
-
-                  <button
-                    onClick={() => showToast('Membuka pengajuan insentif atlet...')}
-                    className="bg-white p-2.5 rounded-xl border border-slate-200 flex flex-col items-center text-center gap-1.5 hover:bg-slate-50 transition-colors shadow-sm"
-                  >
-                    <div className="w-8 h-8 rounded-full bg-rose-50 text-rose-500 grid place-items-center font-bold">
-                      <Award size={16} />
-                    </div>
-                    <span className="text-[10px] font-bold text-sikoni-navy">Insentif</span>
-                  </button>
-                </div>
-
-                {/* Submissions List */}
-                <div className="card-sikoni relative overflow-hidden p-3.5 space-y-3">
-                  <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-sikoni-teal to-sikoni-gold" />
-                  <div className="flex justify-between items-center">
-                    <b className="text-xs text-sikoni-navy font-black">Usulan Berkas Berjalan</b>
+                    <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-md text-[10.5px] font-bold uppercase tracking-wider">
+                      6 Menu Utama
+                    </span>
+                  </div>
+                  {/* 6 Squircle 3D Tactile Grid */}
+                  <div className="grid grid-cols-3 gap-2.5">
+                    {/* 1. Ajukan RAB */}
                     <button
-                      onClick={() => setCaborTab('submissions')}
-                      className="text-[10px] text-sikoni-teal font-extrabold bg-teal-50 px-2 py-0.5 rounded-full hover:bg-teal-100 transition-colors"
+                      onClick={() => setCaborTab('rab-form')}
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95"
                     >
-                      Lihat Semua →
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(211,47,47,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">note_add</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-onyx font-black">add</span>
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        Ajukan RAB
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Proposal & Rincian
+                      </span>
                     </button>
-                  </div>
-
-                  <div className="space-y-2 text-xs">
+                    {/* 2. LPJ Kegiatan */}
+                    <button
+                      onClick={() => setCaborTab('lpj')}
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95"
+                    >
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(245,158,11,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">receipt_long</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-white font-black">done</span>
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        LPJ Kegiatan
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Kwitansi & Nota
+                      </span>
+                    </button>
+                    {/* 3. Buku Kas Cabor */}
+                    <button
+                      onClick={() => setCaborTab('finance')}
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95"
+                    >
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_8px_20px_-2px_rgba(31,41,55,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-amber-300/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">savings</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">payments</span>
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        Buku Kas
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Mutasi Rekening
+                      </span>
+                    </button>
+                    {/* 4. Jadwal Event */}
                     <button
                       onClick={() =>
                         setSelectedMobileItem({
-                          title: 'RAB Kejuaraan Atletik Kota 2026',
-                          sub: 'RAB-026 • 09 Nov 2026',
-                          val: 'Rp 48.500.000',
-                          status: 'Menunggu',
-                          desc: 'Pengajuan sedang berada pada antrean verifikasi teknis oleh Bendahara KONI Surakarta.',
+                          title: 'Jadwal Event & Kejurda Cabor Atletik',
+                          sub: 'Agenda Musim 2026',
+                          val: '12 - 15 Nov 2026',
+                          status: 'Aktif',
+                          desc: 'Kejuaraan Atletik Solo Open 2026 di lintasan sintetis Stadion Sriwedari & persiapan seleksi kontingen Porprov Jawa Tengah.',
                         })
                       }
-                      className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex justify-between items-center hover:bg-white hover:shadow-xs transition-all border-l-4 border-l-sikoni-gold"
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-blue-400/50 hover:shadow-md transition-all active:scale-95"
                     >
-                      <div>
-                        <b className="text-sikoni-navy block text-[11.5px] font-bold">RAB Kejuaraan Atletik Kota</b>
-                        <small className="text-[10px] text-sikoni-muted">RAB-026 • 09 Nov 2026</small>
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#1e40af] via-[#2563eb] to-[#60a5fa] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(37,99,235,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">calendar_month</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="w-1.5 h-1.5 rounded-full bg-onyx animate-ping" />
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <b className="text-sikoni-navy block text-[11.5px] font-black">Rp 48,5 jt</b>
-                        <StatusBadge status="Menunggu" />
-                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        Jadwal Event
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Kejurda & TC
+                      </span>
                     </button>
-
+                    {/* 5. Data Atlet */}
                     <button
                       onClick={() =>
                         setSelectedMobileItem({
-                          title: 'Transportasi & Bus Kontingen',
-                          sub: 'EXP-1126 • 08 Nov 2026',
-                          val: 'Rp 4.500.000',
-                          status: 'Verifikasi',
-                          desc: 'Bukti kuitansi sewa armada bus sedang diteliti kelengkapan stempel dan meterainya.',
+                          title: 'Data Atlet & Pelatih Binaan PASI',
+                          sub: 'SK Kontingen 2026',
+                          val: '38 Atlet • 6 Pelatih',
+                          status: 'Aktif',
+                          desc: 'Database atlet resmi binaan Pengkot PASI Surakarta nomor lari sprint 100m, 200m, 400m, estafet, tolak peluru, dan lompat jauh.',
                         })
                       }
-                      className="w-full text-left p-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80 flex justify-between items-center hover:bg-white hover:shadow-xs transition-all border-l-4 border-l-sikoni-teal"
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95"
                     >
-                      <div>
-                        <b className="text-sikoni-navy block text-[11.5px] font-bold">Transportasi Atlet</b>
-                        <small className="text-[10px] text-sikoni-muted">EXP-1126 • 08 Nov 2026</small>
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(211,47,47,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">sprint</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">military_tech</span>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <b className="text-sikoni-navy block text-[11.5px] font-black">Rp 4,5 jt</b>
-                        <StatusBadge status="Verifikasi" />
-                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        Data Atlet
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        38 Atlet Porprov
+                      </span>
                     </button>
+                    {/* 6. Legalitas SK */}
+                    <button
+                      onClick={() =>
+                        setSelectedMobileItem({
+                          title: 'Legalitas SK Kepengurusan Pengkot PASI',
+                          sub: 'SK KONI No. 042/KONI-SKA/VIII/2026',
+                          val: 'Masa Bakti 2024–2028',
+                          status: 'Disetujui',
+                          desc: 'Surat Keputusan Ketua Umum KONI Kota Surakarta tentang Pengukuhan Personalia Pengkot Persatuan Atletik Seluruh Indonesia (PASI) Surakarta.',
+                        })
+                      }
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95"
+                    >
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#d97706] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(217,119,6,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">verified_user</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-white font-bold">shield</span>
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                        Legalitas SK
+                      </span>
+                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        SK Pengkot PASI
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* 6. LINTASAN BERKAS TERKINI (ATHLETIC TIMELINE) */}
+                <div>
+                  <div className="bg-surface-container-lowest rounded-[28px] p-5 shadow-[0_8px_24px_rgba(18,19,22,0.04)] border border-outline-variant/60">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center gap-2">
+                        <div className="w-1.5 h-5 rounded-full bg-secondary" />
+                        <h2 className="font-headline-md text-[17px] font-extrabold text-onyx tracking-tight">
+                          Lintasan Berkas Terkini
+                        </h2>
+                      </div>
+                      <button
+                        onClick={() => setCaborTab('submissions')}
+                        className="font-label-md text-[11px] uppercase text-primary font-extrabold hover:underline flex items-center gap-0.5 tracking-wider"
+                      >
+                        Semua
+                        <span className="material-symbols-outlined text-[14px]">chevron_right</span>
+                      </button>
+                    </div>
+                    {/* Timeline Track */}
+                    <div className="relative pl-6 space-y-3.5">
+                      {/* Visual Running Track Line */}
+                      <div className="absolute left-2.5 top-3 bottom-3 w-0.5 bg-gradient-to-b from-amber-400 via-primary to-surface-container-high" />
+                      {/* Track 1: Dalam Review Verifikator */}
+                      <div
+                        onClick={() =>
+                          setSelectedMobileItem({
+                            title: 'RAB Pemusatan Latihan Atletik (TC Porprov 2026)',
+                            sub: '12 Mei 2025 • Usulan Cabor',
+                            val: 'Rp 35.000.000',
+                            status: 'Verifikasi',
+                            desc: 'Proposal usulan TC intensif atlet Porprov Surakarta. Saat ini dalam antrean verifikasi teknis oleh tim verifikasi KONI Surakarta.',
+                          })
+                        }
+                        className="relative cursor-pointer group"
+                      >
+                        <div className="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-md">
+                          <span className="w-3 h-3 rounded-full bg-amber-400 animate-ping" />
+                        </div>
+                        <div className="bg-surface-container-low rounded-2xl p-3.5 border border-outline-variant/40 shadow-xs group-hover:border-amber-400/60 transition-colors">
+                          <div className="flex items-center justify-between gap-1 mb-1">
+                            <span className="font-label-md text-[9.5px] uppercase px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300/40 font-extrabold tracking-wider">
+                              DALAM REVIEW VERIFIKATOR
+                            </span>
+                            <span className="font-body-sm text-[10.5px] text-on-surface-variant font-medium">12 Mei 2025</span>
+                          </div>
+                          <h3 className="font-title-md text-[13.5px] font-bold text-onyx leading-snug mt-1">
+                            RAB Pemusatan Latihan Atletik (TC Porprov 2026)
+                          </h3>
+                          <div className="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/40 text-[11px] text-on-surface-variant">
+                            <span>
+                              Nominal Usulan: <strong className="text-onyx font-bold">Rp 35.000.000</strong>
+                            </span>
+                            <span className="flex items-center gap-1 text-amber-700 font-semibold">
+                              <span className="material-symbols-outlined text-[13px]">hourglass_top</span> Tim Verifikasi KONI
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* Track 2: Disetujui & Siap Cair */}
+                      <div
+                        onClick={() =>
+                          setSelectedMobileItem({
+                            title: 'LPJ Kejurda Atletik Solo Open 2025',
+                            sub: '08 Mei 2025 • LPJ Sah',
+                            val: 'Rp 25.000.000',
+                            status: 'Disetujui',
+                            desc: 'Berkas kuitansi, absensi, dan laporan teknis telah lengkap dan diverifikasi sah oleh BPKAD & Bendahara KONI Surakarta.',
+                          })
+                        }
+                        className="relative cursor-pointer group"
+                      >
+                        <div className="absolute -left-6 top-1.5 w-5 h-5 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-md">
+                          <span className="w-3.5 h-3.5 rounded-full bg-primary flex items-center justify-center text-white text-[8px] font-bold">
+                            ✓
+                          </span>
+                        </div>
+                        <div className="bg-surface-container-low rounded-2xl p-3.5 border border-outline-variant/40 shadow-xs group-hover:border-emerald-400/60 transition-colors">
+                          <div className="flex items-center justify-between gap-1 mb-1">
+                            <span className="font-label-md text-[9.5px] uppercase px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300/40 font-extrabold tracking-wider">
+                              DISETUJUI & SIAP CAIR
+                            </span>
+                            <span className="font-body-sm text-[10.5px] text-on-surface-variant font-medium">08 Mei 2025</span>
+                          </div>
+                          <h3 className="font-title-md text-[13.5px] font-bold text-onyx leading-snug mt-1">
+                            LPJ Kejurda Atletik Solo Open 2025
+                          </h3>
+                          <div className="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/40 text-[11px] text-on-surface-variant">
+                            <span>
+                              Terealisasi: <strong className="text-onyx font-bold">Rp 25.000.000</strong>
+                            </span>
+                            <span className="flex items-center gap-1 text-emerald-700 font-semibold">
+                              <span className="material-symbols-outlined text-[13px]">done_all</span> Arsip Lengkap
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Real-time Synchronization Ribbon */}
+                    <div className="mt-4 pt-2.5 flex items-center justify-between bg-surface-container rounded-xl px-3 py-2 text-on-surface-variant border border-outline-variant/50">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                        <span className="font-body-sm text-[11px] truncate font-medium">
+                          Terhubung langsung ke Sekretariat KONI Solo - Stadion Manahan
+                        </span>
+                      </div>
+                      <button
+                        onClick={() => showToast('Sinkronisasi data real-time dengan Sekretariat KONI Solo berhasil!')}
+                        className="p-1 text-on-surface-variant hover:text-primary transition-colors shrink-0"
+                      >
+                        <span className="material-symbols-outlined text-[16px]">sync</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 7. BANNER PRESTASI & SOROTAN ATLET (POSISI DI BAWAH) */}
+                <div className="space-y-3">
+                  {/* Moment of Delight: Target Emas Porprov */}
+                  <div className="relative overflow-hidden bg-gradient-to-r from-onyx via-[#221013] to-onyx rounded-[24px] p-4 text-white shadow-lg border border-amber-400/30">
+                    <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-primary/25 rounded-full blur-2xl pointer-events-none" />
+                    <div className="relative z-10 flex items-center gap-3">
+                      <div className="relative w-14 h-14 rounded-2xl ring-2 ring-amber-400 overflow-hidden shrink-0 shadow-md">
+                        <img
+                          alt="Sprinter Atletik Surakarta"
+                          className="w-full h-full object-cover object-top"
+                          src="/images/sprinter_solo.jpg"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 mb-0.5">
+                          <span className="material-symbols-outlined text-[13px]">military_tech</span>
+                          <span className="font-label-md text-[9.5px] uppercase font-bold tracking-wider">
+                            TARGET EMAS PORPROV
+                          </span>
+                        </div>
+                        <h3 className="font-headline-md text-[16px] font-black text-white leading-tight truncate">
+                          3 Atlet Lolos Seleksi
+                        </h3>
+                        <p className="font-body-sm text-[11px] text-white/80 truncate">
+                          Nomor Lari 100m, 400m, dan Lompat Jauh Putra.
+                        </p>
+                      </div>
+                      <button
+                        onClick={() => setCaborTab('account')}
+                        className="shrink-0 px-3 py-2 rounded-xl gold-shimmer text-onyx font-label-md text-[11px] uppercase font-black shadow-md active:scale-95 transition-transform"
+                      >
+                        Profil
+                      </button>
+                    </div>
+                  </div>
+                  {/* Dual Photo Highlight: Pelatnas & Fasilitas Solo */}
+                  <div className="flex items-center justify-between pt-1">
+                    <div className="flex items-center gap-2">
+                      <div className="w-1.5 h-5 rounded-full bg-gradient-to-b from-primary to-amber-400" />
+                      <h2 className="font-headline-md text-[17px] font-extrabold text-onyx tracking-tight">
+                        Sorotan Atlet & Fasilitas Solo
+                      </h2>
+                    </div>
+                    <span className="font-label-md text-[10.5px] uppercase text-primary font-bold tracking-wider">
+                      Prestasi
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    {/* Card 1: Pelatnas Porprov 2026 */}
+                    <div
+                      onClick={() =>
+                        setSelectedMobileItem({
+                          title: 'Pelatnas Porprov 2026 — Atletik Surakarta',
+                          sub: 'Nomor Sprint 100m, 200m, 400m',
+                          val: '38 Atlet Terbina',
+                          status: 'Aktif',
+                          desc: 'Pemusatan latihan daerah atlet sprint Surakarta di Stadion Manahan dengan target merebut minimal 8 Medali Emas Porprov Jateng.',
+                        })
+                      }
+                      className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
+                    >
+                      <div className="relative h-28 w-full overflow-hidden">
+                        <img
+                          alt="Pelatnas Porprov Atletik Solo"
+                          className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                          src="/images/sprinter_solo.jpg"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-primary text-white font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          Sprint 100m/400m
+                        </span>
+                      </div>
+                      <div className="p-2.5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            Pelatnas Porprov 2026
+                          </h3>
+                          <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            38 Atlet Terbina di Manahan
+                          </p>
+                        </div>
+                        <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-primary font-label-md text-[10px] font-bold uppercase">
+                          <span className="flex items-center gap-0.5">
+                            <span className="material-symbols-outlined text-[13px]">military_tech</span>Emas
+                          </span>
+                          <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                        </div>
+                      </div>
+                    </div>
+                    {/* Card 2: Kota Atlet & Budaya Solo */}
+                    <div
+                      onClick={() =>
+                        setSelectedMobileItem({
+                          title: 'Kawasan Olahraga Bersejarah Surakarta',
+                          sub: 'Heritage Sriwedari & Kompleks Manahan',
+                          val: 'Fasilitas Standar Internasional',
+                          status: 'Aktif',
+                          desc: 'Stadion Sriwedari sebagai tempat PON I 1948 dan Stadion Manahan bertaraf internasional sebagai pusat pembinaan olahraga prestasi Kota Surakarta.',
+                        })
+                      }
+                      className="relative overflow-hidden rounded-2xl bg-surface-container-lowest shadow-sm border border-outline-variant/60 flex flex-col group cursor-pointer"
+                    >
+                      <div className="relative h-28 w-full overflow-hidden">
+                        <img
+                          alt="Stadion Sriwedari dan Kawasan Manahan Solo"
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          src="/images/sriwedari_manahan.jpg"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-amber-400 text-onyx font-label-md text-[9px] font-extrabold tracking-wider uppercase shadow-sm">
+                          Heritage Solo
+                        </span>
+                      </div>
+                      <div className="p-2.5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-title-md text-[13px] font-bold text-onyx leading-tight line-clamp-1">
+                            Kota Atlet & Budaya Solo
+                          </h3>
+                          <p className="font-body-sm text-[11px] text-on-surface-variant mt-0.5 line-clamp-1">
+                            Sriwedari & Manahan
+                          </p>
+                        </div>
+                        <div className="mt-2 pt-1 border-t border-outline-variant/50 flex items-center justify-between text-secondary-dark font-label-md text-[10px] font-bold uppercase">
+                          <span className="flex items-center gap-0.5">
+                            <span className="material-symbols-outlined text-[13px]">stadium</span>Kawasan
+                          </span>
+                          <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2072,353 +2590,358 @@ export const MobilePreview: React.FC = () => {
           </div>
         )}
 
-        {/* Mobile 5-Tab Bottom Navigation Bar (Material 3 Style) */}
-        <div className="h-[68px] bg-white/95 backdrop-blur-md border-t border-slate-200/90 flex items-center justify-around flex-shrink-0 px-1 z-20 shadow-[0_-4px_16px_rgba(0,0,0,0.04)]">
-          {/* TAB BAR FOR: PUBLIK */}
-          {persona === 'publik' && (
-            <>
-              <button
-                onClick={() => setPublikTab('home')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${publikTab === 'home'
-                    ? 'bg-sikoni-navy/10 text-sikoni-navy'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Home size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${publikTab === 'home'
-                    ? 'font-black text-sikoni-navy'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  Beranda
-                </span>
-              </button>
-
-              <button
-                onClick={() => setPublikTab('cabor-dir')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${publikTab === 'cabor-dir'
-                    ? 'bg-sikoni-navy/10 text-sikoni-navy'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Award size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${publikTab === 'cabor-dir'
-                    ? 'font-black text-sikoni-navy'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  64 Cabor
-                </span>
-              </button>
-
-              <button
-                onClick={() => setPublikTab('transparansi')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${publikTab === 'transparansi'
-                    ? 'bg-sikoni-navy/10 text-sikoni-navy'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <TrendingUp size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${publikTab === 'transparansi'
-                    ? 'font-black text-sikoni-navy'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  Transparansi
-                </span>
-              </button>
-
-              <button
-                onClick={() => setPublikTab('jadwal')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${publikTab === 'jadwal'
-                    ? 'bg-sikoni-navy/10 text-sikoni-navy'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Calendar size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${publikTab === 'jadwal'
-                    ? 'font-black text-sikoni-navy'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  Jadwal
-                </span>
-              </button>
-
-              <button
-                onClick={() => setPublikTab('info')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${publikTab === 'info'
-                    ? 'bg-sikoni-navy/10 text-sikoni-navy'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Info size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${publikTab === 'info'
-                    ? 'font-black text-sikoni-navy'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  Profil
-                </span>
-              </button>
-            </>
-          )}
-
-          {/* TAB BAR FOR: OPERATOR CABOR */}
-          {persona === 'cabor' && (
-            <>
+        {/* Mobile Bottom Navigation Bar: Floating Circular Dock for Cabor, Clean Bar for Others */}
+        {persona === 'cabor' ? (
+          <nav className="absolute bottom-3 inset-x-0 z-30 px-4 pointer-events-none">
+            <div className="pointer-events-auto max-w-[340px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
+              {/* Tab 1: Beranda */}
               <button
                 onClick={() => setCaborTab('home')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${caborTab === 'home'
-                    ? 'bg-sikoni-teal/15 text-sikoni-teal'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Home size={19} />
-                </div>
+                {caborTab === 'home' ? (
+                  <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                    <span className="material-symbols-outlined text-[22px] drop-shadow-md">dashboard</span>
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                    <span className="material-symbols-outlined text-[19px]">dashboard</span>
+                  </div>
+                )}
                 <span
-                  className={`text-[10px] leading-tight transition-colors ${caborTab === 'home'
-                    ? 'font-black text-sikoni-teal'
-                    : 'font-semibold text-slate-500'
-                    }`}
+                  className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
+                    caborTab === 'home' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
+                  }`}
                 >
                   Beranda
                 </span>
               </button>
 
-              <button
-                onClick={() => setCaborTab('finance')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${caborTab === 'finance'
-                    ? 'bg-sikoni-teal/15 text-sikoni-teal'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Coins size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${caborTab === 'finance'
-                    ? 'font-black text-sikoni-teal'
-                    : 'font-semibold text-slate-500'
-                    }`}
-                >
-                  Keuangan
-                </span>
-              </button>
-
+              {/* Tab 2: Pengajuan */}
               <button
                 onClick={() => setCaborTab('submissions')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
-                    ? 'bg-sikoni-teal/15 text-sikoni-teal'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <Send size={19} />
-                </div>
+                {caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form' ? (
+                  <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                    <span className="material-symbols-outlined text-[22px] drop-shadow-md">assignment_add</span>
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                    <span className="material-symbols-outlined text-[19px]">assignment_add</span>
+                  </div>
+                )}
                 <span
-                  className={`text-[10px] leading-tight transition-colors ${caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
-                    ? 'font-black text-sikoni-teal'
-                    : 'font-semibold text-slate-500'
-                    }`}
+                  className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
+                    caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form'
+                      ? 'text-primary font-extrabold'
+                      : 'text-on-surface-variant font-bold'
+                  }`}
                 >
                   Pengajuan
                 </span>
               </button>
 
+              {/* Tab 3: Keuangan */}
               <button
-                onClick={() => setCaborTab('lpj')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                onClick={() => setCaborTab('finance')}
+                className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${caborTab === 'lpj'
-                    ? 'bg-sikoni-teal/15 text-sikoni-teal'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <FileCheck size={19} />
-                </div>
+                {caborTab === 'finance' ? (
+                  <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                    <span className="material-symbols-outlined text-[22px] drop-shadow-md">account_balance_wallet</span>
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                    <span className="material-symbols-outlined text-[19px]">account_balance_wallet</span>
+                  </div>
+                )}
                 <span
-                  className={`text-[10px] leading-tight transition-colors ${caborTab === 'lpj'
-                    ? 'font-black text-sikoni-teal'
-                    : 'font-semibold text-slate-500'
-                    }`}
+                  className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
+                    caborTab === 'finance' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
+                  }`}
                 >
-                  LPJ Word
+                  Keuangan
                 </span>
               </button>
 
+              {/* Tab 4: Profil */}
               <button
                 onClick={() => setCaborTab('account')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${caborTab === 'account'
-                    ? 'bg-sikoni-teal/15 text-sikoni-teal'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
-                >
-                  <User size={19} />
-                </div>
+                {caborTab === 'account' ? (
+                  <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                    <span className="material-symbols-outlined text-[22px] drop-shadow-md">shield_person</span>
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                    <span className="material-symbols-outlined text-[19px]">shield_person</span>
+                  </div>
+                )}
                 <span
-                  className={`text-[10px] leading-tight transition-colors ${caborTab === 'account'
-                    ? 'font-black text-sikoni-teal'
-                    : 'font-semibold text-slate-500'
-                    }`}
+                  className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
+                    caborTab === 'account' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
+                  }`}
                 >
-                  Akun
+                  Profil
                 </span>
               </button>
-            </>
-          )}
+            </div>
+          </nav>
+        ) : (
+          <div className="h-[68px] bg-white/95 backdrop-blur-md border-t border-slate-200/90 flex items-center justify-around flex-shrink-0 px-1 z-20 shadow-[0_-4px_16px_rgba(0,0,0,0.04)]">
+            {/* TAB BAR FOR: PUBLIK */}
+            {persona === 'publik' && (
+              <>
+                <button
+                  onClick={() => setPublikTab('home')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                >
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      publikTab === 'home'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    <Home size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      publikTab === 'home'
+                        ? 'font-black text-primary'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Beranda
+                  </span>
+                </button>
 
-          {/* TAB BAR FOR: PENGURUS KONI */}
-          {persona === 'pengurus' && (
-            <>
-              <button
-                onClick={() => setPengurusTab('dashboard')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${pengurusTab === 'dashboard'
-                    ? 'bg-amber-100 text-amber-800'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
+                <button
+                  onClick={() => setPublikTab('cabor-dir')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  <Building2 size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${pengurusTab === 'dashboard'
-                    ? 'font-black text-amber-800'
-                    : 'font-semibold text-slate-500'
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      publikTab === 'cabor-dir'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-400 hover:text-slate-600'
                     }`}
-                >
-                  Dashboard
-                </span>
-              </button>
+                  >
+                    <Award size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      publikTab === 'cabor-dir'
+                        ? 'font-black text-primary'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    64 Cabor
+                  </span>
+                </button>
 
-              <button
-                onClick={() => setPengurusTab('approval')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${pengurusTab === 'approval'
-                    ? 'bg-amber-100 text-amber-800'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
+                <button
+                  onClick={() => setPublikTab('transparansi')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  <CheckCircle2 size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${pengurusTab === 'approval'
-                    ? 'font-black text-amber-800'
-                    : 'font-semibold text-slate-500'
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      publikTab === 'transparansi'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-400 hover:text-slate-600'
                     }`}
-                >
-                  Approval
-                </span>
-              </button>
+                  >
+                    <TrendingUp size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      publikTab === 'transparansi'
+                        ? 'font-black text-primary'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Transparansi
+                  </span>
+                </button>
 
-              <button
-                onClick={() => setPengurusTab('monitoring')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${pengurusTab === 'monitoring'
-                    ? 'bg-amber-100 text-amber-800'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
+                <button
+                  onClick={() => setPublikTab('jadwal')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  <TrendingUp size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${pengurusTab === 'monitoring'
-                    ? 'font-black text-amber-800'
-                    : 'font-semibold text-slate-500'
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      publikTab === 'jadwal'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-400 hover:text-slate-600'
                     }`}
-                >
-                  64 Cabor
-                </span>
-              </button>
+                  >
+                    <Calendar size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      publikTab === 'jadwal'
+                        ? 'font-black text-primary'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Jadwal
+                  </span>
+                </button>
 
-              <button
-                onClick={() => setPengurusTab('kas')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${pengurusTab === 'kas'
-                    ? 'bg-amber-100 text-amber-800'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
+                <button
+                  onClick={() => setPublikTab('info')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  <Coins size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${pengurusTab === 'kas'
-                    ? 'font-black text-amber-800'
-                    : 'font-semibold text-slate-500'
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      publikTab === 'info'
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-slate-400 hover:text-slate-600'
                     }`}
-                >
-                  Giro Kas
-                </span>
-              </button>
+                  >
+                    <Info size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      publikTab === 'info'
+                        ? 'font-black text-primary'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Profil
+                  </span>
+                </button>
+              </>
+            )}
 
-              <button
-                onClick={() => setPengurusTab('profil')}
-                className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
-              >
-                <div
-                  className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${pengurusTab === 'profil'
-                    ? 'bg-amber-100 text-amber-800'
-                    : 'text-slate-400 hover:text-slate-600'
-                    }`}
+            {/* TAB BAR FOR: PENGURUS KONI */}
+            {persona === 'pengurus' && (
+              <>
+                <button
+                  onClick={() => setPengurusTab('dashboard')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  <User size={19} />
-                </div>
-                <span
-                  className={`text-[10px] leading-tight transition-colors ${pengurusTab === 'profil'
-                    ? 'font-black text-amber-800'
-                    : 'font-semibold text-slate-500'
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      pengurusTab === 'dashboard'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'text-slate-400 hover:text-slate-600'
                     }`}
+                  >
+                    <Building2 size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      pengurusTab === 'dashboard'
+                        ? 'font-black text-amber-800'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Dashboard
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setPengurusTab('approval')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
                 >
-                  Pejabat
-                </span>
-              </button>
-            </>
-          )}
-        </div>
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      pengurusTab === 'approval'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    <CheckCircle2 size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      pengurusTab === 'approval'
+                        ? 'font-black text-amber-800'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Approval
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setPengurusTab('monitoring')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                >
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      pengurusTab === 'monitoring'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    <TrendingUp size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      pengurusTab === 'monitoring'
+                        ? 'font-black text-amber-800'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    64 Cabor
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setPengurusTab('kas')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                >
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      pengurusTab === 'kas'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    <Coins size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      pengurusTab === 'kas'
+                        ? 'font-black text-amber-800'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Giro Kas
+                  </span>
+                </button>
+
+                <button
+                  onClick={() => setPengurusTab('profil')}
+                  className="flex-1 h-full min-h-[56px] flex flex-col items-center justify-center gap-0.5 active:scale-95 transition-all select-none"
+                >
+                  <div
+                    className={`px-3.5 py-1 rounded-full transition-all flex items-center justify-center ${
+                      pengurusTab === 'profil'
+                        ? 'bg-amber-100 text-amber-800'
+                        : 'text-slate-400 hover:text-slate-600'
+                    }`}
+                  >
+                    <User size={19} />
+                  </div>
+                  <span
+                    className={`text-[10px] leading-tight transition-colors ${
+                      pengurusTab === 'profil'
+                        ? 'font-black text-amber-800'
+                        : 'font-semibold text-slate-500'
+                    }`}
+                  >
+                    Pejabat
+                  </span>
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {/* Android Native Gesture Navigation Bar Pill */}
         <div className="h-4 bg-white flex items-center justify-center flex-shrink-0 select-none pb-1">

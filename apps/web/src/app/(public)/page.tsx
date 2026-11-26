@@ -33,42 +33,50 @@ export default function HomePage() {
   // Desktop / Laptop Website View
   return (
     <div className="space-y-12 pb-16">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#142a43] via-[#1b395a] to-[#168b8b] text-white py-12 sm:py-20 px-4 sm:px-8 relative overflow-hidden shadow-xl">
+      {/* Hero Section with Official Garuda Flame Athletic Styling */}
+      <section className="relative text-white py-16 sm:py-24 px-4 sm:px-8 overflow-hidden shadow-2xl">
+        <img
+          alt="Stadion Manahan Solo Athletic Track"
+          className="absolute inset-0 w-full h-full object-cover object-center scale-105"
+          src="/images/track_manahan.jpg"
+        />
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/95 to-[#d32f2f]/85 backdrop-blur-[1px]" />
+        <div className="absolute inset-0 carbon-pattern opacity-25" />
+
         <div className="max-w-5xl mx-auto text-center space-y-4 sm:space-y-6 relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 text-sikoni-gold font-bold text-[10.5px] sm:text-xs tracking-wider uppercase border border-white/15 backdrop-blur-sm shadow-sm">
-            <Trophy size={14} className="text-sikoni-gold flex-shrink-0" />
-            <span className="truncate">KONI SURAKARTA • SISTEM OLAHRAGA TERPADU</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/40 text-amber-300 font-extrabold text-[10.5px] sm:text-xs tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="truncate">KONI KOTA SURAKARTA • SISTEM OLAHRAGA TERPADU</span>
           </div>
 
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black font-headline-lg tracking-tight leading-tight">
             Membangun Prestasi Juara.<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-sikoni-gold via-amber-200 to-sikoni-gold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-100 to-amber-300 drop-shadow-md">
               Memperkuat Tata Kelola Akuntabel.
             </span>
           </h1>
 
-          <p className="text-slate-200 text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+          <p className="text-white/90 font-body-lg text-xs sm:text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Portal informasi resmi dan layanan terpadu pembinaan olahraga Kota Surakarta. Akses direktori 64 cabang olahraga, agenda kejuaraan daerah, serta transparansi dana hibah APBD secara terbuka dan akuntabel.
           </p>
 
           <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 pt-2 sm:pt-4 max-w-md sm:max-w-none mx-auto flex-wrap">
             <button
               onClick={() => setMode('android')}
-              className="bg-gradient-to-r from-sikoni-teal to-teal-700 hover:from-teal-600 hover:to-teal-800 text-white font-extrabold text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-emerald-300/30 cursor-pointer"
+              className="gold-shimmer text-onyx font-black font-label-lg text-xs px-6 py-3.5 rounded-2xl shadow-[0_8px_18px_rgba(255,168,0,0.45)] border-t border-white/50 flex items-center justify-center gap-2 transition-transform hover:scale-105 cursor-pointer uppercase tracking-wide"
             >
-              <Smartphone size={15} />
+              <Smartphone size={16} className="text-onyx" />
               <span>Buka SIKONI Versi Android</span>
             </button>
             <Link
               href="/cabor"
-              className="bg-sikoni-gold hover:bg-amber-400 text-sikoni-navy font-black text-xs px-5 py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105"
+              className="red-flame-btn text-white font-extrabold font-label-lg text-xs px-6 py-3.5 rounded-2xl shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 border border-amber-300/40 uppercase tracking-wide"
             >
               <span>Jelajahi 64 Cabor</span> <ArrowRight size={15} />
             </Link>
             <Link
               href="/transparansi"
-              className="bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/25 transition-all backdrop-blur-sm text-center"
+              className="bg-white/15 hover:bg-white/20 text-white font-bold font-label-lg text-xs px-5 py-3.5 rounded-2xl border border-amber-300/30 transition-all backdrop-blur-md text-center uppercase tracking-wide"
             >
               Transparansi Anggaran
             </Link>
@@ -80,9 +88,9 @@ export default function HomePage() {
                   router.push('/login?redirect=/admin/dashboard');
                 }
               }}
-              className="bg-white/15 hover:bg-white/25 text-white font-bold text-xs px-5 py-3 rounded-xl border border-white/20 transition-all backdrop-blur-sm flex items-center justify-center gap-1.5 cursor-pointer"
+              className="bg-black/40 hover:bg-black/60 text-amber-300 font-bold font-label-lg text-xs px-5 py-3.5 rounded-2xl border border-amber-300/40 transition-all backdrop-blur-md flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wide"
             >
-              <Building2 size={14} className="text-sikoni-gold" />
+              <Building2 size={14} className="text-amber-300" />
               <span>{user ? 'Dashboard Admin →' : 'Portal Admin & LPJ →'}</span>
             </button>
           </div>

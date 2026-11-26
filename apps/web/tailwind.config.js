@@ -8,6 +8,25 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        "on-background": "#121316",
+        "surface": "#F8F9FD",
+        "surface-container-low": "#F1F3F9",
+        "surface-container": "#EAECEF",
+        "surface-container-high": "#E1E4EA",
+        "surface-container-lowest": "#ffffff",
+        "on-surface": "#121316",
+        "on-surface-variant": "#59606d",
+        "primary": "#d32f2f",
+        "primary-dark": "#8b0000",
+        "primary-container": "#ffebec",
+        "on-primary": "#ffffff",
+        "secondary": "#f59e0b",
+        "secondary-dark": "#b45309",
+        "secondary-container": "#fef3c7",
+        "secondary-fixed": "#ffc107",
+        "tertiary": "#ae1417",
+        "onyx": "#121316",
+        "outline-variant": "#e2e6ee",
         sikoni: {
           navy: '#142a43',
           navy2: '#1d3a59',
@@ -25,10 +44,24 @@ module.exports = {
         },
       },
       borderRadius: {
+        "squircle": "20px",
+        "squircle-lg": "28px",
         sikoni: '15px',
+      },
+      fontFamily: {
+        "headline-lg": ["Space Grotesk", "sans-serif"],
+        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+        "data-metric": ["Space Grotesk", "sans-serif"],
+        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+        "headline-md": ["Space Grotesk", "sans-serif"],
+        "body-sm": ["Plus Jakarta Sans", "sans-serif"],
+        "label-lg": ["Space Grotesk", "sans-serif"],
+        "label-md": ["Space Grotesk", "sans-serif"]
       },
       boxShadow: {
         sikoni: '0 10px 28px rgba(24,41,62,.07)',
+        '3d-red': '0 8px 20px -4px rgba(211, 47, 47, 0.55), inset 0 1px 1px rgba(255,255,255,0.4)',
+        '3d-gold': '0 8px 18px rgba(255,168,0,0.45)',
       },
     },
   },

@@ -25,10 +25,21 @@ export const PublicHeader: React.FC = () => {
   return (
     <header className="h-[75px] bg-white border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-sm">
       <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setMobileMenuOpen(false)}>
-        <div className="brand-mark">SK</div>
+        <div className="relative h-11 w-11 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-slate-200/80">
+          <img
+            alt="Logo KONI Surakarta"
+            className="h-full w-full object-contain filter drop-shadow-sm"
+            src="/images/logo_koni.png"
+          />
+        </div>
         <div>
-          <div className="text-[14px] sm:text-[16px] font-extrabold tracking-wide text-sikoni-navy">KONI SURAKARTA</div>
-          <div className="text-[9px] sm:text-[10px] text-sikoni-muted tracking-widest font-semibold">SISTEM INFORMASI TERPADU</div>
+          <div className="text-[14px] sm:text-[16px] font-extrabold tracking-wide text-onyx flex items-center gap-1.5">
+            <span>KONI SURAKARTA</span>
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+          </div>
+          <div className="text-[9px] sm:text-[10px] text-on-surface-variant tracking-widest font-bold uppercase">
+            KOTA SURAKARTA · SISTEM INFORMASI TERPADU
+          </div>
         </div>
       </Link>
 

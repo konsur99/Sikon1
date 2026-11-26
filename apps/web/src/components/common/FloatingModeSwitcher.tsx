@@ -34,7 +34,7 @@ export const FloatingModeSwitcher: React.FC = () => {
           onClick={() => setMode('android')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-extrabold text-[11px] transition-all ${
             isAndroid
-              ? 'bg-sikoni-teal text-white shadow-md'
+              ? 'red-flame-btn text-white shadow-md'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
           }`}
           title="Tampilan Aplikasi Android SIKONI"
@@ -48,7 +48,7 @@ export const FloatingModeSwitcher: React.FC = () => {
           onClick={() => setMode('desktop')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full font-extrabold text-[11px] transition-all ${
             !isAndroid
-              ? 'bg-sikoni-gold text-sikoni-navy shadow-md font-black'
+              ? 'gold-shimmer text-onyx shadow-md font-black'
               : 'text-slate-300 hover:text-white hover:bg-white/10'
           }`}
           title="Tampilan Website Desktop / Laptop"
