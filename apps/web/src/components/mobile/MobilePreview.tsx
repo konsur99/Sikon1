@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Home,
   Coins,
@@ -214,6 +214,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
   useEffect(() => {
     setDeviceView(isAndroid ? 'mobile' : 'desktop');
   }, [isAndroid]);
+
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
   const [persona, setPersona] = useState<UserPersona>('cabor');
 
@@ -250,6 +251,30 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
   const [pengurusTab, setPengurusTab] = useState<
     'dashboard' | 'approval' | 'monitoring' | 'kas' | 'profil'
   >('dashboard');
+
+  // Dedicated scroll refs for all 3 personas to eliminate stuck scroll positions on tab switch
+  const caborScrollRef = useRef<HTMLDivElement>(null);
+  const publikScrollRef = useRef<HTMLDivElement>(null);
+  const pengurusScrollRef = useRef<HTMLDivElement>(null);
+
+  // Smooth scroll reset to top when switching tabs or screens
+  useEffect(() => {
+    caborScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [caborTab]);
+
+  useEffect(() => {
+    publikScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [publikTab]);
+
+  useEffect(() => {
+    pengurusScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pengurusTab]);
+
+  useEffect(() => {
+    caborScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+    publikScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+    pengurusScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [persona]);
 
   // In-app Notification Dropdown Popover
   const [isMobileNotifOpen, setIsMobileNotifOpen] = useState(false);
@@ -583,7 +608,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             ? 'w-full sm:w-[412px] h-[100dvh] sm:h-[840px] rounded-none sm:rounded-[44px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43]'
             : deviceView === 'tablet'
               ? 'w-full sm:w-[768px] h-[100dvh] sm:h-[900px] rounded-none sm:rounded-[36px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43]'
-              : 'w-full max-w-7xl min-h-[calc(100vh-80px)] rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 my-2'
+              : 'w-full max-w-7xl h-[calc(100dvh-120px)] min-h-[660px] rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 my-2'
         }`}
       >
         {/* Android Native Status Bar (Only visible on mobile and tablet simulation) */}
@@ -843,7 +868,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
            ======================================================== */}
         {persona === 'publik' && (
           <div
-            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] text-on-surface ${
+            ref={publikScrollRef}
+            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] text-on-surface ${
               deviceView === 'desktop'
                 ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
                 : 'p-3 sm:p-4 pb-24 space-y-4'
@@ -851,7 +877,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           >
             {/* PUBLIK: TAB 1 - BERANDA */}
             {publikTab === 'home' && (
-              <div className="space-y-4">
+              <div key="home" className="tab-transition-in space-y-4">
                 {/* 1. HERO BANNER: KOTA SURAKARTA JUARA (ATHLETIC GARUDA FLAME) */}
                 <div className="relative overflow-hidden rounded-[28px] p-5 text-white shadow-[0_16px_36px_rgba(18,19,22,0.12)] border border-outline-variant/40">
                   <img
@@ -1419,7 +1445,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PUBLIK: TAB 2 - DIREKTORI CABOR */}
             {publikTab === 'cabor-dir' && (
-              <div className="space-y-3">
+              <div key="cabor-dir" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Direktori Resmi</div>
                   <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
@@ -1483,7 +1509,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PUBLIK: TAB 3 - TRANSPARANSI ANGGARAN */}
             {publikTab === 'transparansi' && (
-              <div className="space-y-3">
+              <div key="transparansi" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Keterbukaan Informasi Publik</div>
                   <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
@@ -1557,7 +1583,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PUBLIK: TAB 4 - JADWAL & EVENT */}
             {publikTab === 'jadwal' && (
-              <div className="space-y-3">
+              <div key="jadwal" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Kalender Kompetisi</div>
                   <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
@@ -1607,7 +1633,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PUBLIK: TAB 5 - INFO KONI */}
             {publikTab === 'info' && (
-              <div className="space-y-3">
+              <div key="info" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Tentang Kami</div>
                   <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
@@ -1659,7 +1685,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
            ======================================================== */}
         {persona === 'cabor' && (
           <div
-            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] ${
+            ref={caborScrollRef}
+            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${
               caborTab === 'home'
                 ? deviceView === 'desktop'
                   ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
@@ -1669,7 +1696,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           >
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
-              <div className="space-y-4 pb-12">
+              <div key="home" className="tab-transition-in space-y-4 pb-12">
                 {/* 2. HERO BANNER CABOR "KONI SURAKARTA" */}
                 <div>
                   <div className="relative w-full overflow-hidden rounded-[28px] shadow-[0_18px_36px_-10px_rgba(139,0,0,0.45)] p-5 text-white border border-amber-400/30">
@@ -2668,7 +2695,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
            ======================================================== */}
         {persona === 'pengurus' && (
           <div
-            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] text-on-surface ${
+            ref={pengurusScrollRef}
+            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] text-on-surface ${
               deviceView === 'desktop'
                 ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
                 : 'p-3 sm:p-4 pb-24 space-y-4'
@@ -2676,7 +2704,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           >
             {/* PENGURUS: TAB 1 - DASHBOARD EKSEKUTIF */}
             {pengurusTab === 'dashboard' && (
-              <div className="space-y-4">
+              <div key="dashboard" className="tab-transition-in space-y-4">
                 {/* 1. HERO BANNER: KASDA HIBAH APBD EKSEKUTIF */}
                 <div className="relative overflow-hidden rounded-[28px] p-5 text-white shadow-[0_16px_36px_rgba(18,19,22,0.12)] border border-outline-variant/40">
                   <img
@@ -3147,7 +3175,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PENGURUS: TAB 2 - VERIFIKASI & APPROVAL */}
             {pengurusTab === 'approval' && (
-              <div className="space-y-3">
+              <div key="approval" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Disposisi & Tanda Tangan</div>
                   <h2 className="text-lg font-black text-sikoni-navy">Inbox Persetujuan</h2>
@@ -3206,7 +3234,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PENGURUS: TAB 3 - MONITORING 64 CABOR */}
             {pengurusTab === 'monitoring' && (
-              <div className="space-y-3">
+              <div key="monitoring" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Kontrol Alokasi Pagu</div>
                   <h2 className="text-lg font-black text-sikoni-navy">Monitoring 64 Cabor</h2>
@@ -3239,7 +3267,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PENGURUS: TAB 4 - KAS & MUTASI GIRO */}
             {pengurusTab === 'kas' && (
-              <div className="space-y-3">
+              <div key="kas" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Kas & Kasir KONI</div>
                   <h2 className="text-lg font-black text-sikoni-navy">Rekening Giro Bank</h2>
@@ -3286,7 +3314,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* PENGURUS: TAB 5 - PROFIL & PENGATURAN */}
             {pengurusTab === 'profil' && (
-              <div className="space-y-3">
+              <div key="profil" className="tab-transition-in space-y-3">
                 <div>
                   <div className="text-[11px] text-sikoni-muted">Akun Pejabat</div>
                   <h2 className="text-lg font-black text-sikoni-navy">Profil Pengurus</h2>
@@ -3610,7 +3638,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 1: Beranda */}
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {caborTab === 'home' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3633,7 +3661,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 2: Pengajuan */}
                   <button
                     onClick={() => setCaborTab('submissions')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {caborTab === 'submissions' || caborTab === 'rab-form' || caborTab === 'expense-form' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3658,7 +3686,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 3: Keuangan */}
                   <button
                     onClick={() => setCaborTab('sp2d')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {caborTab === 'sp2d' || caborTab === 'finance' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3681,7 +3709,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 4: LPJ */}
                   <button
                     onClick={() => setCaborTab('lpj')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {caborTab === 'lpj' || caborTab === 'submit-success' || caborTab === 'ette' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3706,7 +3734,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 5: Arsip */}
                   <button
                     onClick={() => setCaborTab('archive')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {caborTab === 'archive' || caborTab === 'account' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3734,7 +3762,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 1: Beranda */}
                   <button
                     onClick={() => setPublikTab('home')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {publikTab === 'home' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3757,7 +3785,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 2: 64 Cabor */}
                   <button
                     onClick={() => setPublikTab('cabor-dir')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {publikTab === 'cabor-dir' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3780,7 +3808,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 3: Transparansi */}
                   <button
                     onClick={() => setPublikTab('transparansi')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {publikTab === 'transparansi' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3803,7 +3831,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 4: Jadwal */}
                   <button
                     onClick={() => setPublikTab('jadwal')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {publikTab === 'jadwal' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3826,7 +3854,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 5: Profil */}
                   <button
                     onClick={() => setPublikTab('info')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {publikTab === 'info' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3854,7 +3882,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 1: Dashboard */}
                   <button
                     onClick={() => setPengurusTab('dashboard')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'dashboard' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3877,7 +3905,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 2: Approval */}
                   <button
                     onClick={() => setPengurusTab('approval')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'approval' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3900,7 +3928,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 3: Monitoring 64 Cabor */}
                   <button
                     onClick={() => setPengurusTab('monitoring')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'monitoring' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3923,7 +3951,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 4: Kas & Giro */}
                   <button
                     onClick={() => setPengurusTab('kas')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'kas' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
@@ -3946,7 +3974,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   {/* Tab 5: Pejabat */}
                   <button
                     onClick={() => setPengurusTab('profil')}
-                    className="group flex flex-col items-center justify-center transition-all active:scale-90"
+                    className="group flex flex-col items-center justify-center transition-all active:scale-90 cursor-pointer"
                   >
                     {pengurusTab === 'profil' ? (
                       <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
