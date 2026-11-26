@@ -45,6 +45,20 @@ import { StatusBadge } from '../common/StatusBadge';
 import { generateLpjWordDocument } from '../../lib/generateLpjWord';
 import { useDisplayMode } from '../../context/DisplayModeContext';
 
+import { Screen1_Submissions } from './screens/Screen1_Submissions';
+import { Screen2_SP2D } from './screens/Screen2_SP2D';
+import { Screen3_SPJReport } from './screens/Screen3_SPJReport';
+import { Screen4_SubmitSuccess } from './screens/Screen4_SubmitSuccess';
+import { Screen5_Notifications } from './screens/Screen5_Notifications';
+import { Screen7_OcrModal } from './screens/Screen7_OcrModal';
+import { Screen9_eTTE } from './screens/Screen9_eTTE';
+import { Screen10_VerificationFlow } from './screens/Screen10_VerificationFlow';
+import { Screen11_Milestone } from './screens/Screen11_Milestone';
+import { Screen12_SkbDoc } from './screens/Screen12_SkbDoc';
+import { Screen13_Archive } from './screens/Screen13_Archive';
+import { Screen14_Termin3Form } from './screens/Screen14_Termin3Form';
+
+
 export type UserPersona = 'publik' | 'cabor' | 'pengurus';
 
 export const MobilePreview: React.FC = () => {
@@ -54,8 +68,24 @@ export const MobilePreview: React.FC = () => {
 
   // Persona-specific tab states
   const [caborTab, setCaborTab] = useState<
-    'home' | 'finance' | 'submissions' | 'lpj' | 'account' | 'rab-form' | 'expense-form'
+    | 'home'
+    | 'submissions'
+    | 'finance'
+    | 'sp2d'
+    | 'lpj'
+    | 'account'
+    | 'rab-form'
+    | 'expense-form'
+    | 'submit-success'
+    | 'notifications'
+    | 'ette'
+    | 'verification-flow'
+    | 'milestone'
+    | 'skb-doc'
+    | 'archive'
+    | 'termin3'
   >('home');
+  const [isOcrModalOpen, setIsOcrModalOpen] = useState(false);
 
   const [publikTab, setPublikTab] = useState<
     'home' | 'cabor-dir' | 'transparansi' | 'jadwal' | 'info'
@@ -348,6 +378,58 @@ export const MobilePreview: React.FC = () => {
           {persona === 'pengurus' && 'Mode Pengurus: Dashboard eksekutif, verifikasi & approval berkas, monitoring 64 cabor, & mutasi giro.'}
         </p>
       </div>
+
+      
+        {/* Stitch Screen Direct Navigator Strip (All 15 Screens Direct Switcher) */}
+        <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm">
+          <div className="flex items-center justify-between mb-2 px-1">
+            <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
+              <span>Stitch Screen Direct Hub (15 Layar Lengkap)</span>
+            </div>
+            <span className="text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
+              Garuda Flame Athletic
+            </span>
+          </div>
+
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            {[
+              { id: 'home', label: '0. Beranda Cabor' },
+              { id: 'submissions', label: '1. Portal RAB & LPJ' },
+              { id: 'sp2d', label: '2. SP2D & Bukti Kas' },
+              { id: 'lpj', label: '3. SPJ Termin II' },
+              { id: 'submit-success', label: '4. e-SPJ Sukses' },
+              { id: 'notifications', label: '5. Pusat Notifikasi' },
+              { id: 'ocr-trigger', label: '7. Scan OCR Nota' },
+              { id: 'ette', label: '9. e-TTE Digital' },
+              { id: 'verification-flow', label: '10. Alur Verifikasi' },
+              { id: 'milestone', label: '11. Milestone Kasda' },
+              { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
+              { id: 'archive', label: '13. Arsip SPJ' },
+              { id: 'termin3', label: '14. Termin III' },
+            ].map((scr) => (
+              <button
+                key={scr.id}
+                type="button"
+                onClick={() => {
+                  if (scr.id === 'ocr-trigger') {
+                    setIsOcrModalOpen(true);
+                  } else {
+                    setPersona('cabor');
+                    setCaborTab(scr.id as any);
+                  }
+                }}
+                className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all active:scale-95 ${
+                  (caborTab === scr.id && persona === 'cabor') || (scr.id === 'ocr-trigger' && isOcrModalOpen)
+                    ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                }`}
+              >
+                {scr.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
       {/* Android Device Frame (Edge-to-Edge on Phones, Elegant Smartphone Frame on Desktops) */}
       <div className="w-full sm:w-[412px] h-[100dvh] sm:h-[830px] bg-white rounded-none sm:rounded-[44px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43] flex flex-col overflow-hidden relative mx-auto">
@@ -1006,15 +1088,7 @@ export const MobilePreview: React.FC = () => {
                         </div>
                       </div>
                       <button
-                        onClick={() =>
-                          setSelectedMobileItem({
-                            title: 'RAB Pra-Porprov Atletik (Koreksi Uang Saku)',
-                            sub: 'RAB-REV-01 • Batas 18 Mei 2026',
-                            val: 'Rp 35.000.000',
-                            status: 'Verifikasi',
-                            desc: 'Catatan Tim Verifikasi KONI: Perbaiki rincian uang saku atlet dan transport agar disesuaikan dengan standar biaya umum (SBU) Pemkot Surakarta.',
-                          })
-                        }
+                        onClick={() => setCaborTab('notifications')}
                         className="shrink-0 px-3 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-onyx font-label-md text-[11px] font-extrabold uppercase tracking-wide flex items-center gap-0.5 shadow-sm active:scale-95 transition-transform"
                       >
                         Perbaiki
@@ -1191,7 +1265,7 @@ export const MobilePreview: React.FC = () => {
                   <div className="grid grid-cols-3 gap-2.5">
                     {/* 1. Ajukan RAB */}
                     <button
-                      onClick={() => setCaborTab('rab-form')}
+                      onClick={() => setCaborTab('submissions')}
                       className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95"
                     >
                       <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(211,47,47,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -1227,7 +1301,7 @@ export const MobilePreview: React.FC = () => {
                     </button>
                     {/* 3. Buku Kas Cabor */}
                     <button
-                      onClick={() => setCaborTab('finance')}
+                      onClick={() => setCaborTab('sp2d')}
                       className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95"
                     >
                       <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_8px_20px_-2px_rgba(31,41,55,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-amber-300/40">
@@ -1243,69 +1317,45 @@ export const MobilePreview: React.FC = () => {
                         Mutasi Rekening
                       </span>
                     </button>
-                    {/* 4. Jadwal Event */}
+                    {/* 4. SKB Resmi */}
                     <button
-                      onClick={() =>
-                        setSelectedMobileItem({
-                          title: 'Jadwal Event & Kejurda Cabor Atletik',
-                          sub: 'Agenda Musim 2026',
-                          val: '12 - 15 Nov 2026',
-                          status: 'Aktif',
-                          desc: 'Kejuaraan Atletik Solo Open 2026 di lintasan sintetis Stadion Sriwedari & persiapan seleksi kontingen Porprov Jawa Tengah.',
-                        })
-                      }
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-blue-400/50 hover:shadow-md transition-all active:scale-95"
+                      onClick={() => setCaborTab('skb-doc')}
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#1e40af] via-[#2563eb] to-[#60a5fa] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(37,99,235,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">calendar_month</span>
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(5,150,105,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">verified</span>
                         <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="w-1.5 h-1.5 rounded-full bg-onyx animate-ping" />
+                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">check</span>
                         </div>
                       </div>
                       <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        Jadwal Event
+                        SKB Resmi
                       </span>
                       <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        Kejurda & TC
+                        PDF Pengesahan
                       </span>
                     </button>
-                    {/* 5. Data Atlet */}
+                    {/* 5. Arsip Dokumen */}
                     <button
-                      onClick={() =>
-                        setSelectedMobileItem({
-                          title: 'Data Atlet & Pelatih Binaan PASI',
-                          sub: 'SK Kontingen 2026',
-                          val: '38 Atlet • 6 Pelatih',
-                          status: 'Aktif',
-                          desc: 'Database atlet resmi binaan Pengkot PASI Surakarta nomor lari sprint 100m, 200m, 400m, estafet, tolak peluru, dan lompat jauh.',
-                        })
-                      }
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95"
+                      onClick={() => setCaborTab('archive')}
+                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-500/50 hover:shadow-md transition-all active:scale-95"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(211,47,47,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">sprint</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">military_tech</span>
+                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#1f2937] via-[#374151] to-[#4b5563] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(55,65,81,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">folder_open</span>
+                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">inventory_2</span>
                         </div>
                       </div>
                       <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        Data Atlet
+                        Arsip SPJ
                       </span>
                       <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        38 Atlet Porprov
+                        Repositori Berkas
                       </span>
                     </button>
-                    {/* 6. Legalitas SK */}
+                    {/* 6. Milestone Kasda */}
                     <button
-                      onClick={() =>
-                        setSelectedMobileItem({
-                          title: 'Legalitas SK Kepengurusan Pengkot PASI',
-                          sub: 'SK KONI No. 042/KONI-SKA/VIII/2026',
-                          val: 'Masa Bakti 2024–2028',
-                          status: 'Disetujui',
-                          desc: 'Surat Keputusan Ketua Umum KONI Kota Surakarta tentang Pengukuhan Personalia Pengkot Persatuan Atletik Seluruh Indonesia (PASI) Surakarta.',
-                        })
-                      }
+                      onClick={() => setCaborTab('milestone')}
                       className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95"
                     >
                       <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#d97706] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(217,119,6,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -1574,396 +1624,105 @@ export const MobilePreview: React.FC = () => {
               </div>
             )}
 
-            {/* CABOR: TAB 2 - KEUANGAN CABOR */}
-            {caborTab === 'finance' && (
-              <div className="space-y-4">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Pembukuan Keuangan</div>
-                  <h2 className="text-xl font-black text-sikoni-navy">Kas Cabor PASI</h2>
-                </div>
-
-                <div className="card-hero-navy p-4 rounded-2xl shadow-md">
-                  <div className="text-[10px] text-slate-300 font-extrabold uppercase tracking-wider">SALDO KAS OPERASIONAL CABOR</div>
-                  <div className="text-2xl font-black mt-1 text-white">Rp 32.500.000</div>
-                  <div className="text-[11px] text-sikoni-gold mt-0.5 font-bold">
-                    Rekening Giro Bank Jateng No. 102-992-811
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-2.5">
-                  <div className="bg-gradient-to-br from-slate-50 to-white p-3 rounded-xl border border-slate-200 shadow-xs border-l-4 border-l-sikoni-navy">
-                    <small className="text-[10px] text-sikoni-muted font-bold block uppercase">Realisasi valid</small>
-                    <b className="block text-base text-sikoni-navy mt-1 font-black">Rp 48 jt</b>
-                  </div>
-                  <div className="bg-gradient-to-br from-emerald-50/50 to-white p-3 rounded-xl border border-teal-200/80 shadow-xs border-l-4 border-l-emerald-600">
-                    <small className="text-[10px] text-emerald-700 font-bold block uppercase">Sudah ditransfer</small>
-                    <b className="block text-base text-sikoni-green mt-1 font-black">Rp 40 jt</b>
-                  </div>
-                  <div className="bg-gradient-to-br from-amber-50/50 to-white p-3 rounded-xl border border-amber-200/80 shadow-xs border-l-4 border-l-sikoni-gold">
-                    <small className="text-[10px] text-amber-800 font-bold block uppercase">Menunggu SP2D</small>
-                    <b className="block text-base text-amber-700 mt-1 font-black">Rp 8 jt</b>
-                  </div>
-                  <div className="bg-gradient-to-br from-teal-50/50 to-white p-3 rounded-xl border border-teal-200/80 shadow-xs border-l-4 border-l-sikoni-teal">
-                    <small className="text-[10px] text-sikoni-teal font-bold block uppercase">Sisa pagu cabor</small>
-                    <b className="block text-base text-sikoni-teal mt-1 font-black">Rp 72 jt</b>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl border border-slate-200 p-3.5 space-y-2 shadow-sm text-xs">
-                  <b className="text-xs text-sikoni-navy block">Riwayat Transfer Hibah</b>
-                  <div className="divide-y divide-slate-100">
-                    <div className="py-2 flex justify-between items-center">
-                      <div>
-                        <b className="text-sikoni-navy block text-[11px]">Pencairan Termin I TA 2026</b>
-                        <span className="text-[10px] text-slate-400">12 Maret 2026 • SP2D-041</span>
-                      </div>
-                      <span className="font-bold text-sikoni-green">+ Rp 40.000.000</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* CABOR: TAB 3 - PENGAJUAN */}
+            {/* CABOR SCREEN 1: PORTAL PENGAJUAN RAB & LPJ */}
             {caborTab === 'submissions' && (
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="text-[11px] text-sikoni-muted">Status Pengajuan</div>
-                    <h2 className="text-lg font-black text-sikoni-navy">Arsip Berkas</h2>
-                  </div>
-                  <button
-                    onClick={() => setCaborTab('rab-form')}
-                    className="bg-sikoni-teal text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm"
-                  >
-                    <Plus size={14} /> Buat Baru
-                  </button>
-                </div>
-
-                <div className="space-y-2 text-xs">
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <div className="flex justify-between items-start">
-                      <b className="text-xs text-sikoni-navy">RAB-026 • Kejuaraan Atletik</b>
-                      <StatusBadge status="Menunggu" />
-                    </div>
-                    <div className="flex justify-between text-[11px] text-slate-600">
-                      <span>Nilai usulan:</span>
-                      <b className="text-sikoni-navy">Rp 48.500.000</b>
-                    </div>
-                    <p className="text-[10px] text-slate-400 pt-1 border-t border-slate-100">
-                      Diajukan pada 09 Nov 2026 • Antrean verifikasi pengurus
-                    </p>
-                  </div>
-
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <div className="flex justify-between items-start">
-                      <b className="text-xs text-sikoni-navy">EXP-1126 • Sewa Bus Kontingen</b>
-                      <StatusBadge status="Verifikasi" />
-                    </div>
-                    <div className="flex justify-between text-[11px] text-slate-600">
-                      <span>Nilai nota:</span>
-                      <b className="text-sikoni-navy">Rp 4.500.000</b>
-                    </div>
-                  </div>
-
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <div className="flex justify-between items-start">
-                      <b className="text-xs text-sikoni-navy">RAB-014 • Perlengkapan Latihan</b>
-                      <StatusBadge status="Disetujui" />
-                    </div>
-                    <div className="flex justify-between text-[11px] text-slate-600">
-                      <span>Nilai disetujui:</span>
-                      <b className="text-sikoni-navy">Rp 12.000.000</b>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <Screen1_Submissions
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
             )}
 
-            {/* CABOR: TAB 4 - LPJ */}
+            {/* CABOR SCREEN 2: SP2D & BUKTI PENCAIRAN */}
+            {(caborTab === 'sp2d' || caborTab === 'finance') && (
+              <Screen2_SP2D
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
+
+            {/* CABOR SCREEN 3 & 8: PELAPORAN SPJ TERMIN II */}
             {caborTab === 'lpj' && (
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <div>
-                    <div className="text-[11px] text-sikoni-muted">Pertanggungjawaban Keuangan</div>
-                    <h2 className="text-lg font-black text-sikoni-navy">Penyusunan LPJ Cabor</h2>
-                  </div>
-                  <span className="text-[10px] font-bold bg-emerald-50 text-sikoni-teal px-2.5 py-1 rounded-full border border-emerald-200 flex items-center gap-1 shadow-xs">
-                    <Sparkles size={11} /> Kolom Isian
-                  </span>
-                </div>
+              <Screen3_SPJReport
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+                onOpenOcrModal={() => setIsOcrModalOpen(true)}
+              />
+            )}
 
-                {/* Banner Panduan Kolom Isian */}
-                <div className="bg-gradient-to-r from-teal-50 to-emerald-50 p-3 rounded-2xl border border-teal-200 text-xs">
-                  <b className="text-sikoni-teal font-black block text-[11.5px]">Isi Kolom & Otomatis Generate Word:</b>
-                  <p className="text-[10.5px] text-slate-600 mt-0.5 leading-relaxed">
-                    Lengkapi kolom kegiatan dan rincian belanja di bawah. Setelah selesai, klik tombol <b>Generate File Word LPJ</b> untuk mengunduh dokumen resmi siap cetak lengkap dengan Kop KONI dan tanda tangan.
-                  </p>
-                </div>
+            {/* CABOR SCREEN 4: STATUS PENGIRIMAN E-SPJ */}
+            {caborTab === 'submit-success' && (
+              <Screen4_SubmitSuccess
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                {/* Bagian 1: Data Pokok Laporan */}
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 text-xs">
-                  <b className="text-xs font-black text-sikoni-navy block border-b border-slate-100 pb-1.5">
-                    1. Data Pokok Kegiatan & Nomor LPJ
-                  </b>
+            {/* CABOR SCREEN 5 & 6: PUSAT NOTIFIKASI & INFORMASI */}
+            {caborTab === 'notifications' && (
+              <Screen5_Notifications
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+                onOpenOcrModal={() => setIsOcrModalOpen(true)}
+              />
+            )}
 
-                  <div className="space-y-2">
-                    <div>
-                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Nomor Surat LPJ</label>
-                      <input
-                        type="text"
-                        value={mobileLpjForm.number}
-                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, number: e.target.value })}
-                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-sikoni-navy focus:bg-white focus:border-sikoni-teal focus:outline-none"
-                      />
-                    </div>
+            {/* CABOR SCREEN 9: TANDA TERIMA ELEKTRONIK (E-TTE) */}
+            {caborTab === 'ette' && (
+              <Screen9_eTTE
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                    <div>
-                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Nama Kegiatan Resmi</label>
-                      <input
-                        type="text"
-                        value={mobileLpjForm.activity}
-                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, activity: e.target.value })}
-                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold text-sikoni-navy focus:bg-white focus:border-sikoni-teal focus:outline-none"
-                      />
-                    </div>
+            {/* CABOR SCREEN 10: ALUR VERIFIKASI BERTINGKAT */}
+            {caborTab === 'verification-flow' && (
+              <Screen10_VerificationFlow
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                    <div className="grid grid-cols-2 gap-2">
-                      <div>
-                        <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Periode Pelaksanaan</label>
-                        <input
-                          type="text"
-                          value={mobileLpjForm.period}
-                          onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, period: e.target.value })}
-                          className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:bg-white focus:border-sikoni-teal focus:outline-none"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Lokasi Kegiatan</label>
-                        <input
-                          type="text"
-                          value={mobileLpjForm.location}
-                          onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, location: e.target.value })}
-                          className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-700 focus:bg-white focus:border-sikoni-teal focus:outline-none"
-                        />
-                      </div>
-                    </div>
+            {/* CABOR SCREEN 11: MILESTONE PERSETUJUAN */}
+            {caborTab === 'milestone' && (
+              <Screen11_Milestone
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                    <div>
-                      <label className="text-[10.5px] font-bold text-slate-600 block mb-0.5">Pagu Dana Hibah Diterima (Rp)</label>
-                      <input
-                        type="number"
-                        value={mobileLpjForm.budgetGrant}
-                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, budgetGrant: Number(e.target.value) })}
-                        className="w-full p-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-sikoni-teal focus:bg-white focus:border-sikoni-teal focus:outline-none"
-                      />
-                    </div>
-                  </div>
-                </div>
+            {/* CABOR SCREEN 12: DOKUMEN SKB-SPJ (PDF RESMI) */}
+            {caborTab === 'skb-doc' && (
+              <Screen12_SkbDoc
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                {/* Bagian 2: Kolom Rincian Belanja Riil */}
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
-                  <div className="flex justify-between items-center border-b border-slate-100 pb-1.5">
-                    <b className="text-xs font-black text-sikoni-navy">2. Rincian Belanja ({mobileLpjItems.length} Item)</b>
-                    <button
-                      onClick={handleAddMobileLpjItem}
-                      className="px-2.5 py-1 bg-emerald-50 text-sikoni-teal hover:bg-emerald-100 rounded-lg text-[10.5px] font-bold border border-emerald-200 flex items-center gap-1"
-                    >
-                      <Plus size={12} /> Tambah Item
-                    </button>
-                  </div>
+            {/* CABOR SCREEN 13: ARSIP DOKUMEN SPJ */}
+            {caborTab === 'archive' && (
+              <Screen13_Archive
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
+            )}
 
-                  <div className="space-y-2.5 max-h-80 overflow-y-auto pr-0.5">
-                    {mobileLpjItems.map((item, idx) => (
-                      <div key={item.id} className="p-2.5 bg-slate-50 rounded-xl border border-slate-200/90 space-y-1.5">
-                        <div className="flex justify-between items-center">
-                          <span className="font-bold text-[10.5px] text-sikoni-teal">Item #{idx + 1}</span>
-                          <button
-                            onClick={() => handleRemoveMobileLpjItem(item.id)}
-                            className="text-slate-400 hover:text-rose-500 p-0.5 transition-colors"
-                            title="Hapus baris"
-                          >
-                            <Trash2 size={13} />
-                          </button>
-                        </div>
-
-                        <input
-                          type="text"
-                          value={item.item}
-                          placeholder="Uraian belanja barang / jasa"
-                          onChange={(e) => handleUpdateMobileLpjItem(item.id, 'item', e.target.value)}
-                          className="w-full p-1.5 bg-white border border-slate-200 rounded-lg text-[11px] font-medium text-sikoni-navy focus:border-sikoni-teal focus:outline-none"
-                        />
-
-                        <div className="grid grid-cols-4 gap-1.5">
-                          <div>
-                            <span className="text-[9px] text-slate-500 block">No Bukti</span>
-                            <input
-                              type="text"
-                              value={item.proofNumber}
-                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'proofNumber', e.target.value)}
-                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center"
-                            />
-                          </div>
-                          <div>
-                            <span className="text-[9px] text-slate-500 block">Vol</span>
-                            <input
-                              type="number"
-                              value={item.volume}
-                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'volume', Number(e.target.value))}
-                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center font-bold"
-                            />
-                          </div>
-                          <div>
-                            <span className="text-[9px] text-slate-500 block">Satuan</span>
-                            <input
-                              type="text"
-                              value={item.unit}
-                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'unit', e.target.value)}
-                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-center"
-                            />
-                          </div>
-                          <div>
-                            <span className="text-[9px] text-slate-500 block">Harga (Rp)</span>
-                            <input
-                              type="number"
-                              value={item.unitPrice}
-                              onChange={(e) => handleUpdateMobileLpjItem(item.id, 'unitPrice', Number(e.target.value))}
-                              className="w-full p-1 bg-white border border-slate-200 rounded text-[10px] text-right font-bold text-sikoni-navy"
-                            />
-                          </div>
-                        </div>
-
-                        <div className="flex justify-between items-center pt-1 border-t border-slate-200 text-[10.5px]">
-                          <span className="text-slate-500">Subtotal Item:</span>
-                          <b className="text-sikoni-teal">
-                            Rp {(item.volume * item.unitPrice).toLocaleString('id-ID')}
-                          </b>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Ringkasan Total Realisasi Belanja */}
-                  <div className="p-2.5 bg-gradient-to-r from-slate-100 to-white rounded-xl border border-slate-300 space-y-1">
-                    <div className="flex justify-between items-center text-xs">
-                      <span className="font-bold text-slate-700">Total Realisasi Belanja:</span>
-                      <b className="text-sm font-black text-sikoni-navy">
-                        Rp {totalMobileLpjRealization.toLocaleString('id-ID')}
-                      </b>
-                    </div>
-                    <div className="flex justify-between items-center text-[10.5px] text-slate-500">
-                      <span>Sisa Saldo Kas Cabor:</span>
-                      <b className={mobileLpjForm.budgetGrant >= totalMobileLpjRealization ? 'text-emerald-600' : 'text-rose-600'}>
-                        Rp {(mobileLpjForm.budgetGrant - totalMobileLpjRealization).toLocaleString('id-ID')}
-                      </b>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Bagian 3: Penandatangan */}
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2 text-xs">
-                  <b className="text-xs font-black text-sikoni-navy block border-b border-slate-100 pb-1.5">
-                    3. Pejabat Penandatangan Laporan
-                  </b>
-                  <div className="grid grid-cols-2 gap-2">
-                    <div>
-                      <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Ketua Pengkot Cabor</label>
-                      <input
-                        type="text"
-                        value={mobileLpjForm.leaderName}
-                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, leaderName: e.target.value })}
-                        className="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10.5px] text-slate-700"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[10px] font-bold text-slate-600 block mb-0.5">Bendahara Cabor</label>
-                      <input
-                        type="text"
-                        value={mobileLpjForm.treasurerName}
-                        onChange={(e) => setMobileLpjForm({ ...mobileLpjForm, treasurerName: e.target.value })}
-                        className="w-full p-1.5 bg-slate-50 border border-slate-200 rounded-lg text-[10.5px] text-slate-700"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* TOMBOL UTAMA: GENERATE & UNDUH FILE WORD LPJ */}
-                <div className="bg-gradient-to-br from-[#142a43] to-[#1c3a5e] p-4 rounded-2xl text-white shadow-lg space-y-2">
-                  <div className="flex items-center gap-2">
-                    <FileText size={18} className="text-sikoni-gold" />
-                    <div>
-                      <b className="text-xs block text-white font-extrabold">Generate File Word LPJ (.doc)</b>
-                      <span className="text-[10px] text-slate-300">File Word resmi dengan Kop KONI dan 4 kolom tanda tangan</span>
-                    </div>
-                  </div>
-
-                  <button
-                    onClick={() => {
-                      generateLpjWordDocument({
-                        number: mobileLpjForm.number,
-                        activity: mobileLpjForm.activity,
-                        cabor: mobileLpjForm.cabor,
-                        caborCode: mobileLpjForm.caborCode,
-                        skNumber: mobileLpjForm.skNumber,
-                        budgetGrant: mobileLpjForm.budgetGrant,
-                        period: mobileLpjForm.period,
-                        location: mobileLpjForm.location,
-                        targetParticipants: mobileLpjForm.targetParticipants,
-                        achievements: mobileLpjForm.achievements,
-                        background: mobileLpjForm.background,
-                        closingNotes: mobileLpjForm.closingNotes,
-                        leaderName: mobileLpjForm.leaderName,
-                        secretaryName: mobileLpjForm.secretaryName,
-                        treasurerName: mobileLpjForm.treasurerName,
-                        koniLeaderName: mobileLpjForm.koniLeaderName,
-                        cityDate: mobileLpjForm.cityDate,
-                        items: mobileLpjItems,
-                      });
-                      showToast('✓ Berhasil! Dokumen Word LPJ telah digenerate dan otomatis terunduh.');
-                    }}
-                    className="w-full py-3 bg-gradient-to-r from-sikoni-gold via-amber-400 to-sikoni-gold hover:from-amber-300 hover:to-amber-500 text-sikoni-navy font-black text-xs rounded-xl shadow-md flex items-center justify-center gap-2 active:scale-95 transition-all cursor-pointer"
-                  >
-                    <Download size={15} />
-                    <span>Selesai & Unduh Dokumen Word LPJ</span>
-                  </button>
-                </div>
-
-                {/* Upload Lampiran Bukti Kuitansi & Nota */}
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-3">
-                  <b className="text-xs text-sikoni-navy block">Unggah Berkas Lampiran Kuitansi / Foto Fisik</b>
-                  <label className="border-2 border-dashed border-slate-200 hover:border-sikoni-teal rounded-xl p-3 text-center block space-y-1.5 cursor-pointer bg-slate-50/50 transition-colors">
-                    <input
-                      type="file"
-                      accept="image/*,application/pdf,application/zip"
-                      className="hidden"
-                      onChange={(e) => {
-                        const file = e.target.files?.[0];
-                        if (file) {
-                          showToast(`✓ Berkas "${file.name}" berhasil dilampirkan.`);
-                        }
-                      }}
-                    />
-                    <UploadCloud size={20} className="mx-auto text-sikoni-teal" />
-                    <span className="text-[10.5px] font-bold text-sikoni-navy block">
-                      Pilih Dokumen PDF / Foto Struk Fisik
-                    </span>
-                    <span className="text-[9px] text-slate-400 block">
-                      Klik untuk membuka galeri foto atau kamera perangkat (Maks 25 MB)
-                    </span>
-                  </label>
-
-                  <button
-                    onClick={() => {
-                      showToast('✓ Dokumen LPJ beserta lampiran berhasil diserahkan ke verifikator KONI!');
-                      setCaborTab('home');
-                    }}
-                    className="w-full py-2.5 bg-sikoni-teal hover:bg-teal-700 text-white rounded-xl font-bold text-xs shadow-xs transition-all cursor-pointer active:scale-95"
-                  >
-                    Kirim LPJ Lengkap ke KONI Surakarta
-                  </button>
-                </div>
-              </div>
+            {/* CABOR SCREEN 14: FORMULIR PENCAIRAN TERMIN III */}
+            {caborTab === 'termin3' && (
+              <Screen14_Termin3Form
+                onBack={() => setCaborTab('home')}
+                onNavigate={(k) => setCaborTab(k as any)}
+                onShowToast={showToast}
+              />
             )}
 
             {/* CABOR: SUB-FORM: FORM RAB BARU */}
@@ -2644,10 +2403,10 @@ export const MobilePreview: React.FC = () => {
 
               {/* Tab 3: Keuangan */}
               <button
-                onClick={() => setCaborTab('finance')}
+                onClick={() => setCaborTab('sp2d')}
                 className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                {caborTab === 'finance' ? (
+                {caborTab === 'sp2d' || caborTab === 'finance' ? (
                   <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
                     <span className="material-symbols-outlined text-[22px] drop-shadow-md">account_balance_wallet</span>
                   </div>
@@ -2665,12 +2424,37 @@ export const MobilePreview: React.FC = () => {
                 </span>
               </button>
 
-              {/* Tab 4: Profil */}
+              {/* Tab 4: LPJ */}
               <button
-                onClick={() => setCaborTab('account')}
+                onClick={() => setCaborTab('lpj')}
                 className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                {caborTab === 'account' ? (
+                {caborTab === 'lpj' || caborTab === 'submit-success' || caborTab === 'ette' ? (
+                  <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
+                    <span className="material-symbols-outlined text-[22px] drop-shadow-md">receipt_long</span>
+                  </div>
+                ) : (
+                  <div className="w-9 h-9 rounded-full bg-surface-container-low hover:bg-surface-container border border-outline-variant/80 flex items-center justify-center text-on-surface-variant hover:text-primary transition-all shadow-xs group-hover:border-primary/40">
+                    <span className="material-symbols-outlined text-[19px]">receipt_long</span>
+                  </div>
+                )}
+                <span
+                  className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
+                    caborTab === 'lpj' || caborTab === 'submit-success' || caborTab === 'ette'
+                      ? 'text-primary font-extrabold'
+                      : 'text-on-surface-variant font-bold'
+                  }`}
+                >
+                  LPJ
+                </span>
+              </button>
+
+              {/* Tab 5: Arsip */}
+              <button
+                onClick={() => setCaborTab('archive')}
+                className="group flex flex-col items-center justify-center transition-all active:scale-90"
+              >
+                {caborTab === 'archive' || caborTab === 'skb-doc' || caborTab === 'account' ? (
                   <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
                     <span className="material-symbols-outlined text-[22px] drop-shadow-md">shield_person</span>
                   </div>

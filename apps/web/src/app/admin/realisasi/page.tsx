@@ -114,6 +114,68 @@ export default function RealizationPage() {
         />
       </div>
 
+      {/* SP2D KASDA OFFICIAL RECONCILIATION CARD (SCREEN 2 SYNC) */}
+      <div className="p-5 rounded-3xl bg-gradient-to-br from-[#121316] via-[#1c1d22] to-[#121316] text-white shadow-xl border border-white/10 relative overflow-hidden">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+              <span className="material-symbols-outlined text-[26px]">account_balance</span>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-amber-400 px-2 py-0.5 rounded-full bg-amber-400/10 border border-amber-400/20">
+                  KAS DAERAH BPKAD SURAKARTA
+                </span>
+                <span className="text-[10.5px] font-mono text-zinc-400">#SP2D-900-0412-2025</span>
+              </div>
+              <h3 className="font-display text-lg font-black text-white mt-1">
+                Pencairan SP2D Termin II: TC Porprov XVII Cabor Atletik
+              </h3>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <span className="px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 text-xs font-black uppercase tracking-wider flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>Bank Jateng RTGS Cleared</span>
+            </span>
+            <button
+              onClick={() => showToast('Mengunduh dokumen SP2D Resmi Bank Jateng (PDF 1.8 MB)...')}
+              className="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors flex items-center gap-1"
+            >
+              <Download size={13} />
+              <span>Unduh SP2D</span>
+            </button>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10.5px] text-zinc-400 uppercase font-bold block">Total SP2D Cair:</span>
+            <div className="font-display text-xl font-black text-amber-400 mt-1">Rp 85.000.000</div>
+            <span className="text-[10.5px] text-zinc-400 mt-0.5 block italic">Penerima: Pengkot PASI</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10.5px] text-zinc-400 uppercase font-bold block">Honor Pelatih & Asisten:</span>
+            <div className="font-display text-lg font-black text-white mt-1">Rp 30.000.000</div>
+            <span className="text-[10.5px] text-zinc-400 mt-0.5 block">Porsi: 35.3% Plafon</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10.5px] text-zinc-400 uppercase font-bold block">Uang Saku Atlet Pelatda:</span>
+            <div className="font-display text-lg font-black text-white mt-1">Rp 25.000.000</div>
+            <span className="text-[10.5px] text-zinc-400 mt-0.5 block">Porsi: 29.4% Plafon</span>
+          </div>
+
+          <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+            <span className="text-[10.5px] text-zinc-400 uppercase font-bold block">Ekstra Fooding & Venue:</span>
+            <div className="font-display text-lg font-black text-white mt-1">Rp 30.000.000</div>
+            <span className="text-[10.5px] text-zinc-400 mt-0.5 block">Porsi: 35.3% Plafon</span>
+          </div>
+        </div>
+      </div>
+
       <DataTable
         title="Daftar Pengeluaran & Verifikasi Bukti"
         subtitle="Pisahkan proses verifikasi berkas dari proses pengeluaran kas"

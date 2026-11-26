@@ -250,57 +250,96 @@ export default function AdminDocumentsPage() {
         </div>
       )}
 
-      {/* Document Preview Modal */}
+      {/* Document Preview Modal with Official SKB Letterhead (Screen 12 sync) */}
       {selectedDoc && (
-        <div className="fixed inset-0 bg-sikoni-navy/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="card-sikoni w-full max-w-lg p-6 space-y-4 shadow-2xl">
-            <div className="flex justify-between items-start">
-              <div className="flex items-center gap-2.5">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-sikoni-teal grid place-items-center">
-                  <FileText size={20} />
-                </div>
-                <div>
-                  <h3 className="text-base font-extrabold text-sikoni-navy">{selectedDoc.number}</h3>
-                  <p className="text-xs text-sikoni-muted">{selectedDoc.category} • {selectedDoc.date}</p>
-                </div>
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl w-full max-w-xl p-6 space-y-4 shadow-2xl border border-slate-200 relative overflow-hidden">
+            <div className="flex justify-between items-start pb-2 border-b border-slate-100">
+              <div className="flex items-center gap-2">
+                <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider">
+                  BSrE BSSN Sah
+                </span>
+                <span className="text-xs font-mono text-slate-500 font-bold">{selectedDoc.number}</span>
               </div>
-              <button onClick={() => setSelectedDoc(null)} className="text-sikoni-muted hover:text-sikoni-navy">
-                <X size={18} />
+              <button
+                onClick={() => setSelectedDoc(null)}
+                className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors"
+              >
+                <X size={16} />
               </button>
             </div>
 
-            <div className="space-y-2.5 text-xs">
-              <div className="p-3.5 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
-                <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Perihal Dokumen</span>
-                <b className="text-xs text-sikoni-navy mt-0.5 block leading-relaxed">{selectedDoc.subject}</b>
+            {/* Official Government Kop Surat */}
+            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-center space-y-1">
+              <div className="font-display text-xs font-black uppercase tracking-wider text-[#0f172a]">
+                PEMERINTAH KOTA SURAKARTA
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div className="p-3 rounded-xl bg-gradient-to-r from-slate-50 to-white border border-slate-200/80">
-                  <span className="text-[10px] font-bold text-sikoni-muted uppercase block">Unit Pengirim</span>
-                  <b className="text-xs text-sikoni-navy">{selectedDoc.owner}</b>
-                </div>
-                <div className="p-3 rounded-xl bg-gradient-to-r from-teal-50/50 via-white to-slate-50 border border-teal-200/70">
-                  <span className="text-[10px] font-bold text-sikoni-teal uppercase block">Status Dokumen</span>
-                  <b className="text-xs text-sikoni-teal">{selectedDoc.status}</b>
-                </div>
+              <div className="text-[10.5px] font-bold uppercase text-[#475569]">
+                BADAN PENGELOLAAN KEUANGAN & ASET DAERAH (BPKAD)
+              </div>
+              <div className="text-[11px] font-black uppercase text-[#d32f2f]">
+                KOMITE OLAHRAGA NASIONAL INDONESIA (KONI)
+              </div>
+              <div className="text-[9px] text-[#64748b]">
+                Kompleks Stadion Manahan, Jl. Adi Sucipto No. 1 Solo • Telp (0271) 714920
               </div>
             </div>
 
-            <div className="flex justify-between items-center pt-3 border-t border-sikoni-line">
+            <div className="text-center pt-1">
+              <span className="font-display text-xs font-black uppercase underline tracking-wide text-[#0f172a]">
+                SURAT KEPUTUSAN BERSAMA (SKB-SPJ)
+              </span>
+              <div className="font-mono text-[10px] text-slate-500 mt-0.5">
+                Nomor: 426/089/SKB-KONI/V/2025 • SP2D: 900/0412/SP2D/2025
+              </div>
+            </div>
+
+            <div className="p-3.5 rounded-xl bg-white border border-slate-200 space-y-2 text-xs">
+              <div className="flex justify-between">
+                <span className="text-slate-500 font-medium">Perihal Berkas:</span>
+                <span className="font-bold text-[#0f172a] text-right">{selectedDoc.subject}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500 font-medium">Unit Pengusul:</span>
+                <span className="font-bold text-[#0f172a]">{selectedDoc.owner}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-500 font-medium">Status Kepatuhan:</span>
+                <span className="font-bold text-emerald-600 flex items-center gap-1">
+                  <Check size={14} /> Memenuhi Standar Pemeriksaan BPKAD
+                </span>
+              </div>
+            </div>
+
+            {/* Signature & Seal info */}
+            <div className="grid grid-cols-2 gap-3 text-center text-[10px] pt-1">
+              <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 block">Tanda Tangan Elektronik:</span>
+                <span className="font-bold text-[#0f172a] block mt-0.5">Verifikator BPKAD Surakarta</span>
+                <span className="text-[8.5px] font-mono text-emerald-600 block mt-0.5">SHA256: 8a9f...3e1b</span>
+              </div>
+              <div className="p-2 rounded-xl bg-slate-50 border border-slate-100">
+                <span className="text-slate-500 block">Pengesahan Akhir:</span>
+                <span className="font-bold text-[#0f172a] block mt-0.5">Ketua Umum KONI Surakarta</span>
+                <span className="text-[8.5px] font-mono text-red-600 block mt-0.5">KTA: KONI-SKT-001</span>
+              </div>
+            </div>
+
+            <div className="flex justify-between items-center pt-3 border-t border-slate-100">
               <button
                 onClick={() => setSelectedDoc(null)}
-                className="px-3.5 py-2 text-xs font-bold text-sikoni-muted hover:text-sikoni-navy"
+                className="px-4 py-2 text-xs font-bold text-slate-600 hover:text-slate-900"
               >
-                Tutup
+                Tutup Pratinjau
               </button>
               <button
                 onClick={() => {
-                  showToast(`Mengunduh berkas fisik ${selectedDoc.number}.pdf...`);
+                  showToast(`Mengunduh dokumen resmi ${selectedDoc.number} (PDF 1.8 MB)...`);
                   setSelectedDoc(null);
                 }}
-                className="px-4 py-2 bg-sikoni-teal text-white rounded-lg text-xs font-bold hover:bg-teal-700 flex items-center gap-1.5 shadow-sm"
+                className="px-4 py-2.5 bg-gradient-to-r from-[#d32f2f] to-[#b71c1c] text-white rounded-xl text-xs font-black shadow-md hover:shadow-lg transition-all flex items-center gap-1.5"
               >
-                <Download size={14} /> Unduh Berkas Digital
+                <Download size={14} /> Unduh PDF Resmi (1.8 MB)
               </button>
             </div>
           </div>

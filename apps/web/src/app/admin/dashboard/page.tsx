@@ -84,6 +84,13 @@ export default function AdminDashboardPage() {
         </div>
 
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 z-10 w-full sm:w-auto">
+          <Link
+            href="/android-preview"
+            className="bg-[#d32f2f] hover:bg-red-700 text-white px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-red-500/20"
+          >
+            <span>📱 SIKONI Mobile</span>
+            <span className="text-[10px] bg-white/20 px-1.5 py-0.5 rounded-full">15 Layar</span>
+          </Link>
           <button
             onClick={() => {
               exportToCsv(

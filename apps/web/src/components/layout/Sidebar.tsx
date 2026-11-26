@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -20,13 +21,18 @@ import {
   Settings,
   X,
   Smartphone,
+  Stamp,
+  FileText,
+  Clock,
+  Sparkles,
 } from 'lucide-react';
 
 interface NavItem {
   href: string;
   label: string;
   icon: React.ReactNode;
-  badge?: number;
+  badge?: number | string;
+  badgeColor?: string;
 }
 
 interface NavGroup {
@@ -41,43 +47,55 @@ interface SidebarProps {
 
 const navGroups: NavGroup[] = [
   {
-    caption: 'RINGKASAN',
+    caption: 'RINGKASAN & FLAGSHIP',
     items: [
-      { href: '/admin/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={17} /> },
-      { href: '/android-preview', label: 'SIKONI Android', icon: <Smartphone size={17} /> },
+      { href: '/admin/dashboard', label: 'Dashboard Eksekutif', icon: <LayoutDashboard size={17} /> },
+      {
+        href: '/android-preview',
+        label: 'SIKONI Mobile (15 Layar)',
+        icon: <Smartphone size={17} />,
+        badge: 'Stitch',
+        badgeColor: 'bg-[#d32f2f] text-white',
+      },
     ],
   },
   {
-    caption: 'KEUANGAN',
+    caption: 'KEUANGAN & KASDA',
     items: [
-      { href: '/admin/keuangan', label: 'Keuangan', icon: <Coins size={17} /> },
-      { href: '/admin/dana-masuk', label: 'Dana Masuk', icon: <PlusCircle size={17} /> },
-      { href: '/admin/anggaran', label: 'Anggaran', icon: <FileSpreadsheet size={17} /> },
-      { href: '/admin/realisasi', label: 'Realisasi', icon: <ArrowUpRight size={17} /> },
-      { href: '/admin/insentif', label: 'Insentif', icon: <Award size={17} /> },
-      { href: '/admin/pajak', label: 'Pajak', icon: <Percent size={17} /> },
+      { href: '/admin/keuangan', label: 'Keuangan & Kasda', icon: <Coins size={17} /> },
+      { href: '/admin/dana-masuk', label: 'Dana Masuk APBD', icon: <PlusCircle size={17} /> },
+      { href: '/admin/anggaran', label: 'Plafon Anggaran', icon: <FileSpreadsheet size={17} /> },
+      { href: '/admin/realisasi', label: 'SP2D & Realisasi', icon: <ArrowUpRight size={17} /> },
+      { href: '/admin/insentif', label: 'Insentif Atlet & Pelatih', icon: <Award size={17} /> },
+      { href: '/admin/pajak', label: 'Pajak PPh 21 / PPN', icon: <Percent size={17} /> },
     ],
   },
   {
-    caption: 'OPERASIONAL',
+    caption: 'OPERASIONAL & VERIFIKASI',
     items: [
-      { href: '/admin/pengajuan', label: 'Pengajuan', icon: <Send size={17} /> },
-      { href: '/admin/persetujuan', label: 'Persetujuan', icon: <CheckCircle2 size={17} />, badge: 6 },
-      { href: '/admin/lpj', label: 'LPJ & Word', icon: <FileCheck2 size={17} /> },
-      { href: '/admin/cabor', label: 'Data Cabor', icon: <ShieldCheck size={17} /> },
+      { href: '/admin/pengajuan', label: 'Pengajuan RAB & LPJ', icon: <Send size={17} /> },
+      {
+        href: '/admin/persetujuan',
+        label: 'Persetujuan & e-TTE',
+        icon: <CheckCircle2 size={17} />,
+        badge: 6,
+        badgeColor: 'bg-amber-500 text-slate-900',
+      },
+      { href: '/admin/lpj', label: 'Generator LPJ Word', icon: <FileCheck2 size={17} /> },
+      { href: '/admin/cabor', label: 'Data 64 Cabor', icon: <ShieldCheck size={17} /> },
     ],
   },
   {
-    caption: 'DOKUMEN & LAPORAN',
+    caption: 'DOKUMEN & AUDIT',
     items: [
-      { href: '/admin/dokumen', label: 'Dokumen', icon: <FolderArchive size={17} /> },
-      { href: '/admin/laporan', label: 'Laporan', icon: <BarChart3 size={17} /> },
+      { href: '/admin/dokumen', label: 'Arsip Dokumen & SKB', icon: <FolderArchive size={17} /> },
+      { href: '/admin/laporan', label: 'Laporan Pertanggungjawaban', icon: <BarChart3 size={17} /> },
     ],
   },
   {
     caption: 'SISTEM',
     items: [
-      { href: '/admin/pengaturan', label: 'Pengaturan', icon: <Settings size={17} /> },
+      { href: '/admin/pengaturan', label: 'Pengaturan & RBAC', icon: <Settings size={17} /> },
     ],
   },
 ];
@@ -87,25 +105,46 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
 
   const sidebarContent = (
     <>
-      {/* Mobile Header Bar inside drawer */}
-      <div className="flex items-center justify-between pb-3 mb-2 border-b border-white/10 lg:hidden">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-white/15 text-white font-black grid place-items-center text-xs">SK</div>
-          <span className="font-extrabold text-white text-xs">Menu Admin SIKONI</span>
-        </div>
+      {/* Brand Header */}
+      <div className="pb-4 mb-3 border-b border-white/10 flex items-center justify-between">
+        <Link href="/admin/dashboard" className="flex items-center gap-3 group">
+          <div className="relative h-10 w-10 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-md border border-white/20 group-hover:scale-105 transition-transform">
+            <Image
+              src="/images/logo_koni.png"
+              alt="Logo Resmi KONI Kota Surakarta"
+              width={36}
+              height={36}
+              className="h-full w-full object-contain filter drop-shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <div className="flex items-center gap-1.5">
+              <span className="font-display text-sm font-black tracking-tight uppercase text-white leading-none">
+                SIKONI SOLO
+              </span>
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
+            </div>
+            <span className="text-[9.5px] uppercase tracking-[0.14em] text-zinc-400 font-bold leading-tight mt-1 truncate">
+              KONI KOTA SURAKARTA
+            </span>
+          </div>
+        </Link>
+
+        {/* Mobile close button */}
         <button
           onClick={onClose}
-          className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-white/10"
+          className="p-1.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/10 lg:hidden transition-colors"
           aria-label="Tutup Menu"
         >
           <X size={18} />
         </button>
       </div>
 
-      <div className="flex-1 space-y-4 overflow-y-auto">
+      {/* Nav Groups */}
+      <div className="flex-1 space-y-4 overflow-y-auto no-scrollbar pr-0.5">
         {navGroups.map((group) => (
           <div key={group.caption}>
-            <div className="text-[9px] font-black tracking-[1.8px] text-[#8fa7be] px-3 py-1 uppercase">
+            <div className="text-[9px] font-black tracking-[1.8px] text-zinc-400 px-3 py-1 uppercase">
               {group.caption}
             </div>
             <div className="space-y-1 mt-1">
@@ -116,16 +155,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
                     key={item.href}
                     href={item.href}
                     onClick={() => onClose?.()}
-                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-[12px] text-xs font-medium transition-all ${
+                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
                       isActive
-                        ? 'bg-gradient-to-r from-white/15 via-white/10 to-transparent text-white font-bold border-l-4 border-sikoni-gold shadow-sm'
-                        : 'text-[#cbd7e1] hover:bg-white/8 hover:text-white hover:translate-x-0.5'
+                        ? 'bg-gradient-to-r from-red-600/30 via-red-600/15 to-transparent text-white font-black border-l-4 border-[#d32f2f] shadow-sm'
+                        : 'text-zinc-300 hover:bg-white/5 hover:text-white hover:translate-x-0.5'
                     }`}
                   >
-                    <span className="opacity-95">{item.icon}</span>
-                    <span>{item.label}</span>
+                    <span className={`shrink-0 ${isActive ? 'text-[#d32f2f]' : 'opacity-80'}`}>
+                      {item.icon}
+                    </span>
+                    <span className="truncate">{item.label}</span>
                     {item.badge && (
-                      <span className="ml-auto bg-sikoni-gold text-sikoni-navy text-[10px] px-2 py-0.5 rounded-full font-black shadow-xs">
+                      <span
+                        className={`ml-auto text-[9.5px] px-2 py-0.5 rounded-full font-black shadow-xs shrink-0 ${
+                          item.badgeColor || 'bg-amber-400 text-slate-900'
+                        }`}
+                      >
                         {item.badge}
                       </span>
                     )}
@@ -137,15 +182,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
         ))}
       </div>
 
-      <div className="pt-4 mt-6 border-t border-white/10 text-[#9fb0c0] text-[10px] leading-relaxed p-3 rounded-2xl bg-white/5 border border-white/5">
-        <div className="font-extrabold text-white tracking-wider flex items-center justify-between">
-          <span>KONI SURAKARTA</span>
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+      {/* System Status Pill at Footer */}
+      <div className="pt-3 mt-4 border-t border-white/10 text-zinc-400 text-[10.5px] leading-relaxed p-3 rounded-2xl bg-white/5 border border-white/5">
+        <div className="font-black text-white tracking-wider flex items-center justify-between">
+          <span className="flex items-center gap-1.5">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span>KASDA BPKAD AKTIF</span>
+          </span>
+          <span className="text-[9px] font-mono text-amber-400">T.A. 2025/2026</span>
         </div>
-        <div className="text-[9.5px] text-slate-300 mt-0.5">SIKONI • Responsif Android & Desktop</div>
-        <div className="flex items-center gap-1.5 mt-1.5 text-sikoni-gold font-bold text-[9.5px]">
-          <span>★</span>
-          <span>Sistem Informasi Terpadu</span>
+        <div className="text-[9.5px] text-zinc-400 mt-1">
+          Garuda Flame Athletic Design System
         </div>
       </div>
     </>
@@ -154,22 +201,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
   return (
     <>
       {/* Desktop / Laptop Sidebar (Pinned on large screens) */}
-      <aside className="hidden lg:flex w-[248px] bg-gradient-to-b from-[#142a43] via-[#183454] to-[#112338] text-[#dce5ed] py-6 px-3.5 flex-shrink-0 flex-col min-h-[calc(100vh-72px)] border-r border-slate-800/70 shadow-lg">
+      <aside className="hidden lg:flex w-[260px] bg-gradient-to-b from-[#121316] via-[#1a1c22] to-[#121316] text-[#dce5ed] py-5 px-3.5 flex-shrink-0 flex-col min-h-[calc(100vh-72px)] border-r border-white/10 shadow-xl">
         {sidebarContent}
       </aside>
 
-      {/* Mobile / Android Slide-in Drawer (Off-canvas) */}
+      {/* Mobile / Tablet Slide-in Drawer */}
       {isOpen && (
         <div className="fixed inset-0 z-50 lg:hidden animate-in fade-in duration-200">
-          {/* Backdrop Overlay */}
           <div
-            className="fixed inset-0 bg-sikoni-navy/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
             aria-hidden="true"
           />
 
-          {/* Drawer Panel */}
-          <aside className="fixed top-0 bottom-0 left-0 w-[270px] bg-gradient-to-b from-[#142a43] via-[#183454] to-[#112338] text-[#dce5ed] py-5 px-3.5 z-50 flex flex-col shadow-2xl animate-in slide-in-from-left duration-200">
+          <aside className="fixed top-0 bottom-0 left-0 w-[280px] bg-gradient-to-b from-[#121316] via-[#1a1c22] to-[#121316] text-[#dce5ed] py-5 px-3.5 z-50 flex flex-col shadow-2xl animate-in slide-in-from-left duration-200 border-r border-white/10">
             {sidebarContent}
           </aside>
         </div>
@@ -177,4 +222,3 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
     </>
   );
 };
-

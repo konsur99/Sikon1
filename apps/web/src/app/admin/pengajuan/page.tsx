@@ -168,6 +168,37 @@ export default function SubmissionsPage() {
         />
       </div>
 
+      {/* ATTENTION & REVISION BANNER (SCREEN 1 SYNC) */}
+      <div className="p-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-amber-500/5 to-transparent border border-amber-500/30 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xs">
+        <div className="flex items-start gap-3">
+          <div className="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+            <span className="material-symbols-outlined text-[22px]">warning</span>
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">
+                Perlu Tindakan Mendesak
+              </span>
+              <span className="text-xs text-[#64748b]">Batas Waktu: 3 Hari Lagi</span>
+            </div>
+            <h3 className="font-display text-sm font-black text-[#0f172a] mt-1">
+              RAB Pra-Porprov Atletik 2025 (Koreksi Uang Saku)
+            </h3>
+            <p className="text-xs text-[#475569] mt-0.5">
+              Catatan Verifikator: Harap lampirkan SK penetapan atlet Pelatda dan sesuaikan plafon uang saku sesuai SBU Pemkot Solo.
+            </p>
+          </div>
+        </div>
+
+        <Link
+          href="/android-preview"
+          className="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-black transition-colors shadow-sm shrink-0 flex items-center gap-1.5 self-start md:self-auto"
+        >
+          <span>Buka di SIKONI Mobile</span>
+          <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
+        </Link>
+      </div>
+
       {/* DataTable */}
       <DataTable
         title="Daftar Pengajuan Anggaran (RAB)"
