@@ -1946,6 +1946,13 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   </div>
                 </div>
+
+                <button
+                  onClick={() => showToast('✓ Menghubungi Hotline Layanan Warga KONI Surakarta (0812-2800-9990)...')}
+                  className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
+                >
+                  <Phone size={14} /> Hubungi Sekretariat KONI Solo
+                </button>
               </div>
             )}
           </div>
@@ -2951,8 +2958,11 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 </div>
 
                 <button
-                  onClick={() => showToast('Sesi operator cabor diakhiri.')}
-                  className="w-full py-2.5 bg-rose-50 text-sikoni-red rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-rose-100"
+                  onClick={() => {
+                    showToast('Sesi operator cabor diakhiri.');
+                    setCaborTab('home');
+                  }}
+                  className="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-sikoni-red rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-rose-200 active:scale-95 transition-all cursor-pointer"
                 >
                   <LogOut size={14} /> Keluar dari Akun Cabor
                 </button>
@@ -3464,19 +3474,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         <div className="flex gap-1.5 pt-2 border-t border-slate-100">
                           <button
                             onClick={() => handleApprove(item.id, item.title)}
-                            className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm"
+                            className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all cursor-pointer"
                           >
                             <Check size={12} /> Setujui
                           </button>
                           <button
                             onClick={() => handleRevise(item.id, item.title)}
-                            className="flex-1 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm"
+                            className="flex-1 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all cursor-pointer"
                           >
                             <RotateCcw size={12} /> Revisi
                           </button>
                           <button
                             onClick={() => handleReject(item.id, item.title)}
-                            className="py-1.5 px-2 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg font-bold text-[10.5px] border border-rose-200"
+                            className="py-1.5 px-2 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg font-bold text-[10.5px] border border-rose-200 active:scale-95 transition-all cursor-pointer"
                           >
                             <X size={12} />
                           </button>
@@ -3595,8 +3605,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 </div>
 
                 <button
-                  onClick={() => showToast('Audit trail berhasil diunduh.')}
-                  className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-sikoni-navy rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-colors"
+                  onClick={() => showToast('Audit trail transaksi Kasda berhasil diunduh (PDF).')}
+                  className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-sikoni-navy rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-2xs"
                 >
                   <Download size={14} /> Download Rekap Audit Transaksi
                 </button>
@@ -3733,6 +3743,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {toastMessage}
           </div>
         )}
+
+        {/* Screen 7: Smart OCR Nota AI Modal */}
+        <Screen7_OcrModal
+          isOpen={isOcrModalOpen}
+          onClose={() => setIsOcrModalOpen(false)}
+          onConfirm={() => {
+            setIsOcrModalOpen(false);
+            setCaborTab('lpj');
+            showToast('✓ Ekstraksi OCR Nota Rp 450.000 berhasil dimasukkan ke formulir SPJ');
+          }}
+          onShowToast={showToast}
+        />
 
         {/* ========================================================
             BOTTOM SHEET: KATALOG LENGKAP SIKONI (PERSONA-ADAPTIVE)
