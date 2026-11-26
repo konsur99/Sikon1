@@ -478,68 +478,70 @@ export const MobilePreview: React.FC = () => {
         </div>
 
         {/* 1. TOP APP BAR & BRAND IDENTITY */}
-        <header className="sticky top-0 inset-x-0 z-30 pt-safe bg-surface/90 backdrop-blur-xl border-b border-outline-variant/50">
-          <div className="h-16 px-4 flex items-center justify-between">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="relative h-12 w-12 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-outline-variant/60">
-                <img
-                  alt="Logo KONI Surakarta"
-                  className="h-full w-full object-contain filter drop-shadow-sm"
-                  src="/images/logo_koni.png"
-                />
-              </div>
-              <div className="flex flex-col justify-center min-w-0">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-headline-md text-[15px] font-extrabold tracking-tight uppercase text-onyx leading-none">
-                    KONI SURAKARTA
+        {(persona !== 'cabor' || caborTab === 'home') && (
+          <header className="sticky top-0 inset-x-0 z-30 pt-safe bg-surface/90 backdrop-blur-xl border-b border-outline-variant/50">
+            <div className="h-16 px-4 flex items-center justify-between">
+              <div className="flex items-center gap-3 min-w-0">
+                <div className="relative h-12 w-12 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-sm border border-outline-variant/60">
+                  <img
+                    alt="Logo KONI Surakarta"
+                    className="h-full w-full object-contain filter drop-shadow-sm"
+                    src="/images/logo_koni.png"
+                  />
+                </div>
+                <div className="flex flex-col justify-center min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="font-headline-md text-[15px] font-extrabold tracking-tight uppercase text-onyx leading-none">
+                      KONI SURAKARTA
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
+                  </div>
+                  <span className="font-label-md text-[9.5px] uppercase tracking-[0.14em] text-on-surface-variant font-bold leading-tight mt-1 truncate">
+                    {persona === 'publik'
+                      ? 'PORTAL INFORMASI RESMI'
+                      : persona === 'pengurus'
+                        ? 'PENGURUS KONI SURAKARTA'
+                        : 'KOTA SURAKARTA · PENGKOT PASI'}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
                 </div>
-                <span className="font-label-md text-[9.5px] uppercase tracking-[0.14em] text-on-surface-variant font-bold leading-tight mt-1 truncate">
-                  {persona === 'publik'
-                    ? 'PORTAL INFORMASI RESMI'
-                    : persona === 'pengurus'
-                      ? 'PENGURUS KONI SURAKARTA'
-                      : 'KOTA SURAKARTA · PENGKOT PASI'}
-                </span>
               </div>
-            </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setMode('desktop')}
-                className="hidden sm:flex text-[9.5px] font-bold text-slate-600 bg-white hover:bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-200 items-center gap-1 transition-colors shadow-xs"
-                title="Buka Tampilan Desktop"
-              >
-                <Monitor size={12} className="text-primary" />
-                <span>Web</span>
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setMode('desktop')}
+                  className="hidden sm:flex text-[9.5px] font-bold text-slate-600 bg-white hover:bg-slate-50 px-2.5 py-1.5 rounded-xl border border-slate-200 items-center gap-1 transition-colors shadow-xs"
+                  title="Buka Tampilan Desktop"
+                >
+                  <Monitor size={12} className="text-primary" />
+                  <span>Web</span>
+                </button>
 
-              <button
-                onClick={() => setIsMobileNotifOpen((prev) => !prev)}
-                aria-label="Notifikasi"
-                className="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
-              >
-                <span className="material-symbols-outlined text-[21px]">notifications</span>
-                <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-white animate-pulse" />
-              </button>
+                <button
+                  onClick={() => setIsMobileNotifOpen((prev) => !prev)}
+                  aria-label="Notifikasi"
+                  className="relative w-10 h-10 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
+                >
+                  <span className="material-symbols-outlined text-[21px]">notifications</span>
+                  <span className="absolute top-2 right-2 w-2.5 h-2.5 rounded-full bg-primary ring-2 ring-white animate-pulse" />
+                </button>
 
-              <div
-                onClick={() => {
-                  if (persona === 'cabor') setCaborTab('account');
-                  else if (persona === 'pengurus') setPengurusTab('profil');
-                  else setPublikTab('info');
-                }}
-                className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-sm cursor-pointer active:scale-95 transition-transform"
-                title="Profil Pengguna"
-              >
-                <div className="w-full h-full rounded-full bg-onyx flex items-center justify-center text-white overflow-hidden">
-                  <span className="material-symbols-outlined text-[20px] text-amber-300">person</span>
+                <div
+                  onClick={() => {
+                    if (persona === 'cabor') setCaborTab('account');
+                    else if (persona === 'pengurus') setPengurusTab('profil');
+                    else setPublikTab('info');
+                  }}
+                  className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-sm cursor-pointer active:scale-95 transition-transform"
+                  title="Profil Pengguna"
+                >
+                  <div className="w-full h-full rounded-full bg-onyx flex items-center justify-center text-white overflow-hidden">
+                    <span className="material-symbols-outlined text-[20px] text-amber-300">person</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
+        )}
 
         {/* Floating In-App Mobile Notification Dropdown Popover */}
         {isMobileNotifOpen && (
@@ -1004,7 +1006,11 @@ export const MobilePreview: React.FC = () => {
             SCREEN CONTENT: PERSONA 2 - OPERATOR CABOR (PASI)
            ======================================================== */}
         {persona === 'cabor' && (
-          <div className="flex-1 overflow-y-auto p-4 pb-24 overscroll-contain bg-[#f4f6f9] space-y-4">
+          <div
+            className={`flex-1 overflow-y-auto overscroll-contain bg-[#F8F9FD] ${
+              caborTab === 'home' ? 'p-4 pb-24 space-y-4' : 'p-0 pb-16'
+            }`}
+          >
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
               <div className="space-y-4 pb-12">
@@ -2362,7 +2368,7 @@ export const MobilePreview: React.FC = () => {
         )}
 
         {/* Mobile Bottom Navigation Bar: Floating Circular Dock for Cabor, Clean Bar for Others */}
-        {persona === 'cabor' ? (
+        {persona === 'cabor' && caborTab !== 'skb-doc' ? (
           <nav className="absolute bottom-3 inset-x-0 z-30 px-4 pointer-events-none">
             <div className="pointer-events-auto max-w-[340px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
               {/* Tab 1: Beranda */}
@@ -2466,7 +2472,7 @@ export const MobilePreview: React.FC = () => {
                 onClick={() => setCaborTab('archive')}
                 className="group flex flex-col items-center justify-center transition-all active:scale-90"
               >
-                {caborTab === 'archive' || caborTab === 'skb-doc' || caborTab === 'account' ? (
+                {caborTab === 'archive' || caborTab === 'account' ? (
                   <div className="w-11 h-11 rounded-full red-flame-btn text-white flex items-center justify-center -mt-4 ring-4 ring-white border-2 border-amber-300 transition-transform group-hover:scale-105 shadow-[0_8px_18px_rgba(211,47,47,0.5)]">
                     <span className="material-symbols-outlined text-[22px] drop-shadow-md">shield_person</span>
                   </div>
@@ -2477,10 +2483,10 @@ export const MobilePreview: React.FC = () => {
                 )}
                 <span
                   className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
-                    caborTab === 'account' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
+                    caborTab === 'account' || caborTab === 'archive' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
                   }`}
                 >
-                  Profil
+                  Arsip
                 </span>
               </button>
             </div>

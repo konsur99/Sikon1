@@ -49,6 +49,8 @@ module.exports = {
         sikoni: '15px',
       },
       fontFamily: {
+        display: ["Space Grotesk", "sans-serif"],
+        body: ["Plus Jakarta Sans", "sans-serif"],
         "headline-lg": ["Space Grotesk", "sans-serif"],
         "body-lg": ["Plus Jakarta Sans", "sans-serif"],
         "data-metric": ["Space Grotesk", "sans-serif"],
@@ -56,7 +58,8 @@ module.exports = {
         "headline-md": ["Space Grotesk", "sans-serif"],
         "body-sm": ["Plus Jakarta Sans", "sans-serif"],
         "label-lg": ["Space Grotesk", "sans-serif"],
-        "label-md": ["Space Grotesk", "sans-serif"]
+        "label-md": ["Space Grotesk", "sans-serif"],
+        "title-md": ["Space Grotesk", "sans-serif"],
       },
       boxShadow: {
         sikoni: '0 10px 28px rgba(24,41,62,.07)',
@@ -67,4 +70,3 @@ module.exports = {
   },
   plugins: [],
 };
-
