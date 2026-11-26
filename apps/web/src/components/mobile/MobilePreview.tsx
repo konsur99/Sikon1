@@ -62,6 +62,143 @@ import { Screen15_Termin3Success } from './screens/Screen15_Termin3Success';
 
 export type UserPersona = 'publik' | 'cabor' | 'pengurus';
 
+export interface ServiceCatalogItem {
+  id: string;
+  category: 'Perencanaan' | 'Pencairan Kasda' | 'Pelaporan SPJ' | 'Legalitas & e-TTE' | 'Arsip & Notifikasi';
+  title: string;
+  screenNum: string;
+  desc: string;
+  icon: string;
+  gradient: string;
+  isOcr?: boolean;
+}
+
+export const serviceCatalog: ServiceCatalogItem[] = [
+  // 1. Perencanaan
+  {
+    id: 'submissions',
+    category: 'Perencanaan',
+    screenNum: 'Layar 1',
+    title: 'Portal Usulan RAB & LPJ',
+    desc: 'Pengajuan proposal kegiatan, pagu operasional cabor & verifikasi RAB',
+    icon: 'assignment_add',
+    gradient: 'from-[#990d16] via-[#d32f2f] to-[#ff5252]',
+  },
+  {
+    id: 'termin3',
+    category: 'Perencanaan',
+    screenNum: 'Layar 14',
+    title: 'Pencairan Dana Termin III',
+    desc: 'Formulir permohonan realisasi tahap akhir Porprov Jateng 2026',
+    icon: 'send_and_archive',
+    gradient: 'from-[#be123c] via-[#e11d48] to-[#fb7185]',
+  },
+  // 2. Pencairan Kasda
+  {
+    id: 'sp2d',
+    category: 'Pencairan Kasda',
+    screenNum: 'Layar 2',
+    title: 'SP2D & Rekening Giro Kasda',
+    desc: 'Bukti transfer BPKAD Surakarta, clearing Bank Jateng & buku kas cabor',
+    icon: 'savings',
+    gradient: 'from-[#1f2937] via-[#374151] to-[#111827]',
+  },
+  {
+    id: 'milestone',
+    category: 'Pencairan Kasda',
+    screenNum: 'Layar 11',
+    title: 'Milestone Kasda & SK Legalitas',
+    desc: 'Lintasan 5 tahap persetujuan pencairan kasda dan validasi SK Pengkot',
+    icon: 'verified_user',
+    gradient: 'from-[#92400e] via-[#d97706] to-[#fbbf24]',
+  },
+  {
+    id: 'termin3-success',
+    category: 'Pencairan Kasda',
+    screenNum: 'Layar 15',
+    title: 'Bukti e-Termin III Berhasil',
+    desc: 'Tanda terima pencairan dana tahap 3 dengan kode verifikasi sistem',
+    icon: 'task_alt',
+    gradient: 'from-[#065f46] via-[#059669] to-[#34d399]',
+  },
+  // 3. Pelaporan SPJ
+  {
+    id: 'lpj',
+    category: 'Pelaporan SPJ',
+    screenNum: 'Layar 3',
+    title: 'Penyusunan SPJ Termin II',
+    desc: 'Input nota kuitansi, alokasi 4 pos belanja & validasi sisa kas',
+    icon: 'receipt_long',
+    gradient: 'from-[#c27803] via-[#f59e0b] to-[#fbbf24]',
+  },
+  {
+    id: 'ocr-trigger',
+    category: 'Pelaporan SPJ',
+    screenNum: 'Layar 7',
+    title: 'Scanner OCR Struk & Nota',
+    desc: 'Pindai nota otomatis menggunakan kamera AI untuk ekstraksi nilai kuitansi',
+    icon: 'document_scanner',
+    gradient: 'from-[#0369a1] via-[#0284c7] to-[#38bdf8]',
+    isOcr: true,
+  },
+  {
+    id: 'submit-success',
+    category: 'Pelaporan SPJ',
+    screenNum: 'Layar 4',
+    title: 'Konfirmasi Pengiriman e-SPJ',
+    desc: 'Status berkas SPJ terkirim ke sekretariat dengan QR registrasi',
+    icon: 'check_circle',
+    gradient: 'from-[#15803d] via-[#16a34a] to-[#4ade80]',
+  },
+  // 4. Legalitas & e-TTE
+  {
+    id: 'ette',
+    category: 'Legalitas & e-TTE',
+    screenNum: 'Layar 9',
+    title: 'Tanda Terima Elektronik (e-TTE)',
+    desc: 'Sertifikat digital terenkripsi BSrE BSSN dengan verifikasi QR code resmi',
+    icon: 'fingerprint',
+    gradient: 'from-[#4338ca] via-[#6366f1] to-[#818cf8]',
+  },
+  {
+    id: 'verification-flow',
+    category: 'Legalitas & e-TTE',
+    screenNum: 'Layar 10',
+    title: 'Alur Verifikasi Bertingkat',
+    desc: 'Tracking 3 lapis pemeriksaan: Verifikator, Bendahara & Ketua KONI',
+    icon: 'fact_check',
+    gradient: 'from-[#7c2d12] via-[#c2410c] to-[#f97316]',
+  },
+  {
+    id: 'skb-doc',
+    category: 'Legalitas & e-TTE',
+    screenNum: 'Layar 12',
+    title: 'Dokumen SKB-SPJ PDF Resmi',
+    desc: 'Viewer surat keputusan bersama berkop resmi KONI dan stempel basah',
+    icon: 'picture_as_pdf',
+    gradient: 'from-[#047857] via-[#059669] to-[#10b981]',
+  },
+  // 5. Arsip & Notifikasi
+  {
+    id: 'archive',
+    category: 'Arsip & Notifikasi',
+    screenNum: 'Layar 13',
+    title: 'Repositori Arsip Dokumen',
+    desc: 'Arsip digital LPJ, SKB, dan kuitansi per tahun anggaran 2024–2026',
+    icon: 'folder_open',
+    gradient: 'from-[#334155] via-[#475569] to-[#64748b]',
+  },
+  {
+    id: 'notifications',
+    category: 'Arsip & Notifikasi',
+    screenNum: 'Layar 5',
+    title: 'Pusat Notifikasi & Surat Revisi',
+    desc: 'Catatan perbaikan verifikator, pengumuman bimpres & status pencairan',
+    icon: 'notifications_active',
+    gradient: 'from-[#b91c1c] via-[#dc2626] to-[#ef4444]',
+  },
+];
+
 export const MobilePreview: React.FC = () => {
   const { setMode } = useDisplayMode();
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
@@ -88,6 +225,10 @@ export const MobilePreview: React.FC = () => {
     | 'termin3-success'
   >('home');
   const [isOcrModalOpen, setIsOcrModalOpen] = useState(false);
+  const [isAllServicesSheetOpen, setIsAllServicesSheetOpen] = useState(false);
+  const [serviceCategoryFilter, setServiceCategoryFilter] = useState('Semua');
+  const [serviceSearch, setServiceSearch] = useState('');
+  const [isHubRibbonCollapsed, setIsHubRibbonCollapsed] = useState(false);
 
   const [publikTab, setPublikTab] = useState<
     'home' | 'cabor-dir' | 'transparansi' | 'jadwal' | 'info'
@@ -383,55 +524,66 @@ export const MobilePreview: React.FC = () => {
 
       
         {/* Stitch Screen Direct Navigator Strip (All 15 Screens Direct Switcher) */}
-        <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm">
-          <div className="flex items-center justify-between mb-2 px-1">
+        <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
+          <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
               <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
               <span>Stitch Screen Direct Hub (15 Layar Lengkap)</span>
             </div>
-            <span className="text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
-              Garuda Flame Athletic
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="hidden sm:inline-block text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
+                Garuda Flame Athletic
+              </span>
+              <button
+                type="button"
+                onClick={() => setIsHubRibbonCollapsed((prev) => !prev)}
+                className="text-[10px] font-black text-primary hover:text-red-700 bg-primary/10 hover:bg-primary/20 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
+              >
+                <span>{isHubRibbonCollapsed ? 'Buka Pita (15) ▼' : 'Sembunyikan ▲'}</span>
+              </button>
+            </div>
           </div>
 
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-            {[
-              { id: 'home', label: '0. Beranda Cabor' },
-              { id: 'submissions', label: '1. Portal RAB & LPJ' },
-              { id: 'sp2d', label: '2. SP2D & Bukti Kas' },
-              { id: 'lpj', label: '3. SPJ Termin II' },
-              { id: 'submit-success', label: '4. e-SPJ Sukses' },
-              { id: 'notifications', label: '5. Pusat Notifikasi' },
-              { id: 'ocr-trigger', label: '7. Scan OCR Nota' },
-              { id: 'ette', label: '9. e-TTE Digital' },
-              { id: 'verification-flow', label: '10. Alur Verifikasi' },
-              { id: 'milestone', label: '11. Milestone Kasda' },
-              { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
-              { id: 'archive', label: '13. Arsip SPJ' },
-              { id: 'termin3', label: '14. Termin III' },
-              { id: 'termin3-success', label: '15. e-Termin III' },
-            ].map((scr) => (
-              <button
-                key={scr.id}
-                type="button"
-                onClick={() => {
-                  if (scr.id === 'ocr-trigger') {
-                    setIsOcrModalOpen(true);
-                  } else {
-                    setPersona('cabor');
-                    setCaborTab(scr.id as any);
-                  }
-                }}
-                className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all active:scale-95 ${
-                  (caborTab === scr.id && persona === 'cabor') || (scr.id === 'ocr-trigger' && isOcrModalOpen)
-                    ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
-                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                }`}
-              >
-                {scr.label}
-              </button>
-            ))}
-          </div>
+          {!isHubRibbonCollapsed && (
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 pb-0.5 animate-in fade-in duration-150">
+              {[
+                { id: 'home', label: '0. Beranda Cabor' },
+                { id: 'submissions', label: '1. Portal RAB & LPJ' },
+                { id: 'sp2d', label: '2. SP2D & Bukti Kas' },
+                { id: 'lpj', label: '3. SPJ Termin II' },
+                { id: 'submit-success', label: '4. e-SPJ Sukses' },
+                { id: 'notifications', label: '5. Pusat Notifikasi' },
+                { id: 'ocr-trigger', label: '7. Scan OCR Nota' },
+                { id: 'ette', label: '9. e-TTE Digital' },
+                { id: 'verification-flow', label: '10. Alur Verifikasi' },
+                { id: 'milestone', label: '11. Milestone Kasda' },
+                { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
+                { id: 'archive', label: '13. Arsip SPJ' },
+                { id: 'termin3', label: '14. Termin III' },
+                { id: 'termin3-success', label: '15. e-Termin III' },
+              ].map((scr) => (
+                <button
+                  key={scr.id}
+                  type="button"
+                  onClick={() => {
+                    if (scr.id === 'ocr-trigger') {
+                      setIsOcrModalOpen(true);
+                    } else {
+                      setPersona('cabor');
+                      setCaborTab(scr.id as any);
+                    }
+                  }}
+                  className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all active:scale-95 ${
+                    (caborTab === scr.id && persona === 'cabor') || (scr.id === 'ocr-trigger' && isOcrModalOpen)
+                      ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                  }`}
+                >
+                  {scr.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
       {/* Android Device Frame (Edge-to-Edge on Phones, Elegant Smartphone Frame on Desktops) */}
@@ -1257,127 +1409,175 @@ export const MobilePreview: React.FC = () => {
                   </div>
                 </div>
 
-                {/* 5. 6 MENU UTAMA LAYANAN CABOR (3D LUXURY SQUIRCLE ICONS) */}
+                {/* 5. 8 MENU UTAMA & KATALOG SEMUA LAYANAN (GRID 4x2 ATHLETIC SQUIRCLES) */}
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <div className="w-1.5 h-5 rounded-full bg-primary" />
-                      <h2 className="font-headline-md text-[17px] font-extrabold text-onyx tracking-tight">
+                      <h2 className="font-headline-md text-[16px] sm:text-[17px] font-extrabold text-onyx tracking-tight">
                         Layanan Administrasi Cabor
                       </h2>
                     </div>
-                    <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-label-md text-[10.5px] font-bold uppercase tracking-wider">
-                      6 Menu Utama
-                    </span>
+                    <button
+                      onClick={() => setIsAllServicesSheetOpen(true)}
+                      className="px-2.5 py-1 rounded-full bg-primary/10 text-primary font-label-md text-[11px] font-extrabold uppercase tracking-wider flex items-center gap-1 hover:bg-primary/20 transition-colors cursor-pointer"
+                    >
+                      <span>Lihat Semua</span>
+                      <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
+                    </button>
                   </div>
-                  {/* 6 Squircle 3D Tactile Grid */}
-                  <div className="grid grid-cols-3 gap-2.5">
+
+                  {/* 8 Squircle 3D Tactile Grid (4 Columns x 2 Rows) */}
+                  <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
                     {/* 1. Ajukan RAB */}
                     <button
                       onClick={() => setCaborTab('submissions')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95"
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(211,47,47,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">note_add</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-onyx font-black">add</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(211,47,47,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">note_add</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-onyx font-black">add</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
                         Ajukan RAB
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        Proposal & Rincian
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Proposal
                       </span>
                     </button>
-                    {/* 2. LPJ Kegiatan */}
+
+                    {/* 2. SPJ Kegiatan */}
                     <button
                       onClick={() => setCaborTab('lpj')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95"
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(245,158,11,0.45)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">receipt_long</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-white font-black">done</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">receipt_long</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-white font-black">done</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        LPJ Kegiatan
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                        SPJ Kegiatan
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        Kwitansi & Nota
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Kwitansi
                       </span>
                     </button>
-                    {/* 3. Buku Kas Cabor */}
+
+                    {/* 3. Scan OCR Nota */}
+                    <button
+                      onClick={() => setIsOcrModalOpen(true)}
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                    >
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">document_scanner</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-onyx font-bold">photo_camera</span>
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                        Scan OCR
+                      </span>
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Foto Nota
+                      </span>
+                    </button>
+
+                    {/* 4. Buku Kas & SP2D */}
                     <button
                       onClick={() => setCaborTab('sp2d')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95"
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_8px_20px_-2px_rgba(31,41,55,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-amber-300/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">savings</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full gold-shimmer border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">payments</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_6px_16px_-2px_rgba(31,41,55,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-amber-300/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">savings</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-onyx font-bold">payments</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
                         Buku Kas
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        Mutasi Rekening
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Mutasi SP2D
                       </span>
                     </button>
-                    {/* 4. SKB Resmi */}
+
+                    {/* 5. SKB Dokumen */}
                     <button
                       onClick={() => setCaborTab('skb-doc')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95"
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(5,150,105,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">verified</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">check</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">picture_as_pdf</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-onyx font-bold">check</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        SKB Resmi
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                        SKB PDF
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        PDF Pengesahan
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Legalitas
                       </span>
                     </button>
-                    {/* 5. Arsip Dokumen */}
+
+                    {/* 6. e-TTE Digital */}
                     <button
-                      onClick={() => setCaborTab('archive')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-500/50 hover:shadow-md transition-all active:scale-95"
+                      onClick={() => setCaborTab('ette')}
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#1f2937] via-[#374151] to-[#4b5563] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(55,65,81,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">folder_open</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-400 border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-onyx font-bold">inventory_2</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">fingerprint</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-white font-bold">shield</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        Arsip SPJ
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                        e-TTE BSrE
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        Repositori Berkas
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Tanda Tangan
                       </span>
                     </button>
-                    {/* 6. Milestone Kasda */}
+
+                    {/* 7. Pencairan T-III */}
                     <button
-                      onClick={() => setCaborTab('milestone')}
-                      className="group relative flex flex-col items-center text-center p-3 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95"
+                      onClick={() => setCaborTab('termin3')}
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-rose-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#d97706] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_8px_20px_-2px_rgba(217,119,6,0.4)] mb-2 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[26px] drop-shadow-md">verified_user</span>
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary border-2 border-white flex items-center justify-center shadow-xs">
-                          <span className="material-symbols-outlined text-[11px] text-white font-bold">shield</span>
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#9f1239] via-[#e11d48] to-[#fb7185] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(225,29,72,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
+                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">send_and_archive</span>
+                        <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
+                          <span className="material-symbols-outlined text-[9px] text-onyx font-bold">forward</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[13px] font-extrabold text-onyx leading-tight">
-                        Legalitas SK
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                        Termin III
                       </span>
-                      <span className="font-body-sm text-[10px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
-                        SK Pengkot PASI
+                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                        Pencairan
+                      </span>
+                    </button>
+
+                    {/* 8. Semua Layanan (15 Layar) */}
+                    <button
+                      onClick={() => setIsAllServicesSheetOpen(true)}
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                    >
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#d97706] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-slate-900 shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
+                        <span className="material-symbols-outlined text-[24px] text-slate-900 font-bold drop-shadow-xs">apps</span>
+                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-[#d32f2f] text-white text-[8.5px] font-black border border-white shadow-xs">
+                          15
+                        </div>
+                      </div>
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-amber-950 leading-tight line-clamp-1">
+                        Semua Menu
+                      </span>
+                      <span className="font-body-sm text-[9px] text-amber-800 font-bold mt-0.5 line-clamp-1">
+                        15 Layar
                       </span>
                     </button>
                   </div>
@@ -2373,6 +2573,156 @@ export const MobilePreview: React.FC = () => {
         {toastMessage && (
           <div className="absolute top-16 left-3 right-3 bg-sikoni-navy text-white text-[11.5px] font-bold py-2.5 px-3.5 rounded-xl shadow-xl z-50 text-center animate-in fade-in slide-in-from-top-1 border border-slate-700">
             {toastMessage}
+          </div>
+        )}
+
+        {/* ========================================================
+            BOTTOM SHEET: KATALOG LENGKAP 15 LAYAR SIKONI
+           ======================================================== */}
+        {isAllServicesSheetOpen && (
+          <div className="absolute inset-0 z-50 flex flex-col justify-end animate-in fade-in duration-200">
+            {/* Backdrop */}
+            <div
+              className="absolute inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity cursor-pointer"
+              onClick={() => setIsAllServicesSheetOpen(false)}
+            />
+
+            {/* Sheet Card */}
+            <div className="relative bg-white rounded-t-[32px] border-t border-slate-200 shadow-2xl max-h-[85%] flex flex-col z-10 animate-in slide-in-from-bottom duration-250">
+              {/* Drag Pill */}
+              <div className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mt-3 mb-2 shrink-0" />
+
+              {/* Header */}
+              <div className="px-4 pb-3 border-b border-slate-100 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#990d16] to-[#d32f2f] text-white flex items-center justify-center shadow-xs">
+                    <span className="material-symbols-outlined text-[18px]">apps</span>
+                  </div>
+                  <div>
+                    <h3 className="font-headline-md text-sm font-black text-onyx leading-tight">
+                      Katalog 15 Layar & Layanan SIKONI
+                    </h3>
+                    <p className="text-[10px] text-slate-500 font-medium">
+                      Akses cepat seluruh modul administrasi & kasda cabor
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsAllServicesSheetOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600 transition-colors cursor-pointer"
+                  aria-label="Tutup"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Search Bar inside Sheet */}
+              <div className="p-3 border-b border-slate-100 bg-slate-50/70 shrink-0">
+                <div className="h-9 px-3 bg-white rounded-xl border border-slate-200 flex items-center gap-2 text-xs focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/20 transition-all shadow-inner">
+                  <Search size={14} className="text-slate-400" />
+                  <input
+                    type="text"
+                    value={serviceSearch}
+                    onChange={(e) => setServiceSearch(e.target.value)}
+                    placeholder="Cari layar (misal: OCR, SKB, Termin, SP2D)..."
+                    className="w-full bg-transparent outline-none text-xs text-onyx font-medium placeholder:text-slate-400"
+                  />
+                  {serviceSearch && (
+                    <button onClick={() => setServiceSearch('')} className="text-slate-400 hover:text-onyx cursor-pointer">
+                      <X size={13} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Filter Pills */}
+                <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2">
+                  {['Semua', 'Perencanaan', 'Pencairan Kasda', 'Pelaporan SPJ', 'Legalitas & e-TTE', 'Arsip & Notifikasi'].map((cat) => (
+                    <button
+                      key={cat}
+                      onClick={() => setServiceCategoryFilter(cat)}
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-black shrink-0 transition-all cursor-pointer ${
+                        serviceCategoryFilter === cat
+                          ? 'bg-[#d32f2f] text-white shadow-xs'
+                          : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                      }`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Catalog Items List */}
+              <div className="flex-1 overflow-y-auto p-3 space-y-2 no-scrollbar">
+                {serviceCatalog
+                  .filter((item) => {
+                    const matchCategory = serviceCategoryFilter === 'Semua' || item.category === serviceCategoryFilter;
+                    const matchQuery =
+                      item.title.toLowerCase().includes(serviceSearch.toLowerCase()) ||
+                      item.desc.toLowerCase().includes(serviceSearch.toLowerCase()) ||
+                      item.screenNum.toLowerCase().includes(serviceSearch.toLowerCase());
+                    return matchCategory && matchQuery;
+                  })
+                  .map((item) => (
+                    <button
+                      key={item.id}
+                      onClick={() => {
+                        setIsAllServicesSheetOpen(false);
+                        if (item.isOcr) {
+                          setIsOcrModalOpen(true);
+                        } else {
+                          setPersona('cabor');
+                          setCaborTab(item.id as any);
+                        }
+                      }}
+                      className="w-full p-2.5 rounded-2xl bg-white border border-slate-200/80 hover:border-primary/40 hover:bg-slate-50/80 flex items-center justify-between text-left transition-all active:scale-[0.98] shadow-xs group cursor-pointer"
+                    >
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div
+                          className={`w-11 h-11 rounded-2xl bg-gradient-to-tr ${item.gradient} flex items-center justify-center text-white shrink-0 shadow-sm border-t border-white/30 group-hover:scale-105 transition-transform`}
+                        >
+                          <span className="material-symbols-outlined text-[20px] drop-shadow-xs">
+                            {item.icon}
+                          </span>
+                        </div>
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-[10px] font-black text-primary uppercase tracking-wide bg-primary/10 px-1.5 py-0.2 rounded-md">
+                              {item.screenNum}
+                            </span>
+                            <span className="text-[10.5px] font-bold text-slate-400">
+                              • {item.category}
+                            </span>
+                          </div>
+                          <h4 className="font-title-md text-xs font-black text-onyx truncate mt-0.5">
+                            {item.title}
+                          </h4>
+                          <p className="text-[10.5px] text-slate-500 line-clamp-1 mt-0.5">
+                            {item.desc}
+                          </p>
+                        </div>
+                      </div>
+                      <span className="material-symbols-outlined text-[18px] text-slate-300 group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0 ml-2">
+                        chevron_right
+                      </span>
+                    </button>
+                  ))}
+              </div>
+
+              {/* Bottom Sheet Footer */}
+              <div className="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between shrink-0">
+                <span className="text-[10.5px] text-slate-500 font-semibold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  Total 15 Layar Stitch Aktif
+                </span>
+                <button
+                  onClick={() => setIsAllServicesSheetOpen(false)}
+                  className="px-3 py-1.5 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Tutup Katalog
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
