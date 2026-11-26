@@ -3150,15 +3150,16 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
                   <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
-                    <div className="flex flex-wrap items-center justify-between gap-1.5">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full bg-black/40 text-amber-300 font-extrabold text-[8.5px] sm:text-[9.5px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-sm shrink-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 text-amber-300 font-extrabold text-[8.5px] sm:text-[9px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-xs shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
                         <span>DASHBOARD EKSEKUTIF • APBD 2026</span>
                       </div>
-                      <span className="font-label-md text-[8.5px] sm:text-[9.5px] uppercase tracking-wider text-emerald-300 font-extrabold flex items-center gap-1 shrink-0">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                        BANK JATENG HOST
-                      </span>
+                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-300 font-extrabold text-[8px] sm:text-[8.5px] tracking-wider uppercase border border-emerald-400/40 backdrop-blur-md shadow-xs shrink-0">
+                        <span className="material-symbols-outlined text-[12px] text-emerald-300">account_balance</span>
+                        <span>BANK JATENG HOST</span>
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
+                      </div>
                     </div>
 
                     <div className="my-2">
