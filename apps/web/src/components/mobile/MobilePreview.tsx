@@ -35,9 +35,6 @@ import {
   Info,
   Users,
   CheckCheck,
-  Monitor,
-  Smartphone,
-  Tablet,
   Trash2,
   Camera,
   FileUp,
@@ -208,17 +205,15 @@ export interface MobilePreviewProps {
 }
 
 export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView }) => {
-  const { isAndroid, setMode } = useDisplayMode();
-  const [deviceView, setDeviceView] = useState<DeviceView>(defaultDeviceView || 'desktop');
+  const { isAndroid } = useDisplayMode();
+  const [deviceView, setDeviceView] = useState<DeviceView>(
+    defaultDeviceView || (isAndroid ? 'mobile' : 'desktop')
+  );
 
-  // Synchronize deviceView with global display mode (FloatingModeSwitcher / isAndroid)
+  // Synchronize deviceView with global display mode (controlled exclusively by the bottom switcher)
   useEffect(() => {
-    if (defaultDeviceView) {
-      setDeviceView(defaultDeviceView);
-    } else {
-      setDeviceView(isAndroid ? 'mobile' : 'desktop');
-    }
-  }, [isAndroid, defaultDeviceView]);
+    setDeviceView(isAndroid ? 'mobile' : 'desktop');
+  }, [isAndroid]);
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
   const [persona, setPersona] = useState<UserPersona>('cabor');
 
@@ -508,45 +503,11 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             </button>
           </div>
 
-          {/* Device Size Switcher */}
-          <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl">
-            <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider hidden lg:inline">Layar:</span>
-            <button
-              onClick={() => {
-                setDeviceView('mobile');
-                setMode('android');
-              }}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
-                deviceView === 'mobile' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
-              }`}
-              title="Tampilan Smartphone Android 412px"
-            >
-              <Smartphone size={13} /> HP (412px)
-            </button>
-            <button
-              onClick={() => {
-                setDeviceView('tablet');
-                setMode('android');
-              }}
-              className={`px-2.5 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
-                deviceView === 'tablet' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
-              }`}
-              title="Tampilan Tablet iPad/Tab 768px"
-            >
-              <Tablet size={13} /> Tablet (768px)
-            </button>
-            <button
-              onClick={() => {
-                setDeviceView('desktop');
-                setMode('desktop');
-              }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${
-                deviceView === 'desktop' ? 'bg-[#142a43] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
-              }`}
-              title="Tampilan Laptop / Desktop Responsif Penuh"
-            >
-              <Monitor size={13} /> Desktop Lebar
-            </button>
+          {/* Active Mode Indicator (Switch mode via bottom FloatingModeSwitcher) */}
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 bg-slate-100 rounded-xl text-xs font-bold text-slate-500">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+            <span className="text-slate-600 font-medium">Mode:</span>
+            <span className="font-black text-onyx">{deviceView === 'desktop' ? '💻 Desktop Lebar' : '📱 Android Mobile'}</span>
           </div>
         </div>
       </div>
