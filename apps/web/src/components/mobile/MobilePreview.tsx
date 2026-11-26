@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import {
   Home,
   Coins,
@@ -63,7 +63,7 @@ export type UserPersona = 'publik' | 'cabor' | 'pengurus';
 
 export interface ServiceCatalogItem {
   id: string;
-  category: 'Perencanaan' | 'Pencairan Kasda' | 'Pelaporan SPJ' | 'Legalitas & e-TTE' | 'Arsip & Notifikasi';
+  category: string;
   title: string;
   screenNum: string;
   desc: string;
@@ -72,7 +72,7 @@ export interface ServiceCatalogItem {
   isOcr?: boolean;
 }
 
-export const serviceCatalog: ServiceCatalogItem[] = [
+export const caborCatalog: ServiceCatalogItem[] = [
   // 1. Perencanaan
   {
     id: 'submissions',
@@ -196,7 +196,168 @@ export const serviceCatalog: ServiceCatalogItem[] = [
     icon: 'notifications_active',
     gradient: 'from-[#b91c1c] via-[#dc2626] to-[#ef4444]',
   },
+  {
+    id: 'home',
+    category: 'Perencanaan',
+    screenNum: 'Layar 0',
+    title: 'Beranda Pagu Cabor & Hibah',
+    desc: 'Dashboard ringkasan realisasi anggaran dan jadwal pencairan termin',
+    icon: 'dashboard',
+    gradient: 'from-[#990d16] via-[#d32f2f] to-[#ff5252]',
+  },
 ];
+
+export const publikCatalog: ServiceCatalogItem[] = [
+  {
+    id: 'home',
+    category: 'Informasi & Berita',
+    screenNum: 'Portal 1',
+    title: 'Beranda Informasi Publik',
+    desc: 'Portal utama keterbukaan informasi dan publikasi kegiatan KONI Surakarta',
+    icon: 'home',
+    gradient: 'from-[#0f172a] via-[#1e3a8a] to-[#3b82f6]',
+  },
+  {
+    id: 'cabor-dir',
+    category: 'Cabor & Atlet',
+    screenNum: 'Portal 2',
+    title: 'Direktori 64 Cabang Olahraga',
+    desc: 'Katalog profil lengkap, alamat sekretariat, dan kontak pengurus cabor Kota Solo',
+    icon: 'military_tech',
+    gradient: 'from-[#065f46] via-[#059669] to-[#34d399]',
+  },
+  {
+    id: 'transparansi',
+    category: 'Transparansi Kasda',
+    screenNum: 'Portal 3',
+    title: 'Transparansi Realisasi APBD 2026',
+    desc: 'Laporan terbuka alokasi hibah olahraga Rp 12,8 Miliar dan serapan kasda',
+    icon: 'trending_up',
+    gradient: 'from-[#92400e] via-[#d97706] to-[#fbbf24]',
+  },
+  {
+    id: 'jadwal',
+    category: 'Fasilitas & Jadwal',
+    screenNum: 'Portal 4',
+    title: 'Kalender Kejuaraan & Lomba',
+    desc: 'Jadwal pertandingan resmi tingkat kota, kualifikasi pra-Porprov, dan open tournament',
+    icon: 'calendar_month',
+    gradient: 'from-[#0369a1] via-[#0284c7] to-[#38bdf8]',
+  },
+  {
+    id: 'info',
+    category: 'Informasi & Berita',
+    screenNum: 'Portal 5',
+    title: 'Profil & Kontak KONI Surakarta',
+    desc: 'Struktur kepengurusan masa bakti 2024-2028, kontak sekretariat, dan layanan warga',
+    icon: 'info',
+    gradient: 'from-[#3730a3] via-[#4f46e5] to-[#6366f1]',
+  },
+  {
+    id: 'cabor-dir',
+    category: 'Cabor & Atlet',
+    screenNum: 'Portal 6',
+    title: 'Data Prestasi Atlet & Medali',
+    desc: 'Rekam jejak 124 medali emas kontingen Surakarta pada kejuaraan multi-event',
+    icon: 'trophy',
+    gradient: 'from-[#78350f] via-[#b45309] to-[#d97706]',
+  },
+  {
+    id: 'jadwal',
+    category: 'Fasilitas & Jadwal',
+    screenNum: 'Portal 7',
+    title: 'Fasilitas Stadion Manahan & Sriwedari',
+    desc: 'Informasi arena olahraga bersejarah dan venue bertaraf internasional di Surakarta',
+    icon: 'stadium',
+    gradient: 'from-[#1e293b] via-[#334155] to-[#475569]',
+  },
+  {
+    id: 'transparansi',
+    category: 'Transparansi Kasda',
+    screenNum: 'Portal 8',
+    title: 'Akuntabilitas & Audit Publik',
+    desc: 'Standar transparansi pelaporan keuangan daerah sesuai ketentuan BPKAD',
+    icon: 'verified',
+    gradient: 'from-[#15803d] via-[#16a34a] to-[#4ade80]',
+  },
+];
+
+export const pengurusCatalog: ServiceCatalogItem[] = [
+  {
+    id: 'dashboard',
+    category: 'Eksekutif & Kebijakan',
+    screenNum: 'Modul 1',
+    title: 'Dashboard Eksekutif Kasda',
+    desc: 'Ringkasan komprehensif pagu Rp 12,8M, status SP2D, dan metrik serapan kasda',
+    icon: 'dashboard',
+    gradient: 'from-[#990d16] via-[#d32f2f] to-[#ff5252]',
+  },
+  {
+    id: 'approval',
+    category: 'Approval & Verifikasi',
+    screenNum: 'Modul 2',
+    title: 'Inbox Persetujuan Usulan & SPJ',
+    desc: 'Otorisasi bertingkat persetujuan RAB, nota kuitansi SPJ termin, dan revisi',
+    icon: 'fact_check',
+    gradient: 'from-[#9f1239] via-[#e11d48] to-[#fb7185]',
+  },
+  {
+    id: 'monitoring',
+    category: 'Monitoring Serapan',
+    screenNum: 'Modul 3',
+    title: 'Monitoring Serapan 64 Cabor',
+    desc: 'Pengawasan realisasi pagu, ranking ketaatan SPJ, dan sisa anggaran per cabor',
+    icon: 'monitoring',
+    gradient: 'from-[#065f46] via-[#059669] to-[#34d399]',
+  },
+  {
+    id: 'kas',
+    category: 'Kasda & Giro',
+    screenNum: 'Modul 4',
+    title: 'Rekening Giro Kasda Bank Jateng',
+    desc: 'Buku kas clearing Bank Jateng, mutasi SP2D masuk, dan histori pencairan termin',
+    icon: 'account_balance',
+    gradient: 'from-[#1e293b] via-[#334155] to-[#475569]',
+  },
+  {
+    id: 'profil',
+    category: 'Eksekutif & Kebijakan',
+    screenNum: 'Modul 5',
+    title: 'Otoritas Pejabat & Audit RBAC',
+    desc: 'Manajemen hak akses: Verifikator, Bendahara Kasda, dan Ketua Umum KONI',
+    icon: 'admin_panel_settings',
+    gradient: 'from-[#4338ca] via-[#6366f1] to-[#818cf8]',
+  },
+  {
+    id: 'approval',
+    category: 'Approval & Verifikasi',
+    screenNum: 'Modul 6',
+    title: 'Pemeriksaan Dokumen SKB & e-TTE',
+    desc: 'Validasi tanda tangan digital tersertifikasi BSrE BSSN dan stempel basah',
+    icon: 'fingerprint',
+    gradient: 'from-[#7c2d12] via-[#c2410c] to-[#f97316]',
+  },
+  {
+    id: 'monitoring',
+    category: 'Monitoring Serapan',
+    screenNum: 'Modul 7',
+    title: 'Matriks Evaluasi Kepatuhan SPJ',
+    desc: 'Laporan kepatuhan batas waktu SPJ untuk rekomendasi pencairan tahap berikutnya',
+    icon: 'assessment',
+    gradient: 'from-[#0369a1] via-[#0284c7] to-[#38bdf8]',
+  },
+  {
+    id: 'kas',
+    category: 'Kasda & Giro',
+    screenNum: 'Modul 8',
+    title: 'Rekonsiliasi Kas BPKAD Surakarta',
+    desc: 'Penyelarasan nomor SP2D dan tanggal clearing kasda dengan laporan resmi daerah',
+    icon: 'receipt_long',
+    gradient: 'from-[#047857] via-[#059669] to-[#10b981]',
+  },
+];
+
+export const serviceCatalog = caborCatalog;
 
 export type DeviceView = 'mobile' | 'tablet' | 'desktop';
 
@@ -274,6 +435,24 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
     caborScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
     publikScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
     pengurusScrollRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+    setServiceCategoryFilter('Semua');
+    setServiceSearch('');
+  }, [persona]);
+
+  const activeCatalog = useMemo(() => {
+    if (persona === 'publik') return publikCatalog;
+    if (persona === 'pengurus') return pengurusCatalog;
+    return caborCatalog;
+  }, [persona]);
+
+  const activeCategories = useMemo(() => {
+    if (persona === 'publik') {
+      return ['Semua', 'Informasi & Berita', 'Transparansi Kasda', 'Cabor & Atlet', 'Fasilitas & Jadwal'];
+    }
+    if (persona === 'pengurus') {
+      return ['Semua', 'Eksekutif & Kebijakan', 'Approval & Verifikasi', 'Monitoring Serapan', 'Kasda & Giro'];
+    }
+    return ['Semua', 'Perencanaan', 'Pencairan Kasda', 'Pelaporan SPJ', 'Legalitas & e-TTE', 'Arsip & Notifikasi'];
   }, [persona]);
 
   // In-app Notification Dropdown Popover
@@ -538,65 +717,123 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
       </div>
 
       
-        {/* Stitch Screen Direct Navigator Strip (All 15 Screens Direct Switcher) */}
+        {/* Screen Direct Navigator Strip (Adapts automatically to Persona Scope) */}
         <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
-              <span>Stitch Screen Direct Hub (15 Layar Lengkap)</span>
+              <span className={`w-2.5 h-2.5 rounded-full ${
+                persona === 'cabor' ? 'bg-[#d32f2f]' : persona === 'pengurus' ? 'bg-amber-500' : 'bg-sikoni-navy'
+              } animate-pulse`} />
+              <span>
+                {persona === 'cabor'
+                  ? 'Stitch Screen Direct Hub (15 Layar Cabor)'
+                  : persona === 'pengurus'
+                    ? 'Navigasi Cepat Eksekutif Pengurus (5 Modul)'
+                    : 'Navigasi Cepat Informasi Publik (5 Layanan)'}
+              </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="hidden sm:inline-block text-[10px] font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-300">
-                Garuda Flame Athletic
+              <span className={`hidden sm:inline-block text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                persona === 'cabor'
+                  ? 'text-red-800 bg-red-100 border-red-300'
+                  : persona === 'pengurus'
+                    ? 'text-amber-800 bg-amber-100 border-amber-300'
+                    : 'text-sky-800 bg-sky-100 border-sky-300'
+              }`}>
+                {persona === 'cabor' ? 'Garuda Flame Athletic' : persona === 'pengurus' ? 'Otoritas Eksekutif' : 'Portal Publik'}
               </span>
               <button
                 type="button"
                 onClick={() => setIsHubRibbonCollapsed((prev) => !prev)}
                 className="text-[10px] font-black text-primary hover:text-red-700 bg-primary/10 hover:bg-primary/20 px-2.5 py-1 rounded-lg transition-colors flex items-center gap-1 cursor-pointer"
               >
-                <span>{isHubRibbonCollapsed ? 'Buka Pita (15) ▼' : 'Sembunyikan ▲'}</span>
+                <span>{isHubRibbonCollapsed ? 'Buka Menu ▼' : 'Sembunyikan ▲'}</span>
               </button>
             </div>
           </div>
 
           {!isHubRibbonCollapsed && (
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2 pb-0.5 animate-in fade-in duration-150">
-              {[
-                { id: 'home', label: '0. Beranda Cabor' },
-                { id: 'submissions', label: '1. Portal RAB & LPJ' },
-                { id: 'sp2d', label: '2. SP2D & Bukti Kas' },
-                { id: 'lpj', label: '3. SPJ Termin II' },
-                { id: 'submit-success', label: '4. e-SPJ Sukses' },
-                { id: 'notifications', label: '5. Pusat Notifikasi' },
-                { id: 'ocr-trigger', label: '7. Scan OCR Nota' },
-                { id: 'ette', label: '9. e-TTE Digital' },
-                { id: 'verification-flow', label: '10. Alur Verifikasi' },
-                { id: 'milestone', label: '11. Milestone Kasda' },
-                { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
-                { id: 'archive', label: '13. Arsip SPJ' },
-                { id: 'termin3', label: '14. Termin III' },
-                { id: 'termin3-success', label: '15. e-Termin III' },
-              ].map((scr) => (
-                <button
-                  key={scr.id}
-                  type="button"
-                  onClick={() => {
-                    if (scr.id === 'ocr-trigger') {
-                      setIsOcrModalOpen(true);
-                    } else {
-                      setPersona('cabor');
-                      setCaborTab(scr.id as any);
-                    }
-                  }}
-                  className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all active:scale-95 ${
-                    (caborTab === scr.id && persona === 'cabor') || (scr.id === 'ocr-trigger' && isOcrModalOpen)
-                      ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
-                      : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
-                  }`}
-                >
-                  {scr.label}
-                </button>
-              ))}
+              {persona === 'cabor' &&
+                [
+                  { id: 'home', label: '0. Beranda Cabor' },
+                  { id: 'submissions', label: '1. Portal RAB & LPJ' },
+                  { id: 'sp2d', label: '2. SP2D & Bukti Kas' },
+                  { id: 'lpj', label: '3. SPJ Termin II' },
+                  { id: 'submit-success', label: '4. e-SPJ Sukses' },
+                  { id: 'notifications', label: '5. Pusat Notifikasi' },
+                  { id: 'ocr-trigger', label: '7. Scan OCR Nota' },
+                  { id: 'ette', label: '9. e-TTE Digital' },
+                  { id: 'verification-flow', label: '10. Alur Verifikasi' },
+                  { id: 'milestone', label: '11. Milestone Kasda' },
+                  { id: 'skb-doc', label: '12. Dokumen SKB PDF' },
+                  { id: 'archive', label: '13. Arsip SPJ' },
+                  { id: 'termin3', label: '14. Termin III' },
+                  { id: 'termin3-success', label: '15. e-Termin III' },
+                ].map((scr) => (
+                  <button
+                    key={scr.id}
+                    type="button"
+                    onClick={() => {
+                      if (scr.id === 'ocr-trigger') {
+                        setIsOcrModalOpen(true);
+                      } else {
+                        setCaborTab(scr.id as any);
+                      }
+                    }}
+                    className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer active:scale-95 ${
+                      caborTab === scr.id || (scr.id === 'ocr-trigger' && isOcrModalOpen)
+                        ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                    }`}
+                  >
+                    {scr.label}
+                  </button>
+                ))}
+
+              {persona === 'publik' &&
+                [
+                  { id: 'home', label: '1. Beranda Informasi Publik' },
+                  { id: 'cabor-dir', label: '2. Direktori 64 Cabor Solo' },
+                  { id: 'transparansi', label: '3. Transparansi APBD 2026' },
+                  { id: 'jadwal', label: '4. Kalender Kejuaraan Kota' },
+                  { id: 'info', label: '5. Profil & Kontak KONI Solo' },
+                ].map((scr) => (
+                  <button
+                    key={scr.id}
+                    type="button"
+                    onClick={() => setPublikTab(scr.id as any)}
+                    className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer active:scale-95 ${
+                      publikTab === scr.id
+                        ? 'bg-sikoni-navy text-white shadow-md'
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                    }`}
+                  >
+                    {scr.label}
+                  </button>
+                ))}
+
+              {persona === 'pengurus' &&
+                [
+                  { id: 'dashboard', label: '1. Dashboard Eksekutif Kasda' },
+                  { id: 'approval', label: `2. Inbox Persetujuan (${approvalList.filter(a => a.status === 'Menunggu').length})` },
+                  { id: 'monitoring', label: '3. Monitoring Serapan 64 Cabor' },
+                  { id: 'kas', label: '4. Rekening Giro Bank Jateng' },
+                  { id: 'profil', label: '5. Otoritas Pejabat & RBAC' },
+                ].map((scr) => (
+                  <button
+                    key={scr.id}
+                    type="button"
+                    onClick={() => setPengurusTab(scr.id as any)}
+                    className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer active:scale-95 ${
+                      pengurusTab === scr.id
+                        ? 'bg-amber-600 text-white shadow-md'
+                        : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                    }`}
+                  >
+                    {scr.label}
+                  </button>
+                ))}
             </div>
           )}
         </div>
@@ -768,11 +1005,31 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setIsAllServicesSheetOpen(true)}
-                  className="hidden md:flex text-xs font-extrabold text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200 px-3 py-1.5 rounded-xl items-center gap-1.5 transition-all cursor-pointer shadow-2xs"
-                  title="Buka Katalog 15 Layar"
+                  className={`hidden md:flex text-xs font-extrabold px-3 py-1.5 rounded-xl items-center gap-1.5 transition-all cursor-pointer shadow-2xs ${
+                    persona === 'cabor'
+                      ? 'text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200'
+                      : persona === 'pengurus'
+                        ? 'text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200'
+                        : 'text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200'
+                  }`}
+                  title={
+                    persona === 'cabor'
+                      ? 'Buka Katalog 15 Layar Cabor'
+                      : persona === 'pengurus'
+                        ? 'Buka Katalog Eksekutif Pengurus'
+                        : 'Buka Katalog Layanan Publik'
+                  }
                 >
-                  <span className="material-symbols-outlined text-[16px]">apps</span>
-                  <span>15 Layar</span>
+                  <span className="material-symbols-outlined text-[16px]">
+                    {persona === 'publik' ? 'menu_book' : persona === 'pengurus' ? 'shield_person' : 'apps'}
+                  </span>
+                  <span>
+                    {persona === 'cabor'
+                      ? '15 Layar Cabor'
+                      : persona === 'pengurus'
+                        ? 'Katalog Modul'
+                        : 'Katalog Publik'}
+                  </span>
                 </button>
 
                 <button
@@ -930,9 +1187,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5"
+                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 cursor-pointer"
                       >
-                        <span>15 Layar</span>
+                        <span>Katalog Publik</span>
                         <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
                       </button>
                     </div>
@@ -1159,22 +1416,22 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </span>
                     </button>
 
-                    {/* 8. Semua Menu (15 Layar) */}
+                    {/* 8. Semua Menu (Katalog Publik) */}
                     <button
                       onClick={() => setIsAllServicesSheetOpen(true)}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-sky-50 to-blue-50/60 rounded-2xl border border-sky-300/80 shadow-xs hover:border-sky-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#d97706] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-slate-900 shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
-                        <span className="material-symbols-outlined text-[24px] text-slate-900 font-bold drop-shadow-xs">apps</span>
-                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-[#d32f2f] text-white text-[8.5px] font-black border border-white shadow-xs">
-                          15
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
+                        <span className="material-symbols-outlined text-[24px] text-white font-bold drop-shadow-xs">menu_book</span>
+                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-sikoni-navy text-white text-[8.5px] font-black border border-white shadow-xs">
+                          8
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-amber-950 leading-tight line-clamp-1">
-                        Semua Menu
+                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-sky-950 leading-tight line-clamp-1">
+                        Katalog Publik
                       </span>
-                      <span className="font-body-sm text-[9px] text-amber-800 font-bold mt-0.5 line-clamp-1">
-                        15 Layar
+                      <span className="font-body-sm text-[9px] text-sky-800 font-bold mt-0.5 line-clamp-1">
+                        Semua Info
                       </span>
                     </button>
                   </div>
@@ -2760,9 +3017,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5"
+                        className="px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[10.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 cursor-pointer"
                       >
-                        <span>15 Layar</span>
+                        <span>Katalog Modul</span>
                         <span className="material-symbols-outlined text-[13px]">arrow_forward</span>
                       </button>
                     </div>
@@ -2792,10 +3049,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   </div>
 
                   <div
-                    onClick={() => {
-                      setPersona('cabor');
-                      setCaborTab('lpj');
-                    }}
+                    onClick={() => setPengurusTab('approval')}
                     className="bg-surface-container-lowest rounded-2xl p-3 border border-outline-variant/60 shadow-xs hover:border-emerald-400 cursor-pointer transition-colors"
                   >
                     <div className="flex items-center justify-between mb-1">
@@ -2934,10 +3188,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                     {/* 4. Otorisasi SP2D */}
                     <button
-                      onClick={() => {
-                        setPersona('cabor');
-                        setCaborTab('sp2d');
-                      }}
+                      onClick={() => setPengurusTab('kas')}
                       className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
                       <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -2956,10 +3207,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                     {/* 5. Verifikasi LPJ */}
                     <button
-                      onClick={() => {
-                        setPersona('cabor');
-                        setCaborTab('lpj');
-                      }}
+                      onClick={() => setPengurusTab('approval')}
                       className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
                       <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -2978,10 +3226,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                     {/* 6. e-TTE BSrE Digital */}
                     <button
-                      onClick={() => {
-                        setPersona('cabor');
-                        setCaborTab('ette');
-                      }}
+                      onClick={() => setPengurusTab('approval')}
                       className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
                       <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -3000,10 +3245,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                     {/* 7. SKB & Legalitas */}
                     <button
-                      onClick={() => {
-                        setPersona('cabor');
-                        setCaborTab('skb-doc');
-                      }}
+                      onClick={() => setPengurusTab('monitoring')}
                       className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-teal-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
                       <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0f766e] via-[#0d9488] to-[#14b8a6] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(13,148,136,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
@@ -3020,22 +3262,22 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </span>
                     </button>
 
-                    {/* 8. Semua Menu (15 Layar) */}
+                    {/* 8. Semua Modul Pengurus */}
                     <button
                       onClick={() => setIsAllServicesSheetOpen(true)}
                       className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#d97706] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-slate-900 shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
-                        <span className="material-symbols-outlined text-[24px] text-slate-900 font-bold drop-shadow-xs">apps</span>
-                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-[#d32f2f] text-white text-[8.5px] font-black border border-white shadow-xs">
-                          15
+                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#b45309] to-[#f59e0b] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
+                        <span className="material-symbols-outlined text-[24px] text-white font-bold drop-shadow-xs">shield_person</span>
+                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-amber-700 text-white text-[8.5px] font-black border border-white shadow-xs">
+                          8
                         </div>
                       </div>
                       <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-amber-950 leading-tight line-clamp-1">
-                        Semua Menu
+                        Katalog Modul
                       </span>
                       <span className="font-body-sm text-[9px] text-amber-800 font-bold mt-0.5 line-clamp-1">
-                        15 Layar
+                        Eksekutif
                       </span>
                     </button>
                   </div>
@@ -3479,7 +3721,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
         )}
 
         {/* ========================================================
-            BOTTOM SHEET: KATALOG LENGKAP 15 LAYAR SIKONI
+            BOTTOM SHEET: KATALOG LENGKAP SIKONI (PERSONA-ADAPTIVE)
            ======================================================== */}
         {isAllServicesSheetOpen && (
           <div className={`absolute inset-0 z-50 flex flex-col ${deviceView === 'desktop' ? 'justify-center items-center p-4' : 'justify-end'} animate-in fade-in duration-200`}>
@@ -3497,15 +3739,31 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               {/* Header */}
               <div className="px-4 pb-3 border-b border-slate-100 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#990d16] to-[#d32f2f] text-white flex items-center justify-center shadow-xs">
-                    <span className="material-symbols-outlined text-[18px]">apps</span>
+                  <div className={`w-8 h-8 rounded-xl ${
+                    persona === 'publik'
+                      ? 'bg-gradient-to-tr from-[#0f172a] to-[#1e3a8a]'
+                      : persona === 'pengurus'
+                        ? 'bg-gradient-to-tr from-[#78350f] to-[#d97706]'
+                        : 'bg-gradient-to-tr from-[#990d16] to-[#d32f2f]'
+                  } text-white flex items-center justify-center shadow-xs`}>
+                    <span className="material-symbols-outlined text-[18px]">
+                      {persona === 'publik' ? 'menu_book' : persona === 'pengurus' ? 'shield_person' : 'apps'}
+                    </span>
                   </div>
                   <div>
                     <h3 className="font-headline-md text-sm font-black text-onyx leading-tight">
-                      Katalog 15 Layar & Layanan SIKONI
+                      {persona === 'cabor'
+                        ? 'Katalog 15 Layar & Layanan Cabor'
+                        : persona === 'pengurus'
+                          ? 'Katalog Modul Eksekutif & Pengurus'
+                          : 'Katalog Layanan & Informasi Publik'}
                     </h3>
                     <p className="text-[10px] text-slate-500 font-medium">
-                      Akses cepat seluruh modul administrasi & kasda cabor
+                      {persona === 'cabor'
+                        ? 'Akses cepat seluruh modul administrasi & kasda cabor'
+                        : persona === 'pengurus'
+                          ? 'Akses instrumen persetujuan, monitoring serapan 64 cabor & kasda'
+                          : 'Akses transparansi APBD, direktori 64 cabor, jadwal & profil KONI'}
                     </p>
                   </div>
                 </div>
@@ -3526,7 +3784,13 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     type="text"
                     value={serviceSearch}
                     onChange={(e) => setServiceSearch(e.target.value)}
-                    placeholder="Cari layar (misal: OCR, SKB, Termin, SP2D)..."
+                    placeholder={
+                      persona === 'cabor'
+                        ? 'Cari layar cabor (misal: OCR, SKB, Termin, SP2D)...'
+                        : persona === 'pengurus'
+                          ? 'Cari modul pengurus (misal: Approval, Serapan, Giro)...'
+                          : 'Cari informasi publik (misal: Cabor, APBD, Jadwal, Medali)...'
+                    }
                     className="w-full bg-transparent outline-none text-xs text-onyx font-medium placeholder:text-slate-400"
                   />
                   {serviceSearch && (
@@ -3538,13 +3802,17 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                 {/* Filter Pills */}
                 <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-2">
-                  {['Semua', 'Perencanaan', 'Pencairan Kasda', 'Pelaporan SPJ', 'Legalitas & e-TTE', 'Arsip & Notifikasi'].map((cat) => (
+                  {activeCategories.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setServiceCategoryFilter(cat)}
                       className={`px-2.5 py-1 rounded-full text-[10px] font-black shrink-0 transition-all cursor-pointer ${
                         serviceCategoryFilter === cat
-                          ? 'bg-[#d32f2f] text-white shadow-xs'
+                          ? persona === 'cabor'
+                            ? 'bg-[#d32f2f] text-white shadow-xs'
+                            : persona === 'pengurus'
+                              ? 'bg-amber-600 text-white shadow-xs'
+                              : 'bg-sikoni-navy text-white shadow-xs'
                           : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
                       }`}
                     >
@@ -3556,7 +3824,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
               {/* Catalog Items List */}
               <div className="flex-1 overflow-y-auto p-3 space-y-2 no-scrollbar">
-                {serviceCatalog
+                {activeCatalog
                   .filter((item) => {
                     const matchCategory = serviceCategoryFilter === 'Semua' || item.category === serviceCategoryFilter;
                     const matchQuery =
@@ -3567,13 +3835,16 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   })
                   .map((item) => (
                     <button
-                      key={item.id}
+                      key={`${persona}-${item.id}-${item.screenNum}`}
                       onClick={() => {
                         setIsAllServicesSheetOpen(false);
                         if (item.isOcr) {
                           setIsOcrModalOpen(true);
+                        } else if (persona === 'publik') {
+                          setPublikTab(item.id as any);
+                        } else if (persona === 'pengurus') {
+                          setPengurusTab(item.id as any);
                         } else {
-                          setPersona('cabor');
                           setCaborTab(item.id as any);
                         }
                       }}
@@ -3589,7 +3860,13 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         </div>
                         <div className="min-w-0">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-[10px] font-black text-primary uppercase tracking-wide bg-primary/10 px-1.5 py-0.2 rounded-md">
+                            <span className={`text-[10px] font-black uppercase tracking-wide px-1.5 py-0.2 rounded-md ${
+                              persona === 'publik'
+                                ? 'bg-sky-100 text-sky-800'
+                                : persona === 'pengurus'
+                                  ? 'bg-amber-100 text-amber-800'
+                                  : 'bg-primary/10 text-primary'
+                            }`}>
                               {item.screenNum}
                             </span>
                             <span className="text-[10.5px] font-bold text-slate-400">
@@ -3614,8 +3891,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               {/* Bottom Sheet Footer */}
               <div className="p-3 bg-slate-50 border-t border-slate-100 flex items-center justify-between shrink-0">
                 <span className="text-[10.5px] text-slate-500 font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                  Total 15 Layar Stitch Aktif
+                  <span className={`w-2 h-2 rounded-full ${
+                    persona === 'publik' ? 'bg-sky-500' : persona === 'pengurus' ? 'bg-amber-500' : 'bg-emerald-500'
+                  }`} />
+                  {persona === 'cabor'
+                    ? 'Total 15 Layar Administrasi Cabor Aktif'
+                    : persona === 'pengurus'
+                      ? 'Total 8 Modul Eksekutif & Pengawasan Kasda'
+                      : 'Total 8 Kanal Layanan & Informasi Publik'}
                 </span>
                 <button
                   onClick={() => setIsAllServicesSheetOpen(false)}
