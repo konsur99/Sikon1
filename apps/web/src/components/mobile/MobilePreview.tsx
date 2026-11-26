@@ -1180,8 +1180,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <div
             ref={publikScrollRef}
             className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] text-on-surface ${deviceView === 'desktop'
-              ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
-              : 'p-3 sm:p-4 pb-24 space-y-4'
+              ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
+              : 'p-3 sm:p-4 pb-36 sm:pb-40 space-y-4'
               }`}
           >
             {/* PUBLIK: TAB 1 - BERANDA */}
@@ -1749,6 +1749,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   </div>
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -1817,6 +1819,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   ))}
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -1891,6 +1895,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 >
                   <Download size={14} /> Unduh Laporan Keterbukaan Publik (PDF)
                 </button>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -1941,6 +1947,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </p>
                   </div>
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -2032,6 +2040,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 >
                   <Phone size={14} /> Hubungi Sekretariat KONI Solo
                 </button>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
           </div>
@@ -2045,9 +2055,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             ref={caborScrollRef}
             className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${caborTab === 'home'
               ? deviceView === 'desktop'
-                ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
-                : 'p-4 pb-24 space-y-4'
-              : 'p-0 pb-16'
+                ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
+                : 'p-4 pb-36 sm:pb-40 space-y-4'
+              : 'p-0 pb-36 sm:pb-40'
               }`}
           >
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
@@ -2720,6 +2730,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   </div>
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -3044,6 +3056,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 >
                   <LogOut size={14} /> Keluar dari Akun Cabor
                 </button>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
           </div>
@@ -3056,8 +3070,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <div
             ref={pengurusScrollRef}
             className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] text-on-surface ${deviceView === 'desktop'
-              ? 'p-6 lg:p-8 pb-24 space-y-6 max-w-6xl mx-auto w-full'
-              : 'p-3 sm:p-4 pb-24 space-y-4'
+              ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
+              : 'p-3 sm:p-4 pb-36 sm:pb-40 space-y-4'
               }`}
           >
             {/* PENGURUS: TAB 1 - DASHBOARD EKSEKUTIF */}
@@ -3513,6 +3527,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   </div>
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -3572,6 +3588,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   ))}
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -3605,6 +3623,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   ))}
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -3652,6 +3672,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
                   </div>
                 </div>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
 
@@ -3712,6 +3734,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 >
                   <Download size={14} /> Download Rekap Audit Transaksi
                 </button>
+                {/* Bottom scroll clearance spacer */}
+                <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
               </div>
             )}
           </div>
