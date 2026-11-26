@@ -203,8 +203,9 @@ export const Screen14_Termin3Form: React.FC<Screen14Termin3FormProps> = ({
         <div className="pt-2">
           <button
             type="submit"
+            onClick={handleSubmit}
             disabled={isSubmitting}
-            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#d32f2f] to-[#b71c1c] text-white text-xs font-black shadow-lg shadow-red-500/25 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-[#d32f2f] to-[#b71c1c] text-white text-xs font-black shadow-lg shadow-red-500/25 active:scale-95 transition-all flex items-center justify-center gap-2 disabled:opacity-50 cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">
               {isSubmitting ? 'sync' : 'send'}

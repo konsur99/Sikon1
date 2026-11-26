@@ -1909,9 +1909,18 @@ export const MobilePreview: React.FC = () => {
             {/* CABOR: TAB 5 - AKUN & SK */}
             {caborTab === 'account' && (
               <div className="space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Profil Kepengurusan</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">PASI Surakarta</h2>
+                <div className="flex items-center gap-3 pb-2 border-b border-slate-100">
+                  <button
+                    onClick={() => setCaborTab('home')}
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition-colors"
+                    aria-label="Kembali"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+                  </button>
+                  <div>
+                    <div className="text-[11px] text-sikoni-muted font-bold">Profil Kepengurusan</div>
+                    <h2 className="text-base font-black text-sikoni-navy leading-tight">PASI Surakarta</h2>
+                  </div>
                 </div>
 
                 <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-2">
@@ -2435,7 +2444,7 @@ export const MobilePreview: React.FC = () => {
                 )}
                 <span
                   className={`font-label-md text-[9.5px] tracking-wide uppercase mt-0.5 ${
-                    caborTab === 'finance' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
+                    caborTab === 'finance' || caborTab === 'sp2d' ? 'text-primary font-extrabold' : 'text-on-surface-variant font-bold'
                   }`}
                 >
                   Keuangan
