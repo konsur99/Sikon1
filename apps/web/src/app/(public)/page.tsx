@@ -1,11 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useDisplayMode } from '../../context/DisplayModeContext';
 import { MobilePreview, UserPersona } from '../../components/mobile/MobilePreview';
 
-export default function HomePage() {
+function HomeContent() {
   const { isAndroid } = useDisplayMode();
   const searchParams = useSearchParams();
   const rawPersona = searchParams.get('persona');
@@ -18,5 +18,13 @@ export default function HomePage() {
       defaultDeviceView={isAndroid ? 'mobile' : 'desktop'}
       defaultPersona={validPersona}
     />
+  );
+}
+
+export default function HomePage() {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent />
+    </Suspense>
   );
 }

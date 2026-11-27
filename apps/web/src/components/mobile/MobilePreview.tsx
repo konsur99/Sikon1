@@ -981,25 +981,22 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                   <div className="hidden lg:flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 mr-1">
                     <button
                       onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
-                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
-                        persona === 'publik' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
-                      }`}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${persona === 'publik' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                        }`}
                     >
                       Publik
                     </button>
                     <button
                       onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
-                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
-                        persona === 'cabor' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
-                      }`}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${persona === 'cabor' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                        }`}
                     >
                       Cabor
                     </button>
                     <button
                       onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
-                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
-                        persona === 'pengurus' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
-                      }`}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${persona === 'pengurus' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                        }`}
                     >
                       Pengurus
                     </button>
@@ -1101,7 +1098,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                 <button
                   onClick={() => setIsMobileNotifOpen((prev) => !prev)}
                   aria-label="Notifikasi"
-                  className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
+                  className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs overflow-hidden shrink-0"
                 >
                   <span className="material-symbols-outlined text-[18px]">notifications</span>
                   <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-1.5 ring-white animate-pulse" />
@@ -1244,32 +1241,32 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                           </span>
                         </div>
 
-                        {/* Trio Medal Badges: Emas, Perak, Perunggu */}
-                        <div className="grid grid-cols-3 gap-1.5 mt-2">
+                        {/* Trio Medal Badges: Emas, Perak, Perunggu (Clean, Compact, Never Overflowing) */}
+                        <div className="grid grid-cols-3 gap-1 sm:gap-1.5 mt-2 max-w-[280px] sm:max-w-xs">
                           {/* 1. Emas (Gold) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-400/30 to-amber-600/20 border border-amber-300/40 backdrop-blur-sm flex items-center gap-1 shadow-xs">
-                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥇</span>
+                          <div className="px-1.5 sm:px-2 py-1 rounded-xl bg-gradient-to-b from-amber-400/30 to-amber-600/20 border border-amber-300/40 backdrop-blur-sm flex items-center justify-center gap-1 shadow-xs overflow-hidden">
+                            <span className="text-[12px] sm:text-[13px] leading-none shrink-0 drop-shadow-xs">🥇</span>
                             <div className="min-w-0">
-                              <span className="text-[11.5px] font-black text-amber-200 leading-tight block">124</span>
-                              <span className="text-[7.5px] font-extrabold uppercase text-amber-100/80 tracking-wider block leading-none">Emas</span>
+                              <span className="text-[10.5px] sm:text-[11.5px] font-black text-amber-200 leading-tight block truncate">124</span>
+                              <span className="text-[6.5px] sm:text-[7.5px] font-bold uppercase text-amber-100/90 tracking-tight block leading-none truncate">Emas</span>
                             </div>
                           </div>
 
                           {/* 2. Perak (Silver) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-slate-200/25 to-slate-400/15 border border-slate-200/35 backdrop-blur-sm flex items-center gap-1 shadow-xs">
-                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥈</span>
+                          <div className="px-1.5 sm:px-2 py-1 rounded-xl bg-gradient-to-b from-slate-200/25 to-slate-400/15 border border-slate-200/35 backdrop-blur-sm flex items-center justify-center gap-1 shadow-xs overflow-hidden">
+                            <span className="text-[12px] sm:text-[13px] leading-none shrink-0 drop-shadow-xs">🥈</span>
                             <div className="min-w-0">
-                              <span className="text-[11.5px] font-black text-slate-100 leading-tight block">88</span>
-                              <span className="text-[7.5px] font-extrabold uppercase text-slate-200/80 tracking-wider block leading-none">Perak</span>
+                              <span className="text-[10.5px] sm:text-[11.5px] font-black text-slate-100 leading-tight block truncate">88</span>
+                              <span className="text-[6.5px] sm:text-[7.5px] font-bold uppercase text-slate-200/90 tracking-tight block leading-none truncate">Perak</span>
                             </div>
                           </div>
 
                           {/* 3. Perunggu (Bronze) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-800/30 to-amber-950/25 border border-amber-500/35 backdrop-blur-sm flex items-center gap-1 shadow-xs">
-                            <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥉</span>
+                          <div className="px-1.5 sm:px-2 py-1 rounded-xl bg-gradient-to-b from-amber-800/30 to-amber-950/25 border border-amber-500/35 backdrop-blur-sm flex items-center justify-center gap-1 shadow-xs overflow-hidden">
+                            <span className="text-[12px] sm:text-[13px] leading-none shrink-0 drop-shadow-xs">🥉</span>
                             <div className="min-w-0">
-                              <span className="text-[11.5px] font-black text-amber-300 leading-tight block">95</span>
-                              <span className="text-[7.5px] font-extrabold uppercase text-amber-200/80 tracking-wider block leading-none">Perunggu</span>
+                              <span className="text-[10.5px] sm:text-[11.5px] font-black text-amber-300 leading-tight block truncate">95</span>
+                              <span className="text-[6.5px] sm:text-[7px] font-bold uppercase text-amber-200/90 tracking-tight block leading-none truncate">Perunggu</span>
                             </div>
                           </div>
                         </div>
@@ -1294,27 +1291,30 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                     </div>
 
                     {/* Bottom Action Buttons: Responsively partitioned with zero overlap */}
-                    <div className="pt-2.5 border-t border-white/15 grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:justify-between sm:gap-2">
+                    <div className="pt-2.5 border-t border-white/15 grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:justify-start sm:gap-3">
                       <button
                         onClick={() => setPublikTab('cabor-dir')}
-                        className="py-1.5 px-1 sm:px-3 rounded-xl red-flame-btn text-white font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl red-flame-btn text-white font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px] shrink-0">military_tech</span>
                         <span className="truncate">64 Cabor</span>
                       </button>
                       <button
                         onClick={() => setPublikTab('transparansi')}
-                        className="py-1.5 px-1 sm:px-3 rounded-xl gold-shimmer text-onyx font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl gold-shimmer text-onyx font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px] shrink-0">trending_up</span>
                         <span className="truncate">APBD 2026</span>
                       </button>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="py-1.5 px-1 sm:px-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[8.5px] sm:text-[9.5px] font-bold backdrop-blur-md transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer border border-white/20 shadow-xs active:scale-95"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[8.5px] sm:text-[9.5px] font-bold backdrop-blur-md transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer border border-white/20 shadow-xs active:scale-95 overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px] shrink-0">menu_book</span>
-                        <span className="truncate">Katalog Publik</span>
+                        <span className="truncate">
+                          <span>Katalog</span>
+                          <span className="hidden sm:inline">&nbsp;Publik</span>
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -2191,15 +2191,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
         {persona === 'cabor' && (
           <div
             ref={caborScrollRef}
-            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${
-              deviceView === 'desktop'
-                ? caborTab === 'home'
-                  ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
-                  : 'p-4 lg:p-6 pb-36 sm:pb-40 max-w-6xl mx-auto w-full'
-                : caborTab === 'home'
-                  ? 'p-4 pb-36 sm:pb-40 space-y-4'
-                  : 'p-0 pb-36 sm:pb-40'
-            }`}
+            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${deviceView === 'desktop'
+              ? caborTab === 'home'
+                ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
+                : 'p-4 lg:p-6 pb-36 sm:pb-40 max-w-6xl mx-auto w-full'
+              : caborTab === 'home'
+                ? 'p-4 pb-36 sm:pb-40 space-y-4'
+                : 'p-0 pb-36 sm:pb-40'
+              }`}
           >
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
@@ -3229,13 +3228,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
                   <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/45 text-amber-300 font-extrabold text-[8.5px] sm:text-[9px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-xs shrink-0">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5 sm:gap-2 mb-1">
+                      <div className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-black/45 text-amber-300 font-extrabold text-[8px] sm:text-[9px] tracking-wider uppercase border border-amber-400/30 backdrop-blur-md shadow-xs shrink-0">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                        <span>DASHBOARD EKSEKUTIF • APBD 2026</span>
+                        <span className="hidden xs:inline sm:inline">DASHBOARD </span>
+                        <span>EKSEKUTIF • APBD 2026</span>
                       </div>
-                      <div className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-950/60 text-emerald-300 font-extrabold text-[8px] sm:text-[8.5px] tracking-wider uppercase border border-emerald-400/40 backdrop-blur-md shadow-xs shrink-0">
-                        <span className="material-symbols-outlined text-[12px] text-emerald-300">account_balance</span>
+                      <div className="inline-flex items-center gap-1 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-emerald-950/60 text-emerald-300 font-extrabold text-[7.5px] sm:text-[8.5px] tracking-wider uppercase border border-emerald-400/40 backdrop-blur-md shadow-xs shrink-0">
+                        <span className="material-symbols-outlined text-[11px] sm:text-[12px] text-emerald-300">account_balance</span>
                         <span>BANK JATENG HOST</span>
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-0.5" />
                       </div>
@@ -3256,27 +3256,30 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
                     </div>
 
                     {/* Bottom Action Buttons: Responsively partitioned with zero overlap */}
-                    <div className="pt-2.5 border-t border-white/15 grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:justify-between sm:gap-2">
+                    <div className="pt-2.5 border-t border-white/15 grid grid-cols-3 gap-1.5 sm:flex sm:items-center sm:justify-start sm:gap-3">
                       <button
                         onClick={() => setPengurusTab('approval')}
-                        className="py-1.5 px-1 sm:px-2.5 rounded-xl red-flame-btn text-white font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl red-flame-btn text-white font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px] shrink-0">fact_check</span>
                         <span className="truncate">Approval ({approvalList.filter((a) => a.status === 'Menunggu').length})</span>
                       </button>
                       <button
                         onClick={() => setPengurusTab('kas')}
-                        className="py-1.5 px-1 sm:px-2.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl gold-shimmer text-onyx font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px] shrink-0">account_balance</span>
                         <span className="truncate">Mutasi Giro</span>
                       </button>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="py-1.5 px-1 sm:px-2.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[8.5px] sm:text-[9.5px] font-bold backdrop-blur-md transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer border border-white/20 shadow-xs active:scale-95"
+                        className="py-1.5 px-1 sm:px-3 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[8.5px] sm:text-[9.5px] font-bold backdrop-blur-md transition-all flex items-center justify-center gap-1 min-w-0 cursor-pointer border border-white/20 shadow-xs active:scale-95 overflow-hidden"
                       >
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px] shrink-0">shield_person</span>
-                        <span className="truncate">Katalog Modul</span>
+                        <span className="truncate">
+                          <span>Katalog</span>
+                          <span className="hidden sm:inline">&nbsp;Modul</span>
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -4530,11 +4533,10 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView,
         {/* Mobile Bottom Navigation Bar: Floating Circular Athletic Dock for ALL personas */}
         {caborTab !== 'skb-doc' && (
           <nav
-            className={`z-40 px-3 sm:px-4 pointer-events-none transition-all duration-200 ${
-              deviceView === 'desktop'
-                ? 'sticky bottom-3 mt-auto md:hidden'
-                : 'fixed sm:absolute inset-x-0 bottom-0 sm:bottom-3 pb-[max(0.85rem,env(safe-area-inset-bottom,0px))] sm:pb-0'
-            }`}
+            className={`z-40 px-3 sm:px-4 pointer-events-none transition-all duration-200 ${deviceView === 'desktop'
+              ? 'sticky bottom-3 mt-auto md:hidden'
+              : 'fixed sm:absolute inset-x-0 bottom-0 sm:bottom-3 pb-[max(0.85rem,env(safe-area-inset-bottom,0px))] sm:pb-0'
+              }`}
           >
             <div className="pointer-events-auto w-[calc(100%-1rem)] max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
               {/* PERSONA 1: CABOR */}

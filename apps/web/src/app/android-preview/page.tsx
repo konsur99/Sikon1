@@ -1,11 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
-import { MobilePreview } from '../../components/mobile/MobilePreview';
+import { useSearchParams } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
+import { MobilePreview, UserPersona } from '../../components/mobile/MobilePreview';
 
-export default function AndroidPreviewPage() {
+function AndroidPreviewContent() {
+  const searchParams = useSearchParams();
+  const rawPersona = searchParams.get('persona');
+  const validPersona: UserPersona = rawPersona === 'publik' || rawPersona === 'pengurus' || rawPersona === 'cabor'
+    ? rawPersona
+    : 'cabor';
+
   return (
     <div className="min-h-[100dvh] flex flex-col bg-surface sm:bg-[#e9edf1]">
       {/* Sleek Navigation Bar for Desktop Users */}
@@ -32,9 +39,16 @@ export default function AndroidPreviewPage() {
       </header>
 
       <main className="flex-1 flex flex-col items-center justify-start sm:justify-center">
-        <MobilePreview defaultDeviceView="mobile" />
+        <MobilePreview defaultDeviceView="mobile" defaultPersona={validPersona} />
       </main>
     </div>
   );
 }
 
+export default function AndroidPreviewPage() {
+  return (
+    <Suspense fallback={null}>
+      <AndroidPreviewContent />
+    </Suspense>
+  );
+}
