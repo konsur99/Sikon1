@@ -1281,19 +1281,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                     </div>
 
-                    {/* Bottom Action Buttons */}
-                    <div className="pt-2 border-t border-white/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
-                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap sm:flex-nowrap">
+                    {/* Bottom Action Buttons (Clean 2-Group Flex with Zero Overlap) */}
+                    <div className="pt-2.5 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                         <button
                           onClick={() => setPublikTab('cabor-dir')}
-                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">military_tech</span>
                           <span>64 Cabor</span>
                         </button>
                         <button
                           onClick={() => setPublikTab('transparansi')}
-                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2.5 sm:px-3 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9.5px] sm:text-[10.5px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">trending_up</span>
                           <span>APBD 2026</span>
@@ -1301,8 +1301,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9px] sm:text-[10px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[9px] sm:text-[10px] font-bold backdrop-blur-md transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer border border-white/20 shadow-xs active:scale-95"
                       >
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px]">menu_book</span>
                         <span>Katalog Publik</span>
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
                       </button>
@@ -1376,18 +1377,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 1. 64 Cabor */}
                     <button
                       onClick={() => setPublikTab('cabor-dir')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">military_tech</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">military_tech</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
-                          <span className="text-[8px] font-black text-onyx">64</span>
+                          <span className="text-[7.5px] font-black text-onyx">64</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         64 Cabor
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Direktori
                       </span>
                     </button>
@@ -1395,18 +1396,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 2. Transparansi APBD */}
                     <button
                       onClick={() => setPublikTab('transparansi')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">trending_up</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">trending_up</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-black">done</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Transparansi
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         APBD 2026
                       </span>
                     </button>
@@ -1414,18 +1415,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 3. Jadwal Kejuaraan */}
                     <button
                       onClick={() => setPublikTab('jadwal')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">calendar_month</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">calendar_month</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">event</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Jadwal Lomba
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Kejuaraan Solo
                       </span>
                     </button>
@@ -1441,18 +1442,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           desc: 'Pemberian apresiasi atlet dan pelatih berprestasi di Balai Kota Surakarta disaksikan Walikota dan Ketua Umum KONI Surakarta.',
                         })
                       }
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-rose-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-rose-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#9f1239] via-[#e11d48] to-[#fb7185] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(225,29,72,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">newspaper</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#9f1239] via-[#e11d48] to-[#fb7185] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(225,29,72,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">newspaper</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">campaign</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Kabar Solo
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Berita Atlet
                       </span>
                     </button>
@@ -1468,18 +1469,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           desc: 'Pencapaian luar biasa 64 cabang olahraga binaan KONI Surakarta dengan torehan total 307 medali kejuaraan provinsi.',
                         })
                       }
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#78350f] via-[#b45309] to-[#d97706] flex items-center justify-center text-amber-200 shadow-[0_6px_16px_-2px_rgba(180,83,9,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-amber-300/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">trophy</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#78350f] via-[#b45309] to-[#d97706] flex items-center justify-center text-amber-200 shadow-[0_6px_16px_-2px_rgba(180,83,9,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-amber-300/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">trophy</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">star</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         124 Emas
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Porprov Jateng
                       </span>
                     </button>
@@ -1495,18 +1496,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           desc: 'Stadion Sriwedari sebagai tempat PON I 1948 dan Stadion Manahan bertaraf internasional sebagai pusat pembinaan olahraga prestasi Kota Surakarta.',
                         })
                       }
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-500/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-500/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#1f2937] via-[#374151] to-[#4b5563] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(55,65,81,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">stadium</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#1f2937] via-[#374151] to-[#4b5563] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(55,65,81,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">stadium</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">place</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Fasilitas
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Manahan Solo
                       </span>
                     </button>
@@ -1514,18 +1515,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 7. Profil KONI */}
                     <button
                       onClick={() => setPublikTab('info')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#3730a3] via-[#4f46e5] to-[#6366f1] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(79,70,229,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">info</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#3730a3] via-[#4f46e5] to-[#6366f1] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(79,70,229,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">info</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-bold">check</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Profil KONI
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Sekretariat
                       </span>
                     </button>
@@ -1533,18 +1534,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 8. Semua Menu (Katalog Publik) */}
                     <button
                       onClick={() => setIsAllServicesSheetOpen(true)}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-sky-50 to-blue-50/60 rounded-2xl border border-sky-300/80 shadow-xs hover:border-sky-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-sky-50 to-blue-50/60 rounded-2xl border border-sky-300/80 shadow-xs hover:border-sky-400 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
-                        <span className="material-symbols-outlined text-[24px] text-white font-bold drop-shadow-xs">menu_book</span>
-                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-sikoni-navy text-white text-[8.5px] font-black border border-white shadow-xs">
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/60 shrink-0">
+                        <span className="material-symbols-outlined text-[22px] sm:text-[24px] text-white font-bold drop-shadow-xs">menu_book</span>
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-sikoni-navy text-white text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
                           8
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-sky-950 leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-sky-950 leading-tight block truncate w-full">
                         Katalog Publik
                       </span>
-                      <span className="font-body-sm text-[9px] text-sky-800 font-bold mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-sky-800 font-bold mt-0.5 block truncate w-full">
                         Semua Info
                       </span>
                     </button>
@@ -3176,18 +3177,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                     </div>
 
-                    <div className="pt-2 border-t border-white/15 flex flex-wrap sm:flex-nowrap items-center justify-between gap-1.5 sm:gap-2">
-                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-wrap sm:flex-nowrap">
+                    {/* Bottom Action Buttons (Clean 2-Group Flex with Zero Overlap) */}
+                    <div className="pt-2.5 border-t border-white/15 flex items-center justify-between gap-1.5 sm:gap-2">
+                      <div className="flex items-center gap-1.5 sm:gap-2 min-w-0">
                         <button
                           onClick={() => setPengurusTab('approval')}
-                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9.5px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1.5 rounded-xl red-flame-btn text-white font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">fact_check</span>
-                          <span>Inbox Approval ({approvalList.filter((a) => a.status === 'Menunggu').length})</span>
+                          <span>Approval ({approvalList.filter((a) => a.status === 'Menunggu').length})</span>
                         </button>
                         <button
                           onClick={() => setPengurusTab('kas')}
-                          className="px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9.5px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
+                          className="px-2 sm:px-2.5 py-1.5 rounded-xl gold-shimmer text-onyx font-label-md text-[9px] sm:text-[10px] font-black uppercase tracking-wide shadow-md hover:scale-105 active:scale-95 transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer"
                         >
                           <span className="material-symbols-outlined text-[13px] sm:text-[14px]">account_balance</span>
                           <span>Mutasi Giro</span>
@@ -3195,8 +3197,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
                       <button
                         onClick={() => setIsAllServicesSheetOpen(true)}
-                        className="px-2 sm:px-2.5 py-1 rounded-lg bg-white/20 hover:bg-white/30 text-white font-label-md text-[9px] sm:text-[9.5px] font-bold backdrop-blur-xs transition-colors flex items-center gap-0.5 shrink-0 whitespace-nowrap cursor-pointer"
+                        className="px-2 sm:px-2.5 py-1.5 rounded-xl bg-white/20 hover:bg-white/30 text-white font-label-md text-[8.5px] sm:text-[9.5px] font-bold backdrop-blur-md transition-all flex items-center gap-1 shrink-0 whitespace-nowrap cursor-pointer border border-white/20 shadow-xs active:scale-95"
                       >
+                        <span className="material-symbols-outlined text-[12px] sm:text-[13px]">shield_person</span>
                         <span>Katalog Modul</span>
                         <span className="material-symbols-outlined text-[12px] sm:text-[13px]">arrow_forward</span>
                       </button>
@@ -3205,85 +3208,97 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 </div>
 
                 {/* 2. 4 KPIS EKSEKUTIF (BENTO GRID 2-KOLOM / 4-KOLOM DESKTOP) */}
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
+                  {/* KPI 1: Antrean Approval */}
                   <div
                     onClick={() => setPengurusTab('approval')}
-                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-amber-400 cursor-pointer active:scale-98 transition-all"
+                    className="group relative overflow-hidden bg-gradient-to-br from-amber-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-amber-300/70 shadow-[0_2px_10px_-2px_rgba(245,158,11,0.10)] hover:border-amber-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 shrink-0">
-                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">hourglass_top</span>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[17px]">hourglass_top</span>
                       </div>
-                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-amber-800 px-1.5 py-0.5 rounded-full bg-amber-100 tracking-wider">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-amber-800 px-2 py-0.5 rounded-full bg-amber-100/90 border border-amber-300/60 tracking-wider shrink-0">
                         ANTREAN
                       </span>
                     </div>
-                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
-                      {approvalList.filter((a) => a.status === 'Menunggu').length} Berkas
+                    <div className="mt-2 min-w-0">
+                      <div className="font-data-metric text-[15px] sm:text-[17px] font-black text-onyx leading-tight tracking-tight truncate">
+                        {approvalList.filter((a) => a.status === 'Menunggu').length} Berkas
+                      </div>
+                      <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-semibold mt-0.5 block truncate">
+                        Menunggu TTD
+                      </span>
                     </div>
-                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
-                      Menunggu TTD
-                    </span>
                   </div>
 
+                  {/* KPI 2: LPJ Sah Terverifikasi */}
                   <div
                     onClick={() => setPengurusTab('approval')}
-                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-emerald-400 cursor-pointer active:scale-98 transition-all"
+                    className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-emerald-300/70 shadow-[0_2px_10px_-2px_rgba(16,185,129,0.10)] hover:border-emerald-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 shrink-0">
-                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">receipt_long</span>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[17px]">receipt_long</span>
                       </div>
-                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-emerald-800 px-1.5 py-0.5 rounded-full bg-emerald-100 tracking-wider">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-emerald-800 px-2 py-0.5 rounded-full bg-emerald-100/90 border border-emerald-300/60 tracking-wider shrink-0">
                         SAH
                       </span>
                     </div>
-                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
-                      04 Laporan
+                    <div className="mt-2 min-w-0">
+                      <div className="font-data-metric text-[15px] sm:text-[17px] font-black text-onyx leading-tight tracking-tight truncate">
+                        04 Laporan
+                      </div>
+                      <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-semibold mt-0.5 block truncate">
+                        LPJ Terverifikasi
+                      </span>
                     </div>
-                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
-                      LPJ Terverifikasi
-                    </span>
                   </div>
 
+                  {/* KPI 3: Pajak Disetor */}
                   <div
                     onClick={() => setPengurusTab('kas')}
-                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-sky-400 cursor-pointer active:scale-98 transition-all"
+                    className="group relative overflow-hidden bg-gradient-to-br from-sky-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-sky-300/70 shadow-[0_2px_10px_-2px_rgba(14,165,233,0.10)] hover:border-sky-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-600 shrink-0">
-                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">payments</span>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[17px]">payments</span>
                       </div>
-                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-sky-800 px-1.5 py-0.5 rounded-full bg-sky-100 tracking-wider">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-sky-800 px-2 py-0.5 rounded-full bg-sky-100/90 border border-sky-300/60 tracking-wider shrink-0">
                         PAJAK
                       </span>
                     </div>
-                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
-                      Rp 184 Juta
+                    <div className="mt-2 min-w-0">
+                      <div className="font-data-metric text-[15px] sm:text-[17px] font-black text-onyx leading-tight tracking-tight truncate">
+                        Rp 184 Juta
+                      </div>
+                      <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-semibold mt-0.5 block truncate tracking-tight">
+                        PPh & PPN Terkumpul
+                      </span>
                     </div>
-                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
-                      PPh & PPN Terkumpul
-                    </span>
                   </div>
 
+                  {/* KPI 4: Cabor Binaan */}
                   <div
                     onClick={() => setPengurusTab('monitoring')}
-                    className="bg-surface-container-lowest rounded-2xl p-2.5 sm:p-3 border border-outline-variant/60 shadow-xs hover:border-indigo-400 cursor-pointer active:scale-98 transition-all"
+                    className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-indigo-300/70 shadow-[0_2px_10px_-2px_rgba(99,102,241,0.10)] hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="w-6.5 h-6.5 sm:w-7 sm:h-7 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 shrink-0">
-                        <span className="material-symbols-outlined text-[14px] sm:text-[15px]">military_tech</span>
+                    <div className="flex items-center justify-between gap-1.5">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                        <span className="material-symbols-outlined text-[16px] sm:text-[17px]">military_tech</span>
                       </div>
-                      <span className="font-label-md text-[8px] sm:text-[8.5px] uppercase font-extrabold text-indigo-800 px-1.5 py-0.5 rounded-full bg-indigo-100 tracking-wider">
+                      <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-indigo-800 px-2 py-0.5 rounded-full bg-indigo-100/90 border border-indigo-300/60 tracking-wider shrink-0">
                         CABOR
                       </span>
                     </div>
-                    <div className="font-data-metric text-[14px] sm:text-[15.5px] font-extrabold text-onyx mt-1 leading-tight truncate">
-                      64 Cabor
+                    <div className="mt-2 min-w-0">
+                      <div className="font-data-metric text-[15px] sm:text-[17px] font-black text-onyx leading-tight tracking-tight truncate">
+                        64 Cabor
+                      </div>
+                      <span className="font-body-sm text-[9.5px] sm:text-[10px] text-on-surface-variant font-semibold mt-0.5 block truncate">
+                        Binaan Aktif
+                      </span>
                     </div>
-                    <span className="font-body-sm text-[9px] sm:text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
-                      Binaan Aktif
-                    </span>
                   </div>
                 </div>
 
@@ -3310,18 +3325,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 1. Approval Inbox */}
                     <button
                       onClick={() => setPengurusTab('approval')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(211,47,47,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">fact_check</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(211,47,47,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">fact_check</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
                           <span className="text-[8px] font-black text-onyx">{approvalList.filter((a) => a.status === 'Menunggu').length}</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Persetujuan
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         RAB & Nota
                       </span>
                     </button>
@@ -3329,18 +3344,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 2. Monitoring 64 Cabor */}
                     <button
                       onClick={() => setPengurusTab('monitoring')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">monitoring</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">monitoring</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="text-[8px] font-black text-onyx">64</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         64 Cabor
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Kontrol Pagu
                       </span>
                     </button>
@@ -3348,18 +3363,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 3. Kas & Giro Bank Jateng */}
                     <button
                       onClick={() => setPengurusTab('kas')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-600/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-slate-600/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#1e293b] via-[#334155] to-[#475569] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(30,41,59,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">account_balance</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#1e293b] via-[#334155] to-[#475569] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(30,41,59,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">account_balance</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-black">done</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Giro Kasda
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Bank Jateng
                       </span>
                     </button>
@@ -3367,18 +3382,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 4. Otorisasi SP2D */}
                     <button
                       onClick={() => setPengurusTab('kas')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">payments</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">payments</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-white border border-slate-300 flex items-center justify-center shadow-xs">
                           <span className="text-[7.5px] font-bold text-amber-900">SP2D</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Buku SP2D
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Otorisasi Kas
                       </span>
                     </button>
@@ -3386,18 +3401,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 5. Verifikasi LPJ */}
                     <button
                       onClick={() => setPengurusTab('approval')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">receipt_long</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">receipt_long</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-bold">check</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         Audit SPJ
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Kwitansi Cabor
                       </span>
                     </button>
@@ -3405,18 +3420,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 6. e-TTE BSrE Digital */}
                     <button
                       onClick={() => setPengurusTab('approval')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">fingerprint</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">fingerprint</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-bold">shield</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         e-TTE BSrE
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Tanda Tangan
                       </span>
                     </button>
@@ -3424,18 +3439,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 7. SKB & Legalitas */}
                     <button
                       onClick={() => setPengurusTab('monitoring')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-teal-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-teal-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0f766e] via-[#0d9488] to-[#14b8a6] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(13,148,136,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">picture_as_pdf</span>
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#0f766e] via-[#0d9488] to-[#14b8a6] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(13,148,136,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] drop-shadow-md">picture_as_pdf</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">check</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10.5px] sm:text-[11.5px] font-extrabold text-onyx leading-tight block truncate w-full">
                         SKB Kasda
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-on-surface-variant font-medium mt-0.5 block truncate w-full">
                         Dokumen Resmi
                       </span>
                     </button>
@@ -3443,18 +3458,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 8. Semua Modul Pengurus */}
                     <button
                       onClick={() => setIsAllServicesSheetOpen(true)}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[96px] sm:min-h-[105px]"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#b45309] to-[#f59e0b] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
-                        <span className="material-symbols-outlined text-[24px] text-white font-bold drop-shadow-xs">shield_person</span>
-                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-amber-700 text-white text-[8.5px] font-black border border-white shadow-xs">
+                      <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#92400e] via-[#b45309] to-[#f59e0b] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/60 shrink-0">
+                        <span className="material-symbols-outlined text-[22px] sm:text-[24px] text-white font-bold drop-shadow-xs">shield_person</span>
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-amber-700 text-white text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
                           8
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-amber-950 leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-amber-950 leading-tight block truncate w-full">
                         Katalog Modul
                       </span>
-                      <span className="font-body-sm text-[9px] text-amber-800 font-bold mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8.5px] sm:text-[9px] text-amber-800 font-bold mt-0.5 block truncate w-full">
                         Eksekutif
                       </span>
                     </button>

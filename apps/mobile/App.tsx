@@ -408,23 +408,27 @@ export default function App() {
 
                 {/* 4 KPIs */}
                 <View style={styles.kpiGrid}>
-                  <View style={styles.kpiBox}>
-                    <Text style={styles.kpiLabel}>Antrean approval</Text>
-                    <Text style={[styles.kpiNumber, { color: '#b77a1d' }]}>
+                  <View style={[styles.kpiBox, { borderLeftColor: '#d97706' }]}>
+                    <Text style={[styles.kpiLabel, { color: '#b45309' }]}>ANTREAN</Text>
+                    <Text style={[styles.kpiNumber, { color: '#b45309' }]}>
                       {approvalList.filter(a => a.status === 'Menunggu').length} Berkas
                     </Text>
+                    <Text style={styles.activitySub}>Menunggu TTD</Text>
                   </View>
-                  <View style={styles.kpiBox}>
-                    <Text style={styles.kpiLabel}>LPJ verifikasi</Text>
-                    <Text style={[styles.kpiNumber, { color: '#168b8b' }]}>04 Laporan</Text>
+                  <View style={[styles.kpiBox, { borderLeftColor: '#059669' }]}>
+                    <Text style={[styles.kpiLabel, { color: '#047857' }]}>SAH</Text>
+                    <Text style={[styles.kpiNumber, { color: '#047857' }]}>04 Laporan</Text>
+                    <Text style={styles.activitySub}>LPJ Terverifikasi</Text>
                   </View>
-                  <View style={styles.kpiBox}>
-                    <Text style={styles.kpiLabel}>Pajak disetor</Text>
-                    <Text style={[styles.kpiNumber, { color: '#23846d' }]}>Rp 184 jt</Text>
+                  <View style={[styles.kpiBox, { borderLeftColor: '#0284c7' }]}>
+                    <Text style={[styles.kpiLabel, { color: '#0369a1' }]}>PAJAK</Text>
+                    <Text style={[styles.kpiNumber, { color: '#0369a1' }]}>Rp 184 Juta</Text>
+                    <Text style={styles.activitySub}>PPh & PPN Terkumpul</Text>
                   </View>
-                  <View style={styles.kpiBox}>
-                    <Text style={styles.kpiLabel}>Total cabor</Text>
-                    <Text style={styles.kpiNumber}>64</Text>
+                  <View style={[styles.kpiBox, { borderLeftColor: '#4f46e5' }]}>
+                    <Text style={[styles.kpiLabel, { color: '#4338ca' }]}>CABOR</Text>
+                    <Text style={[styles.kpiNumber, { color: '#4338ca' }]}>64 Cabor</Text>
+                    <Text style={styles.activitySub}>Binaan Aktif</Text>
                   </View>
                 </View>
 
