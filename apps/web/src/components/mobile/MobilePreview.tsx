@@ -363,9 +363,10 @@ export type DeviceView = 'mobile' | 'tablet' | 'desktop';
 
 export interface MobilePreviewProps {
   defaultDeviceView?: DeviceView;
+  defaultPersona?: UserPersona;
 }
 
-export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView }) => {
+export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView, defaultPersona = 'cabor' }) => {
   const { isAndroid } = useDisplayMode();
   const [deviceView, setDeviceView] = useState<DeviceView>(
     defaultDeviceView || (isAndroid ? 'mobile' : 'desktop')
@@ -373,11 +374,21 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
   // Synchronize deviceView with global display mode (controlled exclusively by the bottom switcher)
   useEffect(() => {
-    setDeviceView(isAndroid ? 'mobile' : 'desktop');
-  }, [isAndroid]);
+    if (defaultDeviceView) {
+      setDeviceView(defaultDeviceView);
+    } else {
+      setDeviceView(isAndroid ? 'mobile' : 'desktop');
+    }
+  }, [isAndroid, defaultDeviceView]);
 
   // Active Persona: 'publik' | 'cabor' | 'pengurus'
-  const [persona, setPersona] = useState<UserPersona>('cabor');
+  const [persona, setPersona] = useState<UserPersona>(defaultPersona);
+
+  useEffect(() => {
+    if (defaultPersona) {
+      setPersona(defaultPersona);
+    }
+  }, [defaultPersona]);
 
   // Persona-specific tab states
   const [caborTab, setCaborTab] = useState<
@@ -781,7 +792,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
 
       {/* Screen Direct Navigator Strip (Adapts automatically to Persona Scope - Hidden on mobile handphones) */}
-      <div className="hidden sm:block w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
+      <div className="hidden sm:block w-full max-w-6xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
@@ -958,7 +969,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       ? 'PORTAL INFORMASI RESMI'
                       : persona === 'pengurus'
                         ? 'PENGURUS KONI SURAKARTA'
-                        : 'KOTA SURAKARTA'}
+                        : 'OTORITAS CABOR'}
                   </span>
                 </div>
               </div>
@@ -967,7 +978,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               {deviceView === 'desktop' && (
                 <div className="hidden md:flex items-center gap-2">
                   {/* In-Header Persona Toggle for Desktop */}
-                  <div className="hidden xl:flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 mr-1">
+                  <div className="hidden lg:flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 mr-1">
                     <button
                       onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
                       className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
@@ -2180,12 +2191,15 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
         {persona === 'cabor' && (
           <div
             ref={caborScrollRef}
-            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${caborTab === 'home'
-              ? deviceView === 'desktop'
-                ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
-                : 'p-4 pb-36 sm:pb-40 space-y-4'
-              : 'p-0 pb-36 sm:pb-40'
-              }`}
+            className={`flex-1 overflow-y-auto overscroll-contain scroll-smooth smooth-scroll bg-[#F8F9FD] ${
+              deviceView === 'desktop'
+                ? caborTab === 'home'
+                  ? 'p-6 lg:p-8 pb-36 sm:pb-40 space-y-6 max-w-6xl mx-auto w-full'
+                  : 'p-4 lg:p-6 pb-36 sm:pb-40 max-w-6xl mx-auto w-full'
+                : caborTab === 'home'
+                  ? 'p-4 pb-36 sm:pb-40 space-y-4'
+                  : 'p-0 pb-36 sm:pb-40'
+            }`}
           >
             {/* CABOR: TAB 1 - BERANDA (GARUDA FLAME ATHLETIC - 100% PERSIS STITCH) */}
             {caborTab === 'home' && (
@@ -2221,7 +2235,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div className="relative z-10 mb-3.5">
                       <div className="inline-flex items-center gap-1.5 text-amber-300/90 font-label-md text-[9.5px] sm:text-[10.5px] font-bold uppercase tracking-wider">
                         <span className="material-symbols-outlined text-[13px] sm:text-[14px]">sports_score</span>
-                        CABOR ATLETIK RESMI
+                        OTORITAS CABOR RESMI
                       </div>
                       <h1 className="font-headline-lg text-2xl sm:text-3xl font-black tracking-tight text-white leading-tight mt-0.5 drop-shadow-md">
                         KONI SURAKARTA
@@ -2456,18 +2470,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 1. Ajukan RAB */}
                     <button
                       onClick={() => setCaborTab('submissions')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(211,47,47,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">note_add</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(211,47,47,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">note_add</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-black">add</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         Ajukan RAB
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Proposal
                       </span>
                     </button>
@@ -2475,18 +2489,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 2. SPJ Kegiatan */}
                     <button
                       onClick={() => setCaborTab('lpj')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">receipt_long</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#c27803] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">receipt_long</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-500 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-black">done</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         SPJ Kegiatan
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Kwitansi
                       </span>
                     </button>
@@ -2494,18 +2508,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 3. Scan OCR Nota */}
                     <button
                       onClick={() => setIsOcrModalOpen(true)}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-sky-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">document_scanner</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">document_scanner</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">photo_camera</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         Scan OCR
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Foto Nota
                       </span>
                     </button>
@@ -2513,18 +2527,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 4. Buku Kas & SP2D */}
                     <button
                       onClick={() => setCaborTab('sp2d')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-amber-500/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_6px_16px_-2px_rgba(31,41,55,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-amber-300/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">savings</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#374151] via-[#1f2937] to-[#111827] flex items-center justify-center text-amber-400 shadow-[0_6px_16px_-2px_rgba(31,41,55,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-amber-300/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">savings</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full gold-shimmer border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">payments</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         Buku Kas
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Mutasi SP2D
                       </span>
                     </button>
@@ -2532,18 +2546,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 5. SKB Dokumen */}
                     <button
                       onClick={() => setCaborTab('skb-doc')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-emerald-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">picture_as_pdf</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(5,150,105,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">picture_as_pdf</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">check</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         SKB PDF
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Legalitas
                       </span>
                     </button>
@@ -2551,18 +2565,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 6. e-TTE Digital */}
                     <button
                       onClick={() => setCaborTab('ette')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-indigo-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">fingerprint</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#4338ca] via-[#6366f1] to-[#818cf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(99,102,241,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">fingerprint</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-emerald-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-white font-bold">shield</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         e-TTE BSrE
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Tanda Tangan
                       </span>
                     </button>
@@ -2570,18 +2584,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 7. Pencairan T-III */}
                     <button
                       onClick={() => setCaborTab('termin3')}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-rose-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-surface-container-lowest rounded-2xl border border-outline-variant/60 shadow-xs hover:border-rose-400/50 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#9f1239] via-[#e11d48] to-[#fb7185] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(225,29,72,0.4)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/40">
-                        <span className="material-symbols-outlined text-[22px] drop-shadow-md">send_and_archive</span>
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#9f1239] via-[#e11d48] to-[#fb7185] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(225,29,72,0.4)] mb-1 group-hover:scale-105 transition-transform border-t border-white/40 shrink-0">
+                        <span className="material-symbols-outlined text-[19px] sm:text-[21px] drop-shadow-md">send_and_archive</span>
                         <div className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-amber-400 border border-white flex items-center justify-center shadow-xs">
                           <span className="material-symbols-outlined text-[9px] text-onyx font-bold">forward</span>
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-onyx leading-tight line-clamp-1">
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-onyx leading-tight block truncate w-full px-0.5">
                         Termin III
                       </span>
-                      <span className="font-body-sm text-[9px] text-on-surface-variant font-medium mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-on-surface-variant font-medium mt-0.5 block truncate w-full px-0.5">
                         Pencairan
                       </span>
                     </button>
@@ -2589,18 +2603,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     {/* 8. Semua Layanan (15 Layar) */}
                     <button
                       onClick={() => setIsAllServicesSheetOpen(true)}
-                      className="group relative flex flex-col items-center text-center p-2 sm:p-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer"
+                      className="group relative flex flex-col items-center justify-center text-center px-1 sm:px-2 py-2 sm:py-2.5 bg-gradient-to-b from-amber-50 to-orange-50/60 rounded-2xl border border-amber-300/80 shadow-xs hover:border-amber-400 hover:shadow-md transition-all active:scale-95 cursor-pointer min-h-[98px] sm:min-h-[106px] overflow-hidden"
                     >
-                      <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#d97706] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-slate-900 shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1.5 group-hover:scale-105 transition-transform border-t border-white/60">
-                        <span className="material-symbols-outlined text-[24px] text-slate-900 font-bold drop-shadow-xs">apps</span>
-                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-[#d32f2f] text-white text-[8.5px] font-black border border-white shadow-xs">
+                      <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-[#d97706] via-[#f59e0b] to-[#fbbf24] flex items-center justify-center text-slate-900 shadow-[0_6px_16px_-2px_rgba(245,158,11,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/60 shrink-0">
+                        <span className="material-symbols-outlined text-[20px] sm:text-[22px] text-slate-900 font-bold drop-shadow-xs">apps</span>
+                        <div className="absolute -top-1 -right-1 px-1 py-0.2 rounded-full bg-[#d32f2f] text-white text-[8px] font-black border border-white shadow-xs">
                           15
                         </div>
                       </div>
-                      <span className="font-title-md text-[11px] sm:text-[11.5px] font-extrabold text-amber-950 leading-tight line-clamp-1">
-                        Semua Menu
+                      <span className="font-title-md text-[10px] sm:text-[11px] font-extrabold text-amber-950 leading-tight block truncate w-full px-0.5">
+                        Katalog Cabor
                       </span>
-                      <span className="font-body-sm text-[9px] text-amber-800 font-bold mt-0.5 line-clamp-1">
+                      <span className="font-body-sm text-[8px] sm:text-[8.5px] text-amber-800 font-bold mt-0.5 block truncate w-full px-0.5">
                         15 Layar
                       </span>
                     </button>
@@ -3211,7 +3225,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="absolute inset-0 w-full h-full object-cover object-center scale-105"
                     src="/images/track_manahan.jpg"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#1e293b]/95 to-[#0f172a]/90 backdrop-blur-[1px]" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#120406] via-[#8b0000]/95 to-[#1e293b]/90 backdrop-blur-[1px]" />
                   <div className="absolute inset-0 carbon-pattern opacity-25" />
 
                   <div className="relative z-10 flex flex-col justify-between min-h-[170px]">
@@ -4183,19 +4197,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           </div>
         )}
 
-        {/* Selected Cabor Detail Bottom Sheet (Android Native Style) */}
+        {/* Selected Cabor Detail Bottom Sheet (Android Native Style / Centered Modal on Desktop) */}
         {selectedCaborDetail && (
           <div
-            className="fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex items-end justify-center animate-in fade-in duration-150"
+            className={`fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex ${deviceView === 'desktop' ? 'items-center justify-center p-4' : 'items-end justify-center'} animate-in fade-in duration-150`}
             onClick={() => setSelectedCaborDetail(null)}
           >
             <div
-              className="w-full bg-white rounded-t-[32px] p-5 pb-8 shadow-2xl border-t border-slate-200/90 text-xs space-y-3 animate-in slide-in-from-bottom duration-200 max-h-[85vh] overflow-y-auto"
+              className={`${deviceView === 'desktop' ? 'w-full max-w-lg rounded-3xl border border-slate-200' : 'w-full rounded-t-[32px] border-t border-slate-200/90'} bg-white p-5 pb-8 shadow-2xl text-xs space-y-3 animate-in ${deviceView === 'desktop' ? 'zoom-in-95' : 'slide-in-from-bottom'} duration-200 max-h-[85vh] overflow-y-auto`}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Drag Handle */}
+              {/* Drag Handle (Mobile only) */}
               <div
-                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer"
+                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer sm:hidden"
                 onClick={() => setSelectedCaborDetail(null)}
               />
 
@@ -4264,19 +4278,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           </div>
         )}
 
-        {/* Selected Generic Item Detail Bottom Sheet (Android Native Style) */}
+        {/* Selected Generic Item Detail Bottom Sheet (Android Native Style / Centered Modal on Desktop) */}
         {selectedMobileItem && (
           <div
-            className="fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex items-end justify-center animate-in fade-in duration-150"
+            className={`fixed sm:absolute inset-0 bg-black/60 z-50 backdrop-blur-xs flex ${deviceView === 'desktop' ? 'items-center justify-center p-4' : 'items-end justify-center'} animate-in fade-in duration-150`}
             onClick={() => setSelectedMobileItem(null)}
           >
             <div
-              className="w-full bg-white rounded-t-[32px] p-5 pb-8 shadow-2xl border-t border-slate-200/90 text-xs space-y-3 animate-in slide-in-from-bottom duration-200"
+              className={`${deviceView === 'desktop' ? 'w-full max-w-md rounded-3xl border border-slate-200' : 'w-full rounded-t-[32px] border-t border-slate-200/90'} bg-white p-5 pb-8 shadow-2xl text-xs space-y-3 animate-in ${deviceView === 'desktop' ? 'zoom-in-95' : 'slide-in-from-bottom'} duration-200`}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Drag Handle */}
+              {/* Drag Handle (Mobile only) */}
               <div
-                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer"
+                className="w-12 h-1.5 bg-slate-300 rounded-full mx-auto mb-2 cursor-pointer sm:hidden"
                 onClick={() => setSelectedMobileItem(null)}
               />
 
@@ -4522,7 +4536,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 : 'fixed sm:absolute inset-x-0 bottom-0 sm:bottom-3 pb-[max(0.85rem,env(safe-area-inset-bottom,0px))] sm:pb-0'
             }`}
           >
-            <div className="pointer-events-auto max-w-[350px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
+            <div className="pointer-events-auto w-[calc(100%-1rem)] max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
               {/* PERSONA 1: CABOR */}
               {persona === 'cabor' && (
                 <>
