@@ -4858,9 +4858,9 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           </nav>
         )}
 
-        {/* Android Native Gesture Navigation Bar Pill (Only on mobile and tablet) */}
+        {/* Android Native Gesture Navigation Bar Pill (Only on simulated desktop preview) */}
         {deviceView !== 'desktop' && (
-          <div className="h-4 bg-white flex items-center justify-center flex-shrink-0 select-none pb-1">
+          <div className="hidden sm:flex h-4 bg-white items-center justify-center flex-shrink-0 select-none pb-1">
             <div className="w-28 h-1 bg-slate-300 rounded-full" />
           </div>
         )}
