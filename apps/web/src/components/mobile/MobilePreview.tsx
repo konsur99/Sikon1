@@ -3504,101 +3504,317 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </div>
 
                     {/* Top 5 Cabor Serapan */}
-                    <div className="bg-surface-container-lowest rounded-[28px] p-5 shadow-[0_8px_24px_rgba(18,19,22,0.04)] border border-outline-variant/60 space-y-3">
-                      <div className="flex justify-between items-center">
-                        <div className="flex items-center gap-2">
-                          <div className="w-1.5 h-5 rounded-full bg-secondary" />
-                          <h2 className="font-headline-md text-[16px] sm:text-[17px] font-extrabold text-onyx tracking-tight">
-                            Monitoring Serapan 64 Cabor
-                          </h2>
+                    <div className="bg-surface-container-lowest rounded-[28px] p-4 sm:p-5 shadow-[0_8px_24px_rgba(18,19,22,0.04)] border border-outline-variant/60 space-y-3.5">
+                      <div className="flex justify-between items-center gap-2">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <div className="w-1.5 h-5 rounded-full bg-secondary shrink-0" />
+                          <div>
+                            <h2 className="font-headline-md text-[15.5px] sm:text-[17px] font-extrabold text-onyx tracking-tight leading-tight">
+                              Monitoring Serapan 64 Cabor
+                            </h2>
+                            <p className="text-[10px] text-on-surface-variant font-medium mt-0.5 hidden sm:block">
+                              Realisasi termin pencairan dana hibah APBD 2026
+                            </p>
+                          </div>
                         </div>
                         <button
                           onClick={() => setPengurusTab('monitoring')}
-                          className="font-label-md text-[11px] uppercase text-primary font-extrabold hover:underline flex items-center gap-0.5 tracking-wider"
+                          className="px-2.5 py-1 rounded-full bg-secondary/10 text-secondary-dark font-label-md text-[10.5px] sm:text-[11px] font-extrabold uppercase tracking-wider flex items-center gap-1 hover:bg-secondary/20 transition-all cursor-pointer shrink-0 active:scale-95"
                         >
-                          Semua 64 Cabor
-                          <span className="material-symbols-outlined text-[14px]">chevron_right</span>
+                          <span>Semua 64 Cabor</span>
+                          <span className="material-symbols-outlined text-[13px] sm:text-[14px]">chevron_right</span>
                         </button>
                       </div>
 
-                      <div className="space-y-2.5">
-                        <div className="p-3 bg-surface-container-low rounded-2xl border border-outline-variant/60 shadow-xs">
-                          <div className="flex justify-between text-[11.5px] mb-1.5 font-bold">
-                            <span className="text-onyx">PASI (Atletik Surakarta)</span>
-                            <span className="text-primary font-black">Rp 48 jt / Rp 120 jt (40%)</span>
+                      <div className="space-y-3">
+                        {/* 1. PASI (Atletik Surakarta) */}
+                        <div
+                          onClick={() => setPengurusTab('monitoring')}
+                          className="p-3 sm:p-3.5 bg-gradient-to-r from-red-500/[0.04] via-surface-container-low to-surface-container-low rounded-2xl border border-outline-variant/60 hover:border-primary/40 hover:shadow-xs transition-all cursor-pointer active:scale-[0.99] group"
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#990d16] via-[#d32f2f] to-[#ff5252] flex items-center justify-center text-white shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined text-[18px]">sprint</span>
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="px-1.5 py-0.5 rounded-md bg-red-100 text-red-800 font-black text-[9px] uppercase tracking-wider">
+                                    PASI
+                                  </span>
+                                  <span className="font-extrabold text-[12px] sm:text-[12.5px] text-onyx truncate">
+                                    Atletik Surakarta
+                                  </span>
+                                </div>
+                                <span className="text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                                  Sisa Alokasi: Rp 72 Jt • 38 Atlet
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <div className="flex items-center justify-end gap-1.5">
+                                <span className="text-primary font-black text-[11.5px] sm:text-[12px]">
+                                  Rp 48 jt <span className="text-slate-400 font-normal">/ Rp 120 jt</span>
+                                </span>
+                                <span className="px-1.5 py-0.5 rounded-full bg-primary/10 text-primary font-black text-[9.5px]">
+                                  40%
+                                </span>
+                              </div>
+                              <span className="text-[9px] text-emerald-700 font-bold mt-0.5 block">
+                                SP2D Termin I Cair
+                              </span>
+                            </div>
                           </div>
-                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden shadow-inner">
-                            <div className="bg-primary h-full rounded-full transition-all duration-500" style={{ width: '40%' }} />
+                          {/* Athletic Dual-tone Glowing Bar */}
+                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                            <div
+                              className="bg-gradient-to-r from-[#990d16] via-[#d32f2f] to-[#ff5252] h-full rounded-full transition-all duration-700 shadow-xs"
+                              style={{ width: '40%' }}
+                            />
                           </div>
                         </div>
 
-                        <div className="p-3 bg-surface-container-low rounded-2xl border border-outline-variant/60 shadow-xs">
-                          <div className="flex justify-between text-[11.5px] mb-1.5 font-bold">
-                            <span className="text-onyx">PBVSI (Bola Voli)</span>
-                            <span className="text-emerald-700 font-black">Rp 75 jt / Rp 100 jt (75%)</span>
+                        {/* 2. PBVSI (Bola Voli) */}
+                        <div
+                          onClick={() => setPengurusTab('monitoring')}
+                          className="p-3 sm:p-3.5 bg-gradient-to-r from-emerald-500/[0.04] via-surface-container-low to-surface-container-low rounded-2xl border border-outline-variant/60 hover:border-emerald-400/40 hover:shadow-xs transition-all cursor-pointer active:scale-[0.99] group"
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#065f46] via-[#059669] to-[#34d399] flex items-center justify-center text-white shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined text-[18px]">sports_volleyball</span>
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="px-1.5 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-black text-[9px] uppercase tracking-wider">
+                                    PBVSI
+                                  </span>
+                                  <span className="font-extrabold text-[12px] sm:text-[12.5px] text-onyx truncate">
+                                    Bola Voli
+                                  </span>
+                                </div>
+                                <span className="text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                                  Sisa Alokasi: Rp 25 Jt • Tim Putra/Putri
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <div className="flex items-center justify-end gap-1.5">
+                                <span className="text-emerald-700 font-black text-[11.5px] sm:text-[12px]">
+                                  Rp 75 jt <span className="text-slate-400 font-normal">/ Rp 100 jt</span>
+                                </span>
+                                <span className="px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-black text-[9.5px]">
+                                  75%
+                                </span>
+                              </div>
+                              <span className="text-[9px] text-emerald-700 font-bold mt-0.5 block">
+                                TC Porprov Siap
+                              </span>
+                            </div>
                           </div>
-                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden shadow-inner">
-                            <div className="bg-emerald-500 h-full rounded-full transition-all duration-500" style={{ width: '75%' }} />
+                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                            <div
+                              className="bg-gradient-to-r from-[#065f46] via-[#059669] to-[#34d399] h-full rounded-full transition-all duration-700 shadow-xs"
+                              style={{ width: '75%' }}
+                            />
                           </div>
                         </div>
 
-                        <div className="p-3 bg-surface-container-low rounded-2xl border border-outline-variant/60 shadow-xs">
-                          <div className="flex justify-between text-[11.5px] mb-1.5 font-bold">
-                            <span className="text-onyx">PBSI (Bulu Tangkis)</span>
-                            <span className="text-amber-700 font-black">Rp 92 jt / Rp 110 jt (83%)</span>
+                        {/* 3. PBSI (Bulu Tangkis) */}
+                        <div
+                          onClick={() => setPengurusTab('monitoring')}
+                          className="p-3 sm:p-3.5 bg-gradient-to-r from-amber-500/[0.04] via-surface-container-low to-surface-container-low rounded-2xl border border-outline-variant/60 hover:border-amber-400/40 hover:shadow-xs transition-all cursor-pointer active:scale-[0.99] group"
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#92400e] via-[#c27803] to-[#f59e0b] flex items-center justify-center text-white shadow-xs shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined text-[18px]">sports_tennis</span>
+                              </div>
+                              <div className="min-w-0">
+                                <div className="flex items-center gap-1.5">
+                                  <span className="px-1.5 py-0.5 rounded-md bg-amber-100 text-amber-800 font-black text-[9px] uppercase tracking-wider">
+                                    PBSI
+                                  </span>
+                                  <span className="font-extrabold text-[12px] sm:text-[12.5px] text-onyx truncate">
+                                    Bulu Tangkis
+                                  </span>
+                                </div>
+                                <span className="text-[9.5px] text-on-surface-variant font-medium mt-0.5 block truncate">
+                                  Sisa Alokasi: Rp 18 Jt • Kejurda Jateng
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <div className="flex items-center justify-end gap-1.5">
+                                <span className="text-amber-700 font-black text-[11.5px] sm:text-[12px]">
+                                  Rp 92 jt <span className="text-slate-400 font-normal">/ Rp 110 jt</span>
+                                </span>
+                                <span className="px-1.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-black text-[9.5px]">
+                                  83%
+                                </span>
+                              </div>
+                              <span className="text-[9px] text-amber-700 font-bold mt-0.5 block">
+                                Siap Verifikasi SPJ
+                              </span>
+                            </div>
                           </div>
-                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden shadow-inner">
-                            <div className="bg-amber-500 h-full rounded-full transition-all duration-500" style={{ width: '83%' }} />
+                          <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                            <div
+                              className="bg-gradient-to-r from-[#92400e] via-[#d97706] to-[#f59e0b] h-full rounded-full transition-all duration-700 shadow-xs"
+                              style={{ width: '83%' }}
+                            />
                           </div>
                         </div>
+                      </div>
+
+                      {/* Summary Footnote Ribbon */}
+                      <div className="pt-2 flex items-center justify-between text-[10.5px] text-on-surface-variant border-t border-outline-variant/40">
+                        <span className="flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                          <span>Total Serapan 64 Cabor: <strong className="text-onyx font-bold">Rp 8,75 M (68,4%)</strong></span>
+                        </span>
+                        <span className="text-primary font-bold hidden sm:inline">64 Terpantau Online</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Right Column (5 cols): Rekening Giro & Mutasi Kasda */}
                   <div className={deviceView === 'desktop' ? 'lg:col-span-5 space-y-4' : 'space-y-3'}>
-                    <div className="bg-surface-container-lowest rounded-[28px] p-5 shadow-[0_8px_24px_rgba(18,19,22,0.04)] border border-outline-variant/60 space-y-3">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="w-1.5 h-5 rounded-full bg-emerald-500" />
-                          <h2 className="font-headline-md text-[16px] sm:text-[17px] font-extrabold text-onyx tracking-tight">
+                    <div className="bg-surface-container-lowest rounded-[28px] p-4 sm:p-5 shadow-[0_8px_24px_rgba(18,19,22,0.04)] border border-outline-variant/60 space-y-3.5">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <div className="w-1.5 h-5 rounded-full bg-emerald-500 shrink-0" />
+                          <h2 className="font-headline-md text-[15.5px] sm:text-[17px] font-extrabold text-onyx tracking-tight truncate">
                             Rekening Giro Bank Jateng
                           </h2>
                         </div>
-                        <span className="font-label-md text-[9.5px] uppercase font-bold text-emerald-700 px-2 py-0.5 rounded-full bg-emerald-100">
-                          HOST-TO-HOST
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 font-extrabold text-[8px] sm:text-[8.5px] uppercase tracking-wider shrink-0">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                          <span>HOST-TO-HOST</span>
                         </span>
                       </div>
 
-                      <div className="p-3.5 bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl text-white shadow-md space-y-1">
-                        <span className="text-[10px] text-amber-300 font-bold uppercase tracking-wider block">
-                          SALDO REKENING KAS DAERAH
-                        </span>
-                        <div className="text-2xl font-black text-white">Rp 4.050.000.000</div>
-                        <span className="text-[10.5px] text-slate-300 block">
-                          No. Rek: 102.001.99281 • Cabang Surakarta
-                        </span>
-                      </div>
+                      {/* Executive Digital Bank Card (Obsidian Emerald Kasda Card) */}
+                      <div className="relative overflow-hidden rounded-2xl p-4 sm:p-5 text-white shadow-lg bg-gradient-to-tr from-[#081726] via-[#0f283e] to-[#12384a] border border-emerald-400/30">
+                        {/* Carbon pattern overlay */}
+                        <div className="absolute inset-0 carbon-pattern opacity-25 pointer-events-none" />
+                        {/* Glow orb */}
+                        <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none" />
 
-                      <div className="pt-2 border-t border-outline-variant/40">
-                        <b className="font-label-md text-[11px] uppercase text-on-surface-variant font-bold block mb-2 tracking-wider">
-                          Mutasi Terkini Kasda
-                        </b>
-                        <div className="space-y-2 text-[11px]">
-                          <div className="p-2.5 bg-surface-container-low rounded-xl flex items-center justify-between">
-                            <div>
-                              <b className="text-onyx block font-bold leading-tight">Transfer Hibah PASI (Atletik)</b>
-                              <span className="text-[10px] text-on-surface-variant">09 Nov 2026 • SP2D-092</span>
+                        <div className="relative z-10 flex flex-col justify-between min-h-[145px]">
+                          {/* Card Top: Chip & Bank Branding */}
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              {/* Gold EMV Chip */}
+                              <div className="w-9 h-7 rounded-md bg-gradient-to-tr from-amber-300 via-amber-400 to-amber-200 border border-amber-500/60 shadow-xs flex items-center justify-center relative overflow-hidden">
+                                <div className="absolute inset-x-1 top-2.5 h-[1px] bg-amber-800/40" />
+                                <div className="absolute inset-y-1 left-3.5 w-[1px] bg-amber-800/40" />
+                                <div className="w-3.5 h-3.5 rounded border border-amber-800/40" />
+                              </div>
+                              <span className="material-symbols-outlined text-[18px] text-white/70 rotate-90">contactless</span>
                             </div>
-                            <span className="font-bold text-rose-600">- Rp 48.500.000</span>
+                            <div className="text-right">
+                              <span className="text-[11px] font-black tracking-widest text-white uppercase block leading-none">
+                                BANK JATENG
+                              </span>
+                              <span className="text-[8px] font-extrabold text-amber-300 uppercase tracking-widest block mt-0.5">
+                                KAS DAERAH SURAKARTA
+                              </span>
+                            </div>
                           </div>
 
-                          <div className="p-2.5 bg-surface-container-low rounded-xl flex items-center justify-between">
-                            <div>
-                              <b className="text-onyx block font-bold leading-tight">Transfer Hibah PBVSI (Voli)</b>
-                              <span className="text-[10px] text-on-surface-variant">07 Nov 2026 • SP2D-088</span>
+                          {/* Card Middle: Saldo Amount */}
+                          <div className="my-2">
+                            <span className="text-[9.5px] font-extrabold text-amber-300/90 uppercase tracking-widest block">
+                              SALDO REKENING KAS DAERAH
+                            </span>
+                            <div className="text-2xl sm:text-[26px] font-black text-white tracking-tight leading-tight mt-0.5">
+                              Rp 4.050.000.000
                             </div>
-                            <span className="font-bold text-rose-600">- Rp 14.200.000</span>
+                          </div>
+
+                          {/* Card Bottom: Rekening & Badge */}
+                          <div className="flex items-center justify-between pt-1 border-t border-white/10 text-slate-300">
+                            <span className="font-mono text-[10.5px] sm:text-[11px] tracking-wider font-semibold">
+                              No. Rek: 102.001.99281 • Cabang Surakarta
+                            </span>
+                            <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 border border-emerald-400/40 text-[8px] font-black text-emerald-300 uppercase tracking-wider">
+                              ONLINE
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Mutasi Terkini Kasda */}
+                      <div className="pt-1 space-y-2.5">
+                        <div className="flex items-center justify-between">
+                          <b className="font-label-md text-[11px] uppercase text-on-surface-variant font-extrabold tracking-wider">
+                            Mutasi Terkini Kasda
+                          </b>
+                          <button
+                            onClick={() => setPengurusTab('kas')}
+                            className="text-[10px] text-primary font-bold hover:underline flex items-center gap-0.5"
+                          >
+                            <span>Buku SP2D</span>
+                            <span className="material-symbols-outlined text-[12px]">arrow_forward</span>
+                          </button>
+                        </div>
+
+                        <div className="space-y-2 text-[11px]">
+                          {/* Mutasi 1: Transfer Hibah PASI */}
+                          <div
+                            onClick={() => setPengurusTab('kas')}
+                            className="p-2.5 bg-surface-container-low rounded-xl border border-outline-variant/60 flex items-center justify-between gap-2 hover:border-primary/40 hover:bg-surface-container transition-all cursor-pointer group"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
+                              </div>
+                              <div className="min-w-0">
+                                <b className="text-onyx block font-bold leading-tight truncate">
+                                  Transfer Hibah PASI (Atletik)
+                                </b>
+                                <span className="text-[10px] text-on-surface-variant block truncate">
+                                  09 Nov 2026 • SP2D-092
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <span className="font-black text-rose-600 text-[11.5px] sm:text-[12px] block">
+                                - Rp 48.500.000
+                              </span>
+                              <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                                Sukses SP2D
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Mutasi 2: Transfer Hibah PBVSI */}
+                          <div
+                            onClick={() => setPengurusTab('kas')}
+                            className="p-2.5 bg-surface-container-low rounded-xl border border-outline-variant/60 flex items-center justify-between gap-2 hover:border-primary/40 hover:bg-surface-container transition-all cursor-pointer group"
+                          >
+                            <div className="flex items-center gap-2.5 min-w-0">
+                              <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-600 flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
+                              </div>
+                              <div className="min-w-0">
+                                <b className="text-onyx block font-bold leading-tight truncate">
+                                  Transfer Hibah PBVSI (Voli)
+                                </b>
+                                <span className="text-[10px] text-on-surface-variant block truncate">
+                                  07 Nov 2026 • SP2D-088
+                                </span>
+                              </div>
+                            </div>
+                            <div className="text-right shrink-0">
+                              <span className="font-black text-rose-600 text-[11.5px] sm:text-[12px] block">
+                                - Rp 14.200.000
+                              </span>
+                              <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">
+                                Sukses SP2D
+                              </span>
+                            </div>
                           </div>
                         </div>
                       </div>
