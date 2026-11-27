@@ -728,7 +728,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
   });
 
   return (
-    <div className="w-full flex flex-col items-center justify-center sm:py-6 min-h-screen sm:min-h-[calc(100vh-56px)] bg-[#0d1c2d] sm:bg-[#e9edf1]">
+    <div className="w-full flex flex-col items-center justify-start sm:justify-center sm:py-6 min-h-[100dvh] sm:min-h-[calc(100vh-56px)] bg-surface sm:bg-[#e9edf1]">
       {/* Top Device & Multi-Persona Selector Bar */}
       <div className="hidden sm:flex mb-3 flex-col items-center gap-2.5 max-w-6xl mx-auto w-full px-4">
         <div className="w-full flex flex-col md:flex-row items-center justify-between gap-3 bg-white/90 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm">
@@ -780,8 +780,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
       </div>
 
 
-      {/* Screen Direct Navigator Strip (Adapts automatically to Persona Scope) */}
-      <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
+      {/* Screen Direct Navigator Strip (Adapts automatically to Persona Scope - Hidden on mobile handphones) */}
+      <div className="hidden sm:block w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
             <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
@@ -899,18 +899,6 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             : 'w-full max-w-7xl h-[calc(100dvh-120px)] min-h-[660px] rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 my-2'
           }`}
       >
-        {/* Android Native Status Bar (Only visible on mobile and tablet simulation) */}
-        {deviceView !== 'desktop' && (
-          <div className="h-6 bg-[#142a43] text-white px-4 flex items-center justify-between text-[10px] font-bold tracking-wider select-none flex-shrink-0">
-            <span>12:30</span>
-            <div className="flex items-center gap-1.5 text-[9.5px]">
-              <span className="text-[9px] font-black tracking-normal text-amber-300">5G</span>
-              <span>📶</span>
-              <span>100% 🔋</span>
-            </div>
-          </div>
-        )}
-
         {/* Mobile Quick Role Switcher for Android Phones */}
         <div className="sm:hidden bg-[#142a43] px-3 py-2 flex items-center justify-between gap-1.5 border-b border-white/10 flex-shrink-0 shadow-inner">
           <span className="text-[10px] text-slate-300 font-bold uppercase tracking-wider">Peran:</span>
@@ -4500,8 +4488,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
         {/* Mobile Bottom Navigation Bar: Floating Circular Athletic Dock for ALL personas */}
         {caborTab !== 'skb-doc' && (
-          <nav className={`z-30 px-4 pointer-events-none ${deviceView === 'desktop' ? 'sticky bottom-3 mt-auto' : 'absolute bottom-3 inset-x-0'}`}>
-            <div className="pointer-events-auto max-w-[340px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
+          <nav
+            className={`z-40 px-3 sm:px-4 pointer-events-none transition-all duration-200 ${
+              deviceView === 'desktop'
+                ? 'sticky bottom-3 mt-auto'
+                : 'fixed sm:absolute inset-x-0 bottom-0 sm:bottom-3 pb-[max(0.85rem,env(safe-area-inset-bottom,0px))] sm:pb-0'
+            }`}
+          >
+            <div className="pointer-events-auto max-w-[350px] sm:max-w-[360px] mx-auto bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/80 shadow-[0_16px_36px_rgba(18,19,22,0.18)] rounded-full px-3 py-1.5 flex items-center justify-between">
               {/* PERSONA 1: CABOR */}
               {persona === 'cabor' && (
                 <>

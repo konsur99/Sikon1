@@ -17,7 +17,7 @@ export default function PublicLayout({
 
   if (isPureAppView) {
     return (
-      <div className="min-h-screen flex flex-col bg-slate-900 sm:bg-slate-100">
+      <div className="min-h-[100dvh] flex flex-col bg-surface sm:bg-slate-100">
         <main className="flex-1 flex flex-col">{children}</main>
       </div>
     );

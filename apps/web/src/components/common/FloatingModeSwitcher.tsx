@@ -8,6 +8,12 @@ export const FloatingModeSwitcher: React.FC = () => {
   const { isAndroid, mode, setMode } = useDisplayMode();
   const [isMinimized, setIsMinimized] = useState(false);
 
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 640) {
+      setIsMinimized(true);
+    }
+  }, []);
+
   if (isMinimized) {
     return (
       <button

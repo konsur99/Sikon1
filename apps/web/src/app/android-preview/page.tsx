@@ -7,7 +7,7 @@ import { MobilePreview } from '../../components/mobile/MobilePreview';
 
 export default function AndroidPreviewPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-[#0d1c2d] sm:bg-[#e9edf1]">
+    <div className="min-h-[100dvh] flex flex-col bg-surface sm:bg-[#e9edf1]">
       {/* Sleek Navigation Bar for Desktop Users */}
       <header className="hidden sm:flex h-14 bg-[#142a43] text-white px-6 items-center justify-between shadow-md border-b border-white/10 flex-shrink-0">
         <div className="flex items-center gap-3">
@@ -31,7 +31,7 @@ export default function AndroidPreviewPage() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center">
+      <main className="flex-1 flex flex-col items-center justify-start sm:justify-center">
         <MobilePreview defaultDeviceView="mobile" />
       </main>
     </div>
