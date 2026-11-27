@@ -946,13 +946,15 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
         {(persona !== 'cabor' || caborTab === 'home' || deviceView === 'desktop') && (
           <header className={`sticky top-0 inset-x-0 z-30 pt-safe bg-surface/95 backdrop-blur-xl border-b border-outline-variant/40 ${deviceView === 'desktop' ? 'px-4 lg:px-6' : ''
             }`}>
-            <div className="h-13 sm:h-14 px-3 sm:px-4 flex items-center justify-between">
+            <div className="h-14 px-3 sm:px-4 flex items-center justify-between">
               {/* Brand Logo & Title */}
               <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
-                <div className="relative h-8.5 w-8.5 sm:h-9.5 sm:w-9.5 shrink-0 flex items-center justify-center p-1 rounded-xl bg-white shadow-2xs border border-outline-variant/50">
+                <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center p-1 rounded-xl bg-white shadow-xs border border-outline-variant/60 overflow-hidden">
                   <img
                     alt="Logo KONI Surakarta"
-                    className="h-full w-full object-contain filter drop-shadow-2xs"
+                    width={40}
+                    height={40}
+                    className="w-full h-full max-w-full max-h-full object-contain filter drop-shadow-xs"
                     src="/images/logo_koni.png"
                   />
                 </div>
@@ -963,7 +965,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     </span>
                     <span className="w-1.5 h-1.5 rounded-full bg-secondary shrink-0" />
                   </div>
-                  <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase tracking-[0.12em] text-on-surface-variant font-extrabold leading-none mt-0.5 truncate">
+                  <span className="font-label-md text-[8.5px] sm:text-[9.5px] uppercase tracking-[0.12em] text-on-surface-variant font-extrabold leading-none mt-0.5 truncate">
                     {persona === 'publik'
                       ? 'PORTAL INFORMASI RESMI'
                       : persona === 'pengurus'
@@ -1073,7 +1075,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 <button
                   onClick={() => setIsMobileNotifOpen((prev) => !prev)}
                   aria-label="Notifikasi"
-                  className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-2xs"
+                  className="relative w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center rounded-full bg-surface-container-lowest border border-outline-variant/60 text-onyx hover:text-primary transition-all active:scale-95 shadow-xs"
                 >
                   <span className="material-symbols-outlined text-[18px]">notifications</span>
                   <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary ring-1.5 ring-white animate-pulse" />
@@ -1086,7 +1088,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     else if (persona === 'pengurus') setPengurusTab('profil');
                     else setPublikTab('info');
                   }}
-                  className="relative w-8 h-8 sm:w-8.5 sm:h-8.5 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-2xs cursor-pointer active:scale-95 transition-transform"
+                  className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full p-0.5 bg-gradient-to-tr from-secondary-fixed via-secondary to-amber-200 shadow-xs cursor-pointer active:scale-95 transition-transform"
                   title="Profil Pengguna"
                 >
                   <div className="w-full h-full rounded-full bg-onyx flex items-center justify-center text-white overflow-hidden">
@@ -1219,7 +1221,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         {/* Trio Medal Badges: Emas, Perak, Perunggu */}
                         <div className="grid grid-cols-3 gap-1.5 mt-2">
                           {/* 1. Emas (Gold) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-400/30 to-amber-600/20 border border-amber-300/40 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-400/30 to-amber-600/20 border border-amber-300/40 backdrop-blur-sm flex items-center gap-1 shadow-xs">
                             <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥇</span>
                             <div className="min-w-0">
                               <span className="text-[11.5px] font-black text-amber-200 leading-tight block">124</span>
@@ -1228,7 +1230,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           </div>
 
                           {/* 2. Perak (Silver) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-slate-200/25 to-slate-400/15 border border-slate-200/35 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-slate-200/25 to-slate-400/15 border border-slate-200/35 backdrop-blur-sm flex items-center gap-1 shadow-xs">
                             <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥈</span>
                             <div className="min-w-0">
                               <span className="text-[11.5px] font-black text-slate-100 leading-tight block">88</span>
@@ -1237,7 +1239,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           </div>
 
                           {/* 3. Perunggu (Bronze) */}
-                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-800/30 to-amber-950/25 border border-amber-500/35 backdrop-blur-xs flex items-center gap-1 shadow-2xs">
+                          <div className="px-2 py-1 rounded-xl bg-gradient-to-b from-amber-800/30 to-amber-950/25 border border-amber-500/35 backdrop-blur-sm flex items-center gap-1 shadow-xs">
                             <span className="text-[13px] leading-none shrink-0 drop-shadow-xs">🥉</span>
                             <div className="min-w-0">
                               <span className="text-[11.5px] font-black text-amber-300 leading-tight block">95</span>
@@ -1253,12 +1255,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       </div>
 
                       {/* Right Side: Authentic 3D Championship Gold Medal Graphic */}
-                      <div className="relative shrink-0 flex items-center justify-center p-1">
-                        <div className="absolute inset-0 rounded-full bg-amber-400/20 blur-xl pointer-events-none" />
+                      <div className="relative w-16 h-16 sm:w-20 sm:h-20 shrink-0 flex items-center justify-center p-0.5">
+                        <div className="absolute inset-0 rounded-full bg-amber-400/25 blur-lg pointer-events-none" />
                         <img
                           src="/images/gold_medal.png"
                           alt="Medali Emas Porprov Surakarta"
-                          className="relative w-18 h-18 sm:w-22 sm:h-22 object-contain filter drop-shadow-[0_8px_18px_rgba(0,0,0,0.55)] hover:scale-105 transition-transform duration-300 select-none"
+                          width={80}
+                          height={80}
+                          className="relative w-full h-full max-w-full max-h-full object-contain filter drop-shadow-[0_6px_14px_rgba(0,0,0,0.5)] hover:scale-105 transition-transform duration-300 select-none pointer-events-none"
                         />
                       </div>
                     </div>
@@ -3257,7 +3261,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="group relative overflow-hidden bg-gradient-to-br from-amber-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-amber-300/70 shadow-[0_2px_10px_-2px_rgba(245,158,11,0.10)] hover:border-amber-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
                     <div className="flex items-center justify-between gap-1.5">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-700 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                         <span className="material-symbols-outlined text-[16px] sm:text-[17px]">hourglass_top</span>
                       </div>
                       <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-amber-800 px-2 py-0.5 rounded-full bg-amber-100/90 border border-amber-300/60 tracking-wider shrink-0">
@@ -3280,7 +3284,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="group relative overflow-hidden bg-gradient-to-br from-emerald-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-emerald-300/70 shadow-[0_2px_10px_-2px_rgba(16,185,129,0.10)] hover:border-emerald-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
                     <div className="flex items-center justify-between gap-1.5">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-700 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                         <span className="material-symbols-outlined text-[16px] sm:text-[17px]">receipt_long</span>
                       </div>
                       <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-emerald-800 px-2 py-0.5 rounded-full bg-emerald-100/90 border border-emerald-300/60 tracking-wider shrink-0">
@@ -3303,7 +3307,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="group relative overflow-hidden bg-gradient-to-br from-sky-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-sky-300/70 shadow-[0_2px_10px_-2px_rgba(14,165,233,0.10)] hover:border-sky-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
                     <div className="flex items-center justify-between gap-1.5">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-sky-500/15 border border-sky-500/30 flex items-center justify-center text-sky-700 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                         <span className="material-symbols-outlined text-[16px] sm:text-[17px]">payments</span>
                       </div>
                       <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-sky-800 px-2 py-0.5 rounded-full bg-sky-100/90 border border-sky-300/60 tracking-wider shrink-0">
@@ -3326,7 +3330,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     className="group relative overflow-hidden bg-gradient-to-br from-indigo-500/[0.08] via-surface-container-lowest to-surface-container-lowest rounded-[20px] sm:rounded-2xl p-3 sm:p-3.5 border border-indigo-300/70 shadow-[0_2px_10px_-2px_rgba(99,102,241,0.10)] hover:border-indigo-400 hover:shadow-md transition-all cursor-pointer active:scale-[0.98] flex flex-col justify-between min-h-[100px] sm:min-h-[106px]"
                   >
                     <div className="flex items-center justify-between gap-1.5">
-                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform">
+                      <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-700 shadow-xs shrink-0 group-hover:scale-105 transition-transform">
                         <span className="material-symbols-outlined text-[16px] sm:text-[17px]">military_tech</span>
                       </div>
                       <span className="font-label-md text-[8.5px] sm:text-[9px] uppercase font-black text-indigo-800 px-2 py-0.5 rounded-full bg-indigo-100/90 border border-indigo-300/60 tracking-wider shrink-0">
@@ -3986,7 +3990,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 <div className="relative overflow-hidden rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-[#120406] via-[#1a080c] to-[#0a0204] text-white shadow-xl border border-amber-400/30">
                   <div className="absolute top-0 right-0 w-44 h-44 bg-gradient-to-br from-amber-500/20 via-red-600/15 to-transparent rounded-full blur-2xl pointer-events-none" />
                   <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-red-600/10 rounded-full blur-xl pointer-events-none" />
-                  
+
                   <div className="relative z-10 space-y-3">
                     <div className="flex justify-between items-start">
                       <div className="flex items-center gap-2">

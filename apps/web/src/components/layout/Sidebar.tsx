@@ -108,7 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
       {/* Brand Header */}
       <div className="pb-4 mb-3 border-b border-white/10 flex items-center justify-between">
         <Link href="/admin/dashboard" className="flex items-center gap-3 group">
-          <div className="relative h-10 w-10 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-md border border-white/20 group-hover:scale-105 transition-transform">
+          <div className="relative h-10 w-10 shrink-0 flex items-center justify-center p-1 rounded-2xl bg-white shadow-md border border-white/20 group-hover:scale-105 transition-transform overflow-hidden">
             <Image
               src="/images/logo_koni.png"
               alt="Logo Resmi KONI Kota Surakarta"

@@ -23,12 +23,14 @@ export const PublicHeader: React.FC = () => {
   ];
 
   return (
-    <header className="h-16 sm:h-[68px] bg-white/95 backdrop-blur-md border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-2xs">
+    <header className="h-16 sm:h-[68px] bg-white/95 backdrop-blur-md border-b border-sikoni-line flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30 shadow-xs">
       <Link href="/" className="flex items-center gap-2.5 sm:gap-3" onClick={() => setMobileMenuOpen(false)}>
-        <div className="relative h-9 w-9 sm:h-10 sm:w-10 shrink-0 flex items-center justify-center p-0.5 rounded-xl bg-white shadow-2xs border border-slate-200/80">
+        <div className="relative w-9 h-9 sm:w-10 sm:h-10 shrink-0 flex items-center justify-center p-0.5 rounded-xl bg-white shadow-xs border border-slate-200/80 overflow-hidden">
           <img
             alt="Logo KONI Surakarta"
-            className="h-full w-full object-contain filter drop-shadow-2xs"
+            width={40}
+            height={40}
+            className="w-full h-full max-w-full max-h-full object-contain filter drop-shadow-xs"
             src="/images/logo_koni.png"
           />
         </div>
