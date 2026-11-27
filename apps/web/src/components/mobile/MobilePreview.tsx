@@ -802,7 +802,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 ? 'text-amber-800 bg-amber-100 border-amber-300'
                 : 'text-sky-800 bg-sky-100 border-sky-300'
               }`}>
-              {persona === 'cabor' ? 'Garuda Flame Athletic' : persona === 'pengurus' ? 'Otoritas Eksekutif' : 'Portal Publik'}
+              {persona === 'cabor' ? 'Otoritas Cabor' : persona === 'pengurus' ? 'Otoritas Eksekutif' : 'Portal Publik'}
             </span>
             <button
               type="button"
