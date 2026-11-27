@@ -737,21 +737,21 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             <span className="text-[10px] font-bold text-slate-400 px-2 uppercase tracking-wider hidden lg:inline">Peran:</span>
             <button
               onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'publik' ? 'bg-sikoni-navy text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
+              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'publik' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
                 }`}
             >
               <Users size={13} /> Publik
             </button>
             <button
               onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'cabor' ? 'bg-[#d32f2f] text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
+              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'cabor' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
                 }`}
             >
               <Award size={13} /> Cabor
             </button>
             <button
               onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
-              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'pengurus' ? 'bg-amber-600 text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
+              className={`px-3 py-1.5 rounded-lg text-xs font-black flex items-center gap-1.5 transition-all cursor-pointer ${persona === 'pengurus' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-600 hover:text-onyx'
                 }`}
             >
               <Building2 size={13} /> Pengurus KONI
@@ -760,8 +760,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
           {/* Active Persona Scope Description Pill */}
           <div className="hidden lg:flex items-center gap-2 text-xs font-medium text-slate-600">
-            <span className={`w-2 h-2 rounded-full ${persona === 'cabor' ? 'bg-[#d32f2f]' : persona === 'pengurus' ? 'bg-amber-500' : 'bg-sikoni-navy'
-              }`} />
+            <span className="w-2 h-2 rounded-full bg-[#d32f2f] animate-pulse" />
             <span className="text-slate-500 text-[11.5px] font-semibold">
               {persona === 'publik'
                 ? 'Portal Publik: Keterbukaan APBD 2026, Direktori 64 Cabor, & Jadwal Lomba'
@@ -785,8 +784,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
       <div className="w-full max-w-xl mx-auto mb-3 bg-white/95 backdrop-blur-md p-2.5 rounded-2xl border border-slate-200/90 shadow-sm transition-all">
         <div className="flex items-center justify-between px-1">
           <div className="flex items-center gap-1.5 text-xs font-black text-[#0f172a]">
-            <span className={`w-2.5 h-2.5 rounded-full ${persona === 'cabor' ? 'bg-[#d32f2f]' : persona === 'pengurus' ? 'bg-amber-500' : 'bg-sikoni-navy'
-              } animate-pulse`} />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#d32f2f] animate-pulse" />
             <span>
               {persona === 'cabor'
                 ? 'Stitch Screen Direct Hub (15 Layar Cabor)'
@@ -796,12 +794,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className={`hidden sm:inline-block text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border ${persona === 'cabor'
-              ? 'text-red-800 bg-red-100 border-red-300'
-              : persona === 'pengurus'
-                ? 'text-amber-800 bg-amber-100 border-amber-300'
-                : 'text-sky-800 bg-sky-100 border-sky-300'
-              }`}>
+            <span className="hidden sm:inline-block text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border text-red-800 bg-red-100 border-red-300">
               {persona === 'cabor' ? 'Otoritas Cabor' : persona === 'pengurus' ? 'Otoritas Eksekutif' : 'Portal Publik'}
             </span>
             <button
@@ -865,7 +858,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   type="button"
                   onClick={() => setPublikTab(scr.id as any)}
                   className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer active:scale-95 ${publikTab === scr.id
-                    ? 'bg-sikoni-navy text-white shadow-md'
+                    ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                     }`}
                 >
@@ -886,7 +879,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   type="button"
                   onClick={() => setPengurusTab(scr.id as any)}
                   className={`px-2.5 py-1.5 rounded-xl text-[11px] font-black shrink-0 transition-all cursor-pointer active:scale-95 ${pengurusTab === scr.id
-                    ? 'bg-amber-600 text-white shadow-md'
+                    ? 'bg-[#d32f2f] text-white shadow-md shadow-red-500/20'
                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                     }`}
                 >
@@ -911,7 +904,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <div className="h-6 bg-[#142a43] text-white px-4 flex items-center justify-between text-[10px] font-bold tracking-wider select-none flex-shrink-0">
             <span>12:30</span>
             <div className="flex items-center gap-1.5 text-[9.5px]">
-              <span className="text-[9px] font-black tracking-normal text-sikoni-gold">5G</span>
+              <span className="text-[9px] font-black tracking-normal text-amber-300">5G</span>
               <span>📶</span>
               <span>100% 🔋</span>
             </div>
@@ -924,7 +917,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <div className="flex items-center gap-1 bg-black/25 p-1 rounded-xl flex-1 max-w-[280px] justify-between">
             <button
               onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
-              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'publik' ? 'bg-white text-sikoni-navy shadow-sm' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'publik' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-300 hover:text-white'
                 }`}
             >
               <Users size={12} />
@@ -932,7 +925,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             </button>
             <button
               onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
-              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'cabor' ? 'bg-sikoni-teal text-white shadow-sm' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'cabor' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-300 hover:text-white'
                 }`}
             >
               <Award size={12} />
@@ -940,7 +933,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             </button>
             <button
               onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
-              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'pengurus' ? 'bg-sikoni-gold text-sikoni-navy shadow-sm' : 'text-slate-300 hover:text-white'
+              className={`flex-1 py-1.5 rounded-lg text-[10.5px] font-black transition-all flex items-center justify-center gap-1 active:scale-95 ${persona === 'pengurus' ? 'red-flame-btn text-white shadow-sm' : 'text-slate-300 hover:text-white'
                 }`}
             >
               <Building2 size={12} />
@@ -996,7 +989,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           key={tab.id}
                           onClick={() => setCaborTab(tab.id as any)}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${caborTab === tab.id
-                            ? 'bg-[#d32f2f] text-white shadow-xs'
+                            ? 'red-flame-btn text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
@@ -1020,7 +1013,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           key={tab.id}
                           onClick={() => setPublikTab(tab.id as any)}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${publikTab === tab.id
-                            ? 'bg-sikoni-navy text-white shadow-xs'
+                            ? 'red-flame-btn text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
@@ -1044,7 +1037,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           key={tab.id}
                           onClick={() => setPengurusTab(tab.id as any)}
                           className={`px-2.5 py-1 rounded-lg text-[11px] font-extrabold flex items-center gap-1 transition-all cursor-pointer ${pengurusTab === tab.id
-                            ? 'bg-amber-600 text-white shadow-xs'
+                            ? 'red-flame-btn text-white shadow-xs'
                             : 'text-slate-600 hover:text-onyx hover:bg-white/80'
                             }`}
                         >
@@ -1061,19 +1054,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   onClick={() => setIsAllServicesSheetOpen(true)}
-                  className={`hidden md:flex text-[11px] font-extrabold px-2.5 py-1 rounded-lg items-center gap-1 transition-all cursor-pointer shadow-2xs ${persona === 'cabor'
-                    ? 'text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200/80'
-                    : persona === 'pengurus'
-                      ? 'text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-200/80'
-                      : 'text-sky-800 bg-sky-50 hover:bg-sky-100 border border-sky-200/80'
-                    }`}
-                  title={
-                    persona === 'cabor'
-                      ? 'Buka Katalog 15 Layar Cabor'
-                      : persona === 'pengurus'
-                        ? 'Buka Katalog Eksekutif Pengurus'
-                        : 'Buka Katalog Layanan Publik'
-                  }
+                  className="hidden md:flex text-[11px] font-extrabold px-2.5 py-1 rounded-lg items-center gap-1 transition-all cursor-pointer shadow-2xs text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200/80"
+                  title="Buka Katalog Layanan"
                 >
                   <span className="material-symbols-outlined text-[15px]">
                     {persona === 'publik' ? 'menu_book' : persona === 'pengurus' ? 'shield_person' : 'apps'}
@@ -1119,14 +1101,14 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
         {/* Floating In-App Mobile Notification Dropdown Popover */}
         {isMobileNotifOpen && (
           <div className="absolute top-14 inset-x-2 bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 overflow-hidden text-xs animate-in fade-in slide-in-from-top-2 duration-150">
-            <div className="p-3 bg-gradient-to-r from-sikoni-navy to-[#1f3f63] text-white flex items-center justify-between">
+            <div className="p-3 bg-gradient-to-r from-[#120406] via-[#1a080c] to-[#120406] text-white flex items-center justify-between border-b border-amber-400/20">
               <div className="flex items-center gap-2">
-                <Bell size={15} className="text-sikoni-gold" />
-                <span className="font-bold text-xs">Pemberitahuan Sistem</span>
+                <Bell size={15} className="text-amber-400" />
+                <span className="font-bold text-xs text-white">Pemberitahuan Sistem</span>
               </div>
               <button
                 onClick={() => setIsMobileNotifOpen(false)}
-                className="text-slate-300 hover:text-white p-0.5"
+                className="text-slate-300 hover:text-white p-0.5 cursor-pointer"
               >
                 <X size={15} />
               </button>
@@ -1141,8 +1123,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 className="p-2.5 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors"
               >
                 <div className="flex justify-between items-start">
-                  <b className="text-sikoni-navy text-[11px]">RAB Kejuaraan Atletik Disetujui</b>
-                  <span className="text-[9px] text-sikoni-muted">10 mnt lalu</span>
+                  <b className="text-onyx text-[11px] font-bold">RAB Kejuaraan Atletik Disetujui</b>
+                  <span className="text-[9px] text-on-surface-variant font-semibold">10 mnt lalu</span>
                 </div>
                 <p className="text-[10.5px] text-slate-600 mt-0.5">
                   Bendahara KONI telah menyetujui usulan dana termin I senilai Rp 48,5 jt.
@@ -1157,8 +1139,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 className="p-2.5 hover:bg-slate-50 rounded-xl cursor-pointer transition-colors"
               >
                 <div className="flex justify-between items-start">
-                  <b className="text-sikoni-navy text-[11px]">Bukti Kuitansi Diterima</b>
-                  <span className="text-[9px] text-sikoni-muted">1 jam lalu</span>
+                  <b className="text-onyx text-[11px] font-bold">Bukti Kuitansi Diterima</b>
+                  <span className="text-[9px] text-on-surface-variant font-semibold">1 jam lalu</span>
                 </div>
                 <p className="text-[10.5px] text-slate-600 mt-0.5">
                   Nota pengeluaran transportasi kontingen telah diverifikasi BPKAD.
@@ -1169,7 +1151,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             <div className="p-2 bg-slate-50 border-t border-slate-100 text-center">
               <button
                 onClick={() => setIsMobileNotifOpen(false)}
-                className="text-[10.5px] font-bold text-sikoni-teal"
+                className="text-[10.5px] font-bold text-primary hover:underline cursor-pointer"
               >
                 Tutup Notifikasi
               </button>
@@ -1538,7 +1520,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     >
                       <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-[#0369a1] via-[#0284c7] to-[#38bdf8] flex items-center justify-center text-white shadow-[0_6px_16px_-2px_rgba(2,132,199,0.45)] mb-1 group-hover:scale-105 transition-transform border-t border-white/60 shrink-0">
                         <span className="material-symbols-outlined text-[22px] sm:text-[24px] text-white font-bold drop-shadow-xs">menu_book</span>
-                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-sikoni-navy text-white text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
+                        <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#d32f2f] text-white text-[8px] font-black border border-white flex items-center justify-center shadow-xs">
                           8
                         </div>
                       </div>
@@ -1820,11 +1802,21 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PUBLIK: TAB 2 - DIREKTORI CABOR */}
             {publikTab === 'cabor-dir' && (
               <div key="cabor-dir" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Direktori Resmi</div>
-                  <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
-                    64 Cabang Olahraga
-                  </h2>
+                <div className="flex items-center justify-between pb-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-5 rounded-full bg-primary" />
+                    <div>
+                      <h2 className="font-headline-md text-base sm:text-lg font-black text-onyx tracking-tight">
+                        Direktori 64 Cabang Olahraga
+                      </h2>
+                      <p className="text-[10px] text-on-surface-variant font-medium">
+                        Daftar lengkap cabor binaan resmi KONI Kota Surakarta
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-label-md text-[9.5px] uppercase font-black text-primary px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
+                    64 Cabor
+                  </span>
                 </div>
 
                 {/* Search Bar */}
@@ -1835,19 +1827,19 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     placeholder="Cari cabor (misal: atletik, voli, silat)..."
                     value={caborSearch}
                     onChange={(e) => setCaborSearch(e.target.value)}
-                    className="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs text-sikoni-ink focus:outline-none focus:border-sikoni-teal"
+                    className="w-full bg-surface-container-lowest border border-outline-variant/60 rounded-xl pl-8 pr-3 py-2 text-xs text-onyx placeholder:text-slate-400 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 shadow-xs"
                   />
                 </div>
 
                 {/* Category Pills */}
-                <div className="flex gap-1 overflow-x-auto pb-1 text-[10px]">
+                <div className="flex gap-1.5 overflow-x-auto pb-1 text-[10.5px] no-scrollbar">
                   {['Semua', 'Terukur', 'Permainan Bola', 'Beladiri', 'Raket'].map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setCaborCategory(cat)}
-                      className={`px-2.5 py-1 rounded-full whitespace-nowrap font-bold transition-all ${caborCategory === cat
-                        ? 'bg-sikoni-navy text-white'
-                        : 'bg-white text-slate-600 border border-slate-200'
+                      className={`px-3 py-1 rounded-full whitespace-nowrap font-black transition-all cursor-pointer active:scale-95 ${caborCategory === cat
+                        ? 'red-flame-btn text-white shadow-xs'
+                        : 'bg-surface-container-low text-on-surface-variant border border-outline-variant/60 hover:bg-surface-container'
                         }`}
                     >
                       {cat}
@@ -1861,24 +1853,27 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div
                       key={idx}
                       onClick={() => setSelectedCaborDetail(c)}
-                      className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all cursor-pointer flex items-center justify-between group"
+                      className="bg-surface-container-lowest p-3 rounded-2xl border border-outline-variant/60 shadow-xs hover:border-primary/50 hover:shadow-md transition-all cursor-pointer flex items-center justify-between group active:scale-[0.99]"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-slate-200 shadow-2xs group-hover:scale-105 transition-transform bg-slate-900">
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="relative w-12 h-12 rounded-2xl overflow-hidden shrink-0 border border-outline-variant/60 shadow-xs group-hover:scale-105 transition-transform bg-slate-900">
                           <img src={c.image} alt={c.name} className="w-full h-full object-cover" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
                           <span className="absolute bottom-1 inset-x-0 text-center font-black text-white text-[9.5px] drop-shadow-sm tracking-wider">
                             {c.code}
                           </span>
                         </div>
-                        <div>
-                          <b className="text-xs text-sikoni-navy block leading-tight group-hover:text-sikoni-teal transition-colors">{c.name}</b>
-                          <span className="text-[10px] text-sikoni-teal font-semibold">
-                            {c.category} • {c.atlet} Atlet Terdaftar
+                        <div className="min-w-0">
+                          <b className="text-xs text-onyx block leading-tight font-extrabold truncate group-hover:text-primary transition-colors">{c.name}</b>
+                          <span className="text-[10px] text-primary font-bold flex items-center gap-1 mt-0.5 truncate">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                            {c.category} • {c.atlet} Atlet
                           </span>
                         </div>
                       </div>
-                      <ChevronRight size={16} className="text-slate-300 group-hover:text-sikoni-navy transition-colors" />
+                      <span className="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary group-hover:translate-x-0.5 transition-all shrink-0">
+                        chevron_right
+                      </span>
                     </div>
                   ))}
                 </div>
@@ -1890,63 +1885,84 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PUBLIK: TAB 3 - TRANSPARANSI ANGGARAN */}
             {publikTab === 'transparansi' && (
               <div key="transparansi" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Keterbukaan Informasi Publik</div>
-                  <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
-                    Transparansi Anggaran
-                  </h2>
+                <div className="flex items-center justify-between pb-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-5 rounded-full bg-gradient-to-b from-primary via-secondary to-amber-300" />
+                    <div>
+                      <h2 className="font-headline-md text-base sm:text-lg font-black text-onyx tracking-tight">
+                        Transparansi Dana Hibah APBD 2026
+                      </h2>
+                      <p className="text-[10px] text-on-surface-variant font-medium">
+                        Keterbukaan alokasi dan realisasi anggaran olahraga Kota Surakarta
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-label-md text-[9px] uppercase font-black text-emerald-800 px-2.5 py-0.5 rounded-full bg-emerald-100 border border-emerald-300">
+                    Akuntabel
+                  </span>
                 </div>
 
-                <div className="card-hero-navy p-4 rounded-2xl text-white">
-                  <div className="text-[10px] text-sikoni-gold font-bold uppercase">
-                    Pagu Hibah APBD TA 2026
-                  </div>
-                  <div className="text-2xl font-black mt-1">Rp 12.800.000.000</div>
-                  <div className="mt-2 text-[10.5px] text-slate-200">
-                    KONI Surakarta berkomitmen pada prinsip akuntabilitas publik bebas suap & gratifikasi.
+                <div className="relative overflow-hidden rounded-[24px] p-5 text-white shadow-lg bg-gradient-to-tr from-[#120406] via-[#8b0000]/95 to-[#d32f2f]/85 border border-amber-400/30">
+                  <div className="absolute inset-0 carbon-pattern opacity-25 pointer-events-none" />
+                  <div className="relative z-10 space-y-1.5">
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black/45 text-amber-300 font-extrabold text-[8.5px] uppercase tracking-wider border border-amber-300/40">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                      <span>PAGU INDUK HIBAH OLAHRAGA SURAKARTA 2026</span>
+                    </div>
+                    <div className="text-2xl sm:text-3xl font-black tracking-tight text-white mt-1">
+                      Rp 12.800.000.000
+                    </div>
+                    <div className="flex items-center gap-2 pt-1 text-[10.5px] text-white/90">
+                      <span>Terserap: <strong className="text-amber-300 font-bold">Rp 8,75 M (68,4%)</strong></span>
+                      <span>•</span>
+                      <span>Sisa Kasda: <strong className="text-emerald-300 font-bold">Rp 4,05 M</strong></span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2.5 text-xs">
-                  <b className="text-xs text-sikoni-navy block">Alokasi per Pos Kegiatan</b>
-                  <div className="space-y-2">
+                <div className="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/60 shadow-xs space-y-3">
+                  <div className="flex items-center justify-between">
+                    <b className="text-xs font-extrabold text-onyx">Alokasi per Pos Kegiatan Utama</b>
+                    <span className="text-[10px] text-on-surface-variant font-semibold">T.A. 2026</span>
+                  </div>
+                  <div className="space-y-2.5 text-xs">
                     <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>Pembinaan Prestasi Cabor</span>
-                        <b className="text-sikoni-navy">Rp 5,63 M (44%)</b>
+                      <div className="flex justify-between text-[11px] mb-1 font-bold">
+                        <span className="text-onyx">Pembinaan Prestasi 64 Cabor</span>
+                        <span className="text-primary font-black">Rp 5,63 M (44%)</span>
                       </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-sikoni-teal h-full" style={{ width: '44%' }} />
+                      <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                        <div className="bg-gradient-to-r from-[#990d16] via-[#d32f2f] to-[#ff5252] h-full rounded-full" style={{ width: '44%' }} />
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>Sarana & Perlengkapan Tanding</span>
-                        <b className="text-sikoni-navy">Rp 3,20 M (25%)</b>
+                      <div className="flex justify-between text-[11px] mb-1 font-bold">
+                        <span className="text-onyx">Sarana & Perlengkapan Tanding</span>
+                        <span className="text-amber-700 font-black">Rp 3,20 M (25%)</span>
                       </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-sikoni-gold h-full" style={{ width: '25%' }} />
-                      </div>
-                    </div>
-
-                    <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>Insentif Atlet & Pelatih</span>
-                        <b className="text-sikoni-navy">Rp 2,30 M (18%)</b>
-                      </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-sky-500 h-full" style={{ width: '18%' }} />
+                      <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                        <div className="bg-gradient-to-r from-[#c27803] via-[#f59e0b] to-[#fbbf24] h-full rounded-full" style={{ width: '25%' }} />
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-[11px] mb-1">
-                        <span>Operasional & Kesekretariatan</span>
-                        <b className="text-sikoni-navy">Rp 1,67 M (13%)</b>
+                      <div className="flex justify-between text-[11px] mb-1 font-bold">
+                        <span className="text-onyx">Insentif Atlet & Pelatih Berprestasi</span>
+                        <span className="text-emerald-700 font-black">Rp 2,30 M (18%)</span>
                       </div>
-                      <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                        <div className="bg-slate-400 h-full" style={{ width: '13%' }} />
+                      <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                        <div className="bg-gradient-to-r from-[#065f46] via-[#059669] to-[#34d399] h-full rounded-full" style={{ width: '18%' }} />
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-[11px] mb-1 font-bold">
+                        <span className="text-onyx">Operasional & Kesekretariatan</span>
+                        <span className="text-sky-700 font-black">Rp 1,67 M (13%)</span>
+                      </div>
+                      <div className="w-full bg-slate-200/80 h-2 rounded-full overflow-hidden p-[1px] shadow-inner">
+                        <div className="bg-gradient-to-r from-[#0369a1] via-[#0284c7] to-[#38bdf8] h-full rounded-full" style={{ width: '13%' }} />
                       </div>
                     </div>
                   </div>
@@ -1954,7 +1970,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                 <button
                   onClick={() => showToast('Mengunduh Berkas Transparansi Publik 2026 (PDF)...')}
-                  className="w-full py-2.5 bg-sikoni-navy text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm"
+                  className="w-full py-2.5 gold-shimmer text-onyx rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
                 >
                   <Download size={14} /> Unduh Laporan Keterbukaan Publik (PDF)
                 </button>
@@ -1966,46 +1982,56 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PUBLIK: TAB 4 - JADWAL & EVENT */}
             {publikTab === 'jadwal' && (
               <div key="jadwal" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Kalender Kompetisi</div>
-                  <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
-                    Jadwal Kejuaraan Kota
-                  </h2>
+                <div className="flex items-center justify-between pb-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-5 rounded-full bg-primary" />
+                    <div>
+                      <h2 className="font-headline-md text-base sm:text-lg font-black text-onyx tracking-tight">
+                        Kalender Kejuaraan Kota
+                      </h2>
+                      <p className="text-[10px] text-on-surface-variant font-medium">
+                        Jadwal pertandingan & turnamen resmi di Surakarta
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-label-md text-[9.5px] uppercase font-black text-primary px-2.5 py-0.5 rounded-full bg-primary/10 border border-primary/20">
+                    2026
+                  </span>
                 </div>
 
                 <div className={`grid gap-2.5 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <span className="text-[9px] font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                  <div className="bg-surface-container-lowest p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-1.5 hover:border-primary/40 transition-colors">
+                    <span className="text-[9px] font-bold text-amber-800 bg-amber-100 border border-amber-200 px-2 py-0.5 rounded-full">
                       Mendatang • 15 Nov 2026
                     </span>
-                    <b className="text-xs text-sikoni-navy block">
+                    <b className="text-xs text-onyx block font-extrabold mt-1">
                       Kejuaraan Daerah Atletik Pelajar Solo
                     </b>
-                    <p className="text-[10.5px] text-slate-500">
+                    <p className="text-[10.5px] text-on-surface-variant leading-relaxed">
                       Diselenggarakan oleh KONI Surakarta bersama Pengcab di Stadion Sriwedari. Terbuka untuk umum.
                     </p>
                   </div>
 
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <div className="bg-surface-container-lowest p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-1.5 hover:border-primary/40 transition-colors">
+                    <span className="text-[9px] font-bold text-emerald-800 bg-emerald-100 border border-emerald-200 px-2 py-0.5 rounded-full">
                       Mendatang • 22 Nov 2026
                     </span>
-                    <b className="text-xs text-sikoni-navy block">
+                    <b className="text-xs text-onyx block font-extrabold mt-1">
                       Piala Walikota Surakarta Bola Voli 2026
                     </b>
-                    <p className="text-[10.5px] text-slate-500">
-                      GOR Manahan Solo • Perebutan piala bergilir 16 tim antar kecamatan.
+                    <p className="text-[10.5px] text-on-surface-variant leading-relaxed">
+                      GOR Manahan Solo • Perebutan piala bergilir 16 tim antar kecamatan se-Kota Surakarta.
                     </p>
                   </div>
 
-                  <div className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5">
-                    <span className="text-[9px] font-bold text-sky-700 bg-sky-50 px-2 py-0.5 rounded-full">
+                  <div className="bg-surface-container-lowest p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-1.5 hover:border-primary/40 transition-colors">
+                    <span className="text-[9px] font-bold text-sky-800 bg-sky-100 border border-sky-200 px-2 py-0.5 rounded-full">
                       Desember 2026
                     </span>
-                    <b className="text-xs text-sikoni-navy block">
+                    <b className="text-xs text-onyx block font-extrabold mt-1">
                       Seleksi Atlet Puslatkot Porprov 2027
                     </b>
-                    <p className="text-[10.5px] text-slate-500">
+                    <p className="text-[10.5px] text-on-surface-variant leading-relaxed">
                       Seleksi terbuka bagi atlet potensial kelahiran 2004 ke atas di berbagai venue kota.
                     </p>
                   </div>
@@ -2018,15 +2044,25 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PUBLIK: TAB 5 - INFO KONI */}
             {publikTab === 'info' && (
               <div key="info" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Tentang Organisasi</div>
-                  <h2 className="text-lg font-black text-sikoni-navy tracking-tight">
-                    KONI Kota Surakarta
-                  </h2>
+                <div className="flex items-center justify-between pb-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-5 rounded-full bg-primary" />
+                    <div>
+                      <h2 className="font-headline-md text-base sm:text-lg font-black text-onyx tracking-tight">
+                        KONI Kota Surakarta
+                      </h2>
+                      <p className="text-[10px] text-on-surface-variant font-medium">
+                        Profil kepengurusan dan kesekretariatan resmi
+                      </p>
+                    </div>
+                  </div>
+                  <span className="font-label-md text-[9.5px] uppercase font-black text-amber-800 px-2.5 py-0.5 rounded-full bg-amber-100 border border-amber-300">
+                    2025–2029
+                  </span>
                 </div>
 
                 {/* Hero Ketua Umum Card with Official Photo */}
-                <div className="relative overflow-hidden bg-gradient-to-br from-[#142a43] via-[#1d3a59] to-[#120406] rounded-2xl p-4 text-white shadow-md border border-amber-400/30">
+                <div className="relative overflow-hidden bg-gradient-to-tr from-[#120406] via-[#8b0000]/90 to-[#120406] rounded-2xl p-4 text-white shadow-md border border-amber-400/30">
                   <div className="flex items-center gap-3.5">
                     <div className="relative w-16 h-16 rounded-2xl overflow-hidden ring-2 ring-amber-400 shrink-0 shadow-md bg-slate-800">
                       <img
@@ -2049,49 +2085,49 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-2.5">
+                <div className="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/60 shadow-xs text-xs space-y-2.5">
                   <div className="flex items-center justify-between">
-                    <b className="text-xs text-sikoni-navy block">Dewan Pengurus Terpilih 2025–2029</b>
+                    <b className="text-xs text-onyx block font-extrabold">Dewan Pengurus Terpilih 2025–2029</b>
                     <span className="text-[9px] font-extrabold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
                       SK Musorkot 2025
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                  <p className="text-[11px] text-on-surface-variant leading-relaxed">
                     KONI Surakarta bertugas mengoordinasikan dan membina 64 cabang olahraga prestasi demi mengantarkan Kota Surakarta mempertahankan supremasi juara umum Porprov Jateng.
                   </p>
-                  <div className="pt-2 border-t border-slate-100 space-y-2 text-[11px]">
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-500">Ketua Umum:</span>
-                      <b className="text-sikoni-navy font-bold">Her Suprabu, S.P., M.M.</b>
+                  <div className="pt-2 border-t border-outline-variant/40 space-y-2 text-[11px]">
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Ketua Umum:</span>
+                      <b className="text-onyx font-bold">Her Suprabu, S.P., M.M.</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-500">Bendahara Umum:</span>
-                      <b className="text-sikoni-navy font-bold">Rudi Jauhari</b>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Bendahara Umum:</span>
+                      <b className="text-onyx font-bold">Rudi Jauhari</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-500">Organisasi & MSD:</span>
-                      <b className="text-sikoni-navy font-bold">Bambang</b>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Organisasi & MSD:</span>
+                      <b className="text-onyx font-bold">Bambang</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-500">Ketua Bidang Humas:</span>
-                      <b className="text-sikoni-navy font-bold">Dwi Puspita Ningrum</b>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Ketua Bidang Humas:</span>
+                      <b className="text-onyx font-bold">Dwi Puspita Ningrum</b>
                     </div>
                     <div className="flex justify-between items-center py-1">
-                      <span className="text-slate-500">Wakil Bendahara:</span>
-                      <b className="text-sikoni-navy font-bold">Antonius</b>
+                      <span className="text-on-surface-variant font-medium">Wakil Bendahara:</span>
+                      <b className="text-onyx font-bold">Antonius</b>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-2">
-                  <b className="text-xs text-sikoni-navy block">Sekretariat & Layanan Cabor</b>
-                  <div className="space-y-1.5 text-[11px] text-slate-600">
+                <div className="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/60 shadow-xs text-xs space-y-2">
+                  <b className="text-xs text-onyx block font-extrabold">Sekretariat & Layanan Cabor</b>
+                  <div className="space-y-1.5 text-[11px] text-on-surface-variant">
                     <div className="flex items-start gap-2">
-                      <MapPin size={14} className="text-sikoni-teal flex-shrink-0 mt-0.5" />
+                      <MapPin size={14} className="text-primary flex-shrink-0 mt-0.5" />
                       <span>Kompleks Stadion Manahan, Jl. Adi Sucipto No. 1, Banjarsari, Kota Surakarta</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Phone size={14} className="text-sikoni-teal flex-shrink-0" />
+                      <Phone size={14} className="text-primary flex-shrink-0" />
                       <span>(0271) 714902 • WhatsApp Hotline: 0812-2800-9990</span>
                     </div>
                   </div>
@@ -2099,7 +2135,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                 <button
                   onClick={() => showToast('✓ Menghubungi Hotline Sekretariat KONI Surakarta (0812-2800-9990)...')}
-                  className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all cursor-pointer"
+                  className="w-full py-2.5 red-flame-btn text-white rounded-xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
                 >
                   <Phone size={14} /> Hubungi Sekretariat KONI Solo
                 </button>
@@ -2910,12 +2946,12 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* CABOR: SUB-FORM: FORM RAB BARU */}
             {caborTab === 'rab-form' && (
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
-                <div className="flex justify-between items-center pb-2 border-b border-slate-100">
-                  <b className="text-sm font-extrabold text-sikoni-navy">Form Usulan RAB Baru</b>
+              <div className="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/60 shadow-xs space-y-3 text-xs">
+                <div className="flex justify-between items-center pb-2 border-b border-outline-variant/40">
+                  <b className="text-sm font-black text-onyx">Form Usulan RAB Baru</b>
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="text-slate-400 hover:text-sikoni-navy"
+                    className="text-slate-400 hover:text-onyx cursor-pointer"
                   >
                     <X size={16} />
                   </button>
@@ -2923,32 +2959,32 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                 <div className="space-y-2">
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Nama Kegiatan Cabor
                     </label>
                     <input
                       type="text"
                       defaultValue="Pemusatan Latihan Porprov Solo"
-                      className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                      className="w-full p-2 bg-surface-container border border-outline-variant/60 rounded-xl text-xs text-onyx font-medium focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Estimasi Anggaran yang Diajukan (Rp)
                     </label>
                     <input
                       type="text"
                       defaultValue="25.000.000"
-                      className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold"
+                      className="w-full p-2 bg-surface-container border border-outline-variant/60 rounded-xl text-xs font-black text-onyx focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Lampiran Dokumen Proposal
                     </label>
-                    <label className="border-2 border-dashed border-slate-300 hover:border-sikoni-teal rounded-xl p-3 text-center block cursor-pointer bg-slate-50 transition-colors">
+                    <label className="border-2 border-dashed border-outline-variant/80 hover:border-primary rounded-xl p-3 text-center block cursor-pointer bg-surface-container transition-colors">
                       <input
                         type="file"
                         accept="application/pdf,application/zip"
@@ -2958,11 +2994,11 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           if (f) showToast(`✓ Dokumen proposal "${f.name}" berhasil diunggah.`);
                         }}
                       />
-                      <div className="flex items-center justify-center gap-2 text-sikoni-teal font-bold text-xs mb-1">
+                      <div className="flex items-center justify-center gap-2 text-primary font-bold text-xs mb-1">
                         <FileUp size={16} />
                         <span>Pilih Dokumen Proposal PDF</span>
                       </div>
-                      <span className="text-[9.5px] text-slate-500 block">
+                      <span className="text-[9.5px] text-on-surface-variant block">
                         Format PDF (Maksimal 10 MB) • Otomatis verifikasi tanda tangan digital
                       </span>
                     </label>
@@ -2972,7 +3008,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="flex-1 py-2 border border-slate-200 rounded-xl font-bold text-slate-600 active:scale-95 transition-all"
+                    className="flex-1 py-2 border border-outline-variant rounded-xl font-bold text-on-surface-variant active:scale-95 transition-all cursor-pointer"
                   >
                     Batal
                   </button>
@@ -2981,7 +3017,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       showToast('✓ Usulan RAB berhasil dikirim ke antrean verifikasi KONI!');
                       setCaborTab('home');
                     }}
-                    className="flex-1 py-2 bg-sikoni-teal text-white rounded-xl font-bold active:scale-95 transition-all"
+                    className="flex-1 py-2 red-flame-btn text-white rounded-xl font-bold active:scale-95 transition-all shadow-xs cursor-pointer"
                   >
                     Kirim RAB
                   </button>
@@ -2991,12 +3027,12 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
             {/* CABOR: SUB-FORM: INPUT NOTA */}
             {caborTab === 'expense-form' && (
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3 text-xs">
-                <div className="flex justify-between items-center pb-2 border-b border-slate-100">
-                  <b className="text-sm font-extrabold text-sikoni-navy">Input Bukti Nota Kas</b>
+              <div className="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/60 shadow-xs space-y-3 text-xs">
+                <div className="flex justify-between items-center pb-2 border-b border-outline-variant/40">
+                  <b className="text-sm font-black text-onyx">Input Bukti Nota Kas</b>
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="text-slate-400 hover:text-sikoni-navy"
+                    className="text-slate-400 hover:text-onyx cursor-pointer"
                   >
                     <X size={16} />
                   </button>
@@ -3004,32 +3040,32 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
                 <div className="space-y-2">
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Nomor Kuitansi / Nota
                     </label>
                     <input
                       type="text"
                       defaultValue="KWT-2026-089"
-                      className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs"
+                      className="w-full p-2 bg-surface-container border border-outline-variant/60 rounded-xl text-xs text-onyx font-medium focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Nominal Kuitansi (Rp)
                     </label>
                     <input
                       type="text"
                       defaultValue="3.450.000"
-                      className="w-full p-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold"
+                      className="w-full p-2 bg-surface-container border border-outline-variant/60 rounded-xl text-xs font-black text-onyx focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none"
                     />
                   </div>
 
                   <div>
-                    <label className="text-[10.5px] font-bold text-slate-600 block mb-1">
+                    <label className="text-[10.5px] font-bold text-on-surface-variant block mb-1">
                       Foto Kuitansi / Bukti Pembayaran
                     </label>
-                    <label className="border-2 border-dashed border-slate-300 hover:border-sikoni-teal rounded-xl p-3 text-center block cursor-pointer bg-slate-50 transition-colors">
+                    <label className="border-2 border-dashed border-outline-variant/80 hover:border-primary rounded-xl p-3 text-center block cursor-pointer bg-surface-container transition-colors">
                       <input
                         type="file"
                         accept="image/*"
@@ -3040,11 +3076,11 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                           if (f) showToast(`✓ Foto "${f.name}" berhasil diambil via kamera.`);
                         }}
                       />
-                      <div className="flex items-center justify-center gap-2 text-sikoni-teal font-bold text-xs mb-1">
+                      <div className="flex items-center justify-center gap-2 text-primary font-bold text-xs mb-1">
                         <Camera size={16} />
                         <span>Ambil Foto via Kamera / Galeri</span>
                       </div>
-                      <span className="text-[9.5px] text-slate-500 block">
+                      <span className="text-[9.5px] text-on-surface-variant block">
                         Format JPG/PNG • Otomatis geotag & kompresi foto kuitansi
                       </span>
                     </label>
@@ -3054,7 +3090,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                 <div className="flex gap-2 pt-2">
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="flex-1 py-2 border border-slate-200 rounded-xl font-bold text-slate-600"
+                    className="flex-1 py-2 border border-outline-variant rounded-xl font-bold text-on-surface-variant active:scale-95 transition-all cursor-pointer"
                   >
                     Batal
                   </button>
@@ -3063,7 +3099,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       showToast('Nota pengeluaran kasir cabor berhasil dicatat!');
                       setCaborTab('home');
                     }}
-                    className="flex-1 py-2 bg-sikoni-navy text-white rounded-xl font-bold"
+                    className="flex-1 py-2 red-flame-btn text-white rounded-xl font-bold active:scale-95 transition-all shadow-xs cursor-pointer"
                   >
                     Simpan Nota
                   </button>
@@ -3074,38 +3110,38 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* CABOR: TAB 5 - AKUN & SK */}
             {caborTab === 'account' && (
               <div className="space-y-3">
-                <div className="flex items-center gap-3 pb-2 border-b border-slate-100">
+                <div className="flex items-center gap-3 pb-2 border-b border-outline-variant/40">
                   <button
                     onClick={() => setCaborTab('home')}
-                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-700 transition-colors"
+                    className="w-8 h-8 rounded-full bg-surface-container hover:bg-surface-container-high flex items-center justify-center text-onyx transition-colors cursor-pointer"
                     aria-label="Kembali"
                   >
                     <span className="material-symbols-outlined text-[18px]">arrow_back</span>
                   </button>
                   <div>
-                    <div className="text-[11px] text-sikoni-muted font-bold">Profil Kepengurusan</div>
-                    <h2 className="text-base font-black text-sikoni-navy leading-tight">KONI Surakarta</h2>
+                    <div className="text-[10px] text-on-surface-variant font-black uppercase tracking-wider">Profil Kepengurusan</div>
+                    <h2 className="text-base font-black text-onyx leading-tight">KONI Surakarta</h2>
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-2">
-                  <b className="text-xs text-sikoni-navy block">Data SK KONI Surakarta</b>
-                  <div className="space-y-1.5 text-[11px] text-slate-600">
+                <div className="bg-surface-container-low p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs text-xs space-y-2">
+                  <b className="text-xs font-black text-onyx block">Data SK KONI Surakarta</b>
+                  <div className="space-y-1.5 text-[11px] text-on-surface-variant">
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Nomor SK:</span>
-                      <b className="text-sikoni-navy">SK-KONI-SKA/2024/042</b>
+                      <span className="text-on-surface-variant">Nomor SK:</span>
+                      <b className="text-onyx font-bold">SK-KONI-SKA/2024/042</b>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Masa Bakti:</span>
-                      <b className="text-sikoni-navy">2024 – 2028</b>
+                      <span className="text-on-surface-variant">Masa Bakti:</span>
+                      <b className="text-onyx font-bold">2024 – 2028</b>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Atlet Binaan:</span>
-                      <b className="text-sikoni-teal">38 Atlet Aktif</b>
+                      <span className="text-on-surface-variant">Atlet Binaan:</span>
+                      <b className="text-emerald-700 font-black">38 Atlet Aktif</b>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-slate-400">Pelatih Berlisensi:</span>
-                      <b className="text-sikoni-navy">6 Pelatih</b>
+                      <span className="text-on-surface-variant">Pelatih Berlisensi:</span>
+                      <b className="text-onyx font-bold">6 Pelatih</b>
                     </div>
                   </div>
                 </div>
@@ -3115,7 +3151,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     showToast('Sesi operator cabor diakhiri.');
                     setCaborTab('home');
                   }}
-                  className="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-sikoni-red rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-rose-200 active:scale-95 transition-all cursor-pointer"
+                  className="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border border-rose-200 active:scale-95 transition-all cursor-pointer"
                 >
                   <LogOut size={14} /> Keluar dari Akun Cabor
                 </button>
@@ -3829,53 +3865,57 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PENGURUS: TAB 2 - VERIFIKASI & APPROVAL */}
             {pengurusTab === 'approval' && (
               <div key="approval" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Disposisi & Tanda Tangan</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">Inbox Persetujuan</h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-5 rounded-full bg-secondary" />
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant">Disposisi & Tanda Tangan BSrE</div>
+                    <h2 className="text-base sm:text-lg font-black text-onyx tracking-tight">Inbox Persetujuan Eksekutif</h2>
+                  </div>
                 </div>
 
                 <div className={`grid gap-3 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {approvalList.map((item) => (
                     <div
                       key={item.id}
-                      className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm space-y-2"
+                      className="bg-surface-container-low p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-2.5 hover:border-primary/40 transition-all"
                     >
-                      <div className="flex justify-between items-start">
+                      <div className="flex justify-between items-start gap-2">
                         <div>
-                          <span className="text-[10px] font-bold text-sikoni-teal uppercase block">
+                          <span className="text-[10px] font-black text-primary bg-primary/10 px-2 py-0.5 rounded-md border border-primary/20 uppercase tracking-wide inline-block mb-1">
                             {item.cabor}
                           </span>
-                          <b className="text-xs text-sikoni-navy">{item.title}</b>
+                          <b className="text-xs text-onyx block leading-snug">{item.title}</b>
                         </div>
                         <StatusBadge status={item.status} />
                       </div>
 
-                      <div className="flex justify-between text-[11px] bg-slate-50 p-2 rounded-lg">
-                        <span className="text-slate-500">Nilai Pengajuan:</span>
-                        <b className="text-sikoni-navy font-black">{item.amount}</b>
+                      <div className="flex justify-between items-center text-[11px] bg-surface-container p-2.5 rounded-xl border border-outline-variant/40">
+                        <span className="text-on-surface-variant font-medium">Nilai Pengajuan:</span>
+                        <b className="text-onyx font-black tracking-tight text-xs">{item.amount}</b>
                       </div>
 
-                      <p className="text-[10px] text-slate-500 leading-relaxed">{item.desc}</p>
+                      <p className="text-[10.5px] text-on-surface-variant leading-relaxed line-clamp-2">{item.desc}</p>
 
                       {item.status === 'Menunggu' && (
-                        <div className="flex gap-1.5 pt-2 border-t border-slate-100">
+                        <div className="flex gap-1.5 pt-2 border-t border-outline-variant/40">
                           <button
                             onClick={() => handleApprove(item.id, item.title)}
-                            className="flex-1 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all cursor-pointer"
+                            className="flex-1 py-2 red-flame-btn text-white rounded-xl font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-xs active:scale-95 transition-all cursor-pointer"
                           >
-                            <Check size={12} /> Setujui
+                            <Check size={13} /> Setujui
                           </button>
                           <button
                             onClick={() => handleRevise(item.id, item.title)}
-                            className="flex-1 py-1.5 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-sm active:scale-95 transition-all cursor-pointer"
+                            className="flex-1 py-2 bg-surface-container-high hover:bg-surface-container-highest text-onyx border border-outline-variant rounded-xl font-bold text-[10.5px] flex items-center justify-center gap-1 shadow-xs active:scale-95 transition-all cursor-pointer"
                           >
-                            <RotateCcw size={12} /> Revisi
+                            <RotateCcw size={13} /> Revisi
                           </button>
                           <button
                             onClick={() => handleReject(item.id, item.title)}
-                            className="py-1.5 px-2 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-lg font-bold text-[10.5px] border border-rose-200 active:scale-95 transition-all cursor-pointer"
+                            className="py-2 px-2.5 bg-rose-50 text-rose-600 hover:bg-rose-100 rounded-xl font-bold text-[10.5px] border border-rose-200 active:scale-95 transition-all cursor-pointer"
+                            aria-label="Tolak"
                           >
-                            <X size={12} />
+                            <X size={13} />
                           </button>
                         </div>
                       )}
@@ -3890,29 +3930,32 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PENGURUS: TAB 3 - MONITORING 64 CABOR */}
             {pengurusTab === 'monitoring' && (
               <div key="monitoring" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Kontrol Alokasi Pagu</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">Monitoring 64 Cabor</h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-5 rounded-full bg-secondary" />
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant">Kontrol Alokasi Pagu & Serapan Realtime</div>
+                    <h2 className="text-base sm:text-lg font-black text-onyx tracking-tight">Monitoring 64 Cabor Porprov</h2>
+                  </div>
                 </div>
 
                 <div className={`grid gap-2.5 text-xs ${deviceView === 'desktop' ? 'grid-cols-2 lg:grid-cols-3' : 'grid-cols-1'}`}>
                   {caborDirectory.map((c, i) => (
                     <div
                       key={i}
-                      className="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1.5"
+                      className="bg-surface-container-low p-3 sm:p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-2 hover:border-primary/40 transition-all group"
                     >
-                      <div className="flex justify-between items-center">
-                        <b className="text-xs text-sikoni-navy">{c.code} • {c.name}</b>
-                        <span className="text-[10px] font-bold text-sikoni-teal bg-emerald-50 px-2 py-0.5 rounded-full">
+                      <div className="flex justify-between items-center gap-2">
+                        <b className="text-xs font-black text-onyx group-hover:text-primary transition-colors truncate">{c.code} • {c.name}</b>
+                        <span className="text-[9.5px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 shrink-0">
                           {c.atlet} Atlet
                         </span>
                       </div>
-                      <div className="flex justify-between text-[10.5px] text-slate-500">
-                        <span>Pagu: Rp 120 Jt</span>
-                        <span>Realisasi: Rp 48 Jt (40%)</span>
+                      <div className="flex justify-between text-[10.5px] text-on-surface-variant">
+                        <span>Pagu: <strong className="text-onyx font-bold">Rp 120 Jt</strong></span>
+                        <span>Realisasi: <strong className="text-primary font-bold">Rp 48 Jt (40%)</strong></span>
                       </div>
-                      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-sikoni-teal h-full" style={{ width: '40%' }} />
+                      <div className="w-full bg-surface-container h-2 rounded-full overflow-hidden p-0.5 border border-outline-variant/30">
+                        <div className="bg-gradient-to-r from-[#990d16] via-[#d32f2f] to-[#ff5252] h-full rounded-full shadow-[0_0_8px_rgba(211,47,47,0.4)]" style={{ width: '40%' }} />
                       </div>
                     </div>
                   ))}
@@ -3925,44 +3968,111 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PENGURUS: TAB 4 - KAS & MUTASI GIRO */}
             {pengurusTab === 'kas' && (
               <div key="kas" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Kas & Kasir KONI</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">Rekening Giro Bank</h2>
-                </div>
-
-                <div className="card-hero-navy p-4 rounded-2xl text-white">
-                  <div className="text-[10px] text-sikoni-gold font-bold">SALDO BANK JATENG CABANG SURAKARTA</div>
-                  <div className="text-2xl font-black mt-1">Rp 4.050.000.000</div>
-                  <div className="text-[10.5px] text-slate-200 mt-1">
-                    Giro No. 102.001.99281 • Terhubung Host-to-Host
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-5 rounded-full bg-secondary" />
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant">Kas & Kasir KONI Surakarta</div>
+                    <h2 className="text-base sm:text-lg font-black text-onyx tracking-tight">Rekening Giro Kasda Bank Jateng</h2>
                   </div>
                 </div>
 
-                <div className="bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-2">
-                  <b className="text-xs text-sikoni-navy block">Histori Penyaluran Termin Cabor</b>
-                  <div className="divide-y divide-slate-100 text-[11px]">
-                    <div className="py-2 flex justify-between items-center">
-                      <div>
-                        <b className="text-sikoni-navy block">Transfer Hibah PASI (Atletik)</b>
-                        <span className="text-[10px] text-slate-400">09 Nov 2026 • SP2D-092</span>
+                {/* Bank Jateng Metal Card */}
+                <div className="relative overflow-hidden rounded-2xl p-4 sm:p-5 bg-gradient-to-br from-[#120406] via-[#1a080c] to-[#0a0204] text-white shadow-xl border border-amber-400/30">
+                  <div className="absolute top-0 right-0 w-44 h-44 bg-gradient-to-br from-amber-500/20 via-red-600/15 to-transparent rounded-full blur-2xl pointer-events-none" />
+                  <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-red-600/10 rounded-full blur-xl pointer-events-none" />
+                  
+                  <div className="relative z-10 space-y-3">
+                    <div className="flex justify-between items-start">
+                      <div className="flex items-center gap-2">
+                        <div className="w-9 h-7 rounded-md bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600 p-0.5 shadow-md flex flex-col justify-between">
+                          <div className="w-full h-1 bg-amber-700/40 rounded-xs" />
+                          <div className="w-3/4 h-1 bg-amber-700/40 rounded-xs" />
+                          <div className="w-full h-1 bg-amber-700/40 rounded-xs" />
+                        </div>
+                        <span className="material-symbols-outlined text-[16px] text-amber-300/80 -rotate-90">contactless</span>
                       </div>
-                      <span className="font-bold text-rose-600">- Rp 48.500.000</span>
+                      <div className="text-right">
+                        <span className="text-[9px] font-black text-amber-300 tracking-widest uppercase block">KAS DAERAH PEMKOT SURAKARTA</span>
+                        <span className="text-[11px] font-black text-white/90 tracking-wide">BANK JATENG CABANG SURAKARTA</span>
+                      </div>
                     </div>
 
-                    <div className="py-2 flex justify-between items-center">
-                      <div>
-                        <b className="text-sikoni-navy block">Transfer Hibah PBVSI (Voli)</b>
-                        <span className="text-[10px] text-slate-400">07 Nov 2026 • SP2D-088</span>
+                    <div className="pt-1">
+                      <div className="text-[9.5px] uppercase font-bold text-amber-200/80 tracking-wider">SALDO REKENING GIRO HOST-TO-HOST</div>
+                      <div className="text-2xl sm:text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-100 to-amber-300 tracking-tight mt-0.5">
+                        Rp 4.050.000.000
                       </div>
-                      <span className="font-bold text-rose-600">- Rp 14.200.000</span>
                     </div>
 
-                    <div className="py-2 flex justify-between items-center">
-                      <div>
-                        <b className="text-sikoni-navy block">Penyaluran Hibah APBD Termin I</b>
-                        <span className="text-[10px] text-slate-400">BPKAD Surakarta</span>
+                    <div className="pt-2 border-t border-white/10 flex justify-between items-center text-[10.5px]">
+                      <div className="font-mono text-white/80 tracking-wider font-semibold">
+                        No. Rek: <span className="text-amber-300 font-bold">102.001.99281</span>
                       </div>
-                      <span className="font-bold text-sikoni-green">+ Rp 4.250.000.000</span>
+                      <div className="flex items-center gap-1.5 text-emerald-400 font-bold text-[10px]">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        ONLINE HOST
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Histori Mutasi */}
+                <div className="bg-surface-container-low p-3.5 rounded-2xl border border-outline-variant/60 shadow-xs space-y-2.5">
+                  <div className="flex justify-between items-center">
+                    <b className="text-xs font-black text-onyx">Histori Penyaluran Termin & Kasda</b>
+                    <span className="text-[10px] font-bold text-on-surface-variant">Realtime Sync</span>
+                  </div>
+
+                  <div className="space-y-2">
+                    {/* Item 1 */}
+                    <div className="p-2.5 bg-surface-container rounded-xl border border-outline-variant/40 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-600 flex items-center justify-center shrink-0">
+                          <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
+                        </div>
+                        <div className="min-w-0">
+                          <b className="text-onyx block text-xs font-bold leading-tight truncate">Transfer Hibah PASI (Atletik)</b>
+                          <span className="text-[10px] text-on-surface-variant block truncate">09 Nov 2026 • SP2D-092</span>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="font-black text-rose-600 text-xs block">- Rp 48.500.000</span>
+                        <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Sukses SP2D</span>
+                      </div>
+                    </div>
+
+                    {/* Item 2 */}
+                    <div className="p-2.5 bg-surface-container rounded-xl border border-outline-variant/40 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-rose-500/15 border border-rose-500/30 text-rose-600 flex items-center justify-center shrink-0">
+                          <span className="material-symbols-outlined text-[16px]">arrow_outward</span>
+                        </div>
+                        <div className="min-w-0">
+                          <b className="text-onyx block text-xs font-bold leading-tight truncate">Transfer Hibah PBVSI (Voli)</b>
+                          <span className="text-[10px] text-on-surface-variant block truncate">07 Nov 2026 • SP2D-088</span>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="font-black text-rose-600 text-xs block">- Rp 14.200.000</span>
+                        <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Sukses SP2D</span>
+                      </div>
+                    </div>
+
+                    {/* Item 3 */}
+                    <div className="p-2.5 bg-surface-container rounded-xl border border-outline-variant/40 flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        <div className="w-8 h-8 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 flex items-center justify-center shrink-0">
+                          <span className="material-symbols-outlined text-[16px]">south_west</span>
+                        </div>
+                        <div className="min-w-0">
+                          <b className="text-onyx block text-xs font-bold leading-tight truncate">Penyaluran Hibah APBD Termin I</b>
+                          <span className="text-[10px] text-on-surface-variant block truncate">BPKAD Surakarta • SP2D-001</span>
+                        </div>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="font-black text-emerald-600 text-xs block">+ Rp 4.250.000.000</span>
+                        <span className="text-[8.5px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded border border-emerald-200">Masuk Kasda</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -3974,15 +4084,18 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
             {/* PENGURUS: TAB 5 - PROFIL & PENGATURAN */}
             {pengurusTab === 'profil' && (
               <div key="profil" className="tab-transition-in space-y-3">
-                <div>
-                  <div className="text-[11px] text-sikoni-muted">Akun Pejabat & Otoritas</div>
-                  <h2 className="text-lg font-black text-sikoni-navy">Profil Pengurus KONI</h2>
+                <div className="flex items-center gap-2">
+                  <div className="w-1.5 h-5 rounded-full bg-secondary" />
+                  <div>
+                    <div className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant">Akun Pejabat & Otoritas Eksekutif</div>
+                    <h2 className="text-base sm:text-lg font-black text-onyx tracking-tight">Profil Pengurus KONI Surakarta</h2>
+                  </div>
                 </div>
 
                 {/* Profile Card with Photo */}
-                <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm text-xs space-y-3">
-                  <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-amber-400 shrink-0 shadow-sm bg-slate-800">
+                <div className="bg-surface-container-low p-4 rounded-2xl border border-outline-variant/60 shadow-xs space-y-3">
+                  <div className="flex items-center gap-3 pb-3 border-b border-outline-variant/40">
+                    <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-amber-400/80 shrink-0 shadow-sm bg-slate-900">
                       <img
                         src="/images/pengurus/rudi_jauhari.jpg"
                         alt="Rudi Jauhari"
@@ -3990,43 +4103,45 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       />
                     </div>
                     <div>
-                      <span className="text-[9.5px] font-extrabold uppercase tracking-wider text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
+                      <span className="text-[9.5px] font-black uppercase tracking-wider text-amber-700 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-300/40">
                         Bendahara Umum
                       </span>
-                      <h3 className="font-headline-md text-sm font-black text-sikoni-navy mt-1">
+                      <h3 className="font-headline-md text-sm font-black text-onyx mt-1">
                         Rudi Jauhari
                       </h3>
-                      <p className="text-[10.5px] text-slate-500">
-                        Otoritas Rekening Giro & Penyaluran Kasda
+                      <p className="text-[10.5px] text-on-surface-variant">
+                        Otoritas Rekening Giro & Penyaluran Kasda BPKAD
                       </p>
                     </div>
                   </div>
 
-                  <div className="space-y-1.5 text-[11px] text-slate-600">
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-400">Pimpinan:</span>
-                      <b className="text-sikoni-navy">Her Suprabu, S.P., M.M. (Ketua Umum)</b>
+                  <div className="space-y-2 text-[11px] text-on-surface-variant">
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
+                      <span className="text-on-surface-variant">Pimpinan:</span>
+                      <b className="text-onyx font-bold">Her Suprabu, S.P., M.M. (Ketua Umum)</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-400">Periode:</span>
-                      <b className="text-sikoni-navy">Masa Bakti 2025–2029</b>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
+                      <span className="text-on-surface-variant">Periode:</span>
+                      <b className="text-onyx font-bold">Masa Bakti 2025–2029</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-slate-50">
-                      <span className="text-slate-400">Verifikator Pendukung:</span>
-                      <b className="text-sikoni-navy">Bambang (Organisasi & MSD)</b>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
+                      <span className="text-on-surface-variant">Verifikator Pendukung:</span>
+                      <b className="text-onyx font-bold">Bambang (Organisasi & MSD)</b>
                     </div>
                     <div className="flex justify-between items-center py-1">
-                      <span className="text-slate-400">Hak Akses:</span>
-                      <b className="text-emerald-700 font-extrabold">Approval SP2D Kasda & e-TTE BSrE</b>
+                      <span className="text-on-surface-variant">Hak Akses:</span>
+                      <span className="text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                        Approval SP2D Kasda & e-TTE BSrE
+                      </span>
                     </div>
                   </div>
                 </div>
 
                 <button
                   onClick={() => showToast('Audit trail transaksi Kasda berhasil diunduh (PDF).')}
-                  className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-sikoni-navy rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-2xs"
+                  className="w-full py-2.5 red-flame-btn text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 cursor-pointer shadow-md"
                 >
-                  <Download size={14} /> Download Rekap Audit Transaksi
+                  <Download size={14} /> Download Rekap Audit Transaksi Kasda
                 </button>
                 {/* Bottom scroll clearance spacer */}
                 <div className="h-10 sm:h-14 w-full shrink-0" aria-hidden="true" />
@@ -4078,16 +4193,16 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
               <div className="space-y-2 pt-2 border-t border-slate-100 text-xs">
                 <div className="flex items-center gap-2 text-slate-700">
-                  <User size={15} className="text-sikoni-teal flex-shrink-0" />
+                  <User size={15} className="text-primary flex-shrink-0" />
                   <span>Ketua Umum: <b>{selectedCaborDetail.ketua}</b></span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-700">
-                  <MapPin size={15} className="text-sikoni-teal flex-shrink-0" />
+                  <MapPin size={15} className="text-primary flex-shrink-0" />
                   <span>Sekretariat: {selectedCaborDetail.sekretariat}</span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-700">
-                  <Award size={15} className="text-sikoni-gold flex-shrink-0" />
-                  <span>Prestasi: <b className="text-sikoni-navy">{selectedCaborDetail.prestasi}</b></span>
+                  <Award size={15} className="text-amber-500 flex-shrink-0" />
+                  <span>Prestasi: <b className="text-onyx">{selectedCaborDetail.prestasi}</b></span>
                 </div>
                 <div className="flex items-center gap-4 text-xs font-bold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
                   <div>🏃 {selectedCaborDetail.atlet} Atlet Binaan</div>
@@ -4101,7 +4216,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     showToast(`✓ Menghubungi WhatsApp Sekretariat ${selectedCaborDetail.code} (${selectedCaborDetail.phone})...`);
                     setSelectedCaborDetail(null);
                   }}
-                  className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
+                  className="flex-1 py-3 red-flame-btn text-white rounded-xl font-bold flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
                 >
                   <Phone size={14} /> Hubungi WhatsApp
                 </button>
@@ -4134,33 +4249,33 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
               <div className="flex justify-between items-start gap-3">
                 <div className="min-w-0 flex-1">
-                  <b className="text-sm font-black text-sikoni-navy block leading-snug">{selectedMobileItem.title}</b>
-                  <small className="text-[11px] text-sikoni-muted block mt-0.5">{selectedMobileItem.sub}</small>
+                  <b className="text-sm font-black text-onyx block leading-snug">{selectedMobileItem.title}</b>
+                  <small className="text-[11px] text-on-surface-variant block mt-0.5">{selectedMobileItem.sub}</small>
                 </div>
                 <button
                   onClick={() => setSelectedMobileItem(null)}
-                  className="text-slate-400 hover:text-sikoni-navy p-1 rounded-full hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
+                  className="text-slate-400 hover:text-onyx p-1 rounded-full hover:bg-slate-100 transition-colors shrink-0 cursor-pointer"
                   aria-label="Tutup"
                 >
                   <X size={18} />
                 </button>
               </div>
 
-              <div className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+              <div className="flex items-center justify-between p-3 bg-surface-container rounded-xl border border-outline-variant/60">
                 <div>
-                  <span className="text-[10px] text-slate-500 block uppercase font-bold">Nominal Berkas</span>
-                  <span className="font-black text-base text-sikoni-navy">{selectedMobileItem.val}</span>
+                  <span className="text-[10px] text-on-surface-variant block uppercase font-bold">Nominal Berkas</span>
+                  <span className="font-black text-base text-onyx">{selectedMobileItem.val}</span>
                 </div>
                 <StatusBadge status={selectedMobileItem.status} />
               </div>
 
-              <p className="text-xs text-slate-600 leading-relaxed bg-slate-50/50 p-2.5 rounded-xl border border-slate-100">
+              <p className="text-xs text-on-surface-variant leading-relaxed bg-surface-container-low p-2.5 rounded-xl border border-outline-variant/40">
                 {selectedMobileItem.desc}
               </p>
 
               <button
                 onClick={() => setSelectedMobileItem(null)}
-                className="w-full py-2.5 bg-sikoni-navy text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
+                className="w-full py-2.5 red-flame-btn text-white rounded-xl font-bold text-xs shadow-md active:scale-95 transition-all cursor-pointer"
               >
                 Tutup Detail
               </button>
@@ -4170,7 +4285,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
         {/* Mobile Toast Alert */}
         {toastMessage && (
-          <div className="absolute top-16 left-3 right-3 bg-sikoni-navy text-white text-[11.5px] font-bold py-2.5 px-3.5 rounded-xl shadow-xl z-50 text-center animate-in fade-in slide-in-from-top-1 border border-slate-700">
+          <div className="absolute top-16 left-3 right-3 bg-gradient-to-r from-[#120406] via-[#221013] to-[#120406] text-white text-[11.5px] font-bold py-2.5 px-3.5 rounded-xl shadow-2xl z-50 text-center animate-in fade-in slide-in-from-top-1 border border-amber-400/40">
             {toastMessage}
           </div>
         )}
@@ -4189,7 +4304,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
         {/* ========================================================
             BOTTOM SHEET: KATALOG LENGKAP SIKONI (PERSONA-ADAPTIVE)
-           ======================================================== */}
+            ======================================================== */}
         {isAllServicesSheetOpen && (
           <div className={`absolute inset-0 z-50 flex flex-col ${deviceView === 'desktop' ? 'justify-center items-center p-4' : 'justify-end'} animate-in fade-in duration-200`}>
             {/* Backdrop */}
@@ -4206,12 +4321,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               {/* Header */}
               <div className="px-4 pb-3 border-b border-slate-100 flex items-center justify-between shrink-0">
                 <div className="flex items-center gap-2.5">
-                  <div className={`w-8 h-8 rounded-xl ${persona === 'publik'
-                    ? 'bg-gradient-to-tr from-[#0f172a] to-[#1e3a8a]'
-                    : persona === 'pengurus'
-                      ? 'bg-gradient-to-tr from-[#78350f] to-[#d97706]'
-                      : 'bg-gradient-to-tr from-[#990d16] to-[#d32f2f]'
-                    } text-white flex items-center justify-center shadow-xs`}>
+                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#990d16] to-[#d32f2f] text-white flex items-center justify-center shadow-xs border-t border-white/20">
                     <span className="material-symbols-outlined text-[18px]">
                       {persona === 'publik' ? 'menu_book' : persona === 'pengurus' ? 'shield_person' : 'apps'}
                     </span>
@@ -4273,12 +4383,8 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       key={cat}
                       onClick={() => setServiceCategoryFilter(cat)}
                       className={`px-2.5 py-1 rounded-full text-[10px] font-black shrink-0 transition-all cursor-pointer ${serviceCategoryFilter === cat
-                        ? persona === 'cabor'
-                          ? 'bg-[#d32f2f] text-white shadow-xs'
-                          : persona === 'pengurus'
-                            ? 'bg-amber-600 text-white shadow-xs'
-                            : 'bg-sikoni-navy text-white shadow-xs'
-                        : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-100'
+                        ? 'red-flame-btn text-white shadow-xs'
+                        : 'bg-surface-container text-on-surface-variant border border-outline-variant/60 hover:bg-surface-container-high'
                         }`}
                     >
                       {cat}
