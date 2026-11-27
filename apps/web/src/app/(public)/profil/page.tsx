@@ -10,28 +10,46 @@ export default function ProfilePage() {
       image: '/images/pengurus/her_suprabu.png',
     },
     {
-      name: 'Rudi Jauhari',
+      name: 'E.H. Heni Nogogini, S.H., M.H.',
+      role: 'Wakil Ketua Umum I',
+      cabor: 'Organisasi & Pembinaan Hukum',
+      image: '/images/pengurus/bambang.jpg',
+    },
+    {
+      name: 'Bambang Widjanarko',
+      role: 'Wakil Ketua Bidang Binpres',
+      cabor: 'Pembinaan Prestasi Atlet Solo',
+      image: '/images/pengurus/bambang.jpg',
+    },
+    {
+      name: 'Farimita Mawarta, S.Sos.',
+      role: 'Sekretaris Umum',
+      cabor: 'Tata Kelola Administrasi & SK',
+      image: '/images/pengurus/dwi_puspita.jpg',
+    },
+    {
+      name: 'Rudi Jauhari, S.E., S.T.',
       role: 'Bendahara Umum',
-      cabor: 'Keuangan & Perbendaharaan',
+      cabor: 'Keuangan & Penyaluran Kasda',
+      image: '/images/pengurus/rudi_jauhari.jpg',
+    },
+    {
+      name: 'Harry Suswanto (Harry Sus)',
+      role: 'Wakil Bendahara Umum',
+      cabor: 'Verifikasi Kasda & Giro Kasir',
       image: '/images/pengurus/rudi_jauhari.jpg',
     },
     {
       name: 'Bambang',
-      role: 'Organisasi & MSD',
+      role: 'Bidang Organisasi & MSD',
       cabor: 'Hukum & Tata Kelola Cabor',
       image: '/images/pengurus/bambang.jpg',
     },
     {
-      name: 'Dwi Puspita Ningrum',
-      role: 'Ketua Bidang Humas',
-      cabor: 'Media & Hubungan Publik',
+      name: 'Widjajadi',
+      role: 'Ketua Bidang Humas & Media',
+      cabor: 'Hubungan Masyarakat & Publikasi',
       image: '/images/pengurus/dwi_puspita.jpg',
-    },
-    {
-      name: 'Antonius',
-      role: 'Wakil Bendahara',
-      cabor: 'Verifikasi Kasda & Giro',
-      image: '/images/pengurus/rudi_jauhari.jpg',
     },
   ];
 

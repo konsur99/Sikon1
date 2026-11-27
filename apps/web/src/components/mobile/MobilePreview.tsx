@@ -2101,30 +2101,42 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       <b className="text-onyx font-bold">Her Suprabu, S.P., M.M.</b>
                     </div>
                     <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
-                      <span className="text-on-surface-variant font-medium">Bendahara Umum:</span>
-                      <b className="text-onyx font-bold">Rudi Jauhari</b>
+                      <span className="text-on-surface-variant font-medium">Wakil Ketua Umum I:</span>
+                      <b className="text-onyx font-bold">E.H. Heni Nogogini, S.H., M.H.</b>
                     </div>
                     <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
-                      <span className="text-on-surface-variant font-medium">Organisasi & MSD:</span>
+                      <span className="text-on-surface-variant font-medium">Wakil Ketua Binpres:</span>
+                      <b className="text-onyx font-bold">Bambang Widjanarko</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Sekretaris Umum:</span>
+                      <b className="text-onyx font-bold">Farimita Mawarta, S.Sos.</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Bendahara Umum:</span>
+                      <b className="text-onyx font-bold">Rudi Jauhari, S.E., S.T.</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Wakil Bendahara Umum:</span>
+                      <b className="text-onyx font-bold">Harry Suswanto (Harry Sus)</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
+                      <span className="text-on-surface-variant font-medium">Bidang Organisasi & MSD:</span>
                       <b className="text-onyx font-bold">Bambang</b>
                     </div>
-                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/20">
-                      <span className="text-on-surface-variant font-medium">Ketua Bidang Humas:</span>
-                      <b className="text-onyx font-bold">Dwi Puspita Ningrum</b>
-                    </div>
                     <div className="flex justify-between items-center py-1">
-                      <span className="text-on-surface-variant font-medium">Wakil Bendahara:</span>
-                      <b className="text-onyx font-bold">Antonius</b>
+                      <span className="text-on-surface-variant font-medium">Ketua Bidang Humas:</span>
+                      <b className="text-onyx font-bold">Widjajadi</b>
                     </div>
                   </div>
                 </div>
 
                 <div className="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/60 shadow-xs text-xs space-y-2">
-                  <b className="text-xs text-onyx block font-extrabold">Sekretariat & Layanan Cabor</b>
+                  <b className="text-xs text-onyx block font-extrabold">Sekretariat Resmi KONI Surakarta</b>
                   <div className="space-y-1.5 text-[11px] text-on-surface-variant">
                     <div className="flex items-start gap-2">
                       <MapPin size={14} className="text-primary flex-shrink-0 mt-0.5" />
-                      <span>Kompleks Stadion Manahan, Jl. Adi Sucipto No. 1, Banjarsari, Kota Surakarta</span>
+                      <span>Jl. Sutan Syahrir No. 90, Widuran, Kota Surakarta (Kompleks Stadion Manahan)</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Phone size={14} className="text-primary flex-shrink-0" />
@@ -4098,7 +4110,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                     <div className="relative w-14 h-14 rounded-2xl overflow-hidden ring-2 ring-amber-400/80 shrink-0 shadow-sm bg-slate-900">
                       <img
                         src="/images/pengurus/rudi_jauhari.jpg"
-                        alt="Rudi Jauhari"
+                        alt="Rudi Jauhari, S.E., S.T."
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -4107,7 +4119,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                         Bendahara Umum
                       </span>
                       <h3 className="font-headline-md text-sm font-black text-onyx mt-1">
-                        Rudi Jauhari
+                        Rudi Jauhari, S.E., S.T.
                       </h3>
                       <p className="text-[10.5px] text-on-surface-variant">
                         Otoritas Rekening Giro & Penyaluran Kasda BPKAD
@@ -4121,12 +4133,20 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
                       <b className="text-onyx font-bold">Her Suprabu, S.P., M.M. (Ketua Umum)</b>
                     </div>
                     <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
-                      <span className="text-on-surface-variant">Periode:</span>
-                      <b className="text-onyx font-bold">Masa Bakti 2025–2029</b>
+                      <span className="text-on-surface-variant">Sekretaris Umum:</span>
+                      <b className="text-onyx font-bold">Farimita Mawarta, S.Sos.</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
+                      <span className="text-on-surface-variant">Wakil Bendahara:</span>
+                      <b className="text-onyx font-bold">Harry Suswanto (Harry Sus)</b>
                     </div>
                     <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
                       <span className="text-on-surface-variant">Verifikator Pendukung:</span>
                       <b className="text-onyx font-bold">Bambang (Organisasi & MSD)</b>
+                    </div>
+                    <div className="flex justify-between items-center py-1 border-b border-outline-variant/30">
+                      <span className="text-on-surface-variant">Periode:</span>
+                      <b className="text-onyx font-bold">Masa Bakti 2025–2029 (Pelantikan Balekambang)</b>
                     </div>
                     <div className="flex justify-between items-center py-1">
                       <span className="text-on-surface-variant">Hak Akses:</span>

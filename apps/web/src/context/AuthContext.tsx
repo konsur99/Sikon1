@@ -33,7 +33,7 @@ export const DEMO_USERS: Record<string, UserSession> = {
   },
   'bendahara@koni-surakarta.id': {
     id: 'USR-002',
-    name: 'Rudi Jauhari',
+    name: 'Rudi Jauhari, S.E., S.T.',
     email: 'bendahara@koni-surakarta.id',
     role: 'bendahara',
     roleLabel: 'Bendahara Umum KONI Surakarta',
@@ -47,7 +47,7 @@ export const DEMO_USERS: Record<string, UserSession> = {
     name: 'Bambang',
     email: 'verifikator@koni-surakarta.id',
     role: 'verifikator',
-    roleLabel: 'Bidang Organisasi & Verifikator',
+    roleLabel: 'Bidang Organisasi, Hukum & MSD',
     mfaEnabled: false,
     sessionToken: 'token_verifikator_koni_demo_2026',
     expiresAt: new Date(Date.now() + 8 * 3600 * 1000).toISOString(),
