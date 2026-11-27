@@ -896,7 +896,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           ? 'w-full sm:w-[412px] h-[100dvh] sm:h-[840px] rounded-none sm:rounded-[44px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43]'
           : deviceView === 'tablet'
             ? 'w-full sm:w-[768px] h-[100dvh] sm:h-[900px] rounded-none sm:rounded-[36px] shadow-none sm:shadow-[0_25px_70px_rgba(20,42,67,0.3)] border-0 sm:border-[10px] sm:border-[#142a43]'
-            : 'w-full max-w-7xl h-[calc(100dvh-120px)] min-h-[660px] rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200/90 my-2'
+            : 'w-full max-w-7xl h-[100dvh] sm:h-[calc(100dvh-5rem)] sm:min-h-[660px] rounded-none sm:rounded-3xl shadow-none sm:shadow-xl border-0 sm:border sm:border-slate-200/90 sm:my-2'
           }`}
       >
         {/* Mobile Quick Role Switcher for Android Phones */}
@@ -965,7 +965,34 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
 
               {/* Desktop Nav Items (when deviceView === 'desktop') */}
               {deviceView === 'desktop' && (
-                <div className="hidden lg:flex items-center gap-1">
+                <div className="hidden md:flex items-center gap-2">
+                  {/* In-Header Persona Toggle for Desktop */}
+                  <div className="hidden xl:flex items-center gap-0.5 bg-slate-100 p-0.5 rounded-xl border border-slate-200/80 mr-1">
+                    <button
+                      onClick={() => { setPersona('publik'); setIsMobileNotifOpen(false); }}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        persona === 'publik' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                      }`}
+                    >
+                      Publik
+                    </button>
+                    <button
+                      onClick={() => { setPersona('cabor'); setIsMobileNotifOpen(false); }}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        persona === 'cabor' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                      }`}
+                    >
+                      Cabor
+                    </button>
+                    <button
+                      onClick={() => { setPersona('pengurus'); setIsMobileNotifOpen(false); }}
+                      className={`px-2 py-1 rounded-lg text-[10px] font-black transition-all cursor-pointer ${
+                        persona === 'pengurus' ? 'red-flame-btn text-white shadow-xs' : 'text-slate-500 hover:text-onyx'
+                      }`}
+                    >
+                      Pengurus
+                    </button>
+                  </div>
                   {persona === 'cabor' && (
                     <nav className="flex items-center gap-1 bg-slate-100/90 p-0.5 rounded-xl border border-slate-200/80 shadow-inner">
                       {[
@@ -1044,7 +1071,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <button
                   onClick={() => setIsAllServicesSheetOpen(true)}
-                  className="hidden md:flex text-[11px] font-extrabold px-2.5 py-1 rounded-lg items-center gap-1 transition-all cursor-pointer shadow-2xs text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200/80"
+                  className="hidden md:flex text-[11px] font-extrabold px-2.5 py-1 rounded-lg items-center gap-1 transition-all cursor-pointer shadow-xs text-[#d32f2f] bg-red-50 hover:bg-red-100 border border-red-200/80"
                   title="Buka Katalog Layanan"
                 >
                   <span className="material-symbols-outlined text-[15px]">
@@ -4400,7 +4427,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
               </div>
 
               {/* Catalog Items List */}
-              <div className="flex-1 overflow-y-auto p-3 space-y-2 no-scrollbar">
+              <div className={`flex-1 overflow-y-auto p-3 no-scrollbar ${deviceView === 'desktop' ? 'grid grid-cols-1 md:grid-cols-2 gap-2.5 space-y-0' : 'space-y-2'}`}>
                 {activeCatalog
                   .filter((item) => {
                     const matchCategory = serviceCategoryFilter === 'Semua' || item.category === serviceCategoryFilter;
@@ -4491,7 +4518,7 @@ export const MobilePreview: React.FC<MobilePreviewProps> = ({ defaultDeviceView 
           <nav
             className={`z-40 px-3 sm:px-4 pointer-events-none transition-all duration-200 ${
               deviceView === 'desktop'
-                ? 'sticky bottom-3 mt-auto'
+                ? 'sticky bottom-3 mt-auto md:hidden'
                 : 'fixed sm:absolute inset-x-0 bottom-0 sm:bottom-3 pb-[max(0.85rem,env(safe-area-inset-bottom,0px))] sm:pb-0'
             }`}
           >

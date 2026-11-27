@@ -122,7 +122,7 @@ export const PublicHeader: React.FC = () => {
 
       {/* Mobile Drawer Dropdown Menu (Android Screen Adaptive) */}
       {mobileMenuOpen && (
-        <div className="absolute top-[75px] left-0 right-0 bg-white border-b border-slate-200 shadow-xl p-5 z-40 md:hidden animate-in fade-in slide-in-from-top-3 duration-200">
+        <div className="absolute top-16 sm:top-[68px] left-0 right-0 bg-white border-b border-slate-200 shadow-xl p-5 z-40 md:hidden animate-in fade-in slide-in-from-top-2 duration-150">
           <div className="flex flex-col space-y-3">
             <span className="text-[10px] font-bold text-sikoni-muted uppercase tracking-wider px-2">
               Menu Navigasi
